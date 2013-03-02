@@ -10,4 +10,5 @@ Gem::Specification.new do |s|
   s.email       = 'ichylinux@gmail.com'
   s.files       = ["lib/daddy.rb"]
   s.homepage    = 'https://github.com/ichylinux/daddy'
+  s.add_runtime_dependency 'rails', ['~>= 3.2']
 end
