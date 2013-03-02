@@ -9,15 +9,18 @@ daddy
 
   $ cd [app_name]
 
-* edit Gemfile to add daddy
+* add daddy gem
+
+  $ vi Gemfile
 
 * start server and check welcome page
 
   $ rails s
+  view http://localhost:3000 on browser
   
 * create controller for home page
 
-  $ rails g controller [home_page_name]
+  $ rails g controller [home_page]
 
 * map root path to home controller
 
@@ -26,6 +29,7 @@ daddy
 
 * create database
 
+  $ vi database.yml
   $ rake dad:create_databases
 
 * create first model
