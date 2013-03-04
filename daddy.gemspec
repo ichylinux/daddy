@@ -11,5 +11,5 @@ Gem::Specification.new do |s|
   s.files       = ["lib/daddy.rb"]
   s.homepage    = 'https://github.com/ichylinux/daddy'
   s.add_runtime_dependency 'rails', ['~> 3.2.0']
-  s.add_development_dependency 'cucumber'
+  s.add_runtime_dependency 'cucumber'
 end
