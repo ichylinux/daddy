@@ -2,16 +2,19 @@
 
 require 'rake/testtask'
 
-desc 'サンプルアプリを実行します。'
+desc 'サンプルを実行します。'
 task :sample do |t|
   if ENV['SAMPLE_NO']
-    samples = ENV['SAMPLE_NO'] 
+    samples = ENV['SAMPLE_NO']
   else
     samples = [ 1 ] 
   end
   
   samples.each do |sample_no|
-    system("cd sample_#{sample_no} && cucumber")
+    dir = "sample_#{sample_no}"
+    system("mkdir -p #{dir}/features/reports")
+    system("rm -Rf #{dir}/features/reports/*")
+    system("cd #{dir} && cucumber -f html > features/reports/index.html")
   end
 end
 
