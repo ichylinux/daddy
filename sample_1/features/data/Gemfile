@@ -5,6 +5,7 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'daddy', :git => 'git://github.com/ichylinux/daddy.git'
 gem 'execjs'
 gem 'mysql2'
 

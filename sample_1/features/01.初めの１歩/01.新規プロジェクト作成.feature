@@ -12,6 +12,7 @@
   シナリオ: Gemfile を編集
     前提 アプリのひな形が生成されている
     もし Gemfile に以下の gem を定義する
+    | daddy |
     | execjs |
     | therubyracer |
     かつ 以下のコマンドを実行する

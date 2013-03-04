@@ -4,9 +4,15 @@ require 'rake/testtask'
 
 desc 'サンプルアプリを実行します。'
 task :sample do |t|
-  fail 'SAMPLE_NO を指定してください。' unless ENV['SAMPLE_NO']
-  sample = "sample_#{ENV['SAMPLE_NO']}"
-  system("cd #{sample} && cucumber")
+  if ENV['SAMPLE_NO']
+    samples = ENV['SAMPLE_NO'] 
+  else
+    samples = [ 1 ] 
+  end
+  
+  samples.each do |sample_no|
+    system("cd sample_#{sample_no} && bundle exec rake cucumber")
+  end
 end
 
 Rake::TestTask.new do |t|
