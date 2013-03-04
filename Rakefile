@@ -11,7 +11,7 @@ task :sample do |t|
   end
   
   samples.each do |sample_no|
-    system("cd sample_#{sample_no} && bundle exec rake cucumber")
+    system("cd sample_#{sample_no} && cucumber")
   end
 end
 
