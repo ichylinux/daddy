@@ -4,27 +4,20 @@
   commands = table.raw.map{|x| x[0]}
   commands.each do |command|
     if command.start_with?('rails new')
-      system("cd tmp && rm -Rf careerlife && #{command} > /dev/null")
+      html = `cd tmp && rm -Rf careerlife && #{command}`
     elsif command.start_with?('rails s')
       fork do
-        system("cd tmp/careerlife && #{command}")
+        html = `cd tmp/careerlife && #{command}`
       end
     else
-      system("cd tmp/careerlife && #{command}")
+      html = `cd tmp/careerlife && #{command}`
     end
+    
+    puts "<pre>#{html}</pre>" if html
   end
 end
 
 ならば /^新しいアプリのひな形が生成される$/ do
-  indent = '|'
-  8.times{|i| indent = '&nbsp' + indent}
-    
-  # tree = `tree tmp/careerlife`
-  # tree.gsub!(/\n/, '<br/>')
-  # tree.gsub!(/`/, ' ')
-  # tree.gsub!(/\|/, indent)
-  # puts tree
-  
   html = '<pre>'
   html << `tree tmp/careerlife`
   html << '</pre>'
