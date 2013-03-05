@@ -89,14 +89,17 @@ module Daddy
       end
 
       def before_comment(comment)
+        return if comment == '# language: ja'
         @builder << '<pre class="comment">'
       end
 
       def after_comment(comment)
+        return if comment == '# language: ja'
         @builder << '</pre>'
       end
 
       def comment_line(comment_line)
+        return if comment_line == '# language: ja'
         @builder.text!(comment_line)
         @builder.br
       end
@@ -459,7 +462,7 @@ module Daddy
       def build_step(keyword, step_match, status)
         step_name = step_match.format_args(lambda{|param| %{<span class="param">#{param}</span>}})
         @builder.div(:class => 'step_name') do |div|
-          @builder.span(keyword, :class => 'keyword')
+#          @builder.span(keyword, :class => 'keyword')
           @builder.span(:class => 'step val') do |name|
             name << h(step_name).gsub(/&lt;span class=&quot;(.*?)&quot;&gt;/, '<span class="\1">').gsub(/&lt;\/span&gt;/, '</span>')
           end

@@ -1,6 +1,6 @@
 # coding: UTF-8
 
-前提 /^以下のコマンドを実行する$/ do |table|
+前提 /^以下のコマンドを実行します。$/ do |table|
   commands = table.raw.map{|x| x[0]}
 
   commands.each do |command|
@@ -18,7 +18,7 @@
   end
 end
 
-ならば /^新しいアプリのひな形が生成される$/ do
+ならば /^新しいアプリのひな形が生成されます。$/ do
   html = '<pre>'
   html << `tree tmp/careerlife`
   html << '</pre>'
@@ -32,7 +32,7 @@ end
   end
 end
 
-もし /^Gemfile に以下の gem を定義する$/ do |table|
+もし /^Gemfile に以下の gem を定義します。$/ do |table|
   html = '<pre>'
   html << `diff features/data/Gemfile tmp/careerlife/Gemfile`
   html << '</pre>'
@@ -41,13 +41,13 @@ end
   system("cp -f features/data/Gemfile tmp/careerlife/Gemfile")  
 end
 
-ならば /^Gemfile\.lock が更新される$/ do
+ならば /^Gemfile\.lock が更新されます。$/ do
 end
 
 前提 /^Gemfile の編集が完了している$/ do
 end
 
-ならば /^WEBrickサーバが起動する$/ do
+ならば /^WEBrickサーバが起動します。$/ do
   sleep 5
   at_exit do
     Process.kill :KILL, `cat tmp/careerlife/tmp/pids/server.pid`.to_i
