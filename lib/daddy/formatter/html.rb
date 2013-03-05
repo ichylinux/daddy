@@ -1,3 +1,5 @@
+# coding: UTF-8
+
 require 'erb'
 require 'cucumber/formatter/ordered_xml_markup'
 require 'cucumber/formatter/duration'
@@ -5,9 +7,11 @@ require 'cucumber/formatter/html'
 require 'cucumber/formatter/io'
 
 module Daddy
-  module Cucumber
-    module Formatter
-    class Html < ::Cucumber::Formatter::Html
+  module Formatter
+    class Html
+      include ERB::Util # for the #h method
+      include Cucumber::Formatter::Duration
+      include Cucumber::Formatter::Io
 
       def initialize(runtime, path_or_io, options)
         @io = ensure_io(path_or_io, "html")
@@ -39,20 +43,11 @@ module Daddy
         end
       end
 
-
       def before_features(features)
         @step_count = get_step_count(features)
 
-        # <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-        @builder.declare!(
-          :DOCTYPE,
-          :html,
-          :PUBLIC,
-          '-//W3C//DTD XHTML 1.0 Strict//EN',
-          'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'
-        )
-
-        @builder << '<html xmlns ="http://www.w3.org/1999/xhtml">'
+        @builder.declare!(:DOCTYPE, :html)
+        @builder << '<html>'
           @builder.head do
           @builder.meta('http-equiv' => 'Content-Type', :content => 'text/html;charset=utf-8')
           @builder.title 'Cucumber'
@@ -70,8 +65,8 @@ module Daddy
             @builder.p('',:id => 'totals')
             @builder.p('',:id => 'duration')
             @builder.div(:id => 'expand-collapse') do
-              @builder.p('Expand All', :id => 'expander')
-              @builder.p('Collapse All', :id => 'collapser')
+              @builder.p('すべて開く', :id => 'expander')
+              @builder.p('すべて閉じる', :id => 'collapser')
             end
           end
         end
@@ -153,8 +148,8 @@ module Daddy
         @scenario_number+=1
         @scenario_red = false
         css_class = {
-          Ast::Scenario        => 'scenario',
-          Ast::ScenarioOutline => 'scenario outline'
+          Cucumber::Ast::Scenario        => 'scenario',
+          Cucumber::Ast::ScenarioOutline => 'scenario outline'
         }[feature_element.class]
         @builder << "<div class='#{css_class}'>"
       end
@@ -274,14 +269,14 @@ module Daddy
 
       def before_multiline_arg(multiline_arg)
         return if @hide_this_step || @skip_step
-        if Ast::Table === multiline_arg
+        if Cucumber::Ast::Table === multiline_arg
           @builder << '<table>'
         end
       end
 
       def after_multiline_arg(multiline_arg)
         return if @hide_this_step || @skip_step
-        if Ast::Table === multiline_arg
+        if Cucumber::Ast::Table === multiline_arg
           @builder << '</table>'
         end
       end
@@ -343,21 +338,20 @@ module Daddy
 
         #@builder.ol do
           @delayed_messages.each do |ann|
-            @builder.li(:class => 'step message') do
+            @builder.li(:class => 'step message hidden') do
               @builder << ann
             end
           end
+          @builder << "<script>$(function(){"
+          @builder << "  $('##{@step_id}').css('cursor', 'pointer').click(function() {"
+          @builder << "    $(this).nextAll('li.message').toggleClass('hidden');"
+          @builder << "  });"
+          @builder << "});</script>"
         #end
         empty_messages
       end
 
       def print_table_row_messages
-        return if @delayed_messages.empty?
-
-        @builder.td(:class => 'message') do
-          @builder << @delayed_messages.join(", ")
-        end
-        empty_messages
       end
 
       def empty_messages
@@ -494,6 +488,7 @@ module Daddy
       def inline_css
         @builder.style(:type => 'text/css') do
           @builder << File.read(File.dirname(__FILE__) + '/cucumber.css')
+          @builder << File.read(File.dirname(__FILE__) + '/daddy.css')
         end
       end
 
@@ -649,6 +644,5 @@ module Daddy
 
       end
     end
-  end
   end
 end

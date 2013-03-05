@@ -14,7 +14,7 @@ task :sample do |t|
     dir = "sample_#{sample_no}"
     system("mkdir -p #{dir}/features/reports")
     system("rm -Rf #{dir}/features/reports/*")
-    system("cd #{dir} && bundle exec cucumber -f Daddy::Cucumber::Formatter::Html -o features/reports/index.html")
+    system("cd #{dir} && bundle exec cucumber -f Daddy::Formatter::Html -o features/reports/index.html")
   end
 end
 
