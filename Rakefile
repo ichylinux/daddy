@@ -12,9 +12,9 @@ task :sample do |t|
   
   samples.each do |sample_no|
     dir = "sample_#{sample_no}"
+    system("rm -Rf #{dir}/features/reports")
     system("mkdir -p #{dir}/features/reports")
-    system("rm -Rf #{dir}/features/reports/*")
-    system("cd #{dir} && bundle exec cucumber -f Daddy::Formatter::Html -o features/reports/index.html")
+    system("cd #{dir} && bundle exec cucumber -f Daddy::Formatter::Html > features/reports/index.html")
   end
 end
 

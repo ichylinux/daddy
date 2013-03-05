@@ -3,7 +3,6 @@
 require 'erb'
 require 'cucumber/formatter/ordered_xml_markup'
 require 'cucumber/formatter/duration'
-require 'cucumber/formatter/html'
 require 'cucumber/formatter/io'
 
 module Daddy
@@ -14,6 +13,7 @@ module Daddy
       include Cucumber::Formatter::Io
 
       def initialize(runtime, path_or_io, options)
+        @path_or_io = path_or_io
         @io = ensure_io(path_or_io, "html")
         @runtime = runtime
         @options = options
@@ -48,12 +48,12 @@ module Daddy
 
         @builder.declare!(:DOCTYPE, :html)
         @builder << '<html>'
-          @builder.head do
+        @builder << '<head>'
           @builder.meta('http-equiv' => 'Content-Type', :content => 'text/html;charset=utf-8')
           @builder.title 'Cucumber'
           inline_css
           inline_js
-        end
+        @builder << '</head>'
         @builder << '<body>'
         @builder << "<!-- Step count #{@step_count}-->"
         @builder << '<div class="cucumber">'
@@ -337,16 +337,18 @@ module Daddy
         return if @delayed_messages.empty?
 
         #@builder.ol do
-          @delayed_messages.each do |ann|
-            @builder.li(:class => 'step message hidden') do
+          @delayed_messages.each_with_index do |ann, i|
+            @builder.li(:id => "#{@step_number}_#{i}", :class => 'step message') do
               @builder << ann
             end
           end
-          @builder << "<script>$(function(){"
-          @builder << "  $('##{@step_id}').css('cursor', 'pointer').click(function() {"
-          @builder << "    $(this).nextAll('li.message').toggleClass('hidden');"
-          @builder << "  });"
-          @builder << "});</script>"
+          @builder.script do |script|
+            script << "$(function() {"
+            script << "  $('##{@step_id}').css('cursor', 'pointer').click(function() {"
+            script << "    $(this).nextAll('li[id^=\"#{@step_number}_\"]').toggle(250);"
+            script << "  });"
+            script << "});"
+          end
         #end
         empty_messages
       end
@@ -486,14 +488,14 @@ module Daddy
       end
 
       def inline_css
-        @builder.style(:type => 'text/css') do
+        @builder.style do
           @builder << File.read(File.dirname(__FILE__) + '/cucumber.css')
           @builder << File.read(File.dirname(__FILE__) + '/daddy.css')
         end
       end
 
       def inline_js
-        @builder.script(:type => 'text/javascript') do
+        @builder.script do
           @builder << inline_jquery
           @builder << inline_js_content
         end
@@ -517,7 +519,9 @@ module Daddy
     $("#collapser").css('cursor', 'pointer');
     $("#collapser").click(function() {
       $(SCENARIOS).siblings().hide();
+      $('li.message').hide();
     });
+    $("#collapser").click();
 
     $("#expander").css('cursor', 'pointer');
     $("#expander").click(function() {
@@ -595,7 +599,7 @@ module Daddy
       end
 
       def create_builder(io)
-        ::Cucumber::Formatter::OrderedXmlMarkup.new(:target => io, :indent => 0)
+        Cucumber::Formatter::OrderedXmlMarkup.new(:target => io, :indent => 0)
       end
 
       class SnippetExtractor #:nodoc:

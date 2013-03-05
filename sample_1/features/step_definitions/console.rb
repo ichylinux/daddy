@@ -2,6 +2,7 @@
 
 前提 /^以下のコマンドを実行する$/ do |table|
   commands = table.raw.map{|x| x[0]}
+
   commands.each do |command|
     if command.start_with?('rails new')
       html = `cd tmp && rm -Rf careerlife && #{command}`
@@ -13,7 +14,7 @@
       html = `cd tmp/careerlife && #{command}`
     end
     
-    puts "<pre>#{html}</pre>" if html
+    puts "<pre>#{html}</pre>" unless html.nil? or html.strip!.empty?
   end
 end
 
@@ -37,17 +38,10 @@ end
   html << '</pre>'
   puts html
 
-  system("cp -f features/data/Gemfile tmp/careerlife/Gemfile")
-
-  @gems = table.raw.map{|x| x[0]}
-  @gems.each do |gem|
-    assert system("grep #{gem} tmp/careerlife/Gemfile"), "#{gem} が含まれていること"
-  end
-  
+  system("cp -f features/data/Gemfile tmp/careerlife/Gemfile")  
 end
 
 ならば /^Gemfile\.lock が更新される$/ do
-  
 end
 
 前提 /^Gemfile の編集が完了している$/ do
@@ -56,6 +50,6 @@ end
 ならば /^WEBrickサーバが起動する$/ do
   sleep 5
   at_exit do
-    Process.kill :KILL, `cat tmp/careerlife/tmp/pids/server.pid > /dev/null`.to_i
+    Process.kill :KILL, `cat tmp/careerlife/tmp/pids/server.pid`.to_i
   end
 end
