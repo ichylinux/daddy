@@ -5,7 +5,7 @@ require 'rake/testtask'
 desc 'サンプルを実行します。'
 task :sample do |t|
   if ENV['SAMPLE_NO']
-    samples = ENV['SAMPLE_NO']
+    samples = [ ENV['SAMPLE_NO'] ]
   else
     samples = [ 1 ] 
   end
