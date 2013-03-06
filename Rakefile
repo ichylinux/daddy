@@ -34,16 +34,29 @@ def snapshot_to_tmp(base_dir)
   end
 end
 
+def get_all_phase_no
+  1..3
+end
+
 task :sample do |t|
   if ENV['PHASE_NO']
     samples = [ ENV['PHASE_NO'].to_i ]
   else
-    samples = 1..3
+    samples = get_all_phase_no
   end
 
   samples.each do |sample_no|
     run_phase(sample_no)
   end
+end
+
+task :publish do |t|
+  # samples = get_all_phase_no
+  # samples.each do |sample_no|
+    # run_phase(sample_no)
+  # end
+  
+  
 end
 
 task :default => :sample
