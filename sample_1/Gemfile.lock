@@ -1,5 +1,5 @@
 PATH
-  remote: /home/ichy/project/daddy
+  remote: ../..
   specs:
     daddy (0.0.1)
       cucumber

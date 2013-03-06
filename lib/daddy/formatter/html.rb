@@ -548,7 +548,7 @@ module Daddy
       end
 
       def move_progress
-        @builder << " <script type=\"text/javascript\">moveProgressBar('#{percent_done}');</script>"
+        @builder << " <script>moveProgressBar('#{percent_done}');</script>"
       end
 
       def percent_done
@@ -574,8 +574,8 @@ module Daddy
       end
 
       def print_stats(features)
-        @builder <<  "<script type=\"text/javascript\">document.getElementById('duration').innerHTML = \"Finished in <strong>#{format_duration(features.duration)} seconds</strong>\";</script>"
-        @builder <<  "<script type=\"text/javascript\">document.getElementById('totals').innerHTML = \"#{print_stat_string(features)}\";</script>"
+        @builder <<  "<script>document.getElementById('duration').innerHTML = \"Finished in <strong>#{format_duration(features.duration)} seconds</strong>\";</script>"
+        @builder <<  "<script>document.getElementById('totals').innerHTML = \"#{print_stat_string(features)}\";</script>"
       end
 
       def print_stat_string(features)
