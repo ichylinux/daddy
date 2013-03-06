@@ -505,6 +505,13 @@ module Daddy
         @builder.script do
           @builder << inline_jquery
           @builder << inline_js_content
+          unless ENV['EXPAND']
+            @builder << %w{
+              $(document).ready(function() {
+                $("#collapser").click();
+                });
+              }.join
+          end
         end
       end
 
@@ -528,7 +535,6 @@ module Daddy
       $(SCENARIOS).siblings().hide();
       $('li.message').hide();
     });
-    $("#collapser").click();
 
     $("#expander").css('cursor', 'pointer');
     $("#expander").click(function() {
