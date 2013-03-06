@@ -7,7 +7,9 @@ namespace :dad do
     task :install do
       system("mkdir -p features/reports")
       system("mkdir -p features/step_definitions")
+      system("touch features/step_definitions/.gitkeep")
       system("mkdir -p features/support")
+      system("touch features/support/.gitkeep")
 
       if File.exist?("features/support/env.rb")
         puts "すでに features/support/env.rb が存在します。上書きはしません。"
