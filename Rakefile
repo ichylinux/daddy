@@ -11,7 +11,23 @@ def run_phase(phase_no)
   system("rm -Rf #{dir}/features/reports")
   system("mkdir -p #{dir}/features/reports")
   system("rm -Rf #{dir}/tmp/careerlife")
-  system("cd #{dir} && bundle exec cucumber -r features -f Daddy::Formatter::Html PHASE_NO=#{phase_no} EXPAND=true > features/reports/index.html")
+  ret = system("cd #{dir} && bundle exec cucumber -r features -f Daddy::Formatter::Html PHASE_NO=#{phase_no} EXPAND=true > features/reports/index.html")
+  if ret
+    snapshot_to_tmp(dir)
+  end
+end
+
+def snapshot_to_tmp(base_dir)
+  system("rm -Rf #{base_dir}/tmp/careerlife")
+  system("mkdir -p #{base_dir}/tmp/careerlife")
+
+  %w{.gitignore config.ru Gemfile Gemfile.lock Rakefile README.rdoc}.each do |file|
+    system("cp #{base_dir}/#{file} #{base_dir}/tmp/careerlife/")
+  end
+
+  %w{app config db doc lib log public script test vendor}.each do |dir|
+    system("cp -R #{base_dir}/#{dir} #{base_dir}/tmp/careerlife/")
+  end
 end
 
 task :sample do |t|
