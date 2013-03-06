@@ -11,13 +11,17 @@ def run_phase(phase_no)
   system("rm -Rf #{dir}/features/reports")
   system("mkdir -p #{dir}/features/reports")
   system("rm -Rf #{dir}/tmp/careerlife")
+
   ret = system("cd #{dir} && bundle exec cucumber -r features -f Daddy::Formatter::Html PHASE_NO=#{phase_no} EXPAND=true > features/reports/index.html")
+
   if ret
     snapshot_to_tmp(dir)
   end
 end
 
 def snapshot_to_tmp(base_dir)
+  return if base_dir.split('_')[1].to_i == 1
+
   system("rm -Rf #{base_dir}/tmp/careerlife")
   system("mkdir -p #{base_dir}/tmp/careerlife")
 
@@ -34,7 +38,7 @@ task :sample do |t|
   if ENV['PHASE_NO']
     samples = [ ENV['PHASE_NO'].to_i ]
   else
-    samples = 1..2 
+    samples = 1..3
   end
 
   samples.each do |sample_no|
