@@ -9,8 +9,8 @@ module Daddy
   module Formatter
     class Html
       include ERB::Util # for the #h method
-      include Cucumber::Formatter::Duration
-      include Cucumber::Formatter::Io
+      include ::Cucumber::Formatter::Duration
+      include ::Cucumber::Formatter::Io
 
       def initialize(runtime, path_or_io, options)
         @path_or_io = path_or_io
@@ -151,8 +151,8 @@ module Daddy
         @scenario_number+=1
         @scenario_red = false
         css_class = {
-          Cucumber::Ast::Scenario        => 'scenario',
-          Cucumber::Ast::ScenarioOutline => 'scenario outline'
+          ::Cucumber::Ast::Scenario        => 'scenario',
+          ::Cucumber::Ast::ScenarioOutline => 'scenario outline'
         }[feature_element.class]
         @builder << "<div class='#{css_class}'>"
       end
@@ -613,7 +613,7 @@ module Daddy
       end
 
       def create_builder(io)
-        Cucumber::Formatter::OrderedXmlMarkup.new(:target => io, :indent => 0)
+        ::Cucumber::Formatter::OrderedXmlMarkup.new(:target => io, :indent => 0)
       end
 
       class SnippetExtractor #:nodoc:

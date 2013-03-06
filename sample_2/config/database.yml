@@ -12,10 +12,10 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: careerlife_development
+  database: careerlife_dev
   pool: 5
-  username: root
-  password:
+  username: careerlife
+  password: careerlife
   socket: /var/lib/mysql/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -27,16 +27,16 @@ test:
   reconnect: false
   database: careerlife_test
   pool: 5
-  username: root
-  password:
+  username: careerlife
+  password: careerlife
   socket: /var/lib/mysql/mysql.sock
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: careerlife_production
+  database: careerlife_pro
   pool: 5
-  username: root
-  password:
+  username: careerlife
+  password: careerlife
   socket: /var/lib/mysql/mysql.sock

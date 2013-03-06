@@ -15,8 +15,8 @@ def run_phase(phase_no)
 end
 
 task :sample do |t|
-  if ENV['SAMPLE_NO']
-    samples = [ ENV['SAMPLE_NO'].to_i ]
+  if ENV['PHASE_NO']
+    samples = [ ENV['PHASE_NO'].to_i ]
   else
     samples = 1..2 
   end
