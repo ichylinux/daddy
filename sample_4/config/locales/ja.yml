@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      career: キャリア
+      
+    attributes:
+      career:
+        birthday: 生年月日
+        first_name: 名
+        gender: 性別
+        last_name: 姓

@@ -1,7 +1,7 @@
 <%= form_for(@career) do |f| %>
   <% if @career.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@career.errors.count, "error") %> prohibited this career from being saved:</h2>
+      <h2><%= pluralize(@career.errors.count, "件") %> のエラーがあります。</h2>
 
       <ul>
       <% @career.errors.full_messages.each do |msg| %>
@@ -12,8 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
   </div>
   <div class="field">
     <%= f.label :birthday %><br />

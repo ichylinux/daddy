@@ -44,7 +44,7 @@ class CareersController < ApplicationController
 
     respond_to do |format|
       if @career.save
-        format.html { redirect_to @career, notice: 'Career was successfully created.' }
+        format.html { redirect_to @career, notice: t('messages.created', :name => Career.model_name.human) }
         format.json { render json: @career, status: :created, location: @career }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class CareersController < ApplicationController
 
     respond_to do |format|
       if @career.update_attributes(params[:career])
-        format.html { redirect_to @career, notice: 'Career was successfully updated.' }
+        format.html { redirect_to @career, notice: t('messages.updated', :name => Career.model_name.human) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,7 +76,7 @@ class CareersController < ApplicationController
     @career.destroy
 
     respond_to do |format|
-      format.html { redirect_to careers_url }
+      format.html { redirect_to careers_url, notice: t('messages.deleted', :name => Career.model_name.human) }
       format.json { head :no_content }
     end
   end

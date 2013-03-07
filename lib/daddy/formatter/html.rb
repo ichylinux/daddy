@@ -59,7 +59,7 @@ module Daddy
         @builder << '<div class="cucumber">'
         @builder.div(:id => 'cucumber-header') do
           @builder.div(:id => 'label') do
-            @builder.h1('Daddy Features')
+            @builder.h1('Daddy')
           end
           @builder.div(:id => 'summary') do
             @builder.p('',:id => 'totals')

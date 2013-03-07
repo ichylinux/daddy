@@ -1,10 +1,13 @@
-<h1>Listing careers</h1>
+<h1>キャリア一覧</h1>
+
+<p id="notice"><%= notice %></p>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Birthday</th>
-    <th>Gender</th>
+    <th><%= Career.human_attribute_name :last_name %></th>
+    <th><%= Career.human_attribute_name :first_name %></th>
+    <th><%= Career.human_attribute_name :birthday %></th>
+    <th><%= Career.human_attribute_name :gender %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,16 +15,17 @@
 
 <% @careers.each do |career| %>
   <tr>
-    <td><%= career.name %></td>
+    <td><%= career.last_name %></td>
+    <td><%= career.first_name %></td>
     <td><%= career.birthday %></td>
     <td><%= career.gender %></td>
-    <td><%= link_to 'Show', career %></td>
-    <td><%= link_to 'Edit', edit_career_path(career) %></td>
-    <td><%= link_to 'Destroy', career, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to '参照', career %></td>
+    <td><%= link_to '編集', edit_career_path(career) %></td>
+    <td><%= link_to '削除', career, method: :delete, data: { confirm: "#{career.full_name} を削除します。よろしいですか？" } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Career', new_career_path %>
+<%= link_to '追加', new_career_path %>
