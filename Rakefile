@@ -12,7 +12,11 @@ def run_phase(phase_no)
   system("mkdir -p #{dir}/features/reports")
   system("rm -Rf #{dir}/tmp/careerlife")
 
-  ret = system("cd #{dir} && bundle exec cucumber -r features -f Daddy::Formatter::Html PHASE_NO=#{phase_no} EXPAND=true > features/reports/index.html")
+  ret = system("cd #{dir} && bundle exec rake db:test:prepare")
+
+  if ret
+    ret = system("cd #{dir} && bundle exec cucumber -r features -f Daddy::Formatter::Html PHASE_NO=#{phase_no} EXPAND=true > features/reports/index.html")
+  end
 
   if ret
     snapshot_to_tmp(dir)
@@ -55,8 +59,6 @@ task :publish do |t|
   # samples.each do |sample_no|
     # run_phase(sample_no)
   # end
-  
-  
 end
 
 task :default => :sample

@@ -18,6 +18,9 @@ namespace :dad do
         system("echo                              >> features/support/env.rb")
         system("echo \"require 'daddy/cucumber'\" >> features/support/env.rb")
       end
+      
+      step_dir = File.dirname(File.dirname(__FILE__)) + '/daddy/cucumber/step_definitions'
+      system("cp -Rf #{step_dir}/* features/step_definitions/daddy/")
     end
   end
 end

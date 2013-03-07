@@ -59,7 +59,7 @@ module Daddy
         @builder << '<div class="cucumber">'
         @builder.div(:id => 'cucumber-header') do
           @builder.div(:id => 'label') do
-            @builder.h1('Cucumber Features')
+            @builder.h1('Daddy Features')
           end
           @builder.div(:id => 'summary') do
             @builder.p('',:id => 'totals')
@@ -80,6 +80,7 @@ module Daddy
       end
 
       def before_feature(feature)
+        @feature = feature
         @exceptions = []
         @builder << '<div class="feature">'
       end
@@ -115,15 +116,18 @@ module Daddy
       end
 
       def feature_name(keyword, name)
-        lines = name.split(/\r?\n/)
-        return if lines.empty?
+        title = @feature.file.split('/').last.gsub(/\.feature/, '')
         @builder.h2 do |h2|
-          @builder.span(keyword + ': ' + lines[0], :class => 'val')
+          @builder.span(title, :class => 'val')
         end
-        @builder.p(:class => 'narrative') do
-          lines[1..-1].each do |line|
-            @builder.text!(line.strip)
-            @builder.br
+
+        lines = name.split(/\r?\n/)
+        unless lines.empty?
+          @builder.p(:class => 'narrative') do
+            lines.each do |line|
+              @builder.text!(line.strip)
+              @builder.br
+            end
           end
         end
       end
@@ -274,14 +278,14 @@ module Daddy
 
       def before_multiline_arg(multiline_arg)
         return if @hide_this_step || @skip_step
-        if Cucumber::Ast::Table === multiline_arg
+        if ::Cucumber::Ast::Table === multiline_arg
           @builder << '<table>'
         end
       end
 
       def after_multiline_arg(multiline_arg)
         return if @hide_this_step || @skip_step
-        if Cucumber::Ast::Table === multiline_arg
+        if ::Cucumber::Ast::Table === multiline_arg
           @builder << '</table>'
         end
       end
