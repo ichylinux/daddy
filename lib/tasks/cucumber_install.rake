@@ -7,8 +7,6 @@ namespace :dad do
     task :install do
       system("mkdir -p features")
       
-      system("mkdir -p features/reports")
-
       system("mkdir -p features/step_definitions")
       system("touch features/step_definitions/.gitkeep")
 

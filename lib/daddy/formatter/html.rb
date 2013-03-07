@@ -117,6 +117,7 @@ module Daddy
 
       def feature_name(keyword, name)
         title = @feature.file.split('/').last.gsub(/\.feature/, '')
+
         @builder.h2 do |h2|
           @builder.span(title, :class => 'val')
         end
@@ -480,8 +481,8 @@ module Daddy
 
         step_file = step_match.file_colon_line
         step_file.gsub(/^([^:]*\.rb):(\d*)/) do
-          if ENV['TM_PROJECT_DIRECTORY']
-            step_file = "<a href=\"txmt://open?url=file://#{File.expand_path($1)}&line=#{$2}\">#{$1}:#{$2}</a> "
+          if index = $1.index('lib/daddy/cucumber/step_definitions/')
+            step_file = "daddy: " + $1[index..-1]
           end
         end
 
