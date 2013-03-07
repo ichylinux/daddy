@@ -23,9 +23,8 @@ module Daddy
         end
     
         puts %{
-          #{url}
-          <br/>
-          <div style="padding-right: 20px;"><img src="screenshots/#{image}" width="100%" height="100%"/></div>
+          <div style="margin: 5px 0;">#{url}</div>
+          <div style="padding-right: 20px;"><img src="screenshots/#{image}" width="80%" height="80%"/></div>
         }
       end
     end

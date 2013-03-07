@@ -1,6 +1,7 @@
 # coding: UTF-8
 
 require 'rails'
+require 'rails_i18n'
 
 module Daddy
   class Railtie < Rails::Railtie

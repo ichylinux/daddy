@@ -190,7 +190,6 @@ DEPENDENCIES
   jquery-rails
   mysql2
   rails (= 3.2.12)
-  rails-i18n
   sass-rails (~> 3.2.3)
   therubyracer
   uglifier (>= 1.0.3)
