@@ -8,27 +8,25 @@ module Daddy
     
       @@_screen_count = 0
     
-      def capture(label = nil)
+      def capture(url = nil)
     
-        label ||= remove_domain(current_url)
+        url ||= remove_domain(current_url)
     
         @@_screen_count += 1
     
-        id = "step_img_#{@@_screen_count}"
-        src = "screenshots/#{id}.png"
+        image = "#{@@_screen_count}.png"
     
-        unless Capybara.current_driver == :selenium
-          page.driver.render("#{SCREENSHOT_DIR}/#{id}.png")
+        if Capybara.current_driver == :webkit
+          page.driver.render("#{SCREENSHOT_DIR}/#{image}")
         else
-          page.driver.browser.save_screenshot("#{SCREENSHOT_DIR}/#{id}.png")
+          page.driver.browser.save_screenshot("#{SCREENSHOT_DIR}/#{image}")
         end
     
-        link = %{
-          URL： #{label}<br/>
-          <img id="#{id}" src="#{src}" width="50%" height="50%"/>
+        puts %{
+          #{url}
+          <br/>
+          <div style="padding-right: 20px;"><img src="screenshots/#{image}" width="100%" height="100%"/></div>
         }
-    
-        puts link
       end
     end
   end

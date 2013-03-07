@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'cucumber'
   s.add_runtime_dependency 'jquery-rails'
   s.add_runtime_dependency 'rails', ['~> 3.2.0']
+  s.add_runtime_dependency 'rails-i18n'
   s.add_runtime_dependency 'cucumber-rails'
   s.add_runtime_dependency 'simplecov'
   s.add_runtime_dependency 'simplecov-rcov'

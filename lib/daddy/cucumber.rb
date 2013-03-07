@@ -13,3 +13,6 @@ ActionController::Base.allow_rescue = false
 World(Daddy::Cucumber::Assert)
 World(Daddy::Cucumber::Capture)
 
+Dir::glob(File.dirname(__FILE__) + '/cucumber/step_definitions/*.rb').each do |file|
+  load file
+end

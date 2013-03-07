@@ -207,6 +207,7 @@ module Daddy
       end
 
       def before_steps(steps)
+        @step_count_in_scenario = steps.count
         @builder << '<ol>'
       end
 
@@ -467,10 +468,11 @@ module Daddy
 
       def build_step(keyword, step_match, status)
         @step_number_in_scenario += 1
+        formatted_step_number = sprintf("%0#{@step_count_in_scenario.to_s.size}d", @step_number_in_scenario) 
 
         step_name = step_match.format_args(lambda{|param| %{<span class="param">#{param}</span>}})
         @builder.div(:class => 'step_name') do |div|
-          @builder.span("#{@step_number_in_scenario}. ", :class => 'keyword')
+          @builder.span("#{formatted_step_number}. ", :class => 'keyword')
           @builder.span(:class => 'step val') do |name|
             name << h(step_name).gsub(/&lt;span class=&quot;(.*?)&quot;&gt;/, '<span class="\1">').gsub(/&lt;\/span&gt;/, '</span>')
           end
