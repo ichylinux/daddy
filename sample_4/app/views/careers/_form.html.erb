@@ -2,11 +2,10 @@
   <% if @career.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@career.errors.count, "件") %> のエラーがあります。</h2>
-
       <ul>
-      <% @career.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @career.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -27,6 +26,10 @@
     <%= f.label :gender %><br />
     <label><%= f.radio_button :gender, 'M' %> 男性</label>
     <label><%= f.radio_button :gender, 'F' %> 女性</label>
+  </div>
+  <div class="field">
+    <%= f.label :introduction %><br />
+    <%= f.text_area :introduction %>
   </div>
   <div class="actions">
     <%= f.submit %>

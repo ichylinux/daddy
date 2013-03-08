@@ -488,7 +488,7 @@ module Daddy
           end
 
           line_index = $2.to_i - 1
-          File.readlines(File.expand_path($1))[line_index..-1].each do |line|
+          File.readlines(File.expand_path($1.force_encoding('UTF-8')))[line_index..-1].each do |line|
             step_contents << line
             break if line.chop == 'end' or line.chop.start_with?('end ')
           end
