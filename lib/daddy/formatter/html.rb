@@ -480,17 +480,30 @@ module Daddy
         end
 
         step_file = step_match.file_colon_line
+        step_contents = "<div id=\"step_contents_#{@step_number}\" class=\"step_contents\"><pre>"
+
         step_file.gsub(/^([^:]*\.rb):(\d*)/) do
           if index = $1.index('lib/daddy/cucumber/step_definitions/')
             step_file = "daddy: " + $1[index..-1]
           end
+
+          line_index = $2.to_i - 1
+          File.readlines(File.expand_path($1))[line_index..-1].each do |line|
+            step_contents << line
+            break if line.chop == 'end' or line.chop.start_with?('end ')
+          end
+    
+          step_file = "<a onclick=\"$('#step_contents_#{@step_number}').toggle(250); return false;\">#{step_file}:#{$2}</a>"
         end
 
+        step_contents << "</pre></div>"
+        
         @builder.div(:class => 'step_file') do |div|
           @builder.span do
             @builder << step_file
           end
         end
+        @builder << step_contents
       end
 
       def build_cell(cell_type, value, attributes)
@@ -512,12 +525,20 @@ module Daddy
         @builder.script do
           @builder << inline_jquery
           @builder << inline_js_content
-          unless ENV['EXPAND']
+          if ENV['EXPAND']
             @builder << %w{
               $(document).ready(function() {
-                $("#collapser").click();
+                $(SCENARIOS).siblings().show();
+                $('li.message').show();
                 });
-              }.join
+            }.join
+          else
+            @builder << %w{
+              $(document).ready(function() {
+                $(SCENARIOS).siblings().show();
+                $('li.message').hide();
+                });
+            }.join
           end
         end
       end

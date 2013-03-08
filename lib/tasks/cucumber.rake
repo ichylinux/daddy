@@ -8,8 +8,8 @@ namespace :dad do
     driver = ENV['DRIVER'] || :webkit
     pause = ENV['PAUSE'] || 0
 
-    Rake::Task['db:test:prepare'].execute
-
-    system("bundle exec cucumber -r features -f Daddy::Formatter::Html PHASE_NO=#{phase_no} DRIVER=#{driver} PAUSE=#{pause} EXPAND=true > features/reports/index.html")    
+    system("mkdir -p features/reports")
+    system("bundle exec rake db:schema:load RAILS_ENV=test")
+    system("bundle exec cucumber -r features -f Daddy::Formatter::Html PHASE_NO=#{phase_no} DRIVER=#{driver} PAUSE=#{pause} > features/reports/index.html")    
   end
 end
