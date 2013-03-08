@@ -493,7 +493,7 @@ module Daddy
             break if line.chop == 'end' or line.chop.start_with?('end ')
           end
     
-          step_file = "<a onclick=\"$('#step_contents_#{@step_number}').toggle(250); return false;\">#{step_file}:#{$2}</a>"
+          step_file = "<span id=\"step_file_#{@step_number}\">#{step_file}:#{$2}</span>"
         end
 
         step_contents << "</pre></div>"
@@ -501,6 +501,14 @@ module Daddy
         @builder.div(:class => 'step_file') do |div|
           @builder.span do
             @builder << step_file
+            @builder.script do |script|
+              script << "$(function() {"
+              script << "  $('#step_file_#{@step_number}').css('cursor', 'pointer').click(function(event) {"
+              script << "    $('#step_contents_#{@step_number}').toggle(250);"
+              script << "    event.stopImmediatePropagation();"
+              script << "  });"
+              script << "});"
+            end
           end
         end
         @builder << step_contents
