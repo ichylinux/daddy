@@ -6,3 +6,10 @@
   color: #000000;
   font-weight: bold;
 }
+
+.step_contents {
+  display: none;
+  background: #FFFFFF;
+  border: solid 1px #999999;
+  padding: 10px;
+}
