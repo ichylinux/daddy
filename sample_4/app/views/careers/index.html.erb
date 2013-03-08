@@ -18,7 +18,7 @@
     <td><%= career.last_name %></td>
     <td><%= career.first_name %></td>
     <td><%= career.birthday %></td>
-    <td><%= career.gender %></td>
+    <td><%= career.gender_name %></td>
     <td><%= link_to '参照', career %></td>
     <td><%= link_to '編集', edit_career_path(career) %></td>
     <td><%= link_to '削除', career, method: :delete, data: { confirm: "#{career.full_name} を削除します。よろしいですか？" } %></td>

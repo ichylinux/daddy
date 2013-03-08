@@ -512,12 +512,20 @@ module Daddy
         @builder.script do
           @builder << inline_jquery
           @builder << inline_js_content
-          unless ENV['EXPAND']
+          if ENV['EXPAND']
             @builder << %w{
               $(document).ready(function() {
-                $("#collapser").click();
+                $(SCENARIOS).siblings().show();
+                $('li.message').show();
                 });
-              }.join
+            }.join
+          else
+            @builder << %w{
+              $(document).ready(function() {
+                $(SCENARIOS).siblings().show();
+                $('li.message').hide();
+                });
+            }.join
           end
         end
       end
