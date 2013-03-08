@@ -50,7 +50,7 @@ module Daddy
         @builder << '<html>'
         @builder << '<head>'
           @builder.meta('http-equiv' => 'Content-Type', :content => 'text/html;charset=utf-8')
-          @builder.title 'Cucumber'
+          @builder.title 'Daddy'
           inline_css
           inline_js
         @builder << '</head>'
