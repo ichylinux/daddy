@@ -1,5 +1,0 @@
-ja:
-  messages:
-    created: '%{name}を登録しました。'
-    updated: '%{name}を更新しました。'
-    deleted: '%{name}を削除しました。'
