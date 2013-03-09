@@ -24,6 +24,10 @@ end
   assert_fill_in name, value
 end
 
+もし /^(.*?) に以下の文章を入力(する)?$/ do |name, suffix, text|
+  assert_fill_in name, text
+end
+
 もし /^(.*?) に (.*?) とリッチに入力(する)?$/ do |name, value, suffix|
   assert_fill_in_rich name, value
 end

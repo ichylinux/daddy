@@ -1,0 +1,19 @@
+<table>
+  <caption><%= CareerDetail.model_name.human %></caption>
+  <tr>
+    <th><%= CareerDetail.human_attribute_name :project_name %></th>
+    <th><%= CareerDetail.human_attribute_name :start_date %></th>
+    <th><%= CareerDetail.human_attribute_name :end_date %></th>
+    <th></th>
+  </tr>
+
+  <% @career.career_details.each do |cd| %>
+    <tr>
+      <td><%= cd.project_name %></td>
+      <td><%= cd.start_date %></td>
+      <td><%= cd.end_date %></td>
+    </tr>
+  <% end %>
+
+  <%= yield %>
+</table>

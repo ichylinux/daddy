@@ -1,0 +1,18 @@
+ja:
+  activerecord:
+    models:
+      career: キャリア
+      career_detail: 経歴
+      
+    attributes:
+      career:
+        birthday: 生年月日
+        first_name: 名
+        gender: 性別
+        introduction: 紹介文
+        last_name: 姓
+
+      career_detail:
+        project_name: プロジェクト名
+        start_date: 開始日
+        end_date: 終了日
