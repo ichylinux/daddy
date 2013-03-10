@@ -1,39 +1,30 @@
 # coding: UTF-8
 
-def run_phase(phase_no)
-  puts "フェーズ #{phase_no} を実行します。"
-  dir = "sample_#{phase_no}"
-  
-  system("rm -Rf #{dir}/features/reports")
-  system("mkdir -p #{dir}/features/reports")
-  system("cd #{dir} && rake dad:cucumber")
-end
-
-def get_all_phase_no
-  ret = []
-  Dir::glob(File.dirname(__FILE__) + '/sample_*').each do |dir|
-    ret << File.basename(dir).split('_')[1].to_i
-  end
-  ret.sort
-end
-
-task :run do |t|
-  if ENV['PHASE_NO']
-    samples = [ ENV['PHASE_NO'].to_i ]
-  else
-    samples = get_all_phase_no
-  end
-
-  samples.each do |sample_no|
-    run_phase(sample_no)
-  end
+task :test do |t|
+  system("cd careerlife && rake test")
 end
 
 task :publish do |t|
-  Rake::Task['run'].execute
-  get_all_phase_no.each do |no|
-    # TODO
+  system("mkdir -p tmp")
+  system("git branch > tmp/branches")
+
+  current_branch = 'master'
+  File.readlines('tmp/branches').each do |b|
+    if b.start_with?('*')
+      current_branch = b.split[1]
+      break
+    end
   end
+
+  unless File.exist?('tmp/gh-pages')
+    system("cd tmp && git clone -b gh-pages git@github.com:ichylinux/daddy.git gh-pages")
+  end 
+  system("mkdir -p tmp/gh-pages/#{current_branch}")
+  system("cd tmp/gh-pages && git rm screenshots/*")
+  system("cp -Rf careerlife/features/reports/* tmp/gh-pages/#{current_branch}/")
+  system("cd tmp/gh-pages && git add .")
+  system("cd tmp/gh-pages && git commit -m 'publish'")
+  system("cd tmp/gh-pages && git push")
 end
 
-task :default => :run
+task :default => :test
