@@ -70,9 +70,27 @@ module Daddy
             end
           end
         end
+        
+        before_menu
+      end
+
+      def before_menu
+        @builder << "<div>"
+        @builder.div(:id => 'menu') do
+          @builder.h2 do
+            @builder << 'TODOああああああああ'
+          end
+        end
+        @builder << "<div class='contents'>"
+      end
+
+      def after_menu
+        @builder << '</div>'
+        @builder << '</div>'
       end
 
       def after_features(features)
+        after_menu
         print_stats(features)
         @builder << '</div>'
         @builder << '</body>'
@@ -429,8 +447,11 @@ module Daddy
 
       def set_scenario_color_failed
         @builder.script do
-          @builder.text!("makeRed('cucumber-header');") unless @header_red
-          @header_red = true
+          unless @header_red
+            @builder.text!("makeRed('cucumber-header');")
+            @builder.text!("makeMenuRed();")
+            @header_red = true
+          end
           @builder.text!("makeRed('scenario_#{@scenario_number}');") unless @scenario_red
           @scenario_red = true
         end
@@ -438,7 +459,10 @@ module Daddy
 
       def set_scenario_color_pending
         @builder.script do
-          @builder.text!("makeYellow('cucumber-header');") unless @header_red
+          unless @header_red
+            @builder.text!("makeYellow('cucumber-header');")
+            @builder.text!("makeMenuYellow();")
+          end
           @builder.text!("makeYellow('scenario_#{@scenario_number}');") unless @scenario_red
         end
       end
@@ -589,9 +613,15 @@ module Daddy
     $('#'+element_id).css('background', '#C40D0D');
     $('#'+element_id).css('color', '#FFFFFF');
   }
+  function makeMenuRed() {
+    $('#menu').css('border-color', '#C40D0D');
+  }
   function makeYellow(element_id) {
     $('#'+element_id).css('background', '#FAF834');
     $('#'+element_id).css('color', '#000000');
+  }
+  function makeMenuYellow() {
+    $('#menu').css('border-color', '#FAF834');
   }
 
         EOF
