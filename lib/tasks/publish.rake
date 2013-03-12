@@ -2,9 +2,10 @@
 
 namespace :dad do
   task :publish do |t|
+    system("rake test PUBLISH=true")
+
     system("mkdir -p tmp")
     system("git branch > tmp/branches")
-  
     current_branch = 'master'
     File.readlines('tmp/branches').each do |b|
       if b.start_with?('*')

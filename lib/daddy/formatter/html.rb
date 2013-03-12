@@ -76,17 +76,34 @@ module Daddy
 
       def before_menu
         @builder << "<div>"
+
         @builder.div(:id => 'menu') do
-          @builder.h2 do
-            @builder << 'TODOああああああああ'
+          if ENV['PUBLISH']
+            @builder << make_menu_for_publish
+          else
+            @builder.h3 do
+              phase_no = ENV['PHASE_NO'].to_i
+              if phase_no == 0
+                @builder << "<a href=\"index.html\">最新</a>"
+              else
+                @builder << "<a href=\"index.html\">PHASE-#{phase_no}</a>"
+              end
+            end
           end
         end
+
         @builder << "<div class='contents'>"
       end
 
       def after_menu
         @builder << '</div>'
         @builder << '</div>'
+      end
+
+      def make_menu_for_publish
+        menu = 'tmp/menu.html'
+        system("erb -T - #{File.dirname(__FILE__)}/menu.html.erb > #{menu}")
+        File.readlines(menu).join
       end
 
       def after_features(features)
