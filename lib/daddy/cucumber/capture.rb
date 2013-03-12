@@ -21,10 +21,10 @@ module Daddy
         else
           page.driver.browser.save_screenshot("#{SCREENSHOT_DIR}/#{image}")
         end
-    
+
         puts %{
           <div style="margin: 5px 0;">#{url}</div>
-          <div style="padding-right: 20px;"><img src="screenshots/#{image}" width="80%" height="80%"/></div>
+          <div style="padding-right: 20px;"><img src="screenshots/#{image}" width="60%" height="60%"/></div>
         }
       end
     end
