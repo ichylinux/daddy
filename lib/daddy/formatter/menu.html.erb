@@ -10,16 +10,17 @@
   branches.sort! do |a, b|
     if a == 'master'
       -1
-    elsif b == 'mastter'
+    elsif b == 'master'
       1
     else
       b <=> a
     end
   end
 %>
-<% branches.each do |b| %>
-  <%
-    title = (b == 'master' ? '最新' : 'PHASE-' + b.gsub(/[a-zA-Z]*/, ''))
-  %>
-  <h3><a href="../<%= b %>/index.html"><%= title %></a></h3>
-<% end %>
+<ol>
+  <% branches.each do |b| %>
+    <% title = (b == 'master' ? '最新' : 'スプリント ' + b.gsub(/[a-zA-Z]*/, '')) %>
+    <li class="sprint"><a href="../<%= b %>/index.html"><%= title %></a></li>
+    <li class="sprint diary"><a href="../<%= b %>/diary.html">開発日記</a></li>
+  <% end %>
+</ol>
