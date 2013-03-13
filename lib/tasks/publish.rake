@@ -2,7 +2,10 @@
 
 namespace :dad do
   task :publish do |t|
-    system("rake test PUBLISH=true")
+  system("mkdir -p features/reports")
+  system("bundle exec rake db:schema:load RAILS_ENV=test")
+  system("bundle exec rake dad:cucumber PUBLISH=true OUTPUT_FILE=diary.html features/開発日記")
+  system("bundle exec rake dad:cucumber PUBLISH=true OUTPUT_FILE=index.html features/仕様書")
 
     system("mkdir -p tmp")
     system("git branch > tmp/branches")
@@ -16,7 +19,9 @@ namespace :dad do
   
     unless File.exist?('tmp/gh-pages')
       system("cd tmp && git clone -b gh-pages git@github.com:ichylinux/daddy.git gh-pages")
-    end 
+    else
+      system("cd tmp && git pull")
+    end
     system("mkdir -p tmp/gh-pages/#{current_branch}")
     system("cd tmp/gh-pages && git rm screenshots/*")
     system("cp -Rf features/reports/* tmp/gh-pages/#{current_branch}/")
