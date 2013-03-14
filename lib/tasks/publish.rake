@@ -20,10 +20,10 @@ namespace :dad do
     unless File.exist?('tmp/gh-pages')
       system("cd tmp && git clone -b gh-pages git@github.com:ichylinux/daddy.git gh-pages")
     else
-      system("cd tmp && git pull")
+      system("cd tmp/gh-pages && git pull")
     end
     system("mkdir -p tmp/gh-pages/#{current_branch}")
-    system("cd tmp/gh-pages && git rm screenshots/*")
+    system("cd tmp/gh-pages && git rm #{current_branch}/screenshots/*")
     system("cp -Rf features/reports/* tmp/gh-pages/#{current_branch}/")
     system("cd tmp/gh-pages && git add .")
     system("cd tmp/gh-pages && git commit -m 'publish'")
