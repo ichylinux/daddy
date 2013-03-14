@@ -2,13 +2,7 @@
 
 機能:
 
-シナリオ: scaffold
-
-* rails g scaffold career name:string birthday:date gender:string
-"""
-　rails の scaffold の機能を利用することでCRUD画面を自動生成できます。
-"""
-* rake db:migrate
+シナリオ: CRUD
 * キャリアを表示
 * New Career をクリック
 * Name に 鈴木 と入力
