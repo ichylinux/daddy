@@ -1,3 +1,5 @@
+# language: ja
+
 機能:
 
 シナリオ: devise のインストール
@@ -13,3 +15,6 @@ config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 シナリオ: キャリアの登録はログインしないとできないように
 * before_filter :authenticate_user!
 * ログアウトを用意
+
+シナリオ: ログインを日本語化
+* rails g devise:views

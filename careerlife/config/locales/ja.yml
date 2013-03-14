@@ -16,3 +16,8 @@ ja:
         project_name: プロジェクト名
         start_date: 開始日
         end_date: 終了日
+        
+      user:
+        email: メールアドレス
+        password: パスワード
+        remember_me: ログイン状態を維持
