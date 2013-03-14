@@ -32,10 +32,14 @@ AfterConfiguration do |configuration|
     sorted_files = feature_files.sort do |x, y|
       if x.start_with?('features/開発日記') and y.start_with?('features/開発日記')
         x <=> y
+      elsif x.start_with?('features/仕様書') and y.start_with?('features/仕様書')
+        x <=> y
+      elsif x.start_with?('features/開発日記')
+        -1
       elsif y.start_with?('features/開発日記')
         1
       else
-        -1
+        x <=> y
       end
     end
     
