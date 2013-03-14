@@ -1,5 +1,10 @@
 <div>
-  <%= link_to 'TOP', root_path %>
-  |
-  <%= link_to 'キャリアを登録する', careers_path %>
+  <span>
+    <%= link_to 'TOP', root_path %>
+    |
+    <%= link_to 'キャリアを登録する', careers_path %>
+  </span>
+  <span style="float: right;">
+    <%= link_to 'ログアウト', destroy_user_session_path, :method => 'delete' if user_signed_in? %>
+  </span>
 </div>

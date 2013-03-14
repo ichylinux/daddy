@@ -2,6 +2,7 @@
 
 require 'rails'
 require 'rails_i18n'
+require 'devise'
 
 module Daddy
   class Railtie < Rails::Railtie
