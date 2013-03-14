@@ -1,0 +1,26 @@
+<%
+  branches = []
+  `git branch -a`.split("\n").each do |b|
+    next if b.index('HEAD')
+    next if b.index('gh-pages')
+    next unless b.index('remotes/origin/')
+    branches << b.strip.sub('remotes/origin/', '')
+  end
+  
+  branches.sort! do |a, b|
+    if a == 'master'
+      -1
+    elsif b == 'master'
+      1
+    else
+      b <=> a
+    end
+  end
+%>
+<ol>
+  <% branches.each do |b| %>
+    <% title = (b == 'master' ? '最新' : 'スプリント ' + b.gsub(/[a-zA-Z]*/, '')) %>
+    <li class="sprint"><a href="../<%= b %>/index.html"><%= title %></a></li>
+    <li class="sprint diary"><a href="../<%= b %>/diary.html">開発日記</a></li>
+  <% end %>
+</ol>

@@ -1,3 +1,41 @@
+#menu {
+  width: 120px;
+  float: left;
+  background: #FFFFFF;
+  color: #000000;
+}
+
+#menu ol {
+  margin: 0;
+  padding: 0;
+}
+
+#menu ol li.sprint {
+  margin: 0;
+  padding: 0 5px;
+  border-left: 5px solid #65c400;
+  border-bottom: 1px solid #65c400;
+  line-height: 40px;
+  vertical-align: middle;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#menu ol li.diary {
+  margin: 0;
+  padding: 0 20px 0 40px;
+  border-left: 5px solid #65c400;
+  border-bottom: 1px solid #65c400;
+  line-height: 40px;
+  vertical-align: middle;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.contents {
+  margin-left: 120px;
+}
+
 .cucumber .scenario h3, td .scenario h3, th .scenario h3, .background h3 {
   font-size: 11px;
   padding: 3px;
@@ -5,6 +43,13 @@
   background: #FFFFFF;
   color: #000000;
   font-weight: bold;
+}
+
+.cucumber ol li.passed, td ol li.passed, th ol li.passed {
+  border-left: 5px solid #65c400;
+  border-bottom: 1px solid #65c400;
+  background: #FFFFFF;
+  color: #000000;
 }
 
 .step_contents {
