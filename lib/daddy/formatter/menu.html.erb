@@ -17,10 +17,20 @@
     end
   end
 %>
-<ol>
-  <% branches.each do |b| %>
+<% branches.each do |b| %>
+  <ol>
     <% title = (b == 'master' ? '最新' : 'スプリント ' + b.gsub(/[a-zA-Z]*/, '')) %>
-    <li class="sprint"><a href="../<%= b %>/index.html"><%= title %></a></li>
-    <li class="sprint diary"><a href="../<%= b %>/diary.html">開発日記</a></li>
-  <% end %>
-</ol>
+    <li class="sprint">
+      <%= title %>
+    </li>
+    <li class="sprint sub_menu">
+      <a href="../<%= b %>/index.html">仕様書</a>
+    </li>
+    <li class="sprint sub_menu">
+      <a href="../<%= b %>/diary.html">開発日記</a>
+    </li>
+    <li class="sprint sub_menu">
+      <a href="../<%= b %>/coverage/rcov/index.html" target="_blank">カバレッジ</a>
+    </li>
+  </ol>
+<% end %>
