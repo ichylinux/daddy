@@ -20,4 +20,5 @@ ja:
       user:
         email: メールアドレス
         password: パスワード
+        password_confirmation: パスワード（確認用）
         remember_me: ログイン状態を維持
