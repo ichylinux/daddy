@@ -1,7 +1,7 @@
 PATH
   remote: ../../
   specs:
-    daddy (0.0.4)
+    daddy (0.0.8)
       capistrano
       capybara
       capybara-webkit (= 0.12.1)
@@ -10,7 +10,7 @@ PATH
       cucumber-rails
       devise
       jquery-rails
-      rails (~> 3.2.0)
+      rails
       rails-i18n
       simplecov
       simplecov-rcov

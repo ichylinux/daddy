@@ -4,6 +4,7 @@ require 'erb'
 require 'cucumber/formatter/ordered_xml_markup'
 require 'cucumber/formatter/duration'
 require 'cucumber/formatter/io'
+require 'daddy/git/git_utils'
 
 module Daddy
   module Formatter

@@ -1,23 +1,4 @@
-<%
-  branches = []
-  `git branch -a`.split("\n").each do |b|
-    next if b.index('HEAD')
-    next if b.index('gh-pages')
-    next unless b.index('remotes/origin/')
-    branches << b.strip.sub('remotes/origin/', '')
-  end
-  
-  branches.sort! do |a, b|
-    if a == 'master'
-      -1
-    elsif b == 'master'
-      1
-    else
-      b <=> a
-    end
-  end
-%>
-<% branches.each do |b| %>
+<% Daddy::Git::GitUtils.get_branches.each do |b| %>
   <ol>
     <% title = (b == 'master' ? '最新' : 'スプリント ' + b.gsub(/[a-zA-Z]*/, '')) %>
     <li class="sprint">
