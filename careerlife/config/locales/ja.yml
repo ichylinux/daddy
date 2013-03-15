@@ -8,6 +8,7 @@ ja:
       career:
         birthday: 生年月日
         first_name: 名
+        full_name: 氏名
         gender: 性別
         introduction: 紹介文
         last_name: 姓
