@@ -14,5 +14,6 @@
 /log/*.log
 /tmp
 
+/coverage
 /features/reports
 
