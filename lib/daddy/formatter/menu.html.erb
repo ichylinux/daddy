@@ -1,3 +1,6 @@
+<%
+  load File.dirname(File.dirname(__FILE__)) + '/git/git_utils.rb'
+-%>
 <% Daddy::Git::GitUtils.get_branches.each do |b| %>
   <ol>
     <% title = (b == 'master' ? '最新' : 'スプリント ' + b.gsub(/[a-zA-Z]*/, '')) %>
