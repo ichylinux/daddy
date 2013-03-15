@@ -1,7 +1,7 @@
 PATH
   remote: ../../
   specs:
-    daddy (0.0.1)
+    daddy (0.0.4)
       capistrano
       capybara
       capybara-webkit (= 0.12.1)

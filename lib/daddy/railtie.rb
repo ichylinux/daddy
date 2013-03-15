@@ -4,6 +4,19 @@ require 'rails'
 require 'rails_i18n'
 require 'devise'
 
+if ENV["COVERAGE"]
+  require 'simplecov'
+  require 'simplecov-rcov'
+  SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
+
+  if ENV['COMMAND_NAME']
+    SimpleCov.command_name(ENV['COMMAND_NAME'])
+  end
+
+  SimpleCov.merge_timeout(7200)
+  SimpleCov.start 'rails'
+end
+
 module Daddy
   class Railtie < Rails::Railtie
     rake_tasks do
