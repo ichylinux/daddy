@@ -1,8 +1,5 @@
 # coding: UTF-8
 
-require 'differ'
-Differ.format = :html
-
 前提(/^rails new careerlife -d mysql$/) do
   `rm -Rf /tmp/careerlife`
   `cd /tmp && rails new careerlife -d mysql`
