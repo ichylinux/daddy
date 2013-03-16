@@ -42,3 +42,14 @@ end
   
   capture
 end
+
+もし /^キャリア一覧の (.*?) の (.*?) をクリック$/ do |name, action|
+  find_tr '.careers', name do
+    click_on action
+    confirm
+  end
+end
+
+前提(/^キャリアが削除され、一覧に遷移$/) do
+  assert_url '/careers'
+end

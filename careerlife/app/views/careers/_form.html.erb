@@ -1,70 +1,72 @@
-<%= form_for(@career) do |f| %>
-  <% if @career.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@career.errors.count, "件") %> のエラーがあります。</h2>
-      <ul>
-        <% @career.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div>
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-  <div>
-    <%= f.label :birthday %><br />
-    <%= f.date_select :birthday %>
-  </div>
-  <div>
-    <%= f.label :gender %><br />
-    <label><%= f.radio_button :gender, 'M' %> 男性</label>
-    <label><%= f.radio_button :gender, 'F' %> 女性</label>
-  </div>
-  <div>
-    <%= f.label :introduction %><br />
-    <%= f.text_area :introduction %>
-  </div>
-
-  <table>
-    <tr>
-      <th><%= CareerDetail.human_attribute_name :project_name %></th>
-      <th><%= CareerDetail.human_attribute_name :start_date %></th>
-      <th><%= CareerDetail.human_attribute_name :end_date %></th>
-      <th></th>
-    </tr>
-  
-    <% @career.career_details.each_with_index do |cd, i| %>
-      <%= render 'career_detail_fields', :career_detail => cd, :index => i %>
+<div class="career">
+  <%= form_for(@career) do |f| %>
+    <% if @career.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@career.errors.count, "件") %> のエラーがあります。</h2>
+        <ul>
+          <% @career.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
   
-    <tr>
-      <td colspan="3">
-        <a id="new_career_detail_link" href="#">経歴を追加</a>
-        <script>
-          $(document).ready(function() {
-            var link = $('#new_career_detail_link');
-            link.click(function() {
-              var index = link.closest('table').find('tr').length;
-
-              $.get('<%= url_for :action => 'new_career_detail' %>', {index: index, format: 'html'},
-                function(data) {
-                  link.closest('tr').before(data);
-                });
-              });
-          });
-        </script>
-      </td>
-    </tr>
-  </table>
+    <div>
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name %>
+    </div>
+    <div>
+      <%= f.label :first_name %><br />
+      <%= f.text_field :first_name %>
+    </div>
+    <div>
+      <%= f.label :birthday %><br />
+      <%= f.date_select :birthday %>
+    </div>
+    <div>
+      <%= f.label :gender %><br />
+      <label><%= f.radio_button :gender, 'M' %> 男性</label>
+      <label><%= f.radio_button :gender, 'F' %> 女性</label>
+    </div>
+    <div>
+      <%= f.label :introduction %><br />
+      <%= f.text_area :introduction, :rows => 8 %>
+    </div>
   
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    <table>
+      <tr>
+        <th><%= CareerDetail.human_attribute_name :project_name %></th>
+        <th><%= CareerDetail.human_attribute_name :start_date %></th>
+        <th><%= CareerDetail.human_attribute_name :end_date %></th>
+        <th></th>
+      </tr>
+    
+      <% @career.career_details.each_with_index do |cd, i| %>
+        <%= render 'career_detail_fields', :career_detail => cd, :index => i %>
+      <% end %>
+    
+      <tr>
+        <td colspan="4">
+          <a id="new_career_detail_link" href="#">経歴を追加</a>
+          <script>
+            $(document).ready(function() {
+              var link = $('#new_career_detail_link');
+              link.click(function() {
+                var index = link.closest('table').find('tr').length;
+  
+                $.get('<%= url_for :action => 'new_career_detail' %>', {index: index, format: 'html'},
+                  function(data) {
+                    link.closest('tr').before(data);
+                  });
+                });
+            });
+          </script>
+        </td>
+      </tr>
+    </table>
+    
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
