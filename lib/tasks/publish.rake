@@ -1,5 +1,7 @@
 # coding: UTF-8
 
+require 'daddy/git'
+
 namespace :dad do
   task :publish do
     system("mkdir -p features/reports")
@@ -12,14 +14,8 @@ namespace :dad do
     if ENV['BRANCH']
       current_branch = ENV['BRANCH']
     else
-      system("git branch > tmp/branches")
-      current_branch = 'master'
-      File.readlines('tmp/branches').each do |b|
-        if b.start_with?('*')
-          current_branch = b.split[1]
-          break
-        end
-      end
+      git = Daddy::Git.new
+      current_branch = git.current_branch
     end
   
     unless File.exist?('tmp/gh-pages')
