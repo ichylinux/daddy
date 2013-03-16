@@ -1,4 +1,4 @@
 daddy
 =====
 
-Homepage: http://ichylinux.github.com/daddy
+ホームページ: http://ichylinux.github.com/daddy
