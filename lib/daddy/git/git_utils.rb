@@ -26,6 +26,11 @@ module Daddy
         branches
       end
       
+      def self.current_branch
+        `git branch`.split("\n").each do |b|
+          return b.split.last if b.start_with?('*')
+        end
+      end
     end
   end
 end
