@@ -1,5 +1,5 @@
 #menu {
-  width: 120px;
+  width: 100px;
   float: left;
   background: #FFFFFF;
   color: #000000;
@@ -34,7 +34,7 @@
 }
 
 .contents {
-  margin-left: 120px;
+  margin-left: 100px;
 }
 
 .cucumber .scenario h3, td .scenario h3, th .scenario h3, .background h3 {
