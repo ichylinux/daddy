@@ -24,7 +24,16 @@ namespace :dad do
       system("cd tmp/gh-pages && git pull")
     end
     system("mkdir -p tmp/gh-pages/#{current_branch}")
-    system("cd tmp/gh-pages && git rm #{current_branch}/screenshots/*")
+
+    system("cd tmp/gh-pages && git rm -r #{current_branch}/screenshots")
     system("cp -Rf features/reports/* tmp/gh-pages/#{current_branch}/")
+
+    system("cd tmp/gh-pages && git rm -r #{current_branch}/coverage")
+    system("cp -Rf coverage tmp/gh-pages/#{current_branch}/")
+
+    system("cd tmp/gh-pages && git add .")
+    system("cd tmp/gh-pages && git commit -m 'publish'")
+    system("cd tmp/gh-pages && git push")
   end
+  
 end
