@@ -1,37 +1,26 @@
 <%
-  load File.dirname(File.dirname(__FILE__)) + '/git.rb'
-  git = Daddy::Git.new
--%>
-
-<script>
-  $(document).ready(function() {
-    $('.sprint').mouseover(function() {
-      $(this).css('background', '#F0F8FF').css('cursor', 'pointer');
-    }).mouseout(function() {
-      $(this).css('background', '#FFFFFF');
-    }).click(function() {
-      $(this).nextAll('.sub_menu').toggle(250);
-    });
-
-    $('.current').click();
-  });
-</script>
-
-<% git.branches.each do |b| %>
-  <ol>
+  branches = []
+  `git branch -a`.split("\n").each do |b|
+    next if b.index('HEAD')
+    next if b.index('gh-pages')
+    next unless b.index('remotes/origin/')
+    branches << b.strip.sub('remotes/origin/', '')
+  end
+  
+  branches.sort! do |a, b|
+    if a == 'master'
+      -1
+    elsif b == 'master'
+      1
+    else
+      b <=> a
+    end
+  end
+%>
+<ol>
+  <% branches.each do |b| %>
     <% title = (b == 'master' ? '最新' : 'スプリント ' + b.gsub(/[a-zA-Z]*/, '')) %>
-
-    <li class="sprint <%= 'current' if b == git.current_branch %>">
-      <%= title %>
-    </li>
-    <li class="sub_menu" style="display: none;">
-      <a href="../<%= b %>/index.html">仕様書</a>
-    </li>
-    <li class="sub_menu" style="display: none;">
-      <a href="../<%= b %>/diary.html">開発日記</a>
-    </li>
-    <li class="sub_menu" style="display: none;">
-      <a href="../<%= b %>/coverage/rcov/index.html" target="_blank">カバレッジ</a>
-    </li>
-  </ol>
-<% end %>
+    <li class="sprint"><a href="../<%= b %>/index.html"><%= title %></a></li>
+    <li class="sprint diary"><a href="../<%= b %>/diary.html">開発日記</a></li>
+  <% end %>
+</ol>

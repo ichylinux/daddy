@@ -9,7 +9,6 @@ module Daddy
       @@_screen_count = 0
     
       def capture(url = nil)
-        pause
     
         url ||= remove_domain(current_url)
     
@@ -31,5 +30,3 @@ module Daddy
     end
   end
 end
-
-World(Daddy::Cucumber::Capture)

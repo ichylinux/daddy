@@ -22,5 +22,3 @@ module Daddy
     end
   end
 end
-
-World(Daddy::Cucumber::Table)

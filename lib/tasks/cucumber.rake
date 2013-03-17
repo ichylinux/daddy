@@ -7,8 +7,7 @@ namespace :dad do
     phase_no = `git branch`.gsub(/[a-zA-Z]*/, '').to_i
     driver = ENV['DRIVER'] || :webkit
     pause = ENV['PAUSE'] || 0
-    coverage = ENV['COVERAGE'] || true
-    options = "PHASE_NO=#{phase_no} DRIVER=#{driver} PAUSE=#{pause} COVERAGE=#{coverage}"
+    options = "PHASE_NO=#{phase_no} DRIVER=#{driver} PAUSE=#{pause}"
     
     output_file = ENV['OUTPUT_FILE'] || 'index.html'
 
