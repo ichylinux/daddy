@@ -1,19 +1,19 @@
 # coding: UTF-8
 
 require 'cucumber/rails'
-require "capybara/webkit"
+require 'capybara/webkit'
+require 'differ'
+
+Differ.format = :html
 
 Capybara.default_driver = (ENV['DRIVER'] || :selenium).to_sym
 Capybara.default_selector = :css
 
 ActionController::Base.allow_rescue = false
 
-require 'daddy/cucumber/assert'
-require 'daddy/cucumber/capture'
-require 'daddy/cucumber/table'
-World(Daddy::Cucumber::Assert)
-World(Daddy::Cucumber::Capture)
-World(Daddy::Cucumber::Table)
+Dir::glob(File.dirname(__FILE__) + '/cucumber/*.rb').each do |file|
+  require file
+end
 
 Dir::glob(File.dirname(__FILE__) + '/cucumber/step_definitions/*.rb').each do |file|
   load file
@@ -32,13 +32,24 @@ AfterConfiguration do |configuration|
     sorted_files = feature_files.sort do |x, y|
       if x.start_with?('features/開発日記') and y.start_with?('features/開発日記')
         x <=> y
+      elsif x.start_with?('features/仕様書') and y.start_with?('features/仕様書')
+        x <=> y
+      elsif x.start_with?('features/開発日記')
+        -1
       elsif y.start_with?('features/開発日記')
         1
       else
-        -1
+        x <=> y
       end
     end
     
     sorted_files
   }
+end
+
+Before do
+  ActiveRecord::Fixtures.reset_cache
+  fixtures_folder = File.join(Rails.root, 'test', 'fixtures')
+  fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
+  ActiveRecord::Fixtures.create_fixtures(fixtures_folder, fixtures)
 end
