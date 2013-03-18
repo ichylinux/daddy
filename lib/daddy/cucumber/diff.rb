@@ -8,7 +8,10 @@ module Daddy
         git = Daddy::Git.new
         a = File.read(local_file).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
         b = git.show_previous(git_path, true).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
-        puts "<pre>#{Differ.diff(a, b)}</pre>"
+        diff = Differ.diff(a, b)
+
+        puts local_file
+        puts "<pre>#{diff}</pre>"
       end
 
     end
