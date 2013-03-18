@@ -16,7 +16,7 @@ end
   assert_url '/careers'
 end
 
-前提 /^TOPページを表示$/ do
+前提 /^トップページを表示$/ do
   assert_visit '/'
 end
 
