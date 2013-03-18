@@ -22,9 +22,9 @@ module Daddy
       end
       
       branches.sort! do |a, b|
-        if a == 'master'
+        if a == 'master' or a == 'remotes/origin/master'
           -1
-        elsif b == 'master'
+        elsif b == 'master' or b == 'remotes/origin/master'
           1
         else
           b <=> a
@@ -47,7 +47,7 @@ module Daddy
       branches.each_with_index do |b, i|
         return nil if i == branches.size - 1
 
-        if b == current_branch
+        if b == current_branch or b == "remotes/origin/#{current_branch}"
           return branches[i+1]
         end
       end
@@ -55,15 +55,6 @@ module Daddy
     
     def show_previous(file, remote = false)
       `git show #{previous_branch(remote)}:#{file}`
-    end
-    
-    def diff(file, remote = false)
-      b = self.previous_branch(remote)
-      ret = `git diff -b #{b} -- #{file}`
-      puts 'ああああ'
-      puts b
-      puts ret
-      ret
     end
   end
 
