@@ -1,19 +1,36 @@
 <%
-  load File.dirname(File.dirname(__FILE__)) + '/git/git_utils.rb'
+  load File.dirname(File.dirname(__FILE__)) + '/git.rb'
+  git = Daddy::Git.new
 -%>
-<% Daddy::Git::GitUtils.get_branches.each do |b| %>
+
+<script>
+  $(document).ready(function() {
+    $('.sprint').mouseover(function() {
+      $(this).css('background', '#F0F8FF').css('cursor', 'pointer');
+    }).mouseout(function() {
+      $(this).css('background', '#FFFFFF');
+    }).click(function() {
+      $(this).nextAll('.sub_menu').toggle(250);
+    });
+
+    $('.current').click();
+  });
+</script>
+
+<% git.branches.each do |b| %>
   <ol>
     <% title = (b == 'master' ? '最新' : 'スプリント ' + b.gsub(/[a-zA-Z]*/, '')) %>
-    <li class="sprint">
+
+    <li class="sprint <%= 'current' if b == git.current_branch %>">
       <%= title %>
     </li>
-    <li class="sprint sub_menu">
+    <li class="sub_menu" style="display: none;">
       <a href="../<%= b %>/index.html">仕様書</a>
     </li>
-    <li class="sprint sub_menu">
+    <li class="sub_menu" style="display: none;">
       <a href="../<%= b %>/diary.html">開発日記</a>
     </li>
-    <li class="sprint sub_menu">
+    <li class="sub_menu" style="display: none;">
       <a href="../<%= b %>/coverage/rcov/index.html" target="_blank">カバレッジ</a>
     </li>
   </ol>
