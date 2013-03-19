@@ -2,6 +2,7 @@
 
 require 'cucumber/rails'
 require 'capybara/webkit'
+require 'daddy/git'
 require 'differ'
 
 Differ.format = :html
