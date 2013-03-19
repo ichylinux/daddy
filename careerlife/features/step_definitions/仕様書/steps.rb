@@ -50,6 +50,6 @@ end
   end
 end
 
-前提(/^キャリアが削除され、一覧に遷移$/) do
+ならば /^キャリアが削除され、一覧に遷移$/ do
   assert_url '/careers'
 end
