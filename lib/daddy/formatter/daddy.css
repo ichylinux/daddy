@@ -47,14 +47,14 @@
 }
 
 .cucumber ol li.passed, td ol li.passed, th ol li.passed {
-  border-left: 5px solid #65c400;
+  border-left: 5px solid #999999;
   border-bottom: 1px solid #999999;
   background: #FFFFFF;
   color: #000000;
 }
 
 .cucumber ol li.expand:hover, td ol li.expand:hover, th ol li.expand:hover {
-  border-bottom: 1px solid #65c400;
+  background: #F0F8FF;
 }
 
 .step_contents {
