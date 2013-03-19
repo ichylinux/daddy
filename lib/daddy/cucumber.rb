@@ -1,7 +1,11 @@
 # coding: UTF-8
 
 require 'cucumber/rails'
-require "capybara/webkit"
+require 'capybara/webkit'
+require 'daddy/git'
+require 'differ'
+
+Differ.format = :html
 
 Capybara.default_driver = (ENV['DRIVER'] || :selenium).to_sym
 Capybara.default_selector = :css

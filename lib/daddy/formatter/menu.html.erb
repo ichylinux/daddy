@@ -1,6 +1,6 @@
 <%
-  load File.dirname(File.dirname(__FILE__)) + '/git/git_utils.rb'
-  current_branch = Daddy::Git::GitUtils.current_branch
+  load File.dirname(File.dirname(__FILE__)) + '/git.rb'
+  git = Daddy::Git.new
 -%>
 
 <script>
@@ -17,18 +17,18 @@
   });
 </script>
 
-<% Daddy::Git::GitUtils.get_branches.each do |b| %>
+<% git.branches.each do |b| %>
   <ol>
     <% title = (b == 'master' ? '最新' : 'スプリント ' + b.gsub(/[a-zA-Z]*/, '')) %>
 
-    <li class="sprint <%= 'current' if b == current_branch %>">
+    <li class="sprint <%= 'current' if b == git.current_branch %>">
       <%= title %>
     </li>
     <li class="sub_menu" style="display: none;">
-      <a href="../<%= b %>/index.html">仕様書</a>
+      <a href="../<%= b %>/diary.html">開発日記</a>
     </li>
     <li class="sub_menu" style="display: none;">
-      <a href="../<%= b %>/diary.html">開発日記</a>
+      <a href="../<%= b %>/index.html">仕様書</a>
     </li>
     <li class="sub_menu" style="display: none;">
       <a href="../<%= b %>/coverage/rcov/index.html" target="_blank">カバレッジ</a>
