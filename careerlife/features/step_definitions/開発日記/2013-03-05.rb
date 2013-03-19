@@ -30,4 +30,5 @@ end
 end
 
 前提(/^ブラウザ http:\/\/localhost:3000 にアクセス$/) do
+  assert_visit '/'
 end
