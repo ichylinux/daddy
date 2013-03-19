@@ -1,5 +1,9 @@
+.contents {
+  margin-left: 100px;
+}
+
 #menu {
-  width: 120px;
+  width: 100px;
   float: left;
   background: #FFFFFF;
   color: #000000;
@@ -21,19 +25,16 @@
   font-weight: bold;
 }
 
-#menu ol li.diary {
+#menu ol li.sub_menu {
   margin: 0;
-  padding: 0 20px 0 40px;
+  padding: 0 5px;
   border-left: 5px solid #65c400;
   border-bottom: 1px solid #65c400;
-  line-height: 40px;
+  line-height: 30px;
+  text-align: right;
   vertical-align: middle;
   font-size: 1.2em;
   font-weight: bold;
-}
-
-.contents {
-  margin-left: 120px;
 }
 
 .cucumber .scenario h3, td .scenario h3, th .scenario h3, .background h3 {
@@ -46,10 +47,14 @@
 }
 
 .cucumber ol li.passed, td ol li.passed, th ol li.passed {
-  border-left: 5px solid #65c400;
-  border-bottom: 1px solid #65c400;
+  border-left: 5px solid #999999;
+  border-bottom: 1px solid #999999;
   background: #FFFFFF;
   color: #000000;
+}
+
+.cucumber ol li.expand:hover, td ol li.expand:hover, th ol li.expand:hover {
+  background: #F0F8FF;
 }
 
 .step_contents {
