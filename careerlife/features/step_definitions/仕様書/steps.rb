@@ -1,9 +1,7 @@
 # coding: UTF-8
 
-前提(/^rails g scaffold career name:string birthday:date gender:string$/) do |string|
-end
-
-前提(/^rake db:migrate$/) do
+前提(/^トップページを表示$/) do
+  assert_visit '/'
 end
 
 前提(/^キャリアを表示$/) do
