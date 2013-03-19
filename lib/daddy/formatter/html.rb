@@ -271,7 +271,12 @@ module Daddy
         @status = status
         return if @hide_this_step
         set_scenario_color(status)
-        @builder << "<li id='#{@step_id}' class='step #{status}'>"
+        
+        if ! @delayed_messages.empty? and status == :passed
+          @builder << "<li id='#{@step_id}' class='step #{status} expand'>"
+        else
+          @builder << "<li id='#{@step_id}' class='step #{status}'>"
+        end
       end
 
       def after_step_result(keyword, step_match, multiline_arg, status, exception, source_indent, background, file_colon_line)
