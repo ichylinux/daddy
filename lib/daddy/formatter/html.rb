@@ -271,7 +271,12 @@ module Daddy
         @status = status
         return if @hide_this_step
         set_scenario_color(status)
-        @builder << "<li id='#{@step_id}' class='step #{status}'>"
+        
+        if ! @delayed_messages.empty? and status == :passed
+          @builder << "<li id='#{@step_id}' class='step #{status} expand'>"
+        else
+          @builder << "<li id='#{@step_id}' class='step #{status}'>"
+        end
       end
 
       def after_step_result(keyword, step_match, multiline_arg, status, exception, source_indent, background, file_colon_line)
@@ -624,14 +629,14 @@ module Daddy
     $('#'+element_id).css('color', '#FFFFFF');
   }
   function makeMenuRed() {
-    $('#menu').css('border-color', '#C40D0D');
+    $('#menu .sprint').css('border-color', '#C40D0D');
   }
   function makeYellow(element_id) {
     $('#'+element_id).css('background', '#FAF834');
     $('#'+element_id).css('color', '#000000');
   }
   function makeMenuYellow() {
-    $('#menu').css('border-color', '#FAF834');
+    $('#menu .sprint').css('border-color', '#FAF834');
   }
 
         EOF
