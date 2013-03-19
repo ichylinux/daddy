@@ -13,6 +13,11 @@ module Daddy
         puts local_file
         puts "<pre>#{diff}</pre>"
       end
+      
+      def show(file)
+        puts file
+        puts "<pre>#{File.read(file).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')}</pre>"
+      end
 
     end
   end
