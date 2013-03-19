@@ -73,3 +73,13 @@ div.scenario td {
   border: solid 1px #999999;
   padding: 5px;
 }
+
+ins.differ {
+  text-decoration: none;
+  background: #90EE90;
+}
+
+del.differ {
+  text-decoration: none;
+  background: #FFB6C1;
+}
