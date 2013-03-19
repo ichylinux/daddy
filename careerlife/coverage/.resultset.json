@@ -1,0 +1,151 @@
+{
+  "Cucumber Features": {
+    "coverage": {
+      "/home/ichy/project/daddy/careerlife/app/models/user.rb": [
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null
+      ],
+      "/home/ichy/project/daddy/careerlife/app/controllers/application_controller.rb": [
+        1,
+        1,
+        null
+      ],
+      "/home/ichy/project/daddy/careerlife/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/home/ichy/project/daddy/careerlife/app/helpers/careers_helper.rb": [
+        1,
+        null
+      ],
+      "/home/ichy/project/daddy/careerlife/app/helpers/top_helper.rb": [
+        1,
+        null
+      ],
+      "/home/ichy/project/daddy/careerlife/app/controllers/careers_controller.rb": [
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        3,
+        null,
+        null,
+        1,
+        2,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        3,
+        3,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        0,
+        null,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        0,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null
+      ],
+      "/home/ichy/project/daddy/careerlife/app/models/career.rb": [
+        null,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        6,
+        null,
+        null,
+        1,
+        8,
+        null,
+        8,
+        null,
+        5,
+        null,
+        3,
+        null,
+        null,
+        null
+      ],
+      "/home/ichy/project/daddy/careerlife/app/controllers/top_controller.rb": [
+        null,
+        null,
+        1,
+        null,
+        1,
+        2,
+        null,
+        null,
+        null
+      ],
+      "/home/ichy/project/daddy/careerlife/app/models/career_detail.rb": [
+        null,
+        null,
+        1,
+        null
+      ]
+    },
+    "timestamp": 1363614216
+  },
+  "Unknown Test Framework": {
+    "coverage": {
+      "/home/ichy/project/daddy/careerlife/app/models/user.rb": [
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1363355143
+  }
+}
