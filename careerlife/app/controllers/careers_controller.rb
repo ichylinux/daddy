@@ -1,8 +1,6 @@
-# coding: UTF-8
-
 class CareersController < ApplicationController
   before_filter :authenticate_user!
-  
+
   def index
     @careers = Career.all
   end
@@ -14,7 +12,7 @@ class CareersController < ApplicationController
   def new
     @career = Career.new
   end
-  
+
   def new_career_detail
     @career_detail = CareerDetail.new
     render :partial => 'career_detail_fields', :locals => {:career_detail => @career_detail, :index => params[:index]}
