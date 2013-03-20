@@ -14,7 +14,7 @@ class Career < ActiveRecord::Base
   
   def gender_name
     return nil unless self.gender
-    
+
     case self.gender.upcase
     when 'M'
       '男性'
