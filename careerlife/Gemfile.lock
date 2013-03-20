@@ -1,7 +1,7 @@
 PATH
   remote: ../../
   specs:
-    daddy (0.0.11)
+    daddy (0.0.12)
       capistrano
       capybara
       capybara-webkit (= 0.12.1)
@@ -122,7 +122,7 @@ GEM
     net-ssh (2.6.6)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    nokogiri (1.5.6)
+    nokogiri (1.5.8)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -140,7 +140,7 @@ GEM
       activesupport (= 3.2.12)
       bundler (~> 1.0)
       railties (= 3.2.12)
-    rails-i18n (0.7.2)
+    rails-i18n (0.7.3)
       i18n (~> 0.5)
     railties (3.2.12)
       actionpack (= 3.2.12)
