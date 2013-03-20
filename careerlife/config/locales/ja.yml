@@ -17,7 +17,10 @@ ja:
         project_name: プロジェクト名
         start_date: 開始日
         end_date: 終了日
-        
+
+      career_details:
+        project_name: プロジェクト名
+
       user:
         email: メールアドレス
         password: パスワード
