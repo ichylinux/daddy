@@ -26,9 +26,12 @@ end
   puts "<pre>#{Differ.diff(a, b)}</pre>"
 end
 
+前提(/^rake dad:db:create$/) do
+end
+
 前提(/^rails s$/) do
 end
 
-前提(/^ブラウザ http:\/\/localhost:3000 にアクセス$/) do
+前提(/^ブラウザで http:\/\/localhost:3000 にアクセス$/) do
   assert_visit '/'
 end

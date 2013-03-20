@@ -13,6 +13,7 @@
     | therubyracer | ExecJS が利用するJavaScript実行環境。Chromeが搭載しているV8 Engineを利用。 |
   * sudo bundle install
   * rake dad:db:config
+  * rake dad:db:create
   * rails s
-  * ブラウザ http://localhost:3000 にアクセス
+  * ブラウザで http://localhost:3000 にアクセス
 
