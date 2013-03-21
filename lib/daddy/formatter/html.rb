@@ -4,6 +4,7 @@ require 'erb'
 require 'cucumber/formatter/ordered_xml_markup'
 require 'cucumber/formatter/duration'
 require 'cucumber/formatter/io'
+require 'daddy/formatter/daddy_html'
 
 module Daddy
   module Formatter
@@ -11,6 +12,7 @@ module Daddy
       include ERB::Util # for the #h method
       include ::Cucumber::Formatter::Duration
       include ::Cucumber::Formatter::Io
+      include Daddy::Formatter::DaddyHtml
 
       def initialize(runtime, path_or_io, options)
         @path_or_io = path_or_io
@@ -108,6 +110,14 @@ module Daddy
       end
 
       def before_feature(feature)
+        dir = feature_dir(feature)
+        if @feature_dir != dir
+          @builder << '<div class="feature"><h2><span class="val">'
+          @builder << dir
+          @builder << '</span></h2></div>'
+        end 
+
+        @feature_dir = dir
         @feature = feature
         @exceptions = []
         @builder << '<div class="feature">'
@@ -144,7 +154,7 @@ module Daddy
       end
 
       def feature_name(keyword, name)
-        title = @feature.file.split('/').last.gsub(/\.feature/, '')
+        title = feature_dir(@feature, true) + @feature.file.split('/').last.gsub(/\.feature/, '')
 
         @builder.h2 do |h2|
           @builder.span(title, :class => 'val')

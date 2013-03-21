@@ -1,7 +1,13 @@
 # coding: UTF-8
 
-前提(/^ログインに遷移$/) do
+前提 /^ログインに遷移$/ do
   assert_visit '/users/sign_in'
+end
+
+前提 /^(.*?) がログイン$/ do |email|
+  fill_in 'メールアドレス', :with => email
+  fill_in 'パスワード', :with => 'testtest'
+  click_on 'ログイン'
 end
 
 前提 /^キャリアを表示$/ do
@@ -14,6 +20,10 @@ end
 
 前提 /^キャリアの一覧に遷移$/ do
   assert_url '/careers'
+end
+
+前提 /^キャリアの編集に遷移$/ do
+  assert_url '/careers/[0-9]+/edit'
 end
 
 前提 /^トップページを表示$/ do
@@ -46,10 +56,20 @@ end
 もし /^キャリア一覧の (.*?) の (.*?) をクリック$/ do |name, action|
   find_tr '.careers', name do
     click_on action
-    confirm
+    confirm if action == '削除'
   end
 end
 
 ならば /^キャリアが削除され、一覧に遷移$/ do
   assert_url '/careers'
+end
+
+前提 /^必須チェックエラーで(登録|更新)できない$/ do |action|
+  if action == '登録'
+    assert_url '/careers'
+  elsif action == '更新'
+    assert_url '/careers/[0-9]+'
+  else
+    pending "不明なアクション #{action}"
+  end
 end
