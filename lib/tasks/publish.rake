@@ -6,8 +6,8 @@ namespace :dad do
   task :publish do
     system("mkdir -p features/reports")
     system("bundle exec rake db:test:prepare")
-    system("bundle exec rake dad:cucumber PUBLISH=true OUTPUT_FILE=diary.html features/開発日記")
-    system("bundle exec rake dad:cucumber PUBLISH=true OUTPUT_FILE=index.html features/仕様書")
+    system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false OUTPUT_FILE=diary.html features/開発日記")
+    system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false OUTPUT_FILE=index.html features/仕様書")
 
     system("mkdir -p tmp")
 

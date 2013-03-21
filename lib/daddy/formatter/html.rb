@@ -112,9 +112,9 @@ module Daddy
       def before_feature(feature)
         dir = feature_dir(feature)
         if @feature_dir != dir
-          @builder << '<div class="feature"><h2><span class="val">'
+          @builder << '<div class="feature_dir"><span class="val">'
           @builder << dir
-          @builder << '</span></h2></div>'
+          @builder << '</span></div>'
         end 
 
         @feature_dir = dir
@@ -586,17 +586,17 @@ module Daddy
         @builder.script do
           @builder << inline_jquery
           @builder << inline_js_content
-          if ENV['EXPAND']
+          if should_expand
             @builder << %w{
               $(document).ready(function() {
                 $(SCENARIOS).siblings().show();
-                $('li.message').show();
+                $('li.message').hide();
                 });
             }.join
           else
             @builder << %w{
               $(document).ready(function() {
-                $(SCENARIOS).siblings().show();
+                $(SCENARIOS).siblings().hide();
                 $('li.message').hide();
                 });
             }.join
@@ -629,6 +629,7 @@ module Daddy
     $("#expander").click(function() {
       $(SCENARIOS).siblings().show();
     });
+    
   })
 
   function moveProgressBar(percentDone) {

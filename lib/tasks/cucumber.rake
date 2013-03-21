@@ -4,11 +4,11 @@ require 'rake'
 
 namespace :dad do
   task :cucumber => :environment do |t, args|
-    phase_no = `git branch`.gsub(/[a-zA-Z]*/, '').to_i
     driver = ENV['DRIVER'] || :webkit
     pause = ENV['PAUSE'] || 0
     coverage = ENV['COVERAGE'] || true
-    options = "PHASE_NO=#{phase_no} DRIVER=#{driver} PAUSE=#{pause} COVERAGE=#{coverage}"
+    expand = ENV['EXPAND']
+    options = "DRIVER=#{driver} PAUSE=#{pause} COVERAGE=#{coverage} EXPAND=#{expand}"
     
     output_file = ENV['OUTPUT_FILE'] || 'index.html'
 
