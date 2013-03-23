@@ -8,7 +8,9 @@ namespace :dad do
   task :test => :environment do
     system("mkdir -p features/reports")
     
-    #system("bundle exec rake db:schema:load RAILS_ENV=test") or fail
+    ret = system("bundle exec rake db:schema:load RAILS_ENV=test")
+    fail unless ret
+
     ret = system("bundle exec rake dad:cucumber #{ARGV[1..-1].join(' ')}")
     fail unless ret
   end  
