@@ -3,6 +3,8 @@
 require 'rake'
 
 namespace :dad do
+  
+  desc 'Cucumberを使用してテストを実行します。'
   task :test => :environment do
     system("mkdir -p features/reports")
     system("bundle exec rake db:test:prepare")

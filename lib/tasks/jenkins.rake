@@ -5,6 +5,7 @@ require 'rake'
 namespace :dad do
   namespace :jenkins do
 
+    desc 'Jenkinsをインストールします。'
     task :install do
       [
         "sudo bash #{File.dirname(__FILE__)}/jenkins_install.sh",
