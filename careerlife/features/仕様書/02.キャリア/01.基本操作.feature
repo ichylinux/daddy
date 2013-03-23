@@ -1,6 +1,6 @@
 # language: ja
 
-機能:
+機能: 基本操作
 
 シナリオ: CRUD
 
