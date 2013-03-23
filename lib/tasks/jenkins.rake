@@ -13,6 +13,8 @@ namespace :dad do
         "sudo cp -f #{File.dirname(__FILE__)}/jenkins /etc/sysconfig",
         "sudo chown root:root /etc/sysconfig/jenkins",
         "sudo chmod 600 /etc/sysconfig/jenkins",
+        "sudo mkdir /var/lib/jenkins/plugins",
+        "sudo chown jenkins:jenkins /var/lib/jenkins/plugins",
         "sudo wget http://updates.jenkins-ci.org/download/plugins/build-pipeline-plugin/1.3.3/build-pipeline-plugin.hpi -O /var/lib/jenkins/plugins/build-pipeline-plugin.hpi",
         "sudo wget http://updates.jenkins-ci.org/download/plugins/git/1.1.26/git.hpi -O /var/lib/jenkins/plugins/git.hpi",
         "sudo wget http://updates.jenkins-ci.org/download/plugins/rake/1.7.7/rake.hpi -O /var/lib/jenkins/plugins/rake.hpi",
