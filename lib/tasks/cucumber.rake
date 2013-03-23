@@ -17,6 +17,7 @@ namespace :dad do
     ARGV[1..-1].each do |arg|
       features << arg unless arg.index('=')
     end
-    system("bundle exec cucumber --guess -r features -f Daddy::Formatter::Html #{options} #{features.join(' ')} > features/reports/#{output_file}")    
+    ret = system("bundle exec cucumber --guess -r features -f Daddy::Formatter::Html #{options} #{features.join(' ')} > features/reports/#{output_file}")
+    fail unless ret    
   end
 end
