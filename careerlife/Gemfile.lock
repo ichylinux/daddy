@@ -1,7 +1,7 @@
 PATH
   remote: ../../
   specs:
-    daddy (0.0.12)
+    daddy (0.0.13)
       capybara
       capybara-webkit (= 0.12.1)
       ci_reporter
