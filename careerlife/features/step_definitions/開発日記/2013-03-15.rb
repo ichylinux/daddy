@@ -1,5 +1,13 @@
 # coding: UTF-8
 
+前提 /^Gemfile を編集$/ do
+  git_diff 'Gemfile', 'careerlife/Gemfile'
+end
+
+前提 /^sudo bundle install$/ do
+  git_diff 'Gemfile.lock', 'careerlife/Gemfile.lock'
+end
+
 前提 /^rails g devise:install$/ do
   show 'config/initializers/devise.rb'
   show 'config/locales/devise.en.yml'

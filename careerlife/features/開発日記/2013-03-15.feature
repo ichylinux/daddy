@@ -3,6 +3,8 @@
 機能:
 
 シナリオ: ログイン
+  * Gemfile を編集
+  * sudo bundle install
   * rails g devise:install
   * development.rb を編集
   * rails g devise user
