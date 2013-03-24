@@ -14,10 +14,12 @@ module Daddy
         lines = []
         puts diff_lines.size
         diff_lines.each_with_index do |line, i|
-          if line.index('<ins ') and line.index('<del ')
+          if line.index('<del ') and line.index('<ins ') 
             split = line.split('<ins ')
             lines << split[0]
             lines << '<ins ' + split[1]
+          elsif i > 1 and line[0] == '"' and diff_lines[i-1] == '<ins class="differ">' and diff_lines[i-2].end_with?('</del>')
+            lines << '"' + "\n" + line[1..-1]
           else
             lines << line
           end
