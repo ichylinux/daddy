@@ -161,9 +161,9 @@ module Daddy
         end
 
         lines = name.split(/\r?\n/)
-        unless lines.empty?
+        if lines.size > 1
           @builder.p(:class => 'narrative') do
-            lines.each do |line|
+            lines[1..-1].each do |line|
               @builder.text!(line.strip)
               @builder.br
             end
