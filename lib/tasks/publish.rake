@@ -4,8 +4,11 @@ require 'daddy/git'
 
 namespace :dad do
   task :publish do
-    system("bundle exec rake dad:test PUBLISH=true EXPAND=false OUTPUT_FILE=diary.html features/開発日記")
-    system("bundle exec rake dad:test PUBLISH=true EXPAND=false OUTPUT_FILE=index.html features/仕様書")
+    ret = system("bundle exec rake db:schema:load RAILS_ENV=test")
+    fail unless ret
+
+    system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false OUTPUT_FILE=diary.html features/開発日記")
+    system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false OUTPUT_FILE=index.html features/仕様書")
 
     system("mkdir -p tmp")
 

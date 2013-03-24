@@ -9,9 +9,6 @@ namespace :dad do
     system("mkdir -p features/reports")
     system("rm -Rf features/reports/*")
     
-    ret = system("bundle exec rake db:schema:load RAILS_ENV=test")
-    fail unless ret
-
     ret = system("bundle exec rake dad:cucumber #{ARGV[1..-1].join(' ')}")
     fail unless ret
   end  
