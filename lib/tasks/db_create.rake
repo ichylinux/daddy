@@ -4,6 +4,8 @@ require 'rake'
 
 namespace :dad do
   namespace :db do
+    
+    desc 'database.yml に従ってDBを作成します。'
     task :create do
       config = YAML.load_file("#{Rails.root}/config/database.yml")
       
