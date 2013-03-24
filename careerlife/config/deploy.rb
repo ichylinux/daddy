@@ -31,7 +31,7 @@ after "deploy:restart", "deploy:cleanup"
 # end
 set :rails_env, :production
 set :unicorn_binary, "/usr/local/bin/unicorn"
-set :unicorn_config, "#{current_path}/#{application}/config/unicorn.rb"
+set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
 namespace :deploy do
