@@ -5,6 +5,6 @@
 end
 
 前提(/^rake db:migrate$/) do
-  puts "<pre>#{File.read('db/schema.rb')}</pre>"
+  git_diff 'db/schema.rb', 'careerlife/db/schema.rb'
 end
 
