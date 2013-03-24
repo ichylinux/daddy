@@ -18,6 +18,7 @@ group :assets do
 end
 
 gem 'daddy'
+gem 'devise'
 gem 'execjs'
 gem 'jquery-rails'
 gem 'mysql2'
