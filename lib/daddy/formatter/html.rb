@@ -306,7 +306,13 @@ module Daddy
           step_contents = "<div class=\"step_contents\"><pre>"
           step_file.gsub(/^([^:]*\.rb):(\d*)/) do
             line_index = $2.to_i - 1
-            File.readlines(File.expand_path($1.force_encoding('UTF-8')))[line_index..-1].each do |line|
+
+            file = $1.force_encoding('UTF-8')
+            if file.start_with?('daddy-') or file.start_with?('/daddy-')
+              file = '/usr/local/lib/ruby/gems/1.9.1/gems/' + file
+            end
+
+            File.readlines(File.expand_path(file))[line_index..-1].each do |line|
               step_contents << line
               break if line.chop == 'end' or line.chop.start_with?('end ')
             end
