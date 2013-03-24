@@ -7,23 +7,16 @@
 end
 
 前提(/^Gemfile に以下の gem を定義$/) do |table|
-  a = File.read('Gemfile')
-  b = File.read('/tmp/careerlife/Gemfile')
-  puts "<pre>#{Differ.diff(a, b)}</pre>"
+  diff('Gemfile', '/tmp/careerlife/Gemfile')
 end
 
 前提(/^sudo bundle install$/) do
   `cd /tmp/careerlife && sudo bundle install`
-
-  a = File.read('Gemfile.lock')
-  b = File.read('/tmp/careerlife/Gemfile.lock')
-  puts "<pre>#{Differ.diff(a, b)}</pre>"
+  diff('Gemfile.lock', '/tmp/careerlife/Gemfile.lock')
 end
 
 前提(/^rake dad:db:config$/) do
-  a = File.read('config/database.yml')
-  b = File.read('/tmp/careerlife/config/database.yml')
-  puts "<pre>#{Differ.diff(a, b)}</pre>"
+  diff('config/database.yml', '/tmp/careerlife/config/database.yml')
 end
 
 前提(/^rake dad:db:create$/) do
