@@ -57,6 +57,21 @@
   background: #F0F8FF;
 }
 
+.cucumber ol li.message, td ol li.message, th ol li.message {
+  border-left: 5px solid #999999;
+  border-bottom: 1px solid #999999;
+  background: #F0F8FF;
+  color: #001111;
+  margin-left: 10px;
+}
+
+.feature_dir {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 2px;
+  margin: 10px 10px 0px 10px;
+}
+
 .step_contents {
   display: none;
   background: #FFFFFF;

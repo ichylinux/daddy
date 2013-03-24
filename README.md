@@ -1,4 +1,4 @@
 daddy
 =====
 
-ホームページ: http://ichylinux.github.com/daddy
+ホームページ: http://daddy.reading.jp
