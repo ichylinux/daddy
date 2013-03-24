@@ -4,8 +4,10 @@ require 'daddy/git'
 
 namespace :dad do
   task :publish do
-    ret = system("bundle exec rake db:schema:load RAILS_ENV=test")
-    fail unless ret
+    if File.exist?("#{Rails.root}/db/schema.rb")
+      ret = system("bundle exec rake db:schema:load RAILS_ENV=test")
+      fail unless ret
+    end
 
     system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false OUTPUT_FILE=diary.html features/開発日記")
     system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false OUTPUT_FILE=index.html features/仕様書")
@@ -18,7 +20,7 @@ namespace :dad do
       git = Daddy::Git.new
       current_branch = git.current_branch
     end
-  
+
     unless File.exist?('tmp/gh-pages')
       system("cd tmp && git clone -b gh-pages git@github.com:ichylinux/daddy.git gh-pages")
     else
