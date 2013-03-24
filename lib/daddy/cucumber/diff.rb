@@ -12,14 +12,16 @@ module Daddy
 
         diff_lines = diff.to_s.split("\n")
         lines = []
-        puts diff_lines.size
         diff_lines.each_with_index do |line, i|
-          if line.index('<del ') and line.index('<ins ') 
-            split = line.split('<ins ')
+          if line.index('</del><ins class="differ">') 
+            split = line.split('</del><ins class="differ">')
             lines << split[0]
-            lines << '<ins ' + split[1]
-          elsif i > 1 and line[0] == '"' and diff_lines[i-1] == '<ins class="differ">' and diff_lines[i-2].end_with?('</del>')
-            lines << '"' + "\n" + line[1..-1]
+            if split[1].start_with?('"')
+              lines << '</del><ins class="differ">"'
+              lines << split[1][1..-1]
+            else
+              lines << '</del><ins class="differ">' + split[1]
+            end
           else
             lines << line
           end
