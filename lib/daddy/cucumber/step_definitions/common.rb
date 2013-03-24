@@ -20,6 +20,10 @@ end
   assert_choose value
 end
 
+もし /^(.*?) を空白にする$/ do |name|
+  assert_fill_in name, ''
+end
+
 もし /^(.*?) に (.*?) と入力(する)?$/ do |name, value, suffix|
   assert_fill_in name, value
 end
