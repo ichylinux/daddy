@@ -3,6 +3,8 @@
 require 'rake'
 
 namespace :dad do
+  
+  desc '本日用の日記を準備します。'
   task :diary do
     today = Date.today.strftime('%Y-%m-%d')
 

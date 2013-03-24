@@ -4,6 +4,7 @@ require 'erb'
 require 'cucumber/formatter/ordered_xml_markup'
 require 'cucumber/formatter/duration'
 require 'cucumber/formatter/io'
+require 'daddy/formatter/daddy_html'
 
 module Daddy
   module Formatter
@@ -11,6 +12,7 @@ module Daddy
       include ERB::Util # for the #h method
       include ::Cucumber::Formatter::Duration
       include ::Cucumber::Formatter::Io
+      include Daddy::Formatter::DaddyHtml
 
       def initialize(runtime, path_or_io, options)
         @path_or_io = path_or_io
@@ -94,7 +96,7 @@ module Daddy
       end
 
       def make_menu_for_publish
-        menu = 'tmp/menu.html'
+        menu = Rails.root + '/tmp/menu.html'
         system("erb -T - #{File.dirname(__FILE__)}/menu.html.erb > #{menu}")
         File.readlines(menu).join
       end
@@ -108,6 +110,14 @@ module Daddy
       end
 
       def before_feature(feature)
+        dir = feature_dir(feature)
+        if @feature_dir != dir
+          @builder << '<div class="feature_dir"><span class="val">'
+          @builder << dir
+          @builder << '</span></div>'
+        end 
+
+        @feature_dir = dir
         @feature = feature
         @exceptions = []
         @builder << '<div class="feature">'
@@ -144,7 +154,7 @@ module Daddy
       end
 
       def feature_name(keyword, name)
-        title = @feature.file.split('/').last.gsub(/\.feature/, '')
+        title = feature_dir(@feature, true) + @feature.file.split('/').last.gsub(/\.feature/, '')
 
         @builder.h2 do |h2|
           @builder.span(title, :class => 'val')
@@ -296,7 +306,13 @@ module Daddy
           step_contents = "<div class=\"step_contents\"><pre>"
           step_file.gsub(/^([^:]*\.rb):(\d*)/) do
             line_index = $2.to_i - 1
-            File.readlines(File.expand_path($1.force_encoding('UTF-8')))[line_index..-1].each do |line|
+
+            file = $1.force_encoding('UTF-8')
+            if file.start_with?('daddy-') or file.start_with?('/daddy-')
+              file = '/usr/local/lib/ruby/gems/1.9.1/gems/' + file
+            end
+
+            File.readlines(File.expand_path(file))[line_index..-1].each do |line|
               step_contents << line
               break if line.chop == 'end' or line.chop.start_with?('end ')
             end
@@ -576,17 +592,17 @@ module Daddy
         @builder.script do
           @builder << inline_jquery
           @builder << inline_js_content
-          if ENV['EXPAND']
+          if should_expand
             @builder << %w{
               $(document).ready(function() {
                 $(SCENARIOS).siblings().show();
-                $('li.message').show();
+                $('li.message').hide();
                 });
             }.join
           else
             @builder << %w{
               $(document).ready(function() {
-                $(SCENARIOS).siblings().show();
+                $(SCENARIOS).siblings().hide();
                 $('li.message').hide();
                 });
             }.join
@@ -619,6 +635,7 @@ module Daddy
     $("#expander").click(function() {
       $(SCENARIOS).siblings().show();
     });
+    
   })
 
   function moveProgressBar(percentDone) {
