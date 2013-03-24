@@ -29,6 +29,10 @@ end
 前提(/^rake dad:db:create$/) do
 end
 
+前提(/^rake db:migrate$/) do
+  show 'db/schema.rb'
+end
+
 前提(/^rails s$/) do
 end
 

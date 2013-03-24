@@ -14,6 +14,7 @@
   * sudo bundle install
   * rake dad:db:config
   * rake dad:db:create
+  * rake db:migrate
   * rails s
   * ブラウザで http://localhost:3000 にアクセス
 
