@@ -17,7 +17,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'daddy', :path => '../../'
+gem 'daddy'
 gem 'execjs'
 gem 'jquery-rails'
 gem 'mysql2'
