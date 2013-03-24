@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name        = 'daddy'
-  s.version     = '0.0.17'
+  s.version     = '0.0.18'
   s.date        = '2013-03-24'
   s.summary     = "My rails dad"
   s.description = "Dadday helps me build rails applications since daddy knows some best practices."
