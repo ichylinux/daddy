@@ -5,7 +5,7 @@ set :repository,  "git://github.com/ichylinux/daddy.git"
 set :scm, :git
 set :branch, 'master'
 set :deploy_via, :remote_cache
-set :deploy_to, "/home/#{user}/apps"
+set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_subdir, "careerlife"
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
