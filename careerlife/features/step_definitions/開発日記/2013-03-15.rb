@@ -1,11 +1,11 @@
 # coding: UTF-8
 
 前提 /^Gemfile を編集$/ do
-  git_diff 'Gemfile', 'careerlife/Gemfile'
+  git_diff 'Gemfile'
 end
 
 前提 /^sudo bundle install$/ do
-  git_diff 'Gemfile.lock', 'careerlife/Gemfile.lock'
+  git_diff 'Gemfile.lock'
 end
 
 前提 /^rails g devise:install$/ do
@@ -14,7 +14,7 @@ end
 end
 
 前提(/^development\.rb を編集$/) do
-  git_diff 'config/environments/development.rb', 'careerlife/config/environments/development.rb'
+  git_diff 'config/environments/development.rb'
 end
 
 前提(/^rails g devise user$/) do
@@ -23,7 +23,7 @@ end
 end
 
 前提(/^rake db:migrate$/) do
-  git_diff 'db/schema.rb', 'careerlife/db/schema.rb'
+  git_diff 'db/schema.rb'
 end
 
 前提 /^devise 用の日本語ファイルを取得$/ do
@@ -32,15 +32,13 @@ end
 end
 
 前提(/^コントローラを修正$/) do
-  git_diff 'app/controllers/careers_controller.rb', 'careerlife/app/controllers/careers_controller.rb'
+  git_diff 'app/controllers/careers_controller.rb'
 end
 
 前提(/^ヘッダを修正/) do
-  git_diff 'app/views/common/_header.html.erb', 'careerlife/app/views/common/_header.html.erb'
+  git_diff 'app/views/common/_header.html.erb'
 end
 
 前提(/^rails g devise:views$/) do
-  git = Daddy::Git.new
-  branch = git.previous_branch
-  puts "<pre>#{`git diff origin/#{branch} --name-only app/views`}</pre>"
+  git_diff_name 'app/views/devise'
 end
