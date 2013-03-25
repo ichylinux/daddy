@@ -18,7 +18,7 @@ class CareersControllerTest < ActionController::TestCase
 
   test "should create career" do
     assert_difference('Career.count') do
-      post :create, career: { birthday: @career.birthday, gender: @career.gender, name: @career.name }
+      post :create, career: { birthday: @career.birthday, first_name: @career.first_name, gender: @career.gender, last_name: @career.last_name }
     end
 
     assert_redirected_to career_path(assigns(:career))
@@ -35,7 +35,7 @@ class CareersControllerTest < ActionController::TestCase
   end
 
   test "should update career" do
-    put :update, id: @career, career: { birthday: @career.birthday, gender: @career.gender, name: @career.name }
+    put :update, id: @career, career: { birthday: @career.birthday, first_name: @career.first_name, gender: @career.gender, last_name: @career.last_name }
     assert_redirected_to career_path(assigns(:career))
   end
 

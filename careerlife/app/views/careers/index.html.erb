@@ -2,7 +2,8 @@
 
 <table>
   <tr>
-    <th>Name</th>
+    <th>Last name</th>
+    <th>First name</th>
     <th>Birthday</th>
     <th>Gender</th>
     <th></th>
@@ -12,7 +13,8 @@
 
 <% @careers.each do |career| %>
   <tr>
-    <td><%= career.name %></td>
+    <td><%= career.last_name %></td>
+    <td><%= career.first_name %></td>
     <td><%= career.birthday %></td>
     <td><%= career.gender %></td>
     <td><%= link_to 'Show', career %></td>

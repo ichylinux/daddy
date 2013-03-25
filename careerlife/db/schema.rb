@@ -14,7 +14,8 @@
 ActiveRecord::Schema.define(:version => 20130307031034) do
 
   create_table "careers", :force => true do |t|
-    t.string   "name"
+    t.string   "last_name"
+    t.string   "first_name"
     t.date     "birthday"
     t.string   "gender"
     t.datetime "created_at", :null => false
