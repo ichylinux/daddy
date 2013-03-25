@@ -8,5 +8,6 @@
 
 シナリオ: 今までの経歴を登録できるように
   * rails g model career_detail
+  * rake db:migrate
   * view を修正
   * controller を修正

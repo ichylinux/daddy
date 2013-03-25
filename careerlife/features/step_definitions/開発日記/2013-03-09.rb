@@ -12,6 +12,10 @@ end
   show 'db/migrate/20130308174601_create_career_details.rb'
 end
 
+前提 /^rake db:migrate$/ do
+  git_diff 'db/schema.rb'
+end
+
 前提 /^view を修正$/ do
   git_diff 'app/views/careers/_form.html.erb'
   show 'app/views/careers/_career_detail_fields.html.erb'
