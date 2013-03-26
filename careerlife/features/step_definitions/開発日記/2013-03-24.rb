@@ -1,14 +1,18 @@
 # coding: UTF-8
 
 前提 /^Gemfileを編集$/ do
-  git_diff 'Gemfile', 'careerlife/Gemfile'
+  git_diff 'Gemfile'
 end
 
 前提 /^capify \.$/ do
-  files = []
-  `git diff origin/p8 --name-only`.split("\n").each do |file|
-    files << file unless file.start_with?('"careerlife/features')
+  `rm -Rf /tmp/careerlife`
+  `cd /tmp && rails new careerlife -d mysql --skip-bundle`
+  `cd /tmp/careerlife && capify .`
+
+  %w(
+    Capfile
+    config/deploy.rb
+  ).each do |file|
+    diff file, "/tmp/careerlife/#{file}"
   end
-  
-  puts "<pre>#{files.join("\n")}</pre>"
 end

@@ -1,12 +1,17 @@
-set :application, "careerlife"
-set :user, ENV['USER']
+require 'daddy/capistrano/remote_cache_subdir'
 
+set :default_run_options, :pty => true
+
+set :application, "careerlife"
 set :repository,  "git://github.com/ichylinux/daddy.git"
 set :scm, :git
 set :branch, 'master'
+
+set :user, ENV['USER']
 set :deploy_via, :remote_cache
 set :deploy_to, "/home/#{user}/apps/#{application}"
-set :deploy_subdir, "careerlife"
+set :deploy_subdir, application
+set :strategy, Daddy::Capistrano::RemoteCacheSubdir.new(self)
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
@@ -57,30 +62,3 @@ after "deploy:setup" do
   run "#{try_sudo} chown -R #{user}:#{user} #{deploy_to}"
 end
 
-require 'capistrano/recipes/deploy/strategy/remote_cache'
-
-class RemoteCacheSubdir < Capistrano::Deploy::Strategy::RemoteCache
-
-  private
-
-  def repository_cache_subdir
-    if configuration[:deploy_subdir]
-      File.join(repository_cache, configuration[:deploy_subdir])
-    else
-      repository_cache
-    end
-  end
-
-  def copy_repository_cache
-    logger.trace "copying the cached version to #{configuration[:release_path]}"
-    if copy_exclude.empty? 
-      run "cp -RPp #{repository_cache_subdir} #{configuration[:release_path]} && #{mark}"
-    else
-      exclusions = copy_exclude.map { |e| "--exclude=\"#{e}\"" }.join(' ')
-      run "rsync -lrpt #{exclusions} #{repository_cache_subdir}/* #{configuration[:release_path]} && #{mark}"
-    end
-  end
-
-end
-
-set :strategy, RemoteCacheSubdir.new(self)
