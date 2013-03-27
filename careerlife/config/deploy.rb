@@ -1,6 +1,7 @@
 require 'daddy/capistrano/remote_cache_subdir'
 
 set :default_run_options, :pty => true
+set :use_sudo, false
 
 set :application, "careerlife"
 set :repository,  "git://github.com/ichylinux/daddy.git"
@@ -13,7 +14,7 @@ set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_subdir, application
 set :strategy, Daddy::Capistrano::RemoteCacheSubdir.new(self)
 
-set :asset_env, "#{asset_env} RAILS_RELATIVE_URL_ROOT=/careerlife"
+#set :asset_env, "#{asset_env} RAILS_RELATIVE_URL_ROOT=/careerlife"
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
@@ -36,32 +37,15 @@ after "deploy:restart", "deploy:cleanup"
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
-set :rails_env, :production
-set :rails_path, '/careerlife'
-set :unicorn_binary, "/usr/local/bin/unicorn_rails"
-set :unicorn_config, "#{current_path}/config/unicorn.rb"
-set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
-
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do 
-    run "cd #{current_path} && RAILS_RELATIVE_URL_ROOT=#{rails_path} #{unicorn_binary} -c #{unicorn_config} -E #{rails_env} --path #{rails_path} -D"
+    run "sudo service unicorn start"
   end
   task :stop, :roles => :app, :except => { :no_release => true } do 
-    run "#{try_sudo} kill `cat #{unicorn_pid}`"
-  end
-  task :graceful_stop, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} kill -s QUIT `cat #{unicorn_pid}`"
-  end
-  task :reload, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} kill -s USR2 `cat #{unicorn_pid}`"
+    run "sudo service unicorn stop"
   end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    stop
-    start
+    run "sudo service unicorn restart"
   end
-end
-
-after "deploy:setup" do
-  run "#{try_sudo} chown -R #{user}:#{user} #{deploy_to}"
 end
 
