@@ -2,3 +2,11 @@
 
 require ::File.expand_path('../config/environment',  __FILE__)
 run Careerlife::Application
+
+if ENV['RAILS_RELATIVE_URL_ROOT']
+  map ENV['RAILS_RELATIVE_URL_ROOT'] do
+    run Careerlife::Application
+  end
+else
+  run Careerlife::Application
+end
