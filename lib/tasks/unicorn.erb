@@ -1,0 +1,51 @@
+#!/bin/sh
+#
+# chkconfig: - 85 15
+# description: unicorn
+
+. /etc/rc.d/init.d/functions
+
+if [ -z ${RAILS_USER} ]; then
+  RAILS_USER=<%= ENV['USER'] %>
+fi
+
+if [ -z ${RAILS_ENV} ]; then
+  RAILS_ENV=<%= ENV['RAILS_ENV'] %>
+fi
+
+if [ -z ${RAILS_ROOT} ]; then
+  RAILS_ROOT=<%= ENV['RAILS_ROOT'] %>
+fi
+
+PID=${RAILS_ROOT}/tmp/pids/unicorn.pid
+CONFIG=${RAILS_ROOT}/config/unicorn.rb
+
+export PATH="${PATH}":/usr/local/bin
+
+start() {
+  daemon --user=${RAILS_USER} --pidfile=$PID bundle exec unicorn_rails -c ${CONFIG} -E ${RAILS_ENV} -D
+}
+
+stop() {
+  killproc -p ${PID} -QUIT
+}
+
+cd ${RAILS_ROOT} || exit 1
+
+case $1 in
+
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  *)
+    echo >&2 "Usage: $0 <start|stop|restart>"
+    exit 1
+    ;;
+esac
