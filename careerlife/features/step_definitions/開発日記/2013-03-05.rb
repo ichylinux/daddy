@@ -1,8 +1,12 @@
 # coding: UTF-8
 
-前提(/^rails new careerlife -d mysql --skip-bundle$/) do
+前提(/^Railsアプリを新規作成$/) do
+  command = 'rails new careerlife -d mysql'
+  puts command
+
   `rm -Rf /tmp/careerlife`
-  `cd /tmp && rails new careerlife -d mysql --skip-bundle`
+  `cd /tmp && #{command}`
+
   puts "<pre>#{`cd /tmp/careerlife && tree .`}</pre>"
 end
 
