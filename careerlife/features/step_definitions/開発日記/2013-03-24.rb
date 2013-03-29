@@ -4,7 +4,13 @@
   git_diff 'Gemfile'
 end
 
-前提 /^capify \.$/ do
+前提 /^Unicornをインストール$/ do
+  puts 'rake dad:unicorn:install'
+  show 'config/deploy.rb'
+end
+
+前提 /^Capistranoをインストール$/ do
+  puts 'capify .'
   `rm -Rf /tmp/careerlife`
   `cd /tmp && rails new careerlife -d mysql --skip-bundle`
   `cd /tmp/careerlife && capify .`

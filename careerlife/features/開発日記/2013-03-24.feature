@@ -4,5 +4,6 @@
 
 シナリオ: デプロイ
   * Gemfileを編集
-  * capify .
+  * Unicornをインストール
+  * Capistranoをインストール
 
