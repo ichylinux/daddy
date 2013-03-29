@@ -1,0 +1,30 @@
+upstream unicorn {
+  server unix:/tmp/unicorn.sock;
+}
+
+server {
+  listen 80 default_server;
+  server_name _;
+  deny all;
+}
+
+server {
+  listen 80;
+  server_name localhost;
+  
+  root <%= ENV['RAILS_ROOT'] %>/public;
+
+  try_files $uri/index.html $uri @app;
+  
+  location @app {
+    proxy_pass http://unicorn;
+  }
+
+  location ~ ^/(assets)/ {
+    gzip_vary on;
+    gzip_static on;
+    expires 1y;
+    add_header Cache-Control public;
+    add_header ETag "";
+  }
+}

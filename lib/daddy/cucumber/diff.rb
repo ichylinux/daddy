@@ -4,15 +4,13 @@ module Daddy
   module Cucumber
     module Diff
       
-      def git_diff(local_file, git_path = nil)
+      def git_diff(file, options = {})
         git = Daddy::Git.new
-        git_path ||= local_file 
-
-        a = File.read(local_file).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
-        b = git.show_previous(git_path, true).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
+        a = File.read(file).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
+        b = git.show_previous(file, true).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
         diff = format_diff(Differ.diff(a, b))
 
-        puts local_file
+        puts file
         puts "<pre>#{diff}</pre>"
       end
       

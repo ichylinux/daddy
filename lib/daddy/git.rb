@@ -12,7 +12,7 @@ module Daddy
     def self.sub_dir=(sub_dir)
       @@sub_dir = sub_dir
     end
-    
+
     def branches(remote = false)
       branches = []
       `git branch -a`.split("\n").each do |b|
