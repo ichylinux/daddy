@@ -19,6 +19,7 @@ namespace :dad do
         "sudo wget http://updates.jenkins-ci.org/download/plugins/git/1.1.26/git.hpi -O /var/lib/jenkins/plugins/git.hpi",
         "sudo wget http://updates.jenkins-ci.org/download/plugins/rake/1.7.7/rake.hpi -O /var/lib/jenkins/plugins/rake.hpi",
         "sudo wget http://updates.jenkins-ci.org/download/plugins/rubyMetrics/1.5.0/rubyMetrics.hpi -O /var/lib/jenkins/plugins/rubyMetrics.hpi",
+        "sudo wget http://updates.jenkins-ci.org/download/plugins/htmlpublisher/1.2/htmlpublisher.hpi -O /var/lib/jenkins/plugins/htmlpublisher.hpi"
       ].each do |command|
         puts command
         system(command)
