@@ -1,14 +1,18 @@
 # coding: UTF-8
 
 task :build do |t|
-  cmd = "gem build daddy.gemspec"
-  puts cmd
-  system cmd
+  [
+    "rm -f daddy-*.gem",
+    "gem build daddy.gemspec",
+  ].each do |command|
+    puts command
+    system command
+  end
 
   Dir.glob(File.dirname(__FILE__) + '/daddy-*.gem').each do |gem|
-    cmd = "sudo gem install --local #{gem}"
-    puts cmd
-    system cmd
+    command = "sudo gem install --local #{gem}"
+    puts command
+    system command
   end
 end
 
