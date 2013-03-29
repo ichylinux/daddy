@@ -5,17 +5,9 @@
 
 . /etc/rc.d/init.d/functions
 
-if [ -z ${RAILS_USER} ]; then
-  RAILS_USER=<%= ENV['USER'] %>
-fi
-
-if [ -z ${RAILS_ENV} ]; then
-  RAILS_ENV=<%= ENV['RAILS_ENV'] %>
-fi
-
-if [ -z ${RAILS_ROOT} ]; then
-  RAILS_ROOT=<%= ENV['RAILS_ROOT'] %>
-fi
+RAILS_USER=<%= ENV['USER'] %>
+RAILS_ENV=<%= ENV['RAILS_ENV'] %>
+RAILS_ROOT=<%= ENV['RAILS_ROOT'] %>
 
 PID=${RAILS_ROOT}/tmp/pids/unicorn.pid
 CONFIG=${RAILS_ROOT}/config/unicorn.rb
