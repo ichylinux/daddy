@@ -207,15 +207,25 @@ module Daddy
 
       def scenario_name(keyword, name, file_colon_line, source_indent)
         @step_number_in_scenario = 0
-        
+
         @builder.span(:class => 'scenario_file') do
           @builder << file_colon_line
         end
         @listing_background = false
+
+        lines = name.split("\n")
         @builder.h3(:id => "scenario_#{@scenario_number}") do
           @builder.span(keyword + ':', :class => 'keyword')
           @builder.text!(' ')
-          @builder.span(name, :class => 'val')
+          @builder.span(lines[0], :class => 'val')
+        end
+        
+        if lines.size > 1
+          @builder.div do
+            @builder.pre do
+              @builder << lines[1..-1].join("\n") 
+            end
+          end
         end
       end
 

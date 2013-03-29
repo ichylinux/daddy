@@ -1,22 +1,27 @@
 # coding: UTF-8
 
-前提(/^Railsアプリを新規作成$/) do
-  command = 'rails new careerlife -d mysql'
-  puts command
-
+前提(/^rails new careerlife -d mysql$/) do
   `rm -Rf /tmp/careerlife`
-  `cd /tmp && #{command}`
-
+  `cd /tmp && rails new careerlife -d mysql --skip-bundle`
   puts "<pre>#{`cd /tmp/careerlife && tree .`}</pre>"
 end
 
-前提(/^Gemfile に以下の gem を定義$/) do |table|
+前提(/^Gemfileを編集$/) do
   diff('Gemfile', '/tmp/careerlife/Gemfile')
 end
 
 前提(/^sudo bundle install$/) do
   `cd /tmp/careerlife && sudo bundle install`
   diff('Gemfile.lock', '/tmp/careerlife/Gemfile.lock')
+end
+
+前提 /^rake dad:unicorn:install$/ do
+  show 'config/unicorn.rb'
+  show '/etc/init.d/unicorn'
+end
+
+前提 /^rake dad:nginx:install$/ do
+  show '/etc/nginx/conf.d/nginx.conf'
 end
 
 前提(/^rake dad:db:config$/) do
@@ -30,9 +35,12 @@ end
   show 'db/schema.rb'
 end
 
-前提(/^rails s$/) do
+前提(/^sudo service nginx start$/) do
 end
 
-前提(/^ブラウザで http:\/\/localhost:3000 にアクセス$/) do
+前提(/^sudo service unicorn start$/) do
+end
+
+前提(/^ブラウザで http:\/\/localhost にアクセス$/) do
   assert_visit '/'
 end
