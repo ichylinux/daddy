@@ -5,11 +5,11 @@
 end
 
 前提 /^ヘッダを作成$/ do
-  show 'app/views/common/_header.html.erb'
+  git_diff 'app/views/common/_header.html.erb'
 end
 
 前提 /^rails g model career_detail$/ do
-  show 'db/migrate/20130308174601_create_career_details.rb'
+  git_diff 'db/migrate/20130308174601_create_career_details.rb'
 end
 
 前提 /^rake db:migrate$/ do
@@ -18,7 +18,7 @@ end
 
 前提 /^view を修正$/ do
   git_diff 'app/views/careers/_form.html.erb'
-  show 'app/views/careers/_career_detail_fields.html.erb'
+  git_diff 'app/views/careers/_career_detail_fields.html.erb'
 end
 
 前提 /^controller を修正$/ do
