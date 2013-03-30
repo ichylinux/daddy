@@ -4,14 +4,41 @@ module Daddy
   module Cucumber
     module Diff
       
-      def git_diff(local_file, git_path)
+      def git_diff(file, options = {})
         git = Daddy::Git.new
-        a = File.read(local_file).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
-        b = git.show_previous(git_path, true).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
-        diff = Differ.diff(a, b)
+        a = File.read(file).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
+        b = git.show_previous(file, true).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
+        diff = format_diff(Differ.diff(a, b))
+
+        puts file
+        puts "<pre>#{diff}</pre>"
+      end
+      
+      def git_diff_name(*includes)
+        git = Daddy::Git.new
+        puts '<pre>' + git.git_diff_name(*includes) + '</pre>'
+      end
+      
+      def diff(file_a, file_b)
+        a = File.read(file_a)
+        b = File.read(file_b)
+        diff = format_diff(Differ.diff(a, b))
+
+        puts file_a
+        puts "<pre>#{diff}</pre>"
+      end
+
+      def show(file)
+        puts file
+        puts "<pre>#{File.read(file).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')}</pre>"
+      end
+      
+      private
+      
+      def format_diff(diff)
+        lines = []
 
         diff_lines = diff.to_s.split("\n")
-        lines = []
         diff_lines.each_with_index do |line, i|
           if line.index('</del><ins class="differ">') 
             split = line.split('</del><ins class="differ">')
@@ -26,14 +53,8 @@ module Daddy
             lines << line
           end
         end
-
-        puts local_file
-        puts "<pre>#{lines.join("\n")}</pre>"
-      end
-
-      def show(file)
-        puts file
-        puts "<pre>#{File.read(file).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')}</pre>"
+        
+        lines.join("\n")
       end
 
     end

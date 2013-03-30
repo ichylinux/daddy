@@ -161,9 +161,9 @@ module Daddy
         end
 
         lines = name.split(/\r?\n/)
-        unless lines.empty?
+        if lines.size > 1
           @builder.p(:class => 'narrative') do
-            lines.each do |line|
+            lines[1..-1].each do |line|
               @builder.text!(line.strip)
               @builder.br
             end
@@ -207,15 +207,31 @@ module Daddy
 
       def scenario_name(keyword, name, file_colon_line, source_indent)
         @step_number_in_scenario = 0
-        
+
         @builder.span(:class => 'scenario_file') do
           @builder << file_colon_line
         end
         @listing_background = false
+
+        lines = name.split("\n")
         @builder.h3(:id => "scenario_#{@scenario_number}") do
           @builder.span(keyword + ':', :class => 'keyword')
           @builder.text!(' ')
-          @builder.span(name, :class => 'val')
+          @builder.span(lines[0], :class => 'val')
+        end
+        
+        if lines.size > 1
+          @builder.div(:class => 'narrative') do
+            @builder.pre do
+              text = ''
+              lines[1..-1].each_with_index do |line, i|
+                next if i == 0 and line.strip.empty?
+                text << '<br/>' unless text.empty?
+                text << line
+              end
+              @builder << text
+            end
+          end
         end
       end
 
