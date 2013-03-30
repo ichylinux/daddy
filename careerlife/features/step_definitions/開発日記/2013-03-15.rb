@@ -1,6 +1,6 @@
 # coding: UTF-8
 
-前提 /^Gemfile を編集$/ do
+前提 /^Gemfileを編集$/ do
   git_diff 'Gemfile'
 end
 
@@ -26,7 +26,7 @@ end
   git_diff 'db/schema.rb'
 end
 
-前提 /^devise 用の日本語ファイルを取得$/ do
+前提 /^devise用の日本語ファイルを取得$/ do
   puts "<pre>wget https://gist.github.com/kawamoto/4729292/raw/ec2b3e23be61b4b8f6903efedff359fd0a4b3223/devise.ja.yml -O config/locales/devise.ja.yml</pre>"
   show 'config/locales/devise.ja.yml'
 end
