@@ -221,9 +221,15 @@ module Daddy
         end
         
         if lines.size > 1
-          @builder.div do
+          @builder.div(:class => 'narrative') do
             @builder.pre do
-              @builder << lines[1..-1].join("\n") 
+              text = ''
+              lines[1..-1].each_with_index do |line, i|
+                next if i == 0 and line.strip.empty?
+                text << '<br/>' unless text.empty?
+                text << line
+              end
+              @builder << text
             end
           end
         end

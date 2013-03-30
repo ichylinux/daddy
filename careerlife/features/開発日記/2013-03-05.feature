@@ -11,11 +11,12 @@
   
 シナリオ: ライブラリをインストール
 
-  以下のライブラリをインストールします。
-  daddy         Railsアプリ開発をサポートするユーティリティ
-  execjs        RubyからJavaScriptの実行を可能にする
-  therubyracer  ExecJS が利用するJavaScript実行環境。Chromeが搭載しているV8 Engineを利用。
-  unicorn       アプリケーションサーバ
+以下のライブラリをインストールします。
+
+daddy        ・・・ Railsアプリ開発をサポートするユーティリティ
+execjs       ・・・ RubyからJavaScriptの実行を可能にする
+therubyracer ・・・ ExecJS が利用するJavaScript実行環境。Chromeが搭載しているV8 Engineを利用。
+unicorn      ・・・ アプリケーションサーバ
 
   * Gemfileを編集
   * sudo bundle install
