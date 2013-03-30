@@ -1,11 +1,10 @@
 # coding: UTF-8
 
 もし /^rails g controller top$/ do
-  git_diff_name 'app', 'test'
+  git_diff_name 'app/assets', 'app/controllers', 'test'
 end
 
-もし /^アクション「index」を実装$/ do
-  git_diff 'app/controllers/top_controller.rb'
+もし /^indexページを作成$/ do
   git_diff 'app/views/top/index.html.erb'
 end
 
