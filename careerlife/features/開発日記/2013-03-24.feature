@@ -2,8 +2,12 @@
 
 機能: 2013-03-24
 
-シナリオ: デプロイ
+シナリオ: Capistranoをインストール
   * Gemfileを編集
-  * Unicornをインストール
-  * Capistranoをインストール
+  * sudo bundle install
+  * capify .
 
+シナリオ: デプロイの設定
+  * Capfileを編集
+  * deploy.rbを編集
+  

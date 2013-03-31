@@ -4,21 +4,20 @@
   git_diff 'Gemfile'
 end
 
-前提 /^Unicornをインストール$/ do
-  puts 'rake dad:unicorn:install'
-  show 'config/deploy.rb'
-end
-
-前提 /^Capistranoをインストール$/ do
-  puts 'capify .'
+前提 /^capify \./ do
   `rm -Rf /tmp/careerlife`
   `cd /tmp && rails new careerlife -d mysql --skip-bundle`
   `cd /tmp/careerlife && capify .`
+end
 
-  %w(
-    Capfile
-    config/deploy.rb
-  ).each do |file|
-    diff file, "/tmp/careerlife/#{file}"
-  end
+前提 /^sudo bundle install$/ do
+  git_diff 'Gemfile.lock'
+end
+
+前提 /^Capfileを編集$/ do
+  diff 'Capfile', "/tmp/careerlife/Capfile"
+end
+
+前提(/^deploy\.rbを編集$/) do
+  diff 'config/deploy.rb', "/tmp/careerlife/config/deploy.rb"
 end
