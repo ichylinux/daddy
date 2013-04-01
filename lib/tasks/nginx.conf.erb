@@ -40,7 +40,7 @@ server {
 
 <% if ENV['PUBLISH'].to_s.downcase == 'true' %>
   location /spec/ {
-    root /var/lib/daddy/;
+    root /var/lib/daddy;
   }
 <% end -%>
 
