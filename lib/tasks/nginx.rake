@@ -31,6 +31,7 @@ namespace :dad do
       
       if publish
         system("sudo mkdir -p /var/lib/daddy")
+        system("sudo chown -R ENV['USER']:ENV['USER'] /var/lib/daddy")
       end
     end  
 
