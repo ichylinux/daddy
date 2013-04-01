@@ -30,7 +30,7 @@ server {
 
 <% if ENV['JENKINS'].to_s.downcase == 'true' %>  
   location /jenkins/ {
-#    root /var/cache/jenkins/war;
+    root /var/cache/jenkins/war;
     proxy_pass http://localhost:8081/jenkins/;
     proxy_set_header Host $http_host;
     proxy_set_header X-Real-IP $remote_addr;
