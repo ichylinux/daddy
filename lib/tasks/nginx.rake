@@ -28,6 +28,10 @@ namespace :dad do
       ret = system("RAILS_ROOT=#{rails_root} erb -T - #{File.dirname(__FILE__)}/nginx.conf.erb > tmp/nginx.conf")
       fail unless ret
       system("sudo cp -f tmp/nginx.conf /etc/nginx/conf.d/nginx.conf")
+      
+      if publish
+        system("sudo mkdir -p /var/lib/daddy")
+      end
     end  
 
   end
