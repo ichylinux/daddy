@@ -2,6 +2,7 @@
 
 task :build do |t|
   [
+    "sudo bundle update",
     "rm -f daddy-*.gem",
     "gem build daddy.gemspec",
   ].each do |command|
