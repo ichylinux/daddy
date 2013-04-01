@@ -1,15 +1,5 @@
 # coding: UTF-8
 
-前提 /^ログインに遷移$/ do
-  assert_visit '/users/sign_in'
-end
-
-前提 /^(.*?) がログイン$/ do |email|
-  fill_in 'メールアドレス', :with => email
-  fill_in 'パスワード', :with => 'testtest'
-  click_on 'ログイン'
-end
-
 前提 /^キャリアを表示$/ do
   assert_visit '/careers'
 end
@@ -28,6 +18,10 @@ end
 
 前提 /^トップページを表示$/ do
   assert_visit '/'
+end
+
+前提 /^トップページに遷移$/ do
+  assert_url '^/$'
 end
 
 もし /^経歴を追加 を (.*?) 回クリック$/ do |count|

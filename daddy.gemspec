@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'cucumber-rails'
   s.add_runtime_dependency 'ci_reporter'
   s.add_runtime_dependency 'differ'
+  s.add_runtime_dependency 'poltergeist'
   s.add_runtime_dependency 'rails', ['~> 3.2.0']
   s.add_runtime_dependency 'rails-i18n'
   s.add_runtime_dependency 'simplecov'
