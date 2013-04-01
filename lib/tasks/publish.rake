@@ -12,8 +12,6 @@ namespace :dad do
     system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false OUTPUT_FILE=diary.html features/開発日記")
     system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false OUTPUT_FILE=index.html features/仕様書")
 
-    system("mkdir -p tmp")
-
     if ENV['BRANCH']
       current_branch = ENV['BRANCH']
     else
