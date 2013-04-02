@@ -20,6 +20,9 @@ namespace :dad do
     end
 
     dir = '/var/lib/daddy/spec'
+    system("sudo mkdir -p #{dir}")
+    system("sudo chown -R #{ENV['USER']}:#{ENV['USER']} #{dir}") 
+
     system("mkdir -p #{dir}/#{current_branch}")
 
     system("rm -Rf #{dir}/#{current_branch}/screenshots")
