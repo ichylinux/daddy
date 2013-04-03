@@ -78,7 +78,7 @@ module Daddy
 
       def before_menu
         if ENV['PUBLISH']
-          @builder << "<div>"
+          @builder << "<div style='margin-top: -10px;'>"
   
           @builder.div(:id => 'menu') do
               @builder << make_menu_for_publish
