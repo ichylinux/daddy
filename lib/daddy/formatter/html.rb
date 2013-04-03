@@ -208,7 +208,7 @@ module Daddy
       def scenario_name(keyword, name, file_colon_line, source_indent)
         @step_number_in_scenario = 0
 
-        @builder.span(:class => 'scenario_file') do
+        @builder.span(:class => 'scenario_file', :style => 'display: none;') do
           @builder << file_colon_line
         end
         @listing_background = false
@@ -263,7 +263,7 @@ module Daddy
 
       def before_steps(steps)
         @step_count_in_scenario = steps.count
-        @builder << '<ol>'
+        @builder << '<ol style="display: none;">'
       end
 
       def after_steps(steps)
@@ -622,7 +622,6 @@ module Daddy
           else
             @builder << %w{
               $(document).ready(function() {
-                $(SCENARIOS).siblings().hide();
                 $('li.message').hide();
                 });
             }.join
