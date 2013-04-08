@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'capybara'
 gem 'capybara-webkit', '0.12.1'
-gem 'cucumber'
+gem 'cucumber', '1.2.3'
 gem 'cucumber-rails'
 gem 'ci_reporter'
 gem 'differ'
