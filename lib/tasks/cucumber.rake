@@ -8,7 +8,7 @@ namespace :dad do
     format = ENV['FORMAT'] || 'Daddy::Formatter::Html'
 
     options = [
-      "DRIVER=" + (ENV['DRIVER'] || 'poltergeist'),
+      "DRIVER=" + (ENV['DRIVER'] || 'webkit'),
       "PAUSE=" + (ENV['PAUSE'] || '0'),
       "COVERAGE=" + (ENV['COVERAGE'] || 'true'),
       "EXPAND=" + (ENV['EXPAND'] || 'true')
