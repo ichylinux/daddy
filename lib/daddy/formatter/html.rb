@@ -46,7 +46,7 @@ module Daddy
       end
 
       def before_features(features)
-        @step_count = get_step_count(features)
+        @step_count = features.step_count
 
         @builder.declare!(:DOCTYPE, :html)
         @builder << '<html>'
@@ -512,45 +512,6 @@ module Daddy
           end
           @builder.text!("makeYellow('scenario_#{@scenario_number}');") unless @scenario_red
         end
-      end
-
-      def get_step_count(features)
-        count = 0
-        features = features.instance_variable_get("@features")
-        features.each do |feature|
-          #get background steps
-          if feature.instance_variable_get("@background")
-            background = feature.instance_variable_get("@background")
-            background.init
-            background_steps = background.instance_variable_get("@steps").instance_variable_get("@steps")
-            count += background_steps.size
-          end
-          #get scenarios
-          feature.instance_variable_get("@feature_elements").each do |scenario|
-            scenario.init
-            #get steps
-            steps = scenario.instance_variable_get("@steps").instance_variable_get("@steps")
-            count += steps.size
-
-            #get example table
-            examples = scenario.instance_variable_get("@examples_array")
-            unless examples.nil?
-              examples.each do |example|
-                example_matrix = example.instance_variable_get("@outline_table").instance_variable_get("@cell_matrix")
-                count += example_matrix.size
-              end
-            end
-
-            #get multiline step tables
-            steps.each do |step|
-              multi_arg = step.instance_variable_get("@multiline_arg")
-              next if multi_arg.nil?
-              matrix = multi_arg.instance_variable_get("@cell_matrix")
-              count += matrix.size unless matrix.nil?
-            end
-          end
-        end
-        return count
       end
 
       def build_step(keyword, step_match, status)

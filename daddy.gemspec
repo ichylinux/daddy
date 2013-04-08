@@ -13,11 +13,11 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'capybara'
   s.add_runtime_dependency 'capybara-webkit', ['0.12.1']
-  s.add_runtime_dependency 'cucumber', ['1.2.3']
+  s.add_runtime_dependency 'cucumber'
   s.add_runtime_dependency 'cucumber-rails'
   s.add_runtime_dependency 'ci_reporter'
   s.add_runtime_dependency 'differ'
-  s.add_runtime_dependency 'gherkin', ['2.11.6']
+  s.add_runtime_dependency 'gherkin'
   s.add_runtime_dependency 'poltergeist'
   s.add_runtime_dependency 'rails', ['~> 3.2.0']
   s.add_runtime_dependency 'rails-i18n'
