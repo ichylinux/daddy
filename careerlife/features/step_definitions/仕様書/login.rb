@@ -1,7 +1,7 @@
 # coding: UTF-8
 
-前提 /^メールアドレス (.*?) が存在する$/ do |email|
-  assert_not_nil User.find_by_email(email)
+前提 /^メールアドレス (.*?) が存在(する|しない)$/ do |email, suffix|
+  assert_equal suffix == 'する', User.where(:email => email).present?
 end
 
 前提 /^ログイン をクリック$/ do
@@ -18,6 +18,10 @@ end
   assert_visit '/users/sign_in'
 end
 
+ならば /^アカウント作成画面に遷移$/ do
+  assert_url '/users/sign_up'
+end
+
 前提 /^(.*?) がログイン$/ do |email|
   fill_in 'メールアドレス', :with => email
   fill_in 'パスワード', :with => 'testtest'
@@ -25,6 +29,6 @@ end
 end
 
 前提 /^(.*?) がログインしている$/ do |email|
-  assert_visit '/users/sign_in'
+  visit '/users/sign_in'
   step "#{email} がログイン"
 end

@@ -12,11 +12,15 @@ end
   assert_url '/careers'
 end
 
+前提 /^キャリアの一覧を表示している$/ do
+  assert_visit '/careers'
+end
+
 前提 /^キャリアの編集に遷移$/ do
   assert_url '/careers/[0-9]+/edit'
 end
 
-前提 /^トップページを表示$/ do
+前提 /^トップページを表示している$/ do
   assert_visit '/'
 end
 
