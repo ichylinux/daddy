@@ -554,11 +554,15 @@ module Daddy
       end
 
       def build_step(keyword, step_match, status)
-        if keyword.strip == '*'
-          @step_number_in_scenario += 1
-          display_keyword = sprintf("%0#{@step_count_in_scenario.to_s.size}d", @step_number_in_scenario) + '. '
-        else
+        if @in_background
           display_keyword = keyword.strip + ' '
+        else
+          if keyword.strip == '*'
+            @step_number_in_scenario += 1
+            display_keyword = sprintf("%0#{@step_count_in_scenario.to_s.size}d", @step_number_in_scenario) + '. '
+          else
+            display_keyword = keyword.strip + ' '
+          end
         end
 
         step_name = step_match.format_args(lambda{|param| %{<span class="param">#{param}</span>}})

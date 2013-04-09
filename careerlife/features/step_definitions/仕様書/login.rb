@@ -23,3 +23,8 @@ end
   fill_in 'パスワード', :with => 'testtest'
   step 'ログイン をクリック'
 end
+
+前提 /^(.*?) がログインしている$/ do |email|
+  assert_visit '/users/sign_in'
+  step "#{email} がログイン"
+end
