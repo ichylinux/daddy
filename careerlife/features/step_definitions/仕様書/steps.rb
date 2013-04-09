@@ -25,7 +25,7 @@ end
   assert_visit "/careers/#{@career.id}"
 end
 
-前提 /^トップページを表示している$/ do
+前提 /^トップページを表示(している|する)$/ do |suffix|
   assert_visit '/'
 end
 
