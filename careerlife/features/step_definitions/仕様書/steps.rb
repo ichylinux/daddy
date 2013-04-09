@@ -20,6 +20,11 @@ end
   assert_url '/careers/[0-9]+/edit'
 end
 
+前提 /^キャリアの参照を表示している$/ do
+  @career = Career.all.first
+  assert_visit "/careers/#{@career.id}"
+end
+
 前提 /^トップページを表示している$/ do
   assert_visit '/'
 end

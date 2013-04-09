@@ -29,6 +29,10 @@ end
 end
 
 前提 /^(.*?) がログインしている$/ do |email|
+  user = User.find_by_email(email)
+  assert_not_nil user
+
   visit '/users/sign_in'
-  step "#{email} がログイン"
+  step "#{user.email} がログイン"
+  @current_user = user
 end
