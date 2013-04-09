@@ -46,7 +46,7 @@ module Daddy
       end
 
       def before_features(features)
-        @step_count = get_step_count(features)
+        @step_count = features.step_count
 
         @builder.declare!(:DOCTYPE, :html)
         @builder << '<html>'
@@ -78,7 +78,7 @@ module Daddy
 
       def before_menu
         if ENV['PUBLISH']
-          @builder << "<div>"
+          @builder << "<div style='margin-top: -10px;'>"
   
           @builder.div(:id => 'menu') do
               @builder << make_menu_for_publish
@@ -208,7 +208,7 @@ module Daddy
       def scenario_name(keyword, name, file_colon_line, source_indent)
         @step_number_in_scenario = 0
 
-        @builder.span(:class => 'scenario_file') do
+        @builder.span(:class => 'scenario_file', :style => 'display: none;') do
           @builder << file_colon_line
         end
         @listing_background = false
@@ -263,7 +263,7 @@ module Daddy
 
       def before_steps(steps)
         @step_count_in_scenario = steps.count
-        @builder << '<ol>'
+        @builder << '<ol style="display: none;">'
       end
 
       def after_steps(steps)
@@ -514,52 +514,17 @@ module Daddy
         end
       end
 
-      def get_step_count(features)
-        count = 0
-        features = features.instance_variable_get("@features")
-        features.each do |feature|
-          #get background steps
-          if feature.instance_variable_get("@background")
-            background = feature.instance_variable_get("@background")
-            background.init
-            background_steps = background.instance_variable_get("@steps").instance_variable_get("@steps")
-            count += background_steps.size
-          end
-          #get scenarios
-          feature.instance_variable_get("@feature_elements").each do |scenario|
-            scenario.init
-            #get steps
-            steps = scenario.instance_variable_get("@steps").instance_variable_get("@steps")
-            count += steps.size
-
-            #get example table
-            examples = scenario.instance_variable_get("@examples_array")
-            unless examples.nil?
-              examples.each do |example|
-                example_matrix = example.instance_variable_get("@outline_table").instance_variable_get("@cell_matrix")
-                count += example_matrix.size
-              end
-            end
-
-            #get multiline step tables
-            steps.each do |step|
-              multi_arg = step.instance_variable_get("@multiline_arg")
-              next if multi_arg.nil?
-              matrix = multi_arg.instance_variable_get("@cell_matrix")
-              count += matrix.size unless matrix.nil?
-            end
-          end
-        end
-        return count
-      end
-
       def build_step(keyword, step_match, status)
-        @step_number_in_scenario += 1
-        formatted_step_number = sprintf("%0#{@step_count_in_scenario.to_s.size}d", @step_number_in_scenario) 
+        if keyword.strip == '*'
+          @step_number_in_scenario += 1
+          display_keyword = sprintf("%0#{@step_count_in_scenario.to_s.size}d", @step_number_in_scenario) + '. '
+        else
+          display_keyword = keyword.strip + ' '
+        end
 
         step_name = step_match.format_args(lambda{|param| %{<span class="param">#{param}</span>}})
         @builder.div(:class => 'step_name') do |div|
-          @builder.span("#{formatted_step_number}. ", :class => 'keyword')
+          @builder.span(display_keyword, :class => 'keyword')
           @builder.span(:class => 'step val') do |name|
             name << h(step_name).gsub(/&lt;span class=&quot;(.*?)&quot;&gt;/, '<span class="\1">').gsub(/&lt;\/span&gt;/, '</span>')
           end
@@ -618,7 +583,6 @@ module Daddy
           else
             @builder << %w{
               $(document).ready(function() {
-                $(SCENARIOS).siblings().hide();
                 $('li.message').hide();
                 });
             }.join

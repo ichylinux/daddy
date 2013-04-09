@@ -13,7 +13,6 @@ server {
   server_name localhost;
   
   root <%= ENV['RAILS_ROOT'] %>/public;
-
   try_files $uri/index.html $uri @app;
   
   location @app {
@@ -27,4 +26,21 @@ server {
     add_header Cache-Control public;
     add_header ETag "";
   }
+
+<% if ENV['JENKINS'].to_s.downcase == 'true' %>  
+  location /jenkins/ {
+    root /var/cache/jenkins/war;
+    proxy_pass http://localhost:8081/jenkins/;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+<% end -%>
+
+<% if ENV['PUBLISH'].to_s.downcase == 'true' %>
+  location /spec/ {
+    root /var/lib/daddy;
+  }
+<% end -%>
+
 }
