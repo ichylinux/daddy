@@ -16,6 +16,10 @@ end
   assert_visit '/careers'
 end
 
+ならば /^キャリアの追加に遷移$/ do
+  assert_url '/careers/new'
+end
+
 前提 /^キャリアの編集に遷移$/ do
   assert_url '/careers/[0-9]+/edit'
 end

@@ -90,6 +90,10 @@ div.background {
   margin-left: 20px;
 }
 
+div.background ol {
+  margin-left: 20px;
+}
+
 div.feature .narrative {
   margin-left: 10px;
 }

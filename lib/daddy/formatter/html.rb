@@ -262,7 +262,6 @@ module Daddy
       end
 
       def before_steps(steps)
-        @step_count_in_scenario = steps.count
         @builder << '<ol style="display: none;">'
       end
 
@@ -559,7 +558,10 @@ module Daddy
         else
           if keyword.strip == '*'
             @step_number_in_scenario += 1
-            display_keyword = sprintf("%0#{@step_count_in_scenario.to_s.size}d", @step_number_in_scenario) + '. '
+            display_keyword = ''
+            display_keyword << '0' if @step_number_in_scenario.to_s.size == 1
+            display_keyword << @step_number_in_scenario.to_s
+            display_keyword << '. '
           else
             display_keyword = keyword.strip + ' '
           end
