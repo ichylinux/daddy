@@ -20,10 +20,12 @@
   <%= @career.gender_name %>
 </p>
 
-<p>
-  <b><%= Career.human_attribute_name :introduction %>:</b>
-  <%= @career.introduction %>
-</p>
+<table>
+  <caption><%= Career.human_attribute_name :introduction %></caption>
+  <tr>
+    <td><%= html_line_break(@career.introduction) %></td>
+  </tr>
+</table>
 
 <%= render 'show_career_details' %>
 
