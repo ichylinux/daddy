@@ -19,6 +19,7 @@ server {
     proxy_pass http://unicorn;
   }
 
+<% if ENV['RAILS_ENV'] == 'production' %>
   location ~ ^/(assets)/ {
     gzip_vary on;
     gzip_static on;
@@ -26,7 +27,7 @@ server {
     add_header Cache-Control public;
     add_header ETag "";
   }
-
+<% end -%>
 <% if ENV['JENKINS'].to_s.downcase == 'true' %>  
   location /jenkins/ {
     root /var/cache/jenkins/war;
@@ -36,7 +37,6 @@ server {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
   }
 <% end -%>
-
 <% if ENV['PUBLISH'].to_s.downcase == 'true' %>
   location /spec/ {
     root /var/lib/daddy;

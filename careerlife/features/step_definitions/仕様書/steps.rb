@@ -55,6 +55,8 @@ end
   
   find('table').all('tr')[1..-2].each_with_index do |tr, i|
     tr.all('td')[0].find('input').set(table[i][0])
+    tr.all('td')[1].find('input').set(table[i][1])
+    tr.all('td')[2].find('input').set(table[i][2])
   end
   
   capture
