@@ -16,6 +16,9 @@ namespace :dad do
     system("mv features/reports/index.html features/reports/diary")
     system("mv features/reports/screenshots features/reports/diary")
     system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false features/仕様書")
+    system("mkdir -p features/reports/spec")
+    system("mv features/reports/index.html features/reports/spec")
+    system("mv features/reports/screenshots features/reports/spec")
 
     if ENV['BRANCH']
       current_branch = ENV['BRANCH']
