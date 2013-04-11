@@ -19,9 +19,8 @@ end
 
 ならば /^テキストフィールドをクリックするとカレンダーが表示される$/ do
   user = User.all.first
-
   step "#{user.email} がログインしている"
-  assert_visit "/careers/#{Career.all.first.id}/edit"
+  visit "/careers/#{Career.all.first.id}/edit"
 
   page.execute_script("$('.datepicker').last().focus();")
   wait_until{ page.has_selector?('#ui-datepicker-div', :visible => true) }

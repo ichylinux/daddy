@@ -4,3 +4,6 @@ c_1:
   first_name: 太郎
   birthday: 1980-05-15
   gender: M
+  introduction: |-
+    初めまして。
+    ○○をずっとやってきました。

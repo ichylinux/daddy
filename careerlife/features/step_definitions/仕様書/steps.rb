@@ -24,7 +24,7 @@ end
   assert_url '/careers/[0-9]+/edit'
 end
 
-前提 /^キャリアの参照を表示している$/ do
+前提 /^キャリアの参照を表示(している|する)$/ do |suffix|
   @career = Career.all.first
   assert_visit "/careers/#{@career.id}"
 end

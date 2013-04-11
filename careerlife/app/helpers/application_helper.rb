@@ -4,5 +4,5 @@ module ApplicationHelper
     ret = html_escape(s)
     ret.gsub(/\r\n|\r|\n/, "<br/>").html_safe
   end
-  
+
 end
