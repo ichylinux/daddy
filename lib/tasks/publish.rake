@@ -9,8 +9,13 @@ namespace :dad do
       fail unless ret
     end
 
-    system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false OUTPUT_FILE=diary.html features/開発日記")
-    system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false OUTPUT_FILE=index.html features/仕様書")
+    system("mkdir -p features/reports")
+    system("rm -Rf features/reports/*")
+    system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false features/開発日記")
+    system("mkdir -p features/reports/diary")
+    system("mv features/reports/index.html features/reports/diary")
+    system("mv features/reports/screenshots features/reports/diary")
+    system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false features/仕様書")
 
     if ENV['BRANCH']
       current_branch = ENV['BRANCH']
@@ -24,11 +29,8 @@ namespace :dad do
     system("sudo chown -R #{ENV['USER']}:#{ENV['USER']} #{dir}") 
 
     system("mkdir -p #{dir}/#{current_branch}")
-
-    system("rm -Rf #{dir}/#{current_branch}/screenshots")
+    system("rm -Rf #{dir}/#{current_branch}/*")
     system("cp -Rf features/reports/* #{dir}/#{current_branch}/")
-
-    system("rm -Rf #{dir}/#{current_branch}/coverage")
     system("cp -Rf coverage #{dir}/#{current_branch}/")
   end
   
