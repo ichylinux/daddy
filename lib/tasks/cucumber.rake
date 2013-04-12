@@ -3,19 +3,26 @@
 require 'rake'
 
 namespace :dad do
-  task :cucumber => :environment do |t, args|
-    phase_no = `git branch`.gsub(/[a-zA-Z]*/, '').to_i
-    driver = ENV['DRIVER'] || :webkit
-    pause = ENV['PAUSE'] || 0
-    coverage = ENV['COVERAGE'] || true
-    options = "PHASE_NO=#{phase_no} DRIVER=#{driver} PAUSE=#{pause} COVERAGE=#{coverage}"
-    
-    output_file = ENV['OUTPUT_FILE'] || 'index.html'
 
+  task :cucumber => :environment do |t, args|
+    format = ENV['FORMAT'] || 'Daddy::Formatter::Html'
+
+    options = [
+      "DRIVER=" + (ENV['DRIVER'] || 'webkit'),
+      "PAUSE=" + (ENV['PAUSE'] || '0'),
+      "COVERAGE=" + (ENV['COVERAGE'] || 'true'),
+      "EXPAND=" + (ENV['EXPAND'] || 'true')
+    ].join(' ')
+    
     features = []
     ARGV[1..-1].each do |arg|
       features << arg unless arg.index('=')
     end
-    system("bundle exec cucumber --guess -r features -f Daddy::Formatter::Html #{options} #{features.join(' ')} > features/reports/#{output_file}")    
+
+    output = "> features/reports/index.html"
+    output = "-o features/reports" if format == 'junit'
+
+    ret = system("bundle exec cucumber --guess -r features -f #{format} #{options} #{features.join(' ')} #{output}")
+    fail unless ret    
   end
 end

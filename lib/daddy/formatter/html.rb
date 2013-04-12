@@ -4,6 +4,7 @@ require 'erb'
 require 'cucumber/formatter/ordered_xml_markup'
 require 'cucumber/formatter/duration'
 require 'cucumber/formatter/io'
+require 'daddy/formatter/daddy_html'
 
 module Daddy
   module Formatter
@@ -11,6 +12,7 @@ module Daddy
       include ERB::Util # for the #h method
       include ::Cucumber::Formatter::Duration
       include ::Cucumber::Formatter::Io
+      include Daddy::Formatter::DaddyHtml
 
       def initialize(runtime, path_or_io, options)
         @path_or_io = path_or_io
@@ -94,7 +96,7 @@ module Daddy
       end
 
       def make_menu_for_publish
-        menu = 'tmp/menu.html'
+        menu = Rails.root + '/tmp/menu.html'
         system("erb -T - #{File.dirname(__FILE__)}/menu.html.erb > #{menu}")
         File.readlines(menu).join
       end
@@ -108,6 +110,14 @@ module Daddy
       end
 
       def before_feature(feature)
+        dir = feature_dir(feature)
+        if @feature_dir != dir
+          @builder << '<div class="feature_dir"><span class="val">'
+          @builder << dir
+          @builder << '</span></div>'
+        end 
+
+        @feature_dir = dir
         @feature = feature
         @exceptions = []
         @builder << '<div class="feature">'
@@ -144,16 +154,16 @@ module Daddy
       end
 
       def feature_name(keyword, name)
-        title = @feature.file.split('/').last.gsub(/\.feature/, '')
+        title = feature_dir(@feature, true) + @feature.file.split('/').last.gsub(/\.feature/, '')
 
         @builder.h2 do |h2|
           @builder.span(title, :class => 'val')
         end
 
         lines = name.split(/\r?\n/)
-        unless lines.empty?
+        if lines.size > 1
           @builder.p(:class => 'narrative') do
-            lines.each do |line|
+            lines[1..-1].each do |line|
               @builder.text!(line.strip)
               @builder.br
             end
@@ -197,15 +207,31 @@ module Daddy
 
       def scenario_name(keyword, name, file_colon_line, source_indent)
         @step_number_in_scenario = 0
-        
-        @builder.span(:class => 'scenario_file') do
+
+        @builder.span(:class => 'scenario_file', :style => 'display: none;') do
           @builder << file_colon_line
         end
         @listing_background = false
+
+        lines = name.split("\n")
         @builder.h3(:id => "scenario_#{@scenario_number}") do
           @builder.span(keyword + ':', :class => 'keyword')
           @builder.text!(' ')
-          @builder.span(name, :class => 'val')
+          @builder.span(lines[0], :class => 'val')
+        end
+        
+        if lines.size > 1
+          @builder.div(:class => 'narrative', :style => 'display: none;') do
+            @builder.pre do
+              text = ''
+              lines[1..-1].each_with_index do |line, i|
+                next if i == 0 and line.strip.empty?
+                text << '<br/>' unless text.empty?
+                text << line
+              end
+              @builder << text
+            end
+          end
         end
       end
 
@@ -236,8 +262,7 @@ module Daddy
       end
 
       def before_steps(steps)
-        @step_count_in_scenario = steps.count
-        @builder << '<ol>'
+        @builder << '<ol style="display: none;">'
       end
 
       def after_steps(steps)
@@ -296,7 +321,13 @@ module Daddy
           step_contents = "<div class=\"step_contents\"><pre>"
           step_file.gsub(/^([^:]*\.rb):(\d*)/) do
             line_index = $2.to_i - 1
-            File.readlines(File.expand_path($1.force_encoding('UTF-8')))[line_index..-1].each do |line|
+
+            file = $1.force_encoding('UTF-8')
+            if file.start_with?('daddy-') or file.start_with?('/daddy-')
+              file = '/usr/local/lib/ruby/gems/1.9.1/gems/' + file
+            end
+
+            File.readlines(File.expand_path(file))[line_index..-1].each do |line|
               step_contents << line
               break if line.chop == 'end' or line.chop.start_with?('end ')
             end
@@ -522,12 +553,23 @@ module Daddy
       end
 
       def build_step(keyword, step_match, status)
-        @step_number_in_scenario += 1
-        formatted_step_number = sprintf("%0#{@step_count_in_scenario.to_s.size}d", @step_number_in_scenario) 
+        if @in_background
+          display_keyword = keyword.strip + ' '
+        else
+          if keyword.strip == '*'
+            @step_number_in_scenario += 1
+            display_keyword = ''
+            display_keyword << '0' if @step_number_in_scenario.to_s.size == 1
+            display_keyword << @step_number_in_scenario.to_s
+            display_keyword << '. '
+          else
+            display_keyword = keyword.strip + ' '
+          end
+        end
 
         step_name = step_match.format_args(lambda{|param| %{<span class="param">#{param}</span>}})
         @builder.div(:class => 'step_name') do |div|
-          @builder.span("#{formatted_step_number}. ", :class => 'keyword')
+          @builder.span(display_keyword, :class => 'keyword')
           @builder.span(:class => 'step val') do |name|
             name << h(step_name).gsub(/&lt;span class=&quot;(.*?)&quot;&gt;/, '<span class="\1">').gsub(/&lt;\/span&gt;/, '</span>')
           end
@@ -576,17 +618,16 @@ module Daddy
         @builder.script do
           @builder << inline_jquery
           @builder << inline_js_content
-          if ENV['EXPAND']
+          if should_expand
             @builder << %w{
               $(document).ready(function() {
                 $(SCENARIOS).siblings().show();
-                $('li.message').show();
+                $('li.message').hide();
                 });
             }.join
           else
             @builder << %w{
               $(document).ready(function() {
-                $(SCENARIOS).siblings().show();
                 $('li.message').hide();
                 });
             }.join
@@ -619,6 +660,7 @@ module Daddy
     $("#expander").click(function() {
       $(SCENARIOS).siblings().show();
     });
+    
   })
 
   function moveProgressBar(percentDone) {
