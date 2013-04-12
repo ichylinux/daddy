@@ -8,3 +8,4 @@
   * rails g controller top
   * root の指定を変更
   * indexページを作成
+  * ブラウザで http://localhost にアクセス

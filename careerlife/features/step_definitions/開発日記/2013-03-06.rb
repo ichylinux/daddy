@@ -5,12 +5,16 @@
 end
 
 もし /^indexページを作成$/ do
-  git_diff 'app/views/top/index.html.erb'
+  show 'app/views/top/index.html.erb'
 end
 
 もし /^root の指定を変更$/ do
   git_diff 'config/routes.rb'
 end
 
-もし(/^rm public\/index\.html$/) do
+もし /^rm public\/index\.html$/ do
+end
+
+もし /^ブラウザで http:\/\/localhost にアクセス$/ do
+  assert_visit '/'
 end
