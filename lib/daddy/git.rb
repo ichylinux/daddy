@@ -7,6 +7,12 @@ end
 module Daddy
   
   class Git
+    @@sub_dir = nil
+
+    def self.sub_dir=(sub_dir)
+      @@sub_dir = sub_dir
+    end
+
     def branches(remote = false)
       branches = []
       `git branch -a`.split("\n").each do |b|
@@ -54,7 +60,32 @@ module Daddy
     end
     
     def show_previous(file, remote = false)
-      `git show #{previous_branch(remote)}:#{file}`
+      if @@sub_dir
+        sub_dir = @@sub_dir
+        sub_dir += '/' unless @@sub_dir.end_with?('/')
+        `git show #{previous_branch(remote)}:#{sub_dir}#{file}`
+      else
+        `git show #{previous_branch(remote)}:#{file}`
+      end
+    end
+
+    def git_diff_name(*includes)
+      diff = `git diff origin/#{previous_branch} --name-only #{includes.join(' ')}`
+      return diff unless @@sub_dir
+
+      ret = []
+      diff.split("\n").each do |line|
+        index = line.index(@@sub_dir)
+        if index
+          sub_file = line[@@sub_dir.length..-1]
+          sub_file = sub_file[1..-1] if sub_file.start_with?('/')
+          ret << sub_file
+        else
+          ret << line
+        end
+      end
+
+      ret.join("\n")
     end
   end
 

@@ -17,15 +17,15 @@ module Daddy
     
         image = "#{@@_screen_count}.png"
     
-        if Capybara.current_driver == :webkit
-          page.driver.render("#{SCREENSHOT_DIR}/#{image}")
-        else
+        if Capybara.current_driver == :selenium
           page.driver.browser.save_screenshot("#{SCREENSHOT_DIR}/#{image}")
+        else
+          page.driver.render("#{SCREENSHOT_DIR}/#{image}")
         end
 
         puts %{
-          <div style="margin: 5px 0;">#{url}</div>
-          <div style="padding-right: 20px;"><img src="screenshots/#{image}" width="60%" height="60%"/></div>
+          <div>#{url}</div>
+          <img style="margin: 5px 0; background: #ffffff;" src="screenshots/#{image}"/>
         }
       end
     end
