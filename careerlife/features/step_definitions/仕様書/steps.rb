@@ -23,3 +23,8 @@ end
 前提(/^キャリアの一覧に遷移$/) do
   assert_url '/careers'
 end
+
+前提 /^削除 をクリック$/ do
+  click_on '削除'
+  confirm
+end
