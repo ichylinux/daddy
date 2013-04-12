@@ -1,16 +1,37 @@
 class CareersController < ApplicationController
   before_filter :authenticate_user!
 
+  # GET /careers
+  # GET /careers.json
   def index
     @careers = Career.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @careers }
+    end
   end
 
+  # GET /careers/1
+  # GET /careers/1.json
   def show
     @career = Career.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @career }
+    end
   end
 
+  # GET /careers/new
+  # GET /careers/new.json
   def new
     @career = Career.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @career }
+    end
   end
 
   def new_career_detail
@@ -18,34 +39,52 @@ class CareersController < ApplicationController
     render :partial => 'career_detail_fields', :locals => {:career_detail => @career_detail, :index => params[:index]}
   end
 
+  # GET /careers/1/edit
   def edit
     @career = Career.find(params[:id])
   end
 
+  # POST /careers
+  # POST /careers.json
   def create
     @career = Career.new(params[:career])
 
-    if @career.save
-      redirect_to @career, notice: t('messages.created', :name => Career.model_name.human)
-    else
-      render action: "new"
+    respond_to do |format|
+      if @career.save
+        format.html { redirect_to @career, notice: t('messages.created', :name => Career.model_name.human) }
+        format.json { render json: @career, status: :created, location: @career }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @career.errors, status: :unprocessable_entity }
+      end
     end
   end
 
+  # PUT /careers/1
+  # PUT /careers/1.json
   def update
     @career = Career.find(params[:id])
 
-    if @career.update_attributes(params[:career])
-      redirect_to @career, notice: t('messages.updated', :name => Career.model_name.human)
-    else
-      render action: "edit"
+    respond_to do |format|
+      if @career.update_attributes(params[:career])
+        format.html { redirect_to @career, notice: t('messages.updated', :name => Career.model_name.human) }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @career.errors, status: :unprocessable_entity }
+      end
     end
   end
 
+  # DELETE /careers/1
+  # DELETE /careers/1.json
   def destroy
     @career = Career.find(params[:id])
     @career.destroy
 
-    redirect_to careers_url, notice: t('messages.deleted', :name => Career.model_name.human)
+    respond_to do |format|
+      format.html { redirect_to careers_url, notice: t('messages.deleted', :name => Career.model_name.human) }
+      format.json { head :no_content }
+    end
   end
 end
