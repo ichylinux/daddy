@@ -1,9 +1,4 @@
-.contents {
-  margin-left: 100px;
-}
-
 #menu {
-  width: 100px;
   float: left;
   background: #FFFFFF;
   color: #000000;
@@ -24,6 +19,7 @@
   vertical-align: middle;
   font-size: 1.2em;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 #menu ol li.sub_menu {
