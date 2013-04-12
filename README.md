@@ -1,4 +1,4 @@
 daddy
 =====
 
-ホームページ: http://daddy.reading.jp
+ホームページ: http://reading.jp/spec/

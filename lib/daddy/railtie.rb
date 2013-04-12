@@ -2,7 +2,6 @@
 
 require 'rails'
 require 'rails_i18n'
-require 'devise'
 
 if ENV["COVERAGE"]
   require 'simplecov'
