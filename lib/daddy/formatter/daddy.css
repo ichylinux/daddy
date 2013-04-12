@@ -7,6 +7,7 @@
   float: left;
   background: #FFFFFF;
   color: #000000;
+  margin-top: -10px;
 }
 
 #menu ol {
@@ -81,8 +82,16 @@
   display: none;
   background: #FFFFFF;
   border: solid 1px #999999;
-  margin-left: 10px;
+  margin-left: 15px;
   padding: 10px;
+}
+
+div.background {
+  margin-left: 20px;
+}
+
+div.background ol {
+  margin-left: 20px;
 }
 
 div.feature .narrative {

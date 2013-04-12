@@ -6,7 +6,7 @@ namespace :dad do
   namespace :nginx do
 
     desc 'Nginxをインストールします。'
-    task :install do
+    task :install => :environment do
       repo = File.dirname(__FILE__) + '/nginx.repo'
       ret = system("sudo cp -f #{repo} /etc/yum.repos.d/")
       fail unless ret
@@ -22,9 +22,17 @@ namespace :dad do
       end
 
       rails_root = ENV['RAILS_ROOT'] || Rails.root
-      ret = system("RAILS_ROOT=#{rails_root} erb -T - #{File.dirname(__FILE__)}/nginx.conf.erb > tmp/nginx.conf")
+      jenkins = ENV['JENKINS'] || false
+      publish = ENV['PUBLISH'] || false
+
+      ret = system("RAILS_ROOT=#{rails_root} RAILS_ENV=#{Rails.env} erb -T - #{File.dirname(__FILE__)}/nginx.conf.erb > tmp/nginx.conf")
       fail unless ret
       system("sudo cp -f tmp/nginx.conf /etc/nginx/conf.d/nginx.conf")
+      
+      if publish
+        system("sudo mkdir -p /var/lib/daddy")
+        system("sudo chown -R #{ENV['USER']}:#{ENV['USER']} /var/lib/daddy")
+      end
     end  
 
   end

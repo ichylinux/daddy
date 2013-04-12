@@ -1,6 +1,7 @@
 # coding: UTF-8
 
 require 'cucumber/rails'
+require 'capybara/poltergeist'
 require 'capybara/webkit'
 require 'daddy/git'
 require 'differ'
