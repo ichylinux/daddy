@@ -3,7 +3,7 @@
 <%= render 'search' %>
 
 <% if @careers.present? %>
-  <table>
+  <table id="careers_table">
     <tr>
       <th><%= Career.human_attribute_name :full_name %></th>
       <th><%= Career.human_attribute_name :birthday %></th>
