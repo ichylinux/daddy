@@ -1,17 +1,21 @@
 <h2>ようこそ！</h2>
 
-<table>
-  <tr>
-    <th><%= Career.human_attribute_name :full_name %></th>
-    <th><%= Career.human_attribute_name :birthday %></th>
-    <th><%= Career.human_attribute_name :gender %></th>
-  </tr>
+<%= render 'search' %>
 
-<% @careers.each do |career| %>
-  <tr>
-    <td><%= career.full_name %></td>
-    <td><%= career.birthday %></td>
-    <td><%= career.gender_name %></td>
-  </tr>
+<% if @careers.present? %>
+  <table>
+    <tr>
+      <th><%= Career.human_attribute_name :full_name %></th>
+      <th><%= Career.human_attribute_name :birthday %></th>
+      <th><%= Career.human_attribute_name :gender %></th>
+    </tr>
+
+  <% @careers.each do |career| %>
+    <tr>
+      <td><%= career.full_name %></td>
+      <td><%= career.birthday %></td>
+      <td><%= career.gender_name %></td>
+    </tr>
+  <% end %>
+  </table>
 <% end %>
-</table>

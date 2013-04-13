@@ -1,0 +1,6 @@
+<div class="search">
+  <%= form_for @condition, :url => {:action => 'index'}, :method => 'get' do |f| %>
+    <span>性別：<%= f.select :gender, Career::GENDERS.invert, :include_blank => true %></span>
+    <%= f.submit '検索' %>
+  <% end %>
+</div>

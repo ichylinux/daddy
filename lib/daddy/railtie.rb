@@ -2,6 +2,7 @@
 
 require 'rails'
 require 'rails_i18n'
+require 'daddy/model'
 
 if ENV["COVERAGE"]
   require 'simplecov'

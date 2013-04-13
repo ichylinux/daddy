@@ -1,7 +1,8 @@
 class TopController < ApplicationController
 
   def index
-    @careers = Career.all
+    @condition = CareerCondition.new(params[:career_condition])
+    @careers = Career.search(@condition)
   end
 
 end
