@@ -82,3 +82,8 @@ end
     pending "不明なアクション #{action}"
   end
 end
+
+前提(/^キャリアの検索結果に男性だけが表示される$/) do
+  capture
+  assert find('#careers_table').text.include?('男性')
+end
