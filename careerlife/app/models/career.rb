@@ -22,7 +22,6 @@ class Career < ActiveRecord::Base
   end
 
   def gender_name
-    return nil unless self.gender
     GENDERS[self.gender]
   end
 end
