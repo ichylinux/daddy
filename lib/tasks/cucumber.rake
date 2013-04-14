@@ -19,10 +19,7 @@ namespace :dad do
       features << arg unless arg.index('=')
     end
 
-    output_file = ENV['OUTPUT_FILE']
-    output_file ||= 'index.html' if format == 'Daddy::Formatter::Html'
-
-    output = "> features/reports/#{output_file}" if output_file
+    output = "> features/reports/index.html"
     output = "-o features/reports" if format == 'junit'
 
     ret = system("bundle exec cucumber --guess -r features -f #{format} #{options} #{features.join(' ')} #{output}")

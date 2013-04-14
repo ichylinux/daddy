@@ -1,12 +1,8 @@
-.contents {
-  margin-left: 100px;
-}
-
 #menu {
-  width: 100px;
   float: left;
   background: #FFFFFF;
   color: #000000;
+  margin-top: -10px;
 }
 
 #menu ol {
@@ -23,6 +19,7 @@
   vertical-align: middle;
   font-size: 1.2em;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 #menu ol li.sub_menu {
@@ -81,8 +78,16 @@
   display: none;
   background: #FFFFFF;
   border: solid 1px #999999;
-  margin-left: 10px;
+  margin-left: 15px;
   padding: 10px;
+}
+
+div.background {
+  margin-left: 20px;
+}
+
+div.background ol {
+  margin-left: 20px;
 }
 
 div.feature .narrative {

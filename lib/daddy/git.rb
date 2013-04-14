@@ -33,7 +33,11 @@ module Daddy
         elsif b == 'master' or b == 'remotes/origin/master'
           1
         else
-          b <=> a
+          if remote
+            b.sub('remotes/origin/p', '').to_i <=> a.sub('remotes/origin/p', '').to_i
+          else
+            b.sub('p', '').to_i <=> a.sub('p', '').to_i
+          end
         end
       end
       

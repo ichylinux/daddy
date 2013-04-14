@@ -5,6 +5,8 @@
 
 <script>
   $(document).ready(function() {
+    $('.contents').css('margin-left', $('#menu').width());
+
     $('.sprint').mouseover(function() {
       $(this).css('background', '#F0F8FF').css('cursor', 'pointer');
     }).mouseout(function() {
@@ -25,13 +27,13 @@
       <%= title %>
     </li>
     <li class="sub_menu" style="display: none;">
-      <a href="../<%= b %>/diary.html">開発日記</a>
+      <a href="../../<%= b %>/diary/index.html">開発日記</a>
     </li>
     <li class="sub_menu" style="display: none;">
-      <a href="../<%= b %>/index.html">仕様書</a>
+      <a href="../../<%= b %>/spec/index.html">仕様書</a>
     </li>
     <li class="sub_menu" style="display: none;">
-      <a href="../<%= b %>/coverage/rcov/index.html" target="_blank">カバレッジ</a>
+      <a href="../../<%= b %>/coverage/rcov/index.html" target="_blank">カバレッジ</a>
     </li>
   </ol>
 <% end %>
