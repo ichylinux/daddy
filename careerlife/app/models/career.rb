@@ -2,10 +2,10 @@
 
 class Career < ActiveRecord::Base
   include CareerConst
-  
+
   has_many :career_details
   accepts_nested_attributes_for :career_details, :allow_destroy => true
-  
+
   validates :last_name, :presence => true
   validates :first_name, :presence => true
 
