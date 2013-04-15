@@ -5,7 +5,7 @@
   assert_visit '/'
 end
 
-もし /^ヘルパーメソッドを作成$/ do
+もし /^ヘルパーメソッドを読み込む$/ do
   git_diff 'app/helpers/application_helper.rb'
 end
 
