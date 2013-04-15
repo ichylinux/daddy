@@ -10,7 +10,11 @@ module Daddy
         b = git.show_previous(file, true).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
         diff = format_diff(Differ.diff(a, b))
 
-        puts file
+        if options[:as] == 'new'
+          puts "<span class=\"new\">#{file}</span>"
+        else
+          puts file
+        end
         puts "<pre>#{diff}</pre>"
       end
       
