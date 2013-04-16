@@ -3,6 +3,7 @@
 require 'rails'
 require 'rails_i18n'
 require 'daddy/model'
+require 'daddy/helpers/html_helper'
 
 if ENV["COVERAGE"]
   require 'simplecov'

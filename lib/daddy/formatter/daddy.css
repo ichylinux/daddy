@@ -115,6 +115,11 @@ div.scenario td {
   padding: 5px;
 }
 
+span.new {
+  color: #006400;
+  font-weight: bold;
+}
+
 ins.differ {
   text-decoration: none;
   background: #90EE90;

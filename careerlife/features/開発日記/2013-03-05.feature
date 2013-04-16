@@ -21,6 +21,10 @@ unicorn      ・・・ アプリケーションサーバ
   * Gemfileを編集
   * sudo bundle install
 
+シナリオ: Daddyをインストール
+
+  * rake dad:cucumber:install
+
 シナリオ: Unicornをインストール
 
   * rake dad:unicorn:install

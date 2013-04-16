@@ -12,7 +12,7 @@ end
 
 前提(/^sudo bundle install$/) do
   `cd /tmp/careerlife && sudo bundle install`
-  diff('Gemfile.lock', '/tmp/careerlife/Gemfile.lock')
+  diff 'Gemfile.lock', '/tmp/careerlife/Gemfile.lock'
 end
 
 前提 /^rake dad:unicorn:install$/ do
@@ -33,6 +33,9 @@ end
 
 前提(/^rake db:migrate$/) do
   show 'db/schema.rb'
+end
+
+前提 /^rake dad:cucumber:install$/ do
 end
 
 前提(/^sudo service nginx start$/) do
