@@ -10,7 +10,7 @@ module Daddy
         b = git.show_previous(file, true).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
         diff = format_diff(Differ.diff(a, b))
 
-        puts file
+        show_filename(file, options)
         puts "<pre>#{diff}</pre>"
       end
       
@@ -28,12 +28,20 @@ module Daddy
         puts "<pre>#{diff}</pre>"
       end
 
-      def show(file)
-        puts file
+      def show(file, options = {})
+        show_filename(file, options)
         puts "<pre>#{File.read(file).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')}</pre>"
       end
       
       private
+      
+      def show_filename(filename, options = {})
+        if options[:as] == 'new'
+          puts "<span class=\"new\">[新規作成] #{filename}</span>"
+        else
+          puts filename
+        end
+      end
       
       def format_diff(diff)
         lines = []

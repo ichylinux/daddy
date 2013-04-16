@@ -1,9 +1,4 @@
-.contents {
-  margin-left: 100px;
-}
-
 #menu {
-  width: 100px;
   float: left;
   background: #FFFFFF;
   color: #000000;
@@ -24,6 +19,7 @@
   vertical-align: middle;
   font-size: 1.2em;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 #menu ol li.sub_menu {
@@ -119,6 +115,11 @@ div.scenario td {
   padding: 5px;
 }
 
+span.new {
+  color: #006400;
+  font-weight: bold;
+}
+
 ins.differ {
   text-decoration: none;
   background: #90EE90;
@@ -127,4 +128,12 @@ ins.differ {
 del.differ {
   text-decoration: none;
   background: #FFB6C1;
+}
+
+.screenshot {
+  border: solid 1px #999999;
+  border-radius: 5px 5px;
+  margin: 5px 0;
+  padding: 5px;
+  background: #ffffff;
 }

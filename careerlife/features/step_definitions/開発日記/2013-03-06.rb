@@ -5,7 +5,7 @@
 end
 
 もし /^indexページを作成$/ do
-  show 'app/views/top/index.html.erb'
+  show 'app/views/top/index.html.erb', :as => 'new'
 end
 
 もし /^root の指定を変更$/ do

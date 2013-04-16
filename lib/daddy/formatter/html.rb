@@ -215,8 +215,6 @@ module Daddy
 
         lines = name.split("\n")
         @builder.h3(:id => "scenario_#{@scenario_number}") do
-          @builder.span(keyword + ':', :class => 'keyword')
-          @builder.text!(' ')
           @builder.span(lines[0], :class => 'val')
         end
         
