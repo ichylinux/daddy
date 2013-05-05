@@ -485,7 +485,7 @@ module Daddy
       end
 
       def set_scenario_color(status)
-        if status.nil? or status == :undefined or status == :pending
+        if status == :undefined or status == :pending
           set_scenario_color_pending
         end
         if status == :failed
@@ -495,7 +495,10 @@ module Daddy
 
       def set_scenario_color_failed
         @builder.script do
-          @builder.text!("makeRed('cucumber-header');") unless @header_red
+          unless @header_red
+            @builder.text!("makeRed('cucumber-header');")
+            @builder.text!("makeMenuRed();")
+          end
           @header_red = true
           @builder.text!("makeRed('scenario_#{@scenario_number}');") unless @scenario_red
           @scenario_red = true
@@ -504,7 +507,10 @@ module Daddy
 
       def set_scenario_color_pending
         @builder.script do
-          @builder.text!("makeYellow('cucumber-header');") unless @header_red
+          unless @header_red
+            @builder.text!("makeYellow('cucumber-header');")
+            @builder.text!("makeMenuYellow();")
+          end
           @builder.text!("makeYellow('scenario_#{@scenario_number}');") unless @scenario_red
         end
       end
