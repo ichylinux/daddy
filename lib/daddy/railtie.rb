@@ -2,8 +2,6 @@
 
 require 'rails'
 require 'rails_i18n'
-require 'daddy/model'
-require 'daddy/helpers/html_helper'
 
 if ENV["COVERAGE"]
   require 'simplecov'
@@ -17,6 +15,12 @@ if ENV["COVERAGE"]
   SimpleCov.merge_timeout(7200)
   SimpleCov.start 'rails'
 end
+
+require 'daddy/model'
+require 'daddy/helpers/html_helper'
+require 'daddy/models/acts_as_like'
+
+Object.send :include, Daddy::Models::ActsAsLike::Mixin
 
 module Daddy
   class Railtie < Rails::Railtie
