@@ -25,7 +25,7 @@ module Daddy
 
         puts %{
           <div>#{url}</div>
-          <img style="margin: 5px 0; background: #ffffff;" src="screenshots/#{image}"/>
+          <img class="screenshot" src="screenshots/#{image}"/>
         }
       end
     end
