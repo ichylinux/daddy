@@ -19,12 +19,12 @@ module Daddy
         puts '<pre>' + git.git_diff_name(*includes) + '</pre>'
       end
       
-      def diff(file_a, file_b)
+      def diff(file_a, file_b, options = {})
         a = File.read(file_a)
         b = File.read(file_b)
         diff = format_diff(Differ.diff(a, b))
 
-        puts file_a
+        show_filename(file_a, options)
         puts "<pre>#{diff}</pre>"
       end
 
@@ -38,6 +38,8 @@ module Daddy
       def show_filename(filename, options = {})
         if options[:as] == 'new'
           puts "<span class=\"new\">[新規作成] #{filename}</span>"
+        elsif options[:as] == 'auto'
+          puts "<span class=\"auto\">[自動生成] #{filename}</span>"
         else
           puts filename
         end

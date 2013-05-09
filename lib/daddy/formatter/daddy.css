@@ -120,6 +120,11 @@ span.new {
   font-weight: bold;
 }
 
+span.auto {
+  color: #006400;
+  font-weight: bold;
+}
+
 ins.differ {
   text-decoration: none;
   background: #90EE90;

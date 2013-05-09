@@ -25,20 +25,20 @@ end
 end
 
 前提(/^rake dad:db:config$/) do
-  diff('config/database.yml', '/tmp/careerlife/config/database.yml')
+  diff 'config/database.yml', '/tmp/careerlife/config/database.yml', :as => 'auto'
 end
 
 前提(/^rake dad:db:create$/) do
 end
 
 前提(/^rake db:migrate$/) do
-  show 'db/schema.rb'
+  show 'db/schema.rb', :as => 'auto'
 end
 
-前提 /^rake dad:cucumber:install$/ do
+前提 /^rake dad:install$/ do
 end
 
-前提(/^sudo service nginx start$/) do
+前提 /^sudo service nginx start$/ do
 end
 
 前提(/^sudo service unicorn start$/) do

@@ -23,7 +23,7 @@ unicorn      ・・・ アプリケーションサーバ
 
 シナリオ: Daddyをインストール
 
-  * rake dad:cucumber:install
+  * rake dad:install
 
 シナリオ: Unicornをインストール
 
