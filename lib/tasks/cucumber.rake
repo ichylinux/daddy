@@ -22,7 +22,9 @@ namespace :dad do
     output = "> features/reports/index.html"
     output = "-o features/reports" if format == 'junit'
 
-    ret = system("bundle exec cucumber --guess -r features -f #{format} #{options} #{features.join(' ')} #{output}")
-    fail unless ret    
+    command = "bundle exec cucumber --guess -r features -f #{format} #{features.join(' ')} #{options} #{output}"
+    #puts command
+    ret = system(command)
+    fail unless ret
   end
 end
