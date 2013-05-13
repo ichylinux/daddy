@@ -6,22 +6,22 @@
   puts "<pre>#{`cd /tmp/careerlife && tree .`}</pre>"
 end
 
-前提(/^Gemfileを編集$/) do
-  diff('Gemfile', '/tmp/careerlife/Gemfile')
+前提 /^Gemfileを編集$/ do
+  diff 'Gemfile', '/tmp/careerlife/Gemfile', :as => 'edit'
 end
 
 前提(/^sudo bundle install$/) do
   `cd /tmp/careerlife && sudo bundle install`
-  diff 'Gemfile.lock', '/tmp/careerlife/Gemfile.lock'
+  diff 'Gemfile.lock', '/tmp/careerlife/Gemfile.lock', :as => 'auto'
 end
 
 前提 /^rake dad:unicorn:install$/ do
-  show 'config/unicorn.rb'
-  show '/etc/init.d/unicorn'
+  show 'config/unicorn.rb', :as => 'auto'
+  show '/etc/init.d/unicorn', :as => 'auto'
 end
 
 前提 /^rake dad:nginx:install$/ do
-  show '/etc/nginx/conf.d/nginx.conf'
+  show '/etc/nginx/conf.d/nginx.conf', :as => 'auto'
 end
 
 前提(/^rake dad:db:config$/) do
@@ -36,6 +36,7 @@ end
 end
 
 前提 /^rake dad:install$/ do
+  show 'features/support/env.rb', :as => 'auto'
 end
 
 前提 /^sudo service nginx start$/ do
