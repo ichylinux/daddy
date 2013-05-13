@@ -5,6 +5,6 @@
 end
 
 前提 /^rake db:migrate$/ do
-  git_diff 'db/schema.rb'
+  git_diff 'db/schema.rb', :as => 'auto'
 end
 

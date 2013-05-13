@@ -2,10 +2,10 @@
 
 Gem::Specification.new do |s|
   s.name        = 'daddy'
-  s.version     = '0.0.19'
-  s.date        = '2013-03-24'
+  s.version     = '0.0.22'
+  s.date        = '2013-05-05'
   s.summary     = "My rails dad"
-  s.description = "Dadday helps me build rails applications since daddy knows some best practices."
+  s.description = "Dadday helps me build rails applications since daddy knows some good practices."
   s.authors     = ["ichy"]
   s.email       = 'ichylinux@gmail.com'
   s.files       = Dir['lib/**/*']
@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'cucumber-rails'
   s.add_runtime_dependency 'ci_reporter'
   s.add_runtime_dependency 'differ'
+  s.add_runtime_dependency 'poltergeist'
   s.add_runtime_dependency 'rails', ['~> 3.2.0']
   s.add_runtime_dependency 'rails-i18n'
   s.add_runtime_dependency 'simplecov'
