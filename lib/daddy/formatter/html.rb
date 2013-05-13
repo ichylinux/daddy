@@ -15,7 +15,6 @@ module Daddy
       include Daddy::Formatter::DaddyHtml
 
       def initialize(runtime, path_or_io, options)
-        @path_or_io = path_or_io
         @io = ensure_io(path_or_io, "html")
         @runtime = runtime
         @options = options
@@ -45,8 +44,9 @@ module Daddy
         end
       end
 
+
       def before_features(features)
-        @step_count = get_step_count(features)
+        @step_count = features.step_count
 
         @builder.declare!(:DOCTYPE, :html)
         @builder << '<html>'
@@ -396,7 +396,11 @@ module Daddy
               end
             end
           end
-          set_scenario_color_failed
+          if table_row.exception.is_a? ::Cucumber::Pending
+            set_scenario_color_pending
+          else
+            set_scenario_color_failed
+          end
         end
         if @outline_row
           @outline_row += 1
@@ -494,8 +498,8 @@ module Daddy
           unless @header_red
             @builder.text!("makeRed('cucumber-header');")
             @builder.text!("makeMenuRed();")
-            @header_red = true
           end
+          @header_red = true
           @builder.text!("makeRed('scenario_#{@scenario_number}');") unless @scenario_red
           @scenario_red = true
         end
@@ -509,45 +513,6 @@ module Daddy
           end
           @builder.text!("makeYellow('scenario_#{@scenario_number}');") unless @scenario_red
         end
-      end
-
-      def get_step_count(features)
-        count = 0
-        features = features.instance_variable_get("@features")
-        features.each do |feature|
-          #get background steps
-          if feature.instance_variable_get("@background")
-            background = feature.instance_variable_get("@background")
-            background.init
-            background_steps = background.instance_variable_get("@steps").instance_variable_get("@steps")
-            count += background_steps.size
-          end
-          #get scenarios
-          feature.instance_variable_get("@feature_elements").each do |scenario|
-            scenario.init
-            #get steps
-            steps = scenario.instance_variable_get("@steps").instance_variable_get("@steps")
-            count += steps.size
-
-            #get example table
-            examples = scenario.instance_variable_get("@examples_array")
-            unless examples.nil?
-              examples.each do |example|
-                example_matrix = example.instance_variable_get("@outline_table").instance_variable_get("@cell_matrix")
-                count += example_matrix.size
-              end
-            end
-
-            #get multiline step tables
-            steps.each do |step|
-              multi_arg = step.instance_variable_get("@multiline_arg")
-              next if multi_arg.nil?
-              matrix = multi_arg.instance_variable_get("@cell_matrix")
-              count += matrix.size unless matrix.nil?
-            end
-          end
-        end
-        return count
       end
 
       def build_step(keyword, step_match, status)
@@ -658,7 +623,6 @@ module Daddy
     $("#expander").click(function() {
       $(SCENARIOS).siblings().show();
     });
-    
   })
 
   function moveProgressBar(percentDone) {
