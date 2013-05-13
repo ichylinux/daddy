@@ -40,6 +40,8 @@ module Daddy
           puts "<span class=\"new\">[新規作成] #{filename}</span>"
         elsif options[:as] == 'auto'
           puts "<span class=\"auto\">[自動生成] #{filename}</span>"
+        elsif options[:as] == 'edit'
+          puts "<span class=\"edit\">[編集] #{filename}</span>"
         else
           puts filename
         end
