@@ -6,12 +6,7 @@ ja:
       
     attributes:
       career:
-        birthday: 生年月日
-        first_name: 名
-        full_name: 氏名
-        gender: 性別
         introduction: 紹介文
-        last_name: 姓
 
       career_detail:
         project_name: プロジェクト名
@@ -22,7 +17,12 @@ ja:
         project_name: プロジェクト名
 
       user:
+        birthday: 生年月日
         email: メールアドレス
+        first_name: 名
+        full_name: 氏名
+        gender: 性別
+        last_name: 姓
         password: パスワード
         password_confirmation: パスワード（確認用）
         remember_me: ログイン状態を維持

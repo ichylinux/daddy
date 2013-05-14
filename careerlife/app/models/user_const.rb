@@ -1,6 +1,6 @@
 # coding: UTF-8
 
-module CareerConst
+module UserConst
 
   GENDERS = {
     GENDER_FEMALE = 'F' => '女性',
