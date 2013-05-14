@@ -1,0 +1,5 @@
+cd_1:
+  id: 1
+  career_id: 1
+  project_name: 某案件
+  start_date: <%= Date.today - 20.days %>

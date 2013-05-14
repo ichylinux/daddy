@@ -1,4 +1,13 @@
 Careerlife::Application.routes.draw do
+  devise_for :users
+
+  resources :careers do
+    collection do
+      get 'new_career_detail'
+    end
+  end
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
