@@ -5,6 +5,7 @@ class Career < ActiveRecord::Base
 
   acts_as_like
 
+  belongs_to :user
   has_many :career_details
   accepts_nested_attributes_for :career_details, :allow_destroy => true
 

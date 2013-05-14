@@ -22,12 +22,13 @@
   * rails g migration add_column_deleted_on_careers
 
 シナリオ: キャリアからユーザに関する属性を削除
+　キャリアからユーザに関する属性を削除して、代わりにユーザIDを追加する。
 
-  * rails g migration remove_column_last_name_on_users
-  * rails g migration remove_column_first_name_on_users
-  * rails g migration remove_column_gender_on_users
-  * rails g migration remove_column_birthday_on_users
-
-シナリオ: マイグレーション実行
-
+  * rails g migration remove_column_last_name_on_careers
+  * rails g migration remove_column_first_name_on_careers
+  * rails g migration remove_column_gender_on_careers
+  * rails g migration remove_column_birthday_on_careers
+  * rails g migration add_column_user_id_on_careers
   * rake db:migrate
+  * キャリアとユーザの紐付け
+

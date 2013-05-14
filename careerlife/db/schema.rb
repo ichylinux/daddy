@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513040317) do
+ActiveRecord::Schema.define(:version => 20130514031653) do
 
   create_table "career_details", :force => true do |t|
     t.integer  "career_id",    :null => false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20130513040317) do
     t.datetime "updated_at",                                      :null => false
     t.string   "introduction", :limit => 1023
     t.boolean  "deleted",                      :default => false, :null => false
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|
