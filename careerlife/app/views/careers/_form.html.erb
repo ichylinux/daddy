@@ -12,21 +12,20 @@
     <% end %>
   
     <div>
-      <%= f.label :last_name %><br />
-      <%= f.text_field :last_name %>
+      <%= User.human_attribute_name :last_name %><br />
+      <%= @career.user.last_name %>
     </div>
     <div>
-      <%= f.label :first_name %><br />
-      <%= f.text_field :first_name %>
+      <%= User.human_attribute_name :first_name %><br />
+      <%= @career.user.first_name %>
     </div>
     <div>
-      <%= f.label :birthday %><br />
-      <%= f.date_select :birthday %>
+      <%= User.human_attribute_name :birthday %><br />
+      <%= @career.user.birthday %>
     </div>
     <div>
-      <%= f.label :gender %><br />
-      <label><%= f.radio_button :gender, 'M' %> 男性</label>
-      <label><%= f.radio_button :gender, 'F' %> 女性</label>
+      <%= User.human_attribute_name :gender %><br />
+      <%= @career.user.gender %>
     </div>
     <div>
       <%= f.label :introduction %><br />

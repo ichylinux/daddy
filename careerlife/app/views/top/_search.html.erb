@@ -1,7 +1,7 @@
 <div class="search">
   <%= form_for @condition, :url => {:action => 'index'}, :method => 'get' do |f| %>
     <span><label for="career_condition_keyword">姓名</label>：<%= f.text_field :keyword, :size => 16 %></span>
-    <span><label for="career_condition_gender">性別</label>：<%= f.select :gender, Career::GENDERS.invert, :include_blank => true %></span>
+    <span><label for="career_condition_gender">性別</label>：<%= f.select :gender, User::GENDERS.invert, :include_blank => true %></span>
     <%= f.submit '検索する' %>
   <% end %>
 </div>

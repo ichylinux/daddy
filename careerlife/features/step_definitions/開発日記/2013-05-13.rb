@@ -46,4 +46,6 @@ end
 
 前提 /^キャリアとユーザの紐付け$/ do
   git_diff 'app/models/career.rb'
+  show 'app/models/user_const.rb', :as => 'new'
+  git_diff 'app/models/user.rb'
 end
