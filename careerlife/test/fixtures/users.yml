@@ -6,3 +6,12 @@ u_1:
   first_name: 太郎
   birthday: 1980-05-15
   gender: M
+
+u_2:
+  id: 2
+  email: user2@example.com
+  encrypted_password: $2a$10$JifTmwNy.DQ4Sbs.Y3xW.uVQ4xj54RWqL25AU0OR62WVug5Pz3Jy6
+  last_name: テスト
+  first_name: 花子
+  birthday: 1992-05-16
+  gender: F

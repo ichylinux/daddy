@@ -1,0 +1,9 @@
+<h2>キャリア</h2>
+
+<p id="notice"><%= notice %></p>
+
+<% unless current_user.career %>
+  <%= current_user.full_name %> さんのキャリアを登録しましょう。
+  <br/>
+  <%= link_to '追加', new_career_path %>
+<% end %>

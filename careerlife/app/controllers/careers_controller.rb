@@ -4,7 +4,10 @@ class CareersController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    redirect_to career_path(current_user.career)
+    if current_user.career
+      redirect_to career_path(current_user.career)
+      return
+    end
   end
 
   def show
@@ -12,7 +15,7 @@ class CareersController < ApplicationController
   end
 
   def new
-    @career = Career.new
+    @career = current_user.build_career
   end
   
   def new_career_detail

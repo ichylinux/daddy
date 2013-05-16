@@ -10,7 +10,9 @@
         </ul>
       </div>
     <% end %>
-  
+
+    <%= f.hidden_field :user_id %>
+
     <div>
       <%= User.human_attribute_name :last_name %><br />
       <%= @career.user.last_name %>

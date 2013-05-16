@@ -1,5 +1,15 @@
 # coding: UTF-8
 
+前提 /^(.*?) はキャリアを登録している$/ do |email|
+  @user = User.where(:email => email).first!
+  assert_not_nil @user.career
+end
+
+前提 /^(.*?) はまだキャリアを登録していない$/ do |email|
+  @user = User.where(:email => email).first!
+  assert_nil @user.career
+end
+
 前提 /^キャリアを表示$/ do
   assert_visit '/careers'
 end
@@ -29,14 +39,6 @@ end
   assert_visit "/careers/#{@career.id}"
 end
 
-前提 /^トップページを表示(している|する)$/ do |suffix|
-  assert_visit '/'
-end
-
-前提 /^トップページに遷移$/ do
-  assert_url '^/$'
-end
-
 もし /^経歴を追加 を (.*?) 回クリック$/ do |count|
   count.to_i.times do
     click_on '経歴を追加'
@@ -62,6 +64,14 @@ end
   capture
 end
 
+もし /^プロジェクト名 を空白にする$/ do
+  find('table').all('tr')[1..-2].each_with_index do |tr, i|
+    tr.all('td')[0].find('input').set('')
+  end
+  
+  capture
+end
+
 もし /^キャリア一覧の (.*?) の (.*?) をクリック$/ do |name, action|
   find_tr '.careers', name do
     click_on action
@@ -70,12 +80,12 @@ end
 end
 
 ならば /^キャリアが削除され、一覧に遷移$/ do
-  assert_url '/careers'
+  assert_url '/careers$'
 end
 
 前提 /^必須チェックエラーで(登録|更新)できない$/ do |action|
   if action == '登録'
-    assert_url '/careers'
+    assert_url '/careers$'
   elsif action == '更新'
     assert_url '/careers/[0-9]+'
   else
@@ -83,7 +93,7 @@ end
   end
 end
 
-前提(/^キャリアの検索結果に男性だけが表示される$/) do
+前提 /^キャリアの検索結果に男性だけが表示される$/ do
   capture
   assert find('#careers_table').text.include?('男性')
 end
