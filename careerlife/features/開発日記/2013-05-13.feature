@@ -28,6 +28,12 @@
   * rails g migration remove_column_gender_on_careers
   * rails g migration remove_column_birthday_on_careers
   * rails g migration add_column_user_id_on_careers
-  * rake db:migrate
   * キャリアとユーザの紐付け
 
+シナリオ: 既存のキャリアを論理削除
+
+  * rails g migration delete_careers
+
+シナリオ: マイグレーション
+
+  * rake db:migrate

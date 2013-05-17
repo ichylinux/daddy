@@ -49,3 +49,7 @@ end
   show 'app/models/user_const.rb', :as => 'new'
   git_diff 'app/models/user.rb'
 end
+
+前提 /^rails g migration delete_careers$/ do
+  show 'db/migrate/20130517043320_delete_careers.rb', :as => 'edit'
+end
