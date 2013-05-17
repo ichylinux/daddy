@@ -20,6 +20,7 @@ end
 gem 'daddy'
 gem 'devise'
 gem 'execjs'
+gem 'flog'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'mysql2'
