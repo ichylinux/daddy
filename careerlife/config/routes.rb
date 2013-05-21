@@ -7,6 +7,7 @@ Careerlife::Application.routes.draw do
     end
   end
 
+  resources :profiles, :only => ['index', 'show', 'edit', 'update']
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

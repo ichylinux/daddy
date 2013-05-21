@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b><%= User.human_attribute_name :last_name %>:</b>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <b><%= User.human_attribute_name :first_name %>:</b>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <b><%= User.human_attribute_name :birthday %>:</b>
+  <%= @user.birthday %>
+</p>
+
+<p>
+  <b><%= User.human_attribute_name :gender %>:</b>
+  <%= @user.gender_name %>
+</p>
+
+<%= link_to '編集', edit_profile_path(@user) %>

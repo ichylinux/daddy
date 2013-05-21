@@ -1,0 +1,41 @@
+<div class="profile">
+  <script>
+    $(document).ready(function() {
+      $('.datepicker').css({'width': '6em', 'text-align': 'center'}).datepicker();
+    });
+  </script>
+
+  <%= form_for(@user, :url => {:action => 'update', :id => @user.id}, :method => 'put') do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= @user.errors.count %> 件のエラーがあります。</h2>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name %>
+    </div>
+    <div>
+      <%= f.label :first_name %><br />
+      <%= f.text_field :first_name %>
+    </div>
+    <div>
+      <%= f.label :birthday %><br />
+      <%= f.text_field :birthday, :class => 'datepicker' %>
+    </div>
+    <div>
+      <%= f.label :gender %><br />
+      <%= f.select :gender, User::GENDERS.invert %>
+    </div>
+    
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

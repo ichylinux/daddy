@@ -28,6 +28,11 @@
   * rails g migration remove_column_gender_on_careers
   * rails g migration remove_column_birthday_on_careers
   * rails g migration add_column_user_id_on_careers
+
+シナリオ: キャリアとユーザの紐付け
+　ユーザはDevise関係の制御が入っているため、マスアサインの指定がホワイト
+リスト形式になっている。ユーザに移動した属性をマスアサインできるようにする。
+
   * キャリアとユーザの紐付け
 
 シナリオ: 既存のキャリアを論理削除
