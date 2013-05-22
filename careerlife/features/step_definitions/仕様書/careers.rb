@@ -83,7 +83,7 @@ end
   assert_url '/careers$'
 end
 
-前提 /^必須チェックエラーで(登録|更新)できない$/ do |action|
+前提 /^必須チェックエラーでキャリアを(登録|更新)できない$/ do |action|
   if action == '登録'
     assert_url '/careers$'
   elsif action == '更新'
