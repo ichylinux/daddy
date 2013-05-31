@@ -17,6 +17,11 @@ namespace :dad do
         system("echo 'drop database if exists #{props['database']};' >> tmp/create_databases.sql")
         system("echo 'create database #{props['database']};' >> tmp/create_databases.sql")
         system("echo 'grant all on #{props['database']}.* to #{props['username']} identified by \"#{props['password']}\";' >> tmp/create_databases.sql")
+
+        if ENV['FILE']
+          system("echo 'grant all on #{props['database']}.* to #{props['username']}@localhost identified by \"#{props['password']}\";' >> tmp/create_databases.sql")
+          system("echo 'grant file on *.* to #{props['username']}@localhost;' >> tmp/create_databases.sql")
+        end
       end
       
       system("echo >> tmp/create_databases.sql")
