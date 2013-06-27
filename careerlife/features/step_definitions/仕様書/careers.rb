@@ -97,3 +97,8 @@ end
   capture
   assert find('#careers_table').text.include?('男性')
 end
+
+もし /^削除 をクリックし、確認ダイアログで OK をクリック$/ do
+  click_on '削除'
+  confirm true
+end
