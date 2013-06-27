@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/ichylinux/daddy'
 
   s.add_runtime_dependency 'capybara'
-  s.add_runtime_dependency 'capybara-webkit', ['0.12.1']
+  s.add_runtime_dependency 'capybara-webkit', ['1.0.0']
   s.add_runtime_dependency 'cucumber'
   s.add_runtime_dependency 'cucumber-rails'
   s.add_runtime_dependency 'ci_reporter'
