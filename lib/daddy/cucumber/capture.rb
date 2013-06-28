@@ -20,7 +20,7 @@ module Daddy
         if Capybara.current_driver == :selenium
           page.driver.browser.save_screenshot("#{SCREENSHOT_DIR}/#{image}")
         else
-          page.driver.render("#{SCREENSHOT_DIR}/#{image}")
+          page.driver.save_screenshot("#{SCREENSHOT_DIR}/#{image}")
         end
 
         puts %{
