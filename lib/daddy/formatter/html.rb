@@ -44,7 +44,6 @@ module Daddy
         end
       end
 
-
       def before_features(features)
         @step_count = features.step_count
 
@@ -61,7 +60,7 @@ module Daddy
         @builder << '<div class="cucumber">'
         @builder.div(:id => 'cucumber-header') do
           @builder.div(:id => 'label') do
-            @builder.h1('Daddy')
+            @builder.h1(ENV['TITLE'] || 'Daddy')
           end
           @builder.div(:id => 'summary') do
             @builder.p('',:id => 'totals')
