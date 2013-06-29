@@ -1,6 +1,15 @@
 html {
-  height: 100%;
   font-family: "Lucida Grande", "Hiragino Kaku Gothic ProN", "Meiryo", "sans-serif";
+}
+
+body {
+  max-width: 1000px;
+  height: 100%;
+  margin: 0px auto;
+}
+
+.wapper {
+  margin: 20px;
 }
 
 .header_top {
@@ -8,6 +17,15 @@ html {
   
   .title {
     font-size: 2em;
+
+    a, a:visited {
+      text-decoration: none;
+      color: #595757;
+    }
+    
+    a:hover {
+      color: #A9A9A9;
+    }
   }
 
   .personal {
@@ -15,16 +33,20 @@ html {
 
     a, a:visited {
       vertical-align: middle;
-      border: solid 1px grey;
+      border: solid 1px #595757;
       border-radius: 8px;
       padding: 4px 8px;
       text-decoration: none;
-      color: black;
+      color: #595757;
     }
     
     a:hover {
       color: white;
-      background: darkgrey;
+      background: #A9A9A9;
     }
   }
+}
+
+.menu {
+  margin: 10px;
 }
