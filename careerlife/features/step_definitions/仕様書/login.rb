@@ -4,16 +4,6 @@
   assert_equal suffix == 'する', User.where(:email => email).present?
 end
 
-前提 /^ログイン をクリック$/ do
-  if current_path == '/users/sign_in'
-    within 'form.new_user' do
-      click_on 'ログイン'
-    end
-  else
-    click_on 'ログイン'
-  end
-end
-
 前提 /^ログインに遷移$/ do
   assert_visit '/users/sign_in'
 end
