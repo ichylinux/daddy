@@ -7,7 +7,5 @@
   </span>
 </div>
 <div class="menu">
-  <span>
-    <%= link_to 'キャリア', careers_path %>
-  </span>
+  <%= link_to 'キャリア', careers_path if user_signed_in? %>
 </div>
