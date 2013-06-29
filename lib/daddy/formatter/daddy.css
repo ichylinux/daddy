@@ -1,3 +1,7 @@
+h2 {
+  font-size: 1.4em;
+}
+
 #menu {
   float: left;
   background: #FFFFFF;
@@ -35,7 +39,7 @@
 }
 
 .cucumber .scenario h3, td .scenario h3, th .scenario h3, .background h3 {
-  font-size: 11px;
+  font-size: 1.2em;
   padding: 3px;
   margin: 0;
   background: #FFFFFF;
