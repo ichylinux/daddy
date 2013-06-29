@@ -14,22 +14,6 @@
     <%= f.hidden_field :user_id %>
 
     <div>
-      <%= User.human_attribute_name :last_name %><br />
-      <%= @career.user.last_name %>
-    </div>
-    <div>
-      <%= User.human_attribute_name :first_name %><br />
-      <%= @career.user.first_name %>
-    </div>
-    <div>
-      <%= User.human_attribute_name :birthday %><br />
-      <%= @career.user.birthday %>
-    </div>
-    <div>
-      <%= User.human_attribute_name :gender %><br />
-      <%= @career.user.gender %>
-    </div>
-    <div>
       <%= f.label :introduction %><br />
       <%= f.text_area :introduction, :rows => 8 %>
     </div>
