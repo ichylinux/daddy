@@ -5,17 +5,18 @@ require 'daddy/git'
 namespace :dad do
   task :publish do
     if File.exist?("#{Rails.root}/db/schema.rb")
-      ret = system("bundle exec rake db:schema:load RAILS_ENV=test")
-      fail unless ret
+      fail unless system("bundle exec rake db:schema:load RAILS_ENV=test")
     end
 
     system("mkdir -p features/reports")
     system("rm -Rf features/reports/*")
-    system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false features/開発日記")
+
+    fail unless system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false features/開発日記")
     system("mkdir -p features/reports/diary")
     system("mv features/reports/index.html features/reports/diary")
     system("mv features/reports/screenshots features/reports/diary")
-    system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false features/仕様書")
+
+    fail unless system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false features/仕様書")
     system("mkdir -p features/reports/spec")
     system("mv features/reports/index.html features/reports/spec")
     system("mv features/reports/screenshots features/reports/spec")
