@@ -1,0 +1,19 @@
+<ul>
+  <li>
+    <%= link_to '基本情報', profiles_path %>
+  </li>
+  <li>
+    <%= link_to 'キャリア', careers_path %>
+  </li>
+</ul>
+
+<script>
+  $(document).ready(function() {
+    $('.profiles .menu ul li').hover(function() {
+      $(this).css('cursor', 'pointer');
+    })
+    .click(function() {
+      document.location.href = $(this).find('a').attr('href');
+     });
+  });
+</script>

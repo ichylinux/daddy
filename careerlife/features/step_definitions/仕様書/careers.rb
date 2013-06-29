@@ -10,7 +10,7 @@ end
   assert_nil @user.career
 end
 
-前提 /^キャリアを表示$/ do
+前提 /^キャリアを表示している?$/ do
   assert_visit '/careers'
 end
 

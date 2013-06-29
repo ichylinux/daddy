@@ -1,0 +1,11 @@
+<% content_for :content do %>
+  <div class="profiles">
+    <div class="menu">
+      <%= render 'common/profiles_menu' %>
+    </div>
+    <div class="content">
+      <%= yield %>
+    </div>
+  </div>
+<% end %>
+<%= render :template => 'layouts/application' %>

@@ -9,7 +9,11 @@
 <body>
   <div class="wapper">
     <%= render 'common/header' %>
-    <%= yield %>
+    <% if content_for?(:content) %>
+      <%= yield :content %>
+    <% else %>
+      <%= yield %>
+    <% end %>
   </div>
 </body>
 </html>

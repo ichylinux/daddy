@@ -4,6 +4,10 @@
   assert_url "/profiles/#{@current_user.id}$"
 end
 
+前提 /^プロフィールを表示している$/ do
+  assert_visit "/profiles/#{@current_user.id}"
+end
+
 前提 /^プロフィールの参照を表示している$/ do
   assert_visit "/profiles/#{@current_user.id}"
 end

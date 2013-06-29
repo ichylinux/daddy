@@ -6,6 +6,3 @@
     <%= link_to 'ログアウト', destroy_user_session_path, :method => 'delete' if user_signed_in? %>
   </span>
 </div>
-<div class="menu">
-  <%= link_to 'キャリア', careers_path if user_signed_in? %>
-</div>
