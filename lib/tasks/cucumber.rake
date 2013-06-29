@@ -16,7 +16,10 @@ namespace :dad do
     
     features = []
     ARGV[1..-1].each do |arg|
-      features << arg unless arg.index('=')
+      unless arg.index('=')
+        task arg.to_sym do ; end
+        features << arg.gsub(/:/, '\:')
+      end
     end
 
     output = "> features/reports/index.html"
