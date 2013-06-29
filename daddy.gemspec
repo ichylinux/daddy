@@ -2,8 +2,8 @@
 
 Gem::Specification.new do |s|
   s.name        = 'daddy'
-  s.version     = '0.0.22'
-  s.date        = '2013-05-05'
+  s.version     = '0.1.3'
+  s.date        = '2013-06-29'
   s.summary     = "My rails dad"
   s.description = "Dadday helps me build rails applications since daddy knows some good practices."
   s.authors     = ["ichy"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/ichylinux/daddy'
 
   s.add_runtime_dependency 'capybara'
-  s.add_runtime_dependency 'capybara-webkit', ['0.12.1']
+  s.add_runtime_dependency 'capybara-webkit', ['1.0.0']
   s.add_runtime_dependency 'cucumber'
   s.add_runtime_dependency 'cucumber-rails'
   s.add_runtime_dependency 'ci_reporter'
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'poltergeist'
   s.add_runtime_dependency 'rails', ['~> 3.2.0']
   s.add_runtime_dependency 'rails-i18n'
+  s.add_runtime_dependency 'selenium-webdriver'
   s.add_runtime_dependency 'simplecov'
   s.add_runtime_dependency 'simplecov-rcov'
 end

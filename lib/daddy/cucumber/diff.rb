@@ -5,6 +5,8 @@ module Daddy
     module Diff
       
       def git_diff(file, options = {})
+        options[:as] ||= 'edit'
+        
         git = Daddy::Git.new
         a = File.read(file).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
         b = git.show_previous(file, true).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
