@@ -1,0 +1,30 @@
+html {
+  height: 100%;
+  font-family: "Lucida Grande", "Hiragino Kaku Gothic ProN", "Meiryo", "sans-serif";
+}
+
+.header_top {
+  margin: 20px;
+  
+  .title {
+    font-size: 2em;
+  }
+
+  .personal {
+    float: right;
+
+    a, a:visited {
+      vertical-align: middle;
+      border: solid 1px grey;
+      border-radius: 8px;
+      padding: 4px 8px;
+      text-decoration: none;
+      color: black;
+    }
+    
+    a:hover {
+      color: white;
+      background: darkgrey;
+    }
+  }
+}
