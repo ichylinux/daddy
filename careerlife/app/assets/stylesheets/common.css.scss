@@ -55,6 +55,23 @@ div.errors {
   color: #DD0000;
 }
 
+table.solid {
+  border-collapse: collapse;
+
+  tr {
+    th {
+      border: solid 1px #999999;
+      padding: 5px;
+      background: #cccccc;
+    }
+
+    td {
+      border: solid 1px #999999;
+      padding: 5px;
+    }
+  }
+}
+
 table.grid {
   width: auto;
   border-spacing: 0;

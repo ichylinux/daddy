@@ -5,7 +5,7 @@
 <% if @careers.present? %>
   <table id="careers_table" class="grid">
     <tr>
-      <th><%= User.human_attribute_name :full_name %></th>
+      <th style="min-width: 200px;"><%= User.human_attribute_name :full_name %></th>
       <th><%= User.human_attribute_name :birthday %></th>
       <th><%= User.human_attribute_name :gender %></th>
     </tr>
