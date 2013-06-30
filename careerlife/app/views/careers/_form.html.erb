@@ -1,55 +1,15 @@
 <div class="career">
   <%= form_for(@career) do |f| %>
-    <% if @career.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= @career.errors.count %> 件のエラーがあります。</h2>
-        <ul>
-          <% @career.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
+    <%= render_errors @career %>
     <%= f.hidden_field :user_id %>
 
     <div>
       <%= f.label :introduction %><br />
       <%= f.text_area :introduction, :rows => 8 %>
     </div>
-  
-    <table>
-      <tr>
-        <th><%= CareerDetail.human_attribute_name :project_name %></th>
-        <th><%= CareerDetail.human_attribute_name :start_date %></th>
-        <th><%= CareerDetail.human_attribute_name :end_date %></th>
-        <th></th>
-      </tr>
-    
-      <% @career.career_details.each_with_index do |cd, i| %>
-        <%= render 'career_detail_fields', :career_detail => cd, :index => i %>
-      <% end %>
-    
-      <tr>
-        <td colspan="4">
-          <a id="new_career_detail_link" href="#">経歴を追加</a>
-          <script>
-            $(document).ready(function() {
-              var link = $('#new_career_detail_link');
-              link.click(function() {
-                var index = link.closest('table').find('tr').length;
-  
-                $.get('<%= url_for :action => 'new_career_detail' %>', {index: index, format: 'html'},
-                  function(data) {
-                    link.closest('tr').before(data);
-                  });
-                });
-            });
-          </script>
-        </td>
-      </tr>
-    </table>
-    
+
+    <%= render 'career_details_fields' %>
+
     <div class="actions">
       <%= f.submit %>
     </div>

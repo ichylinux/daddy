@@ -46,3 +46,11 @@ body {
     }
   }
 }
+
+div.errors {
+  margin: 20px 0;
+  border: solid 2px #DD0000;
+  border-radius: 8px;
+  padding: 4px 8px;
+  color: #DD0000;
+}

@@ -1,0 +1,33 @@
+<div class="career_details">
+  <table>
+    <tr>
+      <th><%= CareerDetail.human_attribute_name :project_name %></th>
+      <th><%= CareerDetail.human_attribute_name :start_date %></th>
+      <th><%= CareerDetail.human_attribute_name :end_date %></th>
+      <th></th>
+    </tr>
+
+    <% @career.career_details.each_with_index do |cd, i| %>
+      <%= render 'career_detail_fields', :career_detail => cd, :index => i %>
+    <% end %>
+
+    <tr>
+      <td colspan="4">
+        <a id="new_career_detail_link" href="#">経歴を追加</a>
+        <script>
+          $(document).ready(function() {
+            var link = $('#new_career_detail_link');
+            link.click(function() {
+              var index = link.closest('table').find('tr').length;
+
+              $.get('<%= url_for :action => 'new_career_detail' %>', {index: index, format: 'html'},
+                function(data) {
+                  link.closest('tr').before(data);
+                });
+              });
+          });
+        </script>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -10,5 +10,4 @@
 <%= render 'show_career_details' %>
 
 <%= link_to '編集', edit_career_path(@career) %> |
-<%= link_to '削除', @career, method: :delete, data: { confirm: "#{@career.user.full_name} さんのキャリアを削除します。よろしいですか？" } %> |
-<%= link_to '戻る', careers_path %>
+<%= link_to '削除', @career, method: :delete, data: { confirm: "#{@career.user.full_name} さんのキャリアを削除します。よろしいですか？" } %>
