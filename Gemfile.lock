@@ -139,7 +139,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
-  capybara-webkit (= 1.0.0)
+  capybara-webkit
   ci_reporter
   cucumber
   cucumber-rails
