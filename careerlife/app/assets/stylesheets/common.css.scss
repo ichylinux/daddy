@@ -55,6 +55,14 @@ div.errors {
   color: #DD0000;
 }
 
+div.notices {
+  margin: 20px 0;
+  border: solid 2px #2E8B57;
+  border-radius: 8px;
+  padding: 4px 8px;
+  color: #2E8B57;
+}
+
 table.solid {
   border-collapse: collapse;
 

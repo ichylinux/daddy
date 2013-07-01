@@ -20,6 +20,7 @@ class ProfilesController < ApplicationController
     
     begin
       @user.update_attributes!(params[:user])
+      flash[:notice] = t('messages.updated', :name => User.model_name.human)
       redirect_to :action => 'show', :id => @user.id
       
     rescue ActiveRecord::RecordInvalid => e
