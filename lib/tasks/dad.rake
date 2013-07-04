@@ -3,7 +3,7 @@
 require 'rake'
 
 task :dad do
-  system('rake -T | grep dad:')
+  system('rake -aT | grep dad:')
 end
 
 namespace :dad do
