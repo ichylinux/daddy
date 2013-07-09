@@ -548,7 +548,7 @@ module Daddy
 
         @builder.div(:class => 'step_file') do |div|
           @builder.span do
-            @builder << step_file
+            @builder << step_file.force_encoding('UTF-8')
             @builder.script do |script|
               script << "$(function() {"
               script << "  $('#step_file_#{@step_number}').css('cursor', 'pointer').click(function(event) {"
