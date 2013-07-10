@@ -149,6 +149,6 @@ del.differ {
   border-radius: 5px 5px;
   margin: 5px 0;
   background: #ffffff;
-  width: 99%;
-  height: 99%;
+  max-width: 99%;
+  max-height: 99%;
 }
