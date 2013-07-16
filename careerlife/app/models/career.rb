@@ -16,4 +16,37 @@ class Career < ActiveRecord::Base
     ret
   end
 
+  def work_experience_months
+    min = nil
+    max = nil
+    career_details.each do |cd|
+      if min.nil?
+        min = cd.start_date
+      elsif cd.start_date < min
+        min = cd.start_date
+      end
+      
+      if max.nil?
+        max = cd.end_date
+      elsif cd.end_date and cd.end_date > max
+        max = cd.end_date
+      end
+    end
+    
+    return 0 unless min
+    
+    max ||= Date.today
+    
+    ret = (max - min).to_i / 30
+  end
+
+  def work_experience
+    months = work_experience_months
+    if months >= 12
+      "#{months/12}年#{months%12}ヶ月"
+    else
+      "#{months%12}ヶ月"
+    end
+  end
+
 end
