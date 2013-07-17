@@ -1,6 +1,6 @@
 # coding: UTF-8
 
-もし /^(.*?) をクリック(する)?$/ do |name, suffix|
+もし /^(.*?)\s*をクリック(する)?$/ do |name, suffix|
   click_on name
 end
 
