@@ -8,7 +8,7 @@ module Daddy
         ret = ''
         
         split = feature.file.split('/')
-        split.reverse[1..-1].each_with_index do |dir, i|
+        split.reverse[1..-2].each_with_index do |dir, i|
           break if dir == '仕様書' or dir == '開発日記'
 
           if i == 0
