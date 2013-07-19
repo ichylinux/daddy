@@ -69,6 +69,7 @@ h2 {
   background: #F0F8FF;
   color: #001111;
   margin-left: 15px;
+  padding-right: 30px;
 }
 
 .feature_dir {
@@ -145,11 +146,12 @@ del.differ {
 }
 
 .screenshot {
+  display: block;
   border: solid 1px #999999;
   border-radius: 5px 5px;
   margin: 5px 0;
   padding: 10px;
   background: #ffffff;
-  max-width: 99%;
-  max-height: 99%;
+  max-width: 100%;
+  max-height: 100%;
 }
