@@ -23,7 +23,10 @@
       <%= f.label :birthday %><br />
       <%= f.text_field :birthday, :class => 'datepicker' %>
     </div>
-
+    <div>
+      <%= f.label :gender %><br />
+      <%= f.select :gender, User::GENDERS.invert %>
+    </div>
     
 
   <% end %>
