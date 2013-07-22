@@ -20,10 +20,14 @@ require 'daddy/model'
 require 'daddy/helpers/html_helper'
 require 'daddy/models/acts_as_like'
 
-Object.send :include, Daddy::Models::ActsAsLike::Mixin
-
 module Daddy
   class Railtie < Rails::Railtie
+    initializer 'acts_as_like' do
+      ActiveSupport.on_load :active_record do
+        ActiveRecord::Base.send(:include, Daddy::Models::ActsAsLike)
+      end
+    end
+
     rake_tasks do
       lib = File.dirname(File.dirname(__FILE__))
       Dir[File.join(lib, 'tasks/*.rake')].each do |f|
