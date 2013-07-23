@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'capybara'
-gem 'capybara-webkit', '1.0.0'
+gem 'capybara-webkit'
 gem 'cucumber'
 gem 'cucumber-rails'
 gem 'ci_reporter'
+gem 'database_cleaner'
 gem 'differ'
 gem 'poltergeist'
 gem 'rails', '~> 3.2.0'
