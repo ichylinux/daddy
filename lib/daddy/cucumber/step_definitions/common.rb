@@ -1,9 +1,5 @@
 # coding: UTF-8
 
-もし /^(.*?)\s*をクリック(する)?$/ do |name, suffix|
-  click_on name
-end
-
 もし /^(.*?) を選択(する)?$/ do |name, suffix|
   click_on name
 end
