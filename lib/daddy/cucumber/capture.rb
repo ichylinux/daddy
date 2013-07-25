@@ -10,10 +10,10 @@ module Daddy
       @@_screen_count = 0
       @@_browser_resized = false
     
-      def capture(url = nil)
+      def capture
         pause
-    
-        url ||= remove_domain(current_url)
+
+        url = Rack::Utils.unescape(current_url)
     
         @@_screen_count += 1
     
