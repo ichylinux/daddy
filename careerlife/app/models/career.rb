@@ -3,8 +3,6 @@
 class Career < ActiveRecord::Base
   include CareerConst
 
-  acts_as_like
-
   has_many :career_details
   accepts_nested_attributes_for :career_details, :allow_destroy => true
 
