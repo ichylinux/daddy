@@ -23,25 +23,7 @@ module Daddy
         @feature_number = 0
         @scenario_number = 0
         @step_number = 0
-        @header_red = nil
         @delayed_messages = []
-        @img_id = 0
-      end
-
-      def embed(src, mime_type, label)
-        case(mime_type)
-        when /^image\/(png|gif|jpg|jpeg)/
-          embed_image(src, label)
-        end
-      end
-
-      def embed_image(src, label)
-        id = "img_#{@img_id}"
-        @img_id += 1
-        @builder.span(:class => 'embed') do |pre|
-          pre << %{<a href="" onclick="img=document.getElementById('#{id}'); img.style.display = (img.style.display == 'none' ? 'block' : 'none');return false">#{label}</a><br>&nbsp;
-          <img id="#{id}" style="display: none" src="#{src}"/>}
-        end
       end
 
       def before_features(features)
@@ -111,7 +93,7 @@ module Daddy
       def before_feature(feature)
         dir = feature_dir(feature)
         if @feature_dir != dir
-          @builder << '<div class="feature_dir"><span class="val">'
+          @builder << '<div class="feature_dir"><span class="val" onclick="toggle_feature_dir(this);">'
           @builder << dir
           @builder << '</span></div>'
         end 
@@ -579,18 +561,18 @@ module Daddy
       def inline_js
         @builder.script do
           @builder << inline_jquery
+          @builder << inline_daddy
           @builder << inline_js_content
           if should_expand
             @builder << %w{
               $(document).ready(function() {
-                $(SCENARIOS).siblings().show();
-                $('li.message').hide();
+                $('#expander').click();
                 });
             }.join
           else
             @builder << %w{
               $(document).ready(function() {
-                $('li.message').hide();
+                $('#collapser').click();
                 });
             }.join
           end
@@ -599,6 +581,10 @@ module Daddy
 
       def inline_jquery
         File.read(File.dirname(__FILE__) + '/jquery-min.js')
+      end
+
+      def inline_daddy
+        File.read(File.dirname(__FILE__) + '/daddy.js')
       end
 
       def inline_js_content
@@ -614,12 +600,14 @@ module Daddy
 
     $("#collapser").css('cursor', 'pointer');
     $("#collapser").click(function() {
+      $('div.feature').hide();
       $(SCENARIOS).siblings().hide();
       $('li.message').hide();
     });
 
     $("#expander").css('cursor', 'pointer');
     $("#expander").click(function() {
+      $('div.feature').show();
       $(SCENARIOS).siblings().show();
     });
   })
