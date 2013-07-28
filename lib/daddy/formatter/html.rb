@@ -60,11 +60,11 @@ module Daddy
       def before_menu
         if ENV['PUBLISH']
           @builder << "<div>"
-  
+
           @builder.div(:id => 'menu') do
               @builder << make_menu_for_publish
           end
-  
+
           @builder << "<div class='contents'>"
         end
       end
@@ -92,13 +92,16 @@ module Daddy
 
       def before_feature(feature)
         dir = feature_dir(feature)
-        if @feature_dir != dir
-          @builder << '<div class="feature_dir"><span class="val" onclick="toggle_feature_dir(this);">'
-          @builder << dir
-          @builder << '</span></div>'
-        end 
+        if dir.present?
+          if @feature_dir != dir
+            @builder << '<div class="feature_dir"><span class="val" onclick="toggle_feature_dir(this);">'
+            @builder << dir
+            @builder << '</span></div>'
+          end
 
-        @feature_dir = dir
+          @feature_dir = dir
+        end
+
         @feature = feature
         @exceptions = []
         @builder << '<div class="feature">'
