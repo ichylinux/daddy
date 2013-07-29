@@ -414,7 +414,7 @@ module Daddy
 
         #@builder.ol do
           @delayed_messages.each_with_index do |ann, i|
-            @builder.li(:id => "#{@step_number}_#{i}", :class => 'step message') do
+            @builder.li(:id => "#{@step_number}_#{i}", :class => 'step message', :style => 'display: none;') do
               @builder << ann
             end
           end
@@ -566,6 +566,14 @@ module Daddy
           @builder << inline_jquery
           @builder << inline_daddy
           @builder << inline_js_content
+
+          if should_expand
+            @builder << %w{
+              $(document).ready(function() {
+                $('#expander').click();
+                });
+            }.join
+          end
         end
       end
 
@@ -590,16 +598,16 @@ module Daddy
 
     $("#collapser").css('cursor', 'pointer');
     $("#collapser").click(function() {
-      $('div.feature').hide();
       $(SCENARIOS).siblings().hide();
       $('li.message').hide();
     });
 
     $("#expander").css('cursor', 'pointer');
     $("#expander").click(function() {
-      $('div.feature').show();
       $(SCENARIOS).siblings().show();
+      $('li.message').show();
     });
+    
   })
 
   function moveProgressBar(percentDone) {
