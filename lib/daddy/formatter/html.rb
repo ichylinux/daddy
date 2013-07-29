@@ -566,19 +566,6 @@ module Daddy
           @builder << inline_jquery
           @builder << inline_daddy
           @builder << inline_js_content
-          if should_expand
-            @builder << %w{
-              $(document).ready(function() {
-                $('#expander').click();
-                });
-            }.join
-          else
-            @builder << %w{
-              $(document).ready(function() {
-                $('#collapser').click();
-                });
-            }.join
-          end
         end
       end
 
