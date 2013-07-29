@@ -8,7 +8,7 @@ namespace :dad do
     format = ENV['FORMAT'] || 'Daddy::Formatter::Html'
 
     options = [
-      "DRIVER=" + (ENV['DRIVER'] || 'webkit'),
+      "DRIVER=" + (ENV['DRIVER'] || 'selenium'),
       "PAUSE=" + (ENV['PAUSE'] || '0'),
       "COVERAGE=" + (ENV['COVERAGE'] || 'true'),
       "EXPAND=" + (ENV['EXPAND'] || 'true')
@@ -22,10 +22,10 @@ namespace :dad do
       end
     end
 
-    output = "> features/reports/index.html"
-    output = "-o features/reports" if format == 'junit'
+    output = "features/reports/index.html"
+    output = "features/reports" if format == 'junit'
 
-    command = "bundle exec cucumber --guess -r features -f #{format} #{features.join(' ')} #{options} #{output}"
+    command = "bundle exec cucumber --guess --quiet --no-multiline -r features --format #{format} --out #{output} #{features.join(' ')} #{options}"
     #puts command
     ret = system(command)
     fail unless ret

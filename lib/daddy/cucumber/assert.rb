@@ -5,13 +5,7 @@ module Daddy
     module Assert
       def assert_url(path, params = {})
         # スクリーンショットの保存
-        url_without_domain = remove_domain(current_url)
-      
-        begin
-          capture url_without_domain
-        rescue
-          puts "URL： #{url_without_domain}"
-        end
+        capture
       
         # パスのチェック
         re = path.gsub(/\//, '\/')
@@ -112,10 +106,7 @@ module Daddy
         end
         ret
       end
-      
-      def remove_domain(url)
-        url.sub(/http:\/\/([^\/:]+)(:[0-9]+)?\/(.+)/) { "/#{$3}" }
-      end
+
     end
   end
 end

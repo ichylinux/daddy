@@ -18,6 +18,7 @@ ja:
         project_name: プロジェクト名
 
       user:
+        age: 年齢
         birthday: 生年月日
         email: メールアドレス
         first_name: 名

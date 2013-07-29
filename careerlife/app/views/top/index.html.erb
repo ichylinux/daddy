@@ -5,16 +5,16 @@
 <% if @careers.present? %>
   <table id="careers_table" class="grid">
     <tr>
-      <th style="min-width: 200px;"><%= User.human_attribute_name :full_name %></th>
-      <th><%= User.human_attribute_name :birthday %></th>
+      <th><%= User.human_attribute_name :full_name %></th>
+      <th><%= User.human_attribute_name :age %></th>
       <th><%= User.human_attribute_name :gender %></th>
     </tr>
 
   <% @careers.each do |career| %>
     <tr>
-      <td><%= career.user.full_name %></td>
-      <td><%= career.user.birthday %></td>
-      <td><%= career.user.gender_name %></td>
+      <td class="fullname"><%= career.user.full_name %></td>
+      <td class="center"><%= career.user.age %></td>
+      <td class="center"><%= career.user.gender_name %></td>
     </tr>
   <% end %>
   </table>

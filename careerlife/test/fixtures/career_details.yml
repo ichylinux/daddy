@@ -3,3 +3,10 @@ cd_1:
   career_id: 1
   project_name: 某案件
   start_date: <%= Date.today - 20.days %>
+
+cd_2:
+  id: 2
+  career_id: 2
+  project_name: POSシステム開発
+  start_date: <%= Date.today - 4.years %>
+  end_date: <%= Date.today - 2.years %>

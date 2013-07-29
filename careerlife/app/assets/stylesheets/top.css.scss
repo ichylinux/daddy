@@ -1,3 +1,15 @@
 .search {
   margin: 20px 0;
 }
+
+#careers_table {
+  td.fullname {
+    min-width: 200px;
+  }
+  td.center {
+    text-align: center;
+  }
+  td.right {
+    text-align: right;
+  }
+}
