@@ -23,20 +23,48 @@ module Daddy
         @feature_number = 0
         @scenario_number = 0
         @step_number = 0
+        @header_red = nil
         @delayed_messages = []
+        @img_id = 0
+        @inside_outline = false
       end
+
+      def embed(src, mime_type, label)
+        case(mime_type)
+        when /^image\/(png|gif|jpg|jpeg)/
+          embed_image(src, label)
+        end
+      end
+
+      def embed_image(src, label)
+        id = "img_#{@img_id}"
+        @img_id += 1
+        @builder.span(:class => 'embed') do |pre|
+          pre << %{<a href="" onclick="img=document.getElementById('#{id}'); img.style.display = (img.style.display == 'none' ? 'block' : 'none');return false">#{label}</a><br>&nbsp;
+          <img id="#{id}" style="display: none" src="#{src}"/>}
+        end
+      end
+
 
       def before_features(features)
         @step_count = features.step_count
 
-        @builder.declare!(:DOCTYPE, :html)
+        # <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        @builder.declare!(
+          :DOCTYPE,
+          :html,
+          :PUBLIC,
+          '-//W3C//DTD XHTML 1.0 Strict//EN',
+          'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'
+        )
+
         @builder << '<html>'
-        @builder << '<head>'
+          @builder.head do
           @builder.meta('http-equiv' => 'Content-Type', :content => 'text/html;charset=utf-8')
-          @builder.title 'Daddy'
+          @builder.title 'Cucumber'
           inline_css
           inline_js
-        @builder << '</head>'
+        end
         @builder << '<body>'
         @builder << "<!-- Step count #{@step_count}-->"
         @builder << '<div class="cucumber">'
@@ -55,31 +83,6 @@ module Daddy
         end
         
         before_menu
-      end
-
-      def before_menu
-        if ENV['PUBLISH']
-          @builder << "<div>"
-
-          @builder.div(:id => 'menu') do
-              @builder << make_menu_for_publish
-          end
-
-          @builder << "<div class='contents'>"
-        end
-      end
-
-      def after_menu
-        if ENV['PUBLISH']
-          @builder << '</div>'
-          @builder << '</div>'
-        end
-      end
-
-      def make_menu_for_publish
-        menu = Rails.root + '/tmp/menu.html'
-        system("erb -T - #{File.dirname(__FILE__)}/menu.html.erb > #{menu}")
-        File.readlines(menu).join
       end
 
       def after_features(features)
@@ -218,6 +221,7 @@ module Daddy
       end
 
       def before_outline_table(outline_table)
+        @inside_outline = true
         @outline_row = 0
         @builder << '<table>'
       end
@@ -225,6 +229,7 @@ module Daddy
       def after_outline_table(outline_table)
         @builder << '</table>'
         @outline_row = nil
+        @inside_outline = false
       end
 
       def before_examples(examples)
@@ -244,7 +249,7 @@ module Daddy
       end
 
       def before_steps(steps)
-        @builder << '<ol style="display: none;">'
+        @builder << '<ol>'
       end
 
       def after_steps(steps)
@@ -278,7 +283,7 @@ module Daddy
         @status = status
         return if @hide_this_step
         set_scenario_color(status)
-        
+
         if ! @delayed_messages.empty? and status == :passed
           @builder << "<li id='#{@step_id}' class='step #{status} expand'>"
         else
@@ -400,7 +405,7 @@ module Daddy
         attributes = {:id => "#{@row_id}_#{@col_index}", :class => 'step'}
         attributes[:class] += " #{status}" if status
         build_cell(@cell_type, value, attributes)
-        set_scenario_color(status)
+        set_scenario_color(status) if @inside_outline
         @col_index += 1
       end
 
@@ -562,7 +567,7 @@ module Daddy
       end
 
       def inline_js
-        @builder.script do
+        @builder.script(:type => 'text/javascript') do
           @builder << inline_jquery
           @builder << inline_daddy
           @builder << inline_js_content
@@ -599,15 +604,12 @@ module Daddy
     $("#collapser").css('cursor', 'pointer');
     $("#collapser").click(function() {
       $(SCENARIOS).siblings().hide();
-      $('li.message').hide();
     });
 
     $("#expander").css('cursor', 'pointer');
     $("#expander").click(function() {
       $(SCENARIOS).siblings().show();
-      $('li.message').show();
     });
-    
   })
 
   function moveProgressBar(percentDone) {
@@ -632,7 +634,7 @@ module Daddy
       end
 
       def move_progress
-        @builder << " <script>moveProgressBar('#{percent_done}');</script>"
+        @builder << " <script type=\"text/javascript\">moveProgressBar('#{percent_done}');</script>"
       end
 
       def percent_done
@@ -658,8 +660,8 @@ module Daddy
       end
 
       def print_stats(features)
-        @builder <<  "<script>document.getElementById('duration').innerHTML = \"Finished in <strong>#{format_duration(features.duration)} seconds</strong>\";</script>"
-        @builder <<  "<script>document.getElementById('totals').innerHTML = \"#{print_stat_string(features)}\";</script>"
+        @builder <<  "<script type=\"text/javascript\">document.getElementById('duration').innerHTML = \"Finished in <strong>#{format_duration(features.duration)} seconds</strong>\";</script>"
+        @builder <<  "<script type=\"text/javascript\">document.getElementById('totals').innerHTML = \"#{print_stat_string(features)}\";</script>"
       end
 
       def print_stat_string(features)

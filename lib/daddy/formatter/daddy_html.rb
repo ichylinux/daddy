@@ -4,6 +4,31 @@ module Daddy
   module Formatter
     module DaddyHtml
       
+      def before_menu
+        if ENV['PUBLISH']
+          @builder << "<div>"
+
+          @builder.div(:id => 'menu') do
+              @builder << make_menu_for_publish
+          end
+
+          @builder << "<div class='contents'>"
+        end
+      end
+
+      def after_menu
+        if ENV['PUBLISH']
+          @builder << '</div>'
+          @builder << '</div>'
+        end
+      end
+
+      def make_menu_for_publish
+        menu = Rails.root + '/tmp/menu.html'
+        system("erb -T - #{File.dirname(__FILE__)}/menu.html.erb > #{menu}")
+        File.readlines(menu).join
+      end
+
       def feature_dir(feature, short = false)
         ret = ''
         
