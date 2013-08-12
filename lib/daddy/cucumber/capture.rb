@@ -30,7 +30,7 @@ module Daddy
         unless @@_browser_resized
           case Capybara.current_driver
           when :poltergeist
-            # TODO
+            Capybara.current_session.driver.resize(width, height)
           when :selenium
             Capybara.current_session.driver.browser.manage.window.resize_to(width, height)
           when :webkit
