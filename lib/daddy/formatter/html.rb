@@ -618,6 +618,10 @@ module Daddy
   function makeRed(element_id) {
     $('#'+element_id).css('background', '#C40D0D');
     $('#'+element_id).css('color', '#FFFFFF');
+
+    if (element_id.indexOf('scenario_' == 0)) {
+      $('#'+element_id).prev('.scenario_file').css('color', '#FFFFFF');
+    }
   }
   function makeMenuRed() {
     $('#menu .sprint').css('border-color', '#C40D0D');
@@ -625,6 +629,10 @@ module Daddy
   function makeYellow(element_id) {
     $('#'+element_id).css('background', '#FAF834');
     $('#'+element_id).css('color', '#000000');
+
+    if (element_id.indexOf('scenario_' == 0)) {
+      $('#'+element_id).prev('.scenario_file').css('color', '#000000');
+    }
   }
   function makeMenuYellow() {
     $('#menu .sprint').css('border-color', '#FAF834');
