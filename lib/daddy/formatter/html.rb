@@ -249,7 +249,7 @@ module Daddy
       end
 
       def before_steps(steps)
-        @builder << '<ol>'
+        @builder << '<ol style="display: none;">'
       end
 
       def after_steps(steps)
@@ -604,11 +604,13 @@ module Daddy
     $("#collapser").css('cursor', 'pointer');
     $("#collapser").click(function() {
       $(SCENARIOS).siblings().hide();
+      $('li.message').hide();
     });
 
     $("#expander").css('cursor', 'pointer');
     $("#expander").click(function() {
       $(SCENARIOS).siblings().show();
+      $('li.message').show();
     });
   })
 
