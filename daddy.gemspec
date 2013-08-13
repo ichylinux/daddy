@@ -26,4 +26,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'simplecov'
   s.add_runtime_dependency 'simplecov-rcov'
   s.add_runtime_dependency 'term-ansicolor'
+
+  s.add_development_dependency 'rails-csv-fixtures'
 end
