@@ -39,11 +39,6 @@ module Daddy
         capture
       end
       
-      def assert_fill_in_rich(field_name, value)
-        fill_in_rich field_name, value
-        capture
-      end
-      
       def assert_check(field_name)
         check field_name
         capture
@@ -83,7 +78,7 @@ module Daddy
       end
       
       def assert_content_type(content_type)
-        assert_equal page.response_headers['Content-Type'], content_type
+        assert_equal content_type, page.response_headers['Content-Type']
       end
       
       def assert_iterate(array)
