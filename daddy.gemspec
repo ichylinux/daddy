@@ -2,8 +2,8 @@
 
 Gem::Specification.new do |s|
   s.name        = 'daddy'
-  s.version     = '0.1.7'
-  s.date        = '2013-08-12'
+  s.version     = '0.1.8'
+  s.date        = '2013-08-16'
   s.summary     = "My rails dad"
   s.description = "Dadday helps me build rails applications since daddy knows some good practices."
   s.license     = 'MIT'
@@ -13,7 +13,6 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/ichylinux/daddy'
 
   s.add_runtime_dependency 'capybara'
-  s.add_runtime_dependency 'capybara-webkit'
   s.add_runtime_dependency 'cucumber'
   s.add_runtime_dependency 'cucumber-rails'
   s.add_runtime_dependency 'ci_reporter'
@@ -27,5 +26,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'simplecov-rcov'
   s.add_runtime_dependency 'term-ansicolor'
 
+  s.add_development_dependency 'capybara-webkit'
   s.add_development_dependency 'rails-csv-fixtures'
 end
