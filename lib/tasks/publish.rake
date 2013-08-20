@@ -4,6 +4,8 @@ require 'daddy/git'
 
 namespace :dad do
   task :publish do
+    fail('環境編集 TITLE を指定してください。') unless ENV['TITLE'] and not ENV['TITLE'].blank?
+
     if File.exist?("#{Rails.root}/db/schema.rb")
       fail unless system("bundle exec rake db:schema:load RAILS_ENV=test")
     end
@@ -28,7 +30,7 @@ namespace :dad do
       current_branch = git.current_branch
     end
 
-    dir = '/var/lib/daddy/spec'
+    dir = '/var/lib/daddy/spec/' + title_to_dirname(ENV['TITLE']) 
     system("sudo mkdir -p #{dir}")
     system("sudo chown -R #{ENV['USER']}:#{ENV['USER']} #{dir}") 
 
@@ -38,4 +40,8 @@ namespace :dad do
     system("cp -Rf coverage #{dir}/#{current_branch}/")
   end
   
+end
+
+def self.title_to_dirname(title)
+  title.sub(' ', '_').downcase
 end
