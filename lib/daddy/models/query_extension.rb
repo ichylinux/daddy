@@ -3,9 +3,10 @@
 module Daddy
   module Models
     
-    module QueryExtention
+    module QueryExtension
       def self.included(base)
         base.extend(ClassMethods)
+        base.__send__(:include, InstanceMethods)
       end
 
       module InstanceMethods
@@ -13,7 +14,6 @@ module Daddy
 
       module ClassMethods
         require 'daddy/utils/sql_utils'
-        include ActsAsLike::InstanceMethods
 
         def not_deleted
           where(:deleted => false)

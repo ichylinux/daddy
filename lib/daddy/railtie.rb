@@ -18,13 +18,15 @@ end
 
 require 'daddy/model'
 require 'daddy/helpers/html_helper'
-require 'daddy/models/acts_as_like'
 
 module Daddy
   class Railtie < Rails::Railtie
-    initializer 'query_extention' do
+    initializer 'active_record_extension' do
       ActiveSupport.on_load :active_record do
-        ActiveRecord::Base.send(:include, Daddy::Models::QueryExtention)
+        require 'daddy/models/crud_extension'
+        require 'daddy/models/query_extension'
+        ActiveRecord::Base.send(:include, Daddy::Models::CrudExtension)
+        ActiveRecord::Base.send(:include, Daddy::Models::QueryExtension)
       end
     end
 
