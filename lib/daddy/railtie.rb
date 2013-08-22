@@ -22,9 +22,9 @@ require 'daddy/models/acts_as_like'
 
 module Daddy
   class Railtie < Rails::Railtie
-    initializer 'acts_as_like' do
+    initializer 'query_extention' do
       ActiveSupport.on_load :active_record do
-        ActiveRecord::Base.send(:include, Daddy::Models::ActsAsLike)
+        ActiveRecord::Base.send(:include, Daddy::Models::QueryExtention)
       end
     end
 
