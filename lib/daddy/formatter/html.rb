@@ -486,7 +486,6 @@ module Daddy
         @builder.script do
           unless @header_red
             @builder.text!("makeRed('cucumber-header');")
-            @builder.text!("makeMenuRed();")
           end
           @header_red = true
           @builder.text!("makeRed('scenario_#{@scenario_number}');") unless @scenario_red
@@ -498,7 +497,6 @@ module Daddy
         @builder.script do
           unless @header_red
             @builder.text!("makeYellow('cucumber-header');")
-            @builder.text!("makeMenuYellow();")
           end
           @builder.text!("makeYellow('scenario_#{@scenario_number}');") unless @scenario_red
         end
@@ -625,9 +623,6 @@ module Daddy
       $('#'+element_id).prev('.scenario_file').css('color', '#FFFFFF');
     }
   }
-  function makeMenuRed() {
-    $('#menu .sprint').css('border-color', '#C40D0D');
-  }
   function makeYellow(element_id) {
     $('#'+element_id).css('background', '#FAF834');
     $('#'+element_id).css('color', '#000000');
@@ -636,10 +631,6 @@ module Daddy
       $('#'+element_id).prev('.scenario_file').css('color', '#000000');
     }
   }
-  function makeMenuYellow() {
-    $('#menu .sprint').css('border-color', '#FAF834');
-  }
-
         EOF
       end
 
