@@ -10,7 +10,7 @@ module Daddy
         git = Daddy::Git.new
         a = File.read(file).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
         b = git.show_previous(file, true).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
-        diff = format_diff(Differ.diff(a, b))
+        diff = format_diff(Differ.diff(a, b), options)
 
         show_filename(file, options)
         puts "<pre>#{diff}</pre>"
@@ -38,18 +38,32 @@ module Daddy
       private
       
       def show_filename(filename, options = {})
-        if options[:as] == 'new'
-          puts "<span class=\"new\">[新規作成] #{filename}</span>"
-        elsif options[:as] == 'auto'
-          puts "<span class=\"auto\">[自動生成] #{filename}</span>"
-        elsif options[:as] == 'edit'
-          puts "<span class=\"edit\">[編集] #{filename}</span>"
-        else
-          puts filename
+        labels = []
+        if options[:as].is_a?(String) or options[:as].is_a?(Symbol)
+          labels << options[:as]
+        elsif options[:as].is_a?(Array)
+          labels += options[:as]
         end
+
+        html = "<span class=\"#{labels.join(' ')}\">"
+        labels.each do |label|
+          case label.to_s
+          when 'auto'
+            html << '[自動生成] '
+          when 'new'
+            html << '[新規作成] '
+          when 'edit'
+            html << '[編集] '
+          end
+        end
+        
+        html << filename
+        html << "</span>"
+
+        puts html
       end
       
-      def format_diff(diff)
+      def format_diff(diff, options = {})
         lines = []
 
         diff_lines = diff.to_s.split("\n")
@@ -66,6 +80,14 @@ module Daddy
           else
             lines << line
           end
+        end
+        
+        if options[:from] and options[:to]
+          lines = lines[options[:from]..options[:to]]
+        elsif options[:from]
+          lines = lines[options[:from]..-1]
+        elsif options[:to]
+          lines = lines[0..options[:to]]
         end
         
         lines.join("\n")
