@@ -1,11 +1,11 @@
 # coding: UTF-8
 
 前提 /^Gemfile に jquery\-ui\-rails を追加$/ do
-  git_diff 'Gemfile'
+  git_diff 'Gemfile', :from => 20, :to => 24
 end
 
 前提 /^sudo bundle install$/ do
-  git_diff 'Gemfile.lock'
+  git_diff 'Gemfile.lock', :as => 'auto'
 end
 
 前提 /^アセットに datepicker を追加$/ do
