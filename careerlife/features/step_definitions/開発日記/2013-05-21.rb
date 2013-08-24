@@ -1,11 +1,11 @@
 # coding: UTF-8
 
-前提(/^rails g controller profiles$/) do
-  show 'app/controllers/profiles_controller.rb', :as => 'new'
+前提 /^rails g controller profiles$/ do
+  show 'app/controllers/profiles_controller.rb', :as => ['auto', 'edit']
 end
 
-前提(/^routes を修正$/) do
-  git_diff 'config/routes.rb'
+前提 /^routes を修正$/ do
+  git_diff 'config/routes.rb', :to => 10
 end
 
 前提(/^ユーザモデルを修正$/) do
