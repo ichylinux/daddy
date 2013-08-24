@@ -67,6 +67,19 @@ module Daddy
         lines = []
 
         diff_lines = diff.to_s.split("\n")
+
+        if options[:from] and options[:to]
+          from = options[:from] - 1
+          to = options[:to] - 1
+          diff_lines = diff_lines[from..to]
+        elsif options[:from]
+          from = options[:from] - 1
+          diff_lines = diff_lines[from..-1]
+        elsif options[:to]
+          to = options[:to] - 1
+          diff_lines = diff_lines[0..to]
+        end
+
         diff_lines.each_with_index do |line, i|
           if line.index('</del><ins class="differ">') 
             split = line.split('</del><ins class="differ">')
@@ -80,18 +93,6 @@ module Daddy
           else
             lines << line
           end
-        end
-        
-        if options[:from] and options[:to]
-          from = options[:from] - 1
-          to = options[:to] - 1
-          lines = lines[from..to]
-        elsif options[:from]
-          from = options[:from] - 1
-          lines = lines[from..-1]
-        elsif options[:to]
-          to = options[:to] - 1
-          lines = lines[0..to]
         end
         
         lines.join("\n")
