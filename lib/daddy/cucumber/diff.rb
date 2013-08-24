@@ -83,11 +83,15 @@ module Daddy
         end
         
         if options[:from] and options[:to]
-          lines = lines[options[:from]..options[:to]]
+          from = options[:from] - 1
+          to = options[:to] - 1
+          lines = lines[from..to]
         elsif options[:from]
-          lines = lines[options[:from]..-1]
+          from = options[:from] - 1
+          lines = lines[from..-1]
         elsif options[:to]
-          lines = lines[0..options[:to]]
+          to = options[:to] - 1
+          lines = lines[0..to]
         end
         
         lines.join("\n")
