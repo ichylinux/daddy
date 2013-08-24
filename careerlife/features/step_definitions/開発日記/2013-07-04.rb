@@ -5,6 +5,6 @@
 end
 
 もし /^プロフィール機能とキャリア機能をサイドバー付きのレイアウトに変更$/ do
-  git_diff 'app/views/layouts/profiles.html.erb', :as => 'new'
-  git_diff 'app/controllers/careers_controller.rb'
+  show 'app/views/layouts/profiles.html.erb', :as => 'new'
+  git_diff 'app/controllers/careers_controller.rb', :to => 6
 end
