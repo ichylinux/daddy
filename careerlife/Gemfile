@@ -18,7 +18,6 @@ group :assets do
 end
 
 gem 'daddy'
-gem 'execjs'
 gem 'jquery-rails'
 gem 'mysql2'
 
@@ -29,7 +28,7 @@ gem 'mysql2'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
