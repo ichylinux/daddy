@@ -1,6 +1,6 @@
 # coding: UTF-8
 
-前提(/^rails new careerlife -d mysql$/) do
+前提(/^rails new careerlife -d mysql --skip-bundle$/) do
   `rm -Rf /tmp/careerlife`
   `cd /tmp && rails new careerlife -d mysql --skip-bundle`
   puts "<pre>#{`cd /tmp/careerlife && tree .`}</pre>"
