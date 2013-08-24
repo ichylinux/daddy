@@ -3,7 +3,7 @@
 require 'rails'
 require 'rails_i18n'
 
-if ENV["COVERAGE"]
+if ENV["COVERAGE"].to_s.downcase == 'true'
   require 'simplecov'
   require 'simplecov-rcov'
   SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter

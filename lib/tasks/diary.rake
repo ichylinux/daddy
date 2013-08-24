@@ -6,7 +6,7 @@ namespace :dad do
   
   desc '開発日記を実行します。'
   task :diary do
-    system("bundle exec rake dad:cucumber features/開発日記")
+    system("bundle exec rake dad:cucumber DRIVER=poltergeist COVERAGE=false features/開発日記")
   end
   
   namespace :diary do
