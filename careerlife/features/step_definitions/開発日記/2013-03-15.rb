@@ -1,29 +1,29 @@
 # coding: UTF-8
 
 前提 /^Gemfileを編集$/ do
-  git_diff 'Gemfile'
+  git_diff 'Gemfile', :from => 20, :to => 23
 end
 
 前提 /^sudo bundle install$/ do
-  git_diff 'Gemfile.lock'
+  git_diff 'Gemfile.lock', :as => 'auto'
 end
 
 前提 /^rails g devise:install$/ do
-  show 'config/initializers/devise.rb'
-  show 'config/locales/devise.en.yml'
+  show 'config/initializers/devise.rb', :as => 'auto'
+  show 'config/locales/devise.en.yml', :as => 'auto'
 end
 
-前提(/^development\.rb を編集$/) do
-  git_diff 'config/environments/development.rb'
+前提 /^development\.rb を編集$/ do
+  git_diff 'config/environments/development.rb', :from => 17, :to => 18
 end
 
-前提(/^rails g devise user$/) do
-  show 'app/models/user.rb'
-  show 'db/migrate/20130314152358_devise_create_users.rb'
+前提 /^rails g devise user$/ do
+  show 'app/models/user.rb', :as => 'auto'
+  show 'db/migrate/20130314152358_devise_create_users.rb', :as => 'auto'
 end
 
-前提(/^rake db:migrate$/) do
-  git_diff 'db/schema.rb'
+前提 /^rake db:migrate$/ do
+  git_diff 'db/schema.rb', :as => 'auto'
 end
 
 前提 /^devise用の日本語ファイルを取得$/ do
@@ -31,14 +31,14 @@ end
   show 'config/locales/devise.ja.yml'
 end
 
-前提(/^コントローラを修正$/) do
-  git_diff 'app/controllers/careers_controller.rb'
+前提 /^コントローラを修正$/ do
+  git_diff 'app/controllers/careers_controller.rb', :from => 1, :to => 3
 end
 
-前提(/^ヘッダを修正/) do
+前提 /^ヘッダを修正/ do
   git_diff 'app/views/common/_header.html.erb'
 end
 
-前提(/^rails g devise:views$/) do
+前提 /^rails g devise:views$/ do
   git_diff_name 'app/views/devise'
 end

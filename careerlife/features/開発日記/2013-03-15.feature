@@ -2,7 +2,7 @@
 
 機能:
 
-シナリオ: ログイン
+シナリオ: ログイン機能
   * Gemfileを編集
   * sudo bundle install
   * rails g devise:install
