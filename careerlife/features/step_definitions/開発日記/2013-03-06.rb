@@ -9,7 +9,7 @@ end
 end
 
 もし /^root の指定を変更$/ do
-  git_diff 'config/routes.rb', :as => 'edit'
+  git_diff 'config/routes.rb', :as => 'edit', :from => 49, :to => 51
 end
 
 もし /^rm public\/index\.html$/ do
