@@ -203,7 +203,6 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   daddy
   devise
-  execjs
   jquery-rails
   mysql2
   rails (= 3.2.13)
