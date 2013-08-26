@@ -17,7 +17,6 @@ end
 
 前提 /^rake dad:unicorn:install$/ do
   show 'config/unicorn.rb', :as => 'auto'
-  show '/etc/init.d/unicorn', :as => 'auto'
 end
 
 前提 /^rake dad:nginx:install$/ do
@@ -31,7 +30,7 @@ end
 前提(/^rake dad:db:create$/) do
 end
 
-前提(/^rake db:migrate$/) do
+前提 /^rake db:migrate$/ do
   show 'db/schema.rb', :as => 'auto'
 end
 
