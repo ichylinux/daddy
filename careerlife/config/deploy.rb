@@ -39,13 +39,13 @@ after "deploy:restart", "deploy:cleanup"
 # end
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do 
-    run "sudo service unicorn start"
+    run "sudo service unicorn_careerlife_pro start"
   end
   task :stop, :roles => :app, :except => { :no_release => true } do 
-    run "sudo service unicorn stop"
+    run "sudo service unicorn_careerlife_pro stop"
   end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "sudo service unicorn restart"
+    run "sudo service unicorn_careerlife_pro restart"
   end
 end
 
