@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'capybara'
-gem 'capybara-webkit'
+gem 'capybara-webkit', :platforms => :ruby
 gem 'cucumber'
 gem 'cucumber-rails'
 gem 'ci_reporter'
