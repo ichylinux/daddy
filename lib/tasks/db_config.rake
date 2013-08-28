@@ -7,8 +7,7 @@ namespace :dad do
     
     desc 'database.yml を生成します。'
     task :config do
-      pwd = `pwd`.strip
-      command = "APP_NAME=#{File.basename(pwd)} erb -T - #{File.dirname(__FILE__)}/database.yml.erb > config/database.yml"
+      command = "APP_NAME=#{File.basename(Rails.root)} erb -T - #{File.dirname(__FILE__)}/database.yml.erb > config/database.yml"
       puts command
       system("#{command}")
     end

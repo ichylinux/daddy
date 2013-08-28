@@ -14,9 +14,9 @@ development:
   reconnect: false
   database: careerlife_dev
   pool: 5
+  host: localhost
   username: careerlife
   password: careerlife
-  socket: /var/lib/mysql/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,9 +27,9 @@ test: &test
   reconnect: false
   database: careerlife_test
   pool: 5
+  host: localhost
   username: careerlife
   password: careerlife
-  socket: /var/lib/mysql/mysql.sock
 
 production:
   adapter: mysql2
@@ -37,9 +37,9 @@ production:
   reconnect: false
   database: careerlife_pro
   pool: 5
+  host: localhost
   username: careerlife
   password: careerlife
-  socket: /var/lib/mysql/mysql.sock
 
 cucumber:
   <<: *test

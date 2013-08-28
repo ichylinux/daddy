@@ -26,7 +26,7 @@ gem 'mysql2'
 gem 'thin'
 
 group :test do
-  gem 'capybara-webkit'
+  gem 'capybara-webkit', :platforms => :ruby
 end
 
 # To use ActiveModel has_secure_password
@@ -36,7 +36,7 @@ end
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-gem 'unicorn'
+gem 'unicorn', :platforms => :ruby
 
 # Deploy with Capistrano
 gem 'capistrano'
