@@ -5,9 +5,9 @@ require 'rake'
 namespace :dad do
   namespace :cucumber do
     task :install do
-      system("mkdir -p features")
+      FileUtils.mkdir_p("features")
       
-      system("mkdir -p features/step_definitions")
+      FileUtils.mkdir_p("features/step_definitions")
       system("touch features/step_definitions/.gitkeep")
       system("mkdir -p features/step_definitions/開発日記")
       system("touch features/step_definitions/開発日記/.gitkeep")
