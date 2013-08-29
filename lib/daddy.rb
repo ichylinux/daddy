@@ -1,5 +1,10 @@
 # coding: UTF-8
 
+begin
+  require 'rails'
+rescue LoadError => e
+end
+
 module Daddy
   if defined?(Rails)
     require "daddy/railtie"

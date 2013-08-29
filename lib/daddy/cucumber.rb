@@ -1,5 +1,7 @@
 # coding: UTF-8
 
+require 'daddy'
+
 if defined?(Rails)
   require 'cucumber/rails'
   ActionController::Base.allow_rescue = false

@@ -1,6 +1,5 @@
 # coding: UTF-8
 
-require 'rails'
 require 'rails_i18n'
 
 if ENV["COVERAGE"].to_s.downcase == 'true'
