@@ -95,7 +95,7 @@ module Daddy
 
       def before_feature(feature)
         dir = feature_dir(feature)
-        if dir.present?
+        unless dir.empty?
           if @feature_dir != dir
             @builder << '<div class="feature_dir"><span class="val" onclick="toggle_feature_dir(this);">'
             @builder << dir
@@ -320,7 +320,7 @@ module Daddy
             end
           end
           step_contents << "</pre></div>"
-          @builder << step_contents
+          @builder << step_contents.force_encoding('UTF-8')
         end
 
         print_messages

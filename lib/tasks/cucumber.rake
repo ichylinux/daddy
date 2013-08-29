@@ -2,6 +2,10 @@
 
 require 'rake'
 
+unless defined?(Rails)
+  task :environment do; end
+end
+
 namespace :dad do
 
   task :cucumber => :environment do |t, args|
