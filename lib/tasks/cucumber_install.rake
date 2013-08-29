@@ -8,25 +8,27 @@ namespace :dad do
       FileUtils.mkdir_p("features")
       
       FileUtils.mkdir_p("features/step_definitions")
-      system("touch features/step_definitions/.gitkeep")
-      system("mkdir -p features/step_definitions/開発日記")
-      system("touch features/step_definitions/開発日記/.gitkeep")
-      system("mkdir -p features/step_definitions/仕様書")
-      system("touch features/step_definitions/仕様書/.gitkeep")
+      FileUtils.touch("features/step_definitions/.gitkeep")
+      FileUtils.mkdir_p("features/step_definitions/開発日記")
+      FileUtils.touch("features/step_definitions/開発日記/.gitkeep")
+      FileUtils.mkdir_p("features/step_definitions/仕様書")
+      FileUtils.touch("features/step_definitions/仕様書/.gitkeep")
 
-      system("mkdir -p features/support")
+      FileUtils.mkdir_p("features/support")
       system("touch features/support/.gitkeep")
 
-      system("mkdir -p features/開発日記")
-      system("touch features/開発日記/.gitkeep")
-      system("mkdir -p features/仕様書")
-      system("touch features/仕様書/.gitkeep")
+      FileUtils.mkdir_p("features/開発日記")
+      FileUtils.touch("features/開発日記/.gitkeep")
+      FileUtils.mkdir_p("features/仕様書")
+      FileUtils.touch("features/仕様書/.gitkeep")
 
       if File.exist?("features/support/env.rb")
         puts "すでに features/support/env.rb が存在します。上書きはしません。"
       else
-        system("echo '# coding: UTF-8'            >  features/support/env.rb")
-        system("echo \"require 'daddy/cucumber'\" >> features/support/env.rb")
+        File.write "features/support/env.rb", <<-EOF
+# coding: UTF-8
+require 'daddy/cucumber'
+        EOF
       end      
     end
   end

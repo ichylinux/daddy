@@ -16,20 +16,22 @@ namespace :dad do
   
       system("rake dad:cucumber:install")
   
-      today = Date.today.strftime('%Y-%m-%d')
-  
       feature = "features/開発日記/#{today}.feature"
       unless File.exist?(feature)
-        system("echo '# language: ja'            >  #{feature}")
-        system("echo                             >> #{feature}")
-        system("echo '機能:'                         >> #{feature}")
-        system("echo                             >> #{feature}")
+        File.write feature, <<-EOF
+# language: ja
+
+機能:
+
+        EOF
       end
   
       step = "features/step_definitions/開発日記/#{today}.rb"
       unless File.exist?(step)
-        system("echo '# coding: UTF-8'            >  #{step}")
-        system("echo                              >> #{step}")
+        File.write step, <<-EOF
+# coding: UTF-8
+
+        EOF
       end
     end
   end
