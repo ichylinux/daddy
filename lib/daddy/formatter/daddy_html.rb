@@ -24,7 +24,7 @@ module Daddy
       end
 
       def make_menu_for_publish
-        menu = Rails.root + '/tmp/menu.html'
+        menu = 'tmp/menu.html'
         system("erb -T - #{File.dirname(__FILE__)}/menu.html.erb > #{menu}")
         File.readlines(menu).join
       end
