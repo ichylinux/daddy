@@ -12,7 +12,7 @@ require 'differ'
 
 Differ.format = :html
 
-require 'capybara'
+require 'capybara/cucumber'
 require 'capybara/webkit' if ENV['DRIVER'] == 'webkit'
 require 'capybara/poltergeist' if ENV['DRIVER'] == 'poltergeist'
 
