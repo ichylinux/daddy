@@ -2,8 +2,8 @@
 
 Gem::Specification.new do |s|
   s.name        = 'daddy'
-  s.version     = '0.1.10'
-  s.date        = '2013-08-29'
+  s.version     = '0.1.11'
+  s.date        = '2013-08-30'
   s.summary     = "My rails dad"
   s.description = "Daddy helps me build rails applications since daddy knows some good practices."
   s.license     = 'MIT'
