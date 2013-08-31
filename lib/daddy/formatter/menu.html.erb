@@ -5,6 +5,8 @@
 
 <script>
   $(document).ready(function() {
+    $('.contents').css('margin-left', $('#menu').width());
+
     $('.sprint').mouseover(function() {
       $(this).css('background', '#F0F8FF').css('cursor', 'pointer');
     }).mouseout(function() {
@@ -14,7 +16,6 @@
     });
 
     $('.current').click();
-    $('.contents').css('margin-left', $('#menu').width());
   });
 </script>
 

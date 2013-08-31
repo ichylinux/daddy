@@ -37,7 +37,9 @@ namespace :dad do
     system("mkdir -p #{dir}/#{current_branch}")
     system("rm -Rf #{dir}/#{current_branch}/*")
     system("cp -Rf features/reports/* #{dir}/#{current_branch}/")
-    system("cp -Rf coverage #{dir}/#{current_branch}/")
+    if File.exist? 'coverage'
+      system("cp -Rf coverage #{dir}/#{current_branch}/")
+    end
   end
   
 end
