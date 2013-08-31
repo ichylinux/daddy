@@ -28,7 +28,8 @@ module Daddy
       end
 
       def make_menu_for_publish
-        menu = 'tmp/menu.html'
+        FileUtils.mkdir_p('tmp')
+        menu = File.join('tmp', 'menu.html')
         system("erb -T - #{File.dirname(__FILE__)}/menu.html.erb > #{menu}")
         File.readlines(menu).join
       end
