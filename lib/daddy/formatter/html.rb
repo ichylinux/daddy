@@ -61,7 +61,7 @@ module Daddy
         @builder << '<html>'
           @builder.head do
           @builder.meta('http-equiv' => 'Content-Type', :content => 'text/html;charset=utf-8')
-          @builder.title 'Cucumber'
+          @builder.title title
           inline_css
           inline_js
         end
@@ -70,7 +70,7 @@ module Daddy
         @builder << '<div class="cucumber">'
         @builder.div(:id => 'cucumber-header') do
           @builder.div(:id => 'label') do
-            @builder.h1(ENV['TITLE'] || 'Daddy')
+            @builder.h1(title)
           end
           @builder.div(:id => 'summary') do
             @builder.p('',:id => 'totals')

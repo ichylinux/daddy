@@ -22,7 +22,7 @@ module Daddy
       def assert_visit(path, params = {})
         query_string = ''
         params.each do |key, value|
-          if query_string.blank?
+          if query_string.empty?
             query_string += '?'
           else
             query_string += '&'

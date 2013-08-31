@@ -4,6 +4,10 @@ module Daddy
   module Formatter
     module DaddyHtml
       
+      def title
+        ENV['TITLE'] || 'Daddy'
+      end
+      
       def before_menu
         if ENV['PUBLISH']
           @builder << "<div>"
