@@ -2,8 +2,8 @@
 
 Gem::Specification.new do |s|
   s.name        = 'daddy'
-  s.version     = '0.1.11'
-  s.date        = '2013-08-30'
+  s.version     = '0.1.12'
+  s.date        = '2013-09-03'
   s.summary     = "My rails dad"
   s.description = "Daddy helps me build rails applications since daddy knows some good practices."
   s.license     = 'MIT'
@@ -27,6 +27,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'simplecov-rcov'
   s.add_runtime_dependency 'term-ansicolor'
 
-  s.add_development_dependency 'capybara-webkit' if s.platform.to_s == 'ruby'
   s.add_development_dependency 'rails-csv-fixtures'
 end
