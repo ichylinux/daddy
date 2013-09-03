@@ -32,7 +32,24 @@ module Daddy
 
       def show(file, options = {})
         show_filename(file, options)
-        puts "<pre>#{File.read(file).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')}</pre>"
+
+        lines = File.readlines(file)
+
+        if options[:from] and options[:to]
+          from = options[:from] - 1
+          to = options[:to] - 1
+          lines = lines[from..to]
+        elsif options[:from]
+          from = options[:from] - 1
+          lines = lines[from..-1]
+        elsif options[:to]
+          to = options[:to] - 1
+          lines = lines[0..to]
+        end
+
+        lines = lines.join("\n").gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
+        puts "<pre>#{lines}</pre>"
+
       end
       
       private
