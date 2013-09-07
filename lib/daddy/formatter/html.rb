@@ -336,6 +336,7 @@ module Daddy
       end
 
       def exception(exception, status)
+        return if @hide_this_step
         build_exception_detail(exception)
       end
 
@@ -484,21 +485,19 @@ module Daddy
 
       def set_scenario_color_failed
         @builder.script do
-          unless @header_red
-            @builder.text!("makeRed('cucumber-header');")
-          end
+          @builder.text!("makeRed('cucumber-header');") unless @header_red
           @header_red = true
-          @builder.text!("makeRed('scenario_#{@scenario_number}');") unless @scenario_red
+          scenario_or_background = @in_background ? "background" : "scenario"
+          @builder.text!("makeRed('#{scenario_or_background}_#{@scenario_number}');") unless @scenario_red
           @scenario_red = true
         end
       end
 
       def set_scenario_color_pending
         @builder.script do
-          unless @header_red
-            @builder.text!("makeYellow('cucumber-header');")
-          end
-          @builder.text!("makeYellow('scenario_#{@scenario_number}');") unless @scenario_red
+          @builder.text!("makeYellow('cucumber-header');") unless @header_red
+          scenario_or_background = @in_background ? "background" : "scenario"
+          @builder.text!("makeYellow('#{scenario_or_background}_#{@scenario_number}');") unless @scenario_red
         end
       end
 
@@ -530,7 +529,7 @@ module Daddy
           if index = $1.index('lib/daddy/cucumber/step_definitions/')
             step_file = "daddy: " + $1[index..-1]
           end
-    
+
           step_file = "<span id=\"step_file_#{@step_number}\">#{step_file}:#{$2}</span>"
         end
 
@@ -618,19 +617,12 @@ module Daddy
   function makeRed(element_id) {
     $('#'+element_id).css('background', '#C40D0D');
     $('#'+element_id).css('color', '#FFFFFF');
-
-    if (element_id.indexOf('scenario_' == 0)) {
-      $('#'+element_id).prev('.scenario_file').css('color', '#FFFFFF');
-    }
   }
   function makeYellow(element_id) {
     $('#'+element_id).css('background', '#FAF834');
     $('#'+element_id).css('color', '#000000');
-
-    if (element_id.indexOf('scenario_' == 0)) {
-      $('#'+element_id).prev('.scenario_file').css('color', '#000000');
-    }
   }
+
         EOF
       end
 
