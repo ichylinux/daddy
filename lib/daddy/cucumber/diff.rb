@@ -47,7 +47,7 @@ module Daddy
           lines = lines[0..to]
         end
 
-        lines = lines.join("\n").gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
+        lines = lines.join.gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
         puts "<pre>#{lines}</pre>"
 
       end
