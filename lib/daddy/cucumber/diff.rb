@@ -112,7 +112,15 @@ module Daddy
           end
         end
         
-        lines.join("\n")
+        ret = ''
+        lines.each do |line|
+          if line.end_with?('</ins>')
+            ret << line
+          else
+            ret << line + "\n"
+          end
+        end
+        ret
       end
 
     end
