@@ -5,7 +5,7 @@
 end
 
 前提 /^sudo bundle install$/ do
-  git_diff 'Gemfile.lock', :as => 'auto'
+  git_diff 'Gemfile.lock', :as => 'auto', :from => 215
 end
 
 前提 /^アセットに datepicker を追加$/ do
@@ -24,6 +24,7 @@ end
 
   page.execute_script("$('.datepicker').last().focus();")
   wait_until{ page.has_selector?('#ui-datepicker-div', :visible => true) }
+  pause 3
   capture
 end
 
