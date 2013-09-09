@@ -16,7 +16,7 @@ module Daddy
         url = Rack::Utils.unescape(current_url)
     
         @@_screen_count += 1
-    
+
         image = "#{IMAGE_DIR}/#{@@_screen_count}.png"
         page.driver.save_screenshot("#{REPORT_DIR}/#{image}")
 

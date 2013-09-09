@@ -7,7 +7,8 @@ namespace :dad do
     fail('環境編集 TITLE を指定してください。') unless ENV['TITLE'] and not ENV['TITLE'].empty?
 
     if File.exist?("db/schema.rb")
-      fail unless system("bundle exec rake db:schema:load RAILS_ENV=test")
+      ENV['RAILS_ENV'] = test
+      Rake::Task['db:schema:load'].invoke
     end
 
     system("mkdir -p features/reports")
