@@ -6,11 +6,9 @@ namespace :dad do
   
   desc '開発日記を実行します。'
   task :diary do
-    ENV['DRIVER'] ||= 'poltergeist'
-    ENV['COVERAGE'] ||= 'false'
     features_path = File.join('features', '開発日記')
-
-    Rake::Task['dad:cucumber'].invoke(features_path)
+    driver = ENV['DRIVER'] || 'poltergeist'
+    system("bundle exec rake dad:cucumber DRIVER=#{driver} COVERAGE=false #{features_path}")
   end
   
   namespace :diary do
