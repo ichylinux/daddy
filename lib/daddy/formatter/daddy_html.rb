@@ -34,6 +34,10 @@ module Daddy
         File.readlines(menu).join
       end
 
+      def scenario_id
+        @feature.file.gsub(/(\/|\.|\\)/, '_') + '_scenario_' +@scenario_number.to_s
+      end
+
       def feature_dir(feature, short = false)
         ret = ''
         

@@ -49,14 +49,7 @@ module Daddy
       def before_features(features)
         @step_count = features.step_count
 
-        # <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-        @builder.declare!(
-          :DOCTYPE,
-          :html,
-          :PUBLIC,
-          '-//W3C//DTD XHTML 1.0 Strict//EN',
-          'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'
-        )
+        @builder.declare!(:DOCTYPE, :html)
 
         @builder << '<html>'
           @builder.head do
@@ -170,7 +163,7 @@ module Daddy
 
       def background_name(keyword, name, file_colon_line, source_indent)
         @listing_background = true
-        @builder.h3(:id => "background_#{@scenario_number}") do |h3|
+        @builder.h3(:id => scenario_id) do |h3|
           @builder.span(keyword, :class => 'keyword')
           @builder.text!(' ')
           @builder.span(name, :class => 'val')
@@ -201,7 +194,7 @@ module Daddy
         @listing_background = false
 
         lines = name.split("\n")
-        @builder.h3(:id => "scenario_#{@scenario_number}") do
+        @builder.h3(:id => scenario_id) do
           @builder.span(lines[0], :class => 'val')
         end
         
@@ -487,8 +480,7 @@ module Daddy
         @builder.script do
           @builder.text!("makeRed('cucumber-header');") unless @header_red
           @header_red = true
-          scenario_or_background = @in_background ? "background" : "scenario"
-          @builder.text!("makeRed('#{scenario_or_background}_#{@scenario_number}');") unless @scenario_red
+          @builder.text!("makeRed('#{scenario_id}');") unless @scenario_red
           @scenario_red = true
         end
       end
@@ -496,8 +488,7 @@ module Daddy
       def set_scenario_color_pending
         @builder.script do
           @builder.text!("makeYellow('cucumber-header');") unless @header_red
-          scenario_or_background = @in_background ? "background" : "scenario"
-          @builder.text!("makeYellow('#{scenario_or_background}_#{@scenario_number}');") unless @scenario_red
+          @builder.text!("makeYellow('#{scenario_id}');") unless @scenario_red
         end
       end
 
@@ -590,7 +581,7 @@ module Daddy
       def inline_js_content
         <<-EOF
 
-  SCENARIOS = "h3[id^='scenario_'],h3[id^=background_]";
+  SCENARIOS = "h3[id*='_scenario_'],h3[id*='_background_']";
 
   $(document).ready(function() {
     $(SCENARIOS).css('cursor', 'pointer');
@@ -653,8 +644,8 @@ module Daddy
       end
 
       def print_stats(features)
-        @builder <<  "<script type=\"text/javascript\">document.getElementById('duration').innerHTML = \"Finished in <strong>#{format_duration(features.duration)} seconds</strong>\";</script>"
-        @builder <<  "<script type=\"text/javascript\">document.getElementById('totals').innerHTML = \"#{print_stat_string(features)}\";</script>"
+        @builder <<  "<script>document.getElementById('duration').innerHTML = \"Finished in <strong>#{format_duration(features.duration)} seconds</strong>\";</script>"
+        @builder <<  "<script>document.getElementById('totals').innerHTML = \"#{print_stat_string(features)}\";</script>"
       end
 
       def print_stat_string(features)
