@@ -1,14 +1,16 @@
 source 'https://rubygems.org'
 
 gem 'capybara'
-gem 'capybara-webkit'
+gem 'capybara-webkit', :platforms => :ruby, :require => false
 gem 'cucumber'
 gem 'cucumber-rails'
 gem 'ci_reporter'
 gem 'database_cleaner'
 gem 'differ'
+gem 'execjs'
 gem 'poltergeist'
 gem 'rails', '~> 3.2.0'
+gem 'rails-csv-fixtures'
 gem 'rails-i18n'
 gem 'selenium-webdriver'
 gem 'simplecov'
