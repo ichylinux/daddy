@@ -1,10 +1,23 @@
 # coding: UTF-8
 
 require 'daddy/git'
+require 'nokogiri'
 
 namespace :dad do
   task :publish do
     fail('環境編集 TITLE を指定してください。') unless ENV['TITLE'] and not ENV['TITLE'].empty?
+
+    # dir = '/var/lib/daddy/spec/' + title_to_dirname(ENV['TITLE']) 
+    # Dir[dir + '/*'].each do |dir|
+      # features = []
+      # html = dir + '/diary/index.html'
+      # doc = Nokogiri::HTML(File.read(html))
+      # doc.css('div.feature').each do |div|
+        # features << div.to_s
+      # end
+      # puts features.join
+    # end
+    # exit
 
     if File.exist?("db/schema.rb")
       ENV['RAILS_ENV'] = 'test'
@@ -25,22 +38,23 @@ namespace :dad do
     system("mv features/reports/images features/reports/spec")
 
     if ENV['BRANCH']
-      current_branch = ENV['BRANCH']
+      branch = ENV['BRANCH']
     else
       git = Daddy::Git.new
-      current_branch = git.current_branch
+      branch = git.current_branch
     end
 
     dir = '/var/lib/daddy/spec/' + title_to_dirname(ENV['TITLE']) 
     system("sudo mkdir -p #{dir}")
     system("sudo chown -R #{ENV['USER']}:#{ENV['USER']} #{dir}") 
 
-    system("mkdir -p #{dir}/#{current_branch}")
-    system("rm -Rf #{dir}/#{current_branch}/*")
-    system("cp -Rf features/reports/* #{dir}/#{current_branch}/")
+    system("mkdir -p #{dir}/#{branch}")
+    system("rm -Rf #{dir}/#{branch}/*")
+    system("cp -Rf features/reports/* #{dir}/#{branch}/")
     if File.exist? 'coverage'
-      system("cp -Rf coverage #{dir}/#{current_branch}/")
+      system("cp -Rf coverage #{dir}/#{branch}/")
     end
+
   end
   
 end
