@@ -14,7 +14,7 @@ namespace :dad do
     system("mkdir -p features/reports")
     system("rm -Rf features/reports/*")
 
-    fail unless system("bundle exec rake dad:cucumber PUBLISH=true features/開発日記")
+    fail unless system("bundle exec rake dad:cucumber PUBLISH=true COVERAGE=false features/開発日記")
     system("mkdir -p features/reports/diary")
     system("mv features/reports/index.html features/reports/diary")
     system("mv features/reports/images features/reports/diary")
