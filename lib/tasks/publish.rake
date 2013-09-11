@@ -7,16 +7,22 @@ namespace :dad do
   task :publish do
     fail('環境編集 TITLE を指定してください。') unless ENV['TITLE'] and not ENV['TITLE'].empty?
 
-    # dir = '/var/lib/daddy/spec/' + title_to_dirname(ENV['TITLE']) 
-    # Dir[dir + '/*'].each do |dir|
-      # features = []
+    # features = []
+    # base_dir = '/var/lib/daddy/spec/' + title_to_dirname(ENV['TITLE']) 
+    # Dir[base_dir + '/*'].each do |dir|
       # html = dir + '/diary/index.html'
       # doc = Nokogiri::HTML(File.read(html))
       # doc.css('div.feature').each do |div|
-        # features << div.to_s
+        # features << div
       # end
-      # puts features.join
     # end
+    # system("bundle exec rake dad:cucumber PUBLISH=true COVERAGE=false features/support")
+    # doc = Nokogiri::HTML(File.read('features/reports/index.html'))
+    # contents_div = doc.css('div.contents').first
+    # features.each do |div|
+      # contents_div.add_child(div)
+    # end
+    # File.write('features/reports/diary.html', doc)
     # exit
 
     if File.exist?("db/schema.rb")
