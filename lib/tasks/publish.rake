@@ -55,7 +55,7 @@ namespace :dad do
           features << div
         end
       end
-      system("bundle exec rake dad:cucumber PUBLISH=true COVERAGE=false features/support") # 空HTMLを生成
+      system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false COVERAGE=false features/support") # 空HTMLを生成
       doc = Nokogiri::HTML(File.read('features/reports/index.html'))
       contents_div = doc.css('div.contents').first
       features.each do |div|
