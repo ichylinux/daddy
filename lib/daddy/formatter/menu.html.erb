@@ -1,6 +1,7 @@
 <%
   load File.dirname(File.dirname(__FILE__)) + '/git.rb'
   git = Daddy::Git.new
+  title = ENV['TITLE'].sub(' ', '_').downcase
 -%>
 
 <script>
@@ -26,23 +27,23 @@
         <%= '最新' %>
       </li>
       <li class="sub_menu" style="display: none;">
-        <a href="../../master/diary/diary.html">開発日記</a>
+        <a href="/<%= title %>/">開発日記</a>
       </li>
       <li class="sub_menu" style="display: none;">
-        <a href="../../master/spec/index.html">仕様書</a>
+        <a href="/<%= title %>/master/spec/">仕様書</a>
       </li>
       <li class="sub_menu" style="display: none;">
-        <a href="../../master/coverage/rcov/index.html" target="_blank">カバレッジ</a>
+        <a href="/<%= title %>/master/coverage/rcov/" target="_blank">カバレッジ</a>
       </li>
     <% else %>
       <li class="sprint <%= 'current' if b == git.current_branch %>">
         <%= 'スプリント ' + b.gsub(/[a-zA-Z]*/, '') %>
       </li>
       <li class="sub_menu" style="display: none;">
-        <a href="../../<%= b %>/spec/index.html">仕様書</a>
+        <a href="/<%= title %>/<%= b %>/spec/">仕様書</a>
       </li>
       <li class="sub_menu" style="display: none;">
-        <a href="../../<%= b %>/coverage/rcov/index.html" target="_blank">カバレッジ</a>
+        <a href="/<%= title %>/<%= b %>/coverage/rcov/" target="_blank">カバレッジ</a>
       </li>
     <% end %>
   </ol>

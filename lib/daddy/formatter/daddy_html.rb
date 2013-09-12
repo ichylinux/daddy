@@ -31,11 +31,11 @@ module Daddy
         FileUtils.mkdir_p('tmp')
         menu = File.join('tmp', 'menu.html')
         system("erb -T - #{File.dirname(__FILE__)}/menu.html.erb > #{menu}")
-        File.readlines(menu).join
+        File.read(menu)
       end
 
       def scenario_id
-        @feature.file.gsub(/(\/|\.|\\)/, '_') + '_scenario_' +@scenario_number.to_s
+        @feature.file.gsub(/(\/|\.|\\)/, '_') + '_scenario_' + @scenario_number.to_s
       end
 
       def feature_dir(feature, short = false)
