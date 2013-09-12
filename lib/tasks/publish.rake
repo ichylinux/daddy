@@ -47,6 +47,8 @@ namespace :dad do
     if branch == 'master'
       features = []
       Dir[base_dir + '/*'].each do |dir|
+        next unless File.directory?(dir)
+
         html = dir + '/diary/index.html'
         doc = Nokogiri::HTML(File.read(html))
         doc.css('div.feature').each do |div|
