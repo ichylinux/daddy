@@ -23,16 +23,16 @@
 <% git.branches.each do |b| %>
   <ol>
     <% if b == 'master' %>
-      <li class="sprint <%= 'current' if b == git.current_branch %>">
+      <li class="master">
         <%= '最新' %>
       </li>
-      <li class="sub_menu" style="display: none;">
+      <li class="sub_menu">
         <a href="/<%= title %>/">開発日記</a>
       </li>
-      <li class="sub_menu" style="display: none;">
+      <li class="sub_menu">
         <a href="/<%= title %>/master/spec/">仕様書</a>
       </li>
-      <li class="sub_menu" style="display: none;">
+      <li class="sub_menu">
         <a href="/<%= title %>/master/coverage/rcov/" target="_blank">カバレッジ</a>
       </li>
     <% else %>
