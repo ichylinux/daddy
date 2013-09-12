@@ -21,19 +21,29 @@
 
 <% git.branches.each do |b| %>
   <ol>
-    <% title = (b == 'master' ? '最新' : 'スプリント ' + b.gsub(/[a-zA-Z]*/, '')) %>
-
-    <li class="sprint <%= 'current' if b == git.current_branch %>">
-      <%= title %>
-    </li>
-    <li class="sub_menu" style="display: none;">
-      <a href="../../<%= b %>/diary/index.html">開発日記</a>
-    </li>
-    <li class="sub_menu" style="display: none;">
-      <a href="../../<%= b %>/spec/index.html">仕様書</a>
-    </li>
-    <li class="sub_menu" style="display: none;">
-      <a href="../../<%= b %>/coverage/rcov/index.html" target="_blank">カバレッジ</a>
-    </li>
+    <% if b == 'master' %>
+      <li class="sprint <%= 'current' if b == git.current_branch %>">
+        <%= '最新' %>
+      </li>
+      <li class="sub_menu" style="display: none;">
+        <a href="../../master/diary/diary.html">開発日記</a>
+      </li>
+      <li class="sub_menu" style="display: none;">
+        <a href="../../master/spec/index.html">仕様書</a>
+      </li>
+      <li class="sub_menu" style="display: none;">
+        <a href="../../master/coverage/rcov/index.html" target="_blank">カバレッジ</a>
+      </li>
+    <% else %>
+      <li class="sprint <%= 'current' if b == git.current_branch %>">
+        <%= 'スプリント ' + b.gsub(/[a-zA-Z]*/, '') %>
+      </li>
+      <li class="sub_menu" style="display: none;">
+        <a href="../../<%= b %>/spec/index.html">仕様書</a>
+      </li>
+      <li class="sub_menu" style="display: none;">
+        <a href="../../<%= b %>/coverage/rcov/index.html" target="_blank">カバレッジ</a>
+      </li>
+    <% end %>
   </ol>
 <% end %>
