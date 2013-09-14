@@ -113,8 +113,8 @@ module Daddy
         end
         
         ret = ''
-        lines.each do |line|
-          if line.end_with?('</ins>')
+        lines.each_with_index do |line, i|
+          if line.end_with?('</ins>') and i == (lines.size - 1)
             ret << line
           else
             ret << line + "\n"
