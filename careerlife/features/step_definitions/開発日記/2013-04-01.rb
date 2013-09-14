@@ -10,7 +10,7 @@ end
 end
 
 もし /^改行して表示$/ do
-  git_diff 'app/views/careers/show.html.erb'
+  git_diff 'app/views/careers/show.html.erb', :from => 23, :to => 32
   
   user = User.all.first
   step "#{user.email} がログインしている"
