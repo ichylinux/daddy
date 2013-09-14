@@ -81,8 +81,6 @@ module Daddy
       end
       
       def format_diff(diff, options = {})
-        lines = []
-
         diff_lines = diff.to_s.split("\n")
 
         if options[:from] and options[:to]
@@ -97,30 +95,7 @@ module Daddy
           diff_lines = diff_lines[0..to]
         end
 
-        diff_lines.each_with_index do |line, i|
-          if line.index('</del><ins class="differ">') 
-            split = line.split('</del><ins class="differ">')
-            lines << split[0]
-            if split[1].start_with?('"')
-              lines << '</del><ins class="differ">"'
-              lines << split[1][1..-1]
-            else
-              lines << '</del><ins class="differ">' + split[1]
-            end
-          else
-            lines << line
-          end
-        end
-        
-        ret = ''
-        lines.each_with_index do |line, i|
-          if line.end_with?('</ins>') and i == (lines.size - 1)
-            ret << line
-          else
-            ret << line + "\n"
-          end
-        end
-        ret
+        diff_lines.join("\n")
       end
 
     end
