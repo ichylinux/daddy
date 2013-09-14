@@ -96,5 +96,6 @@ JENKINS_HANDLER_IDLE="20"
 #
 JENKINS_ARGS="--prefix=/jenkins"
 
-export QMAKE=/usr/bin/qmake-qt4
 export PATH="${PATH}":/usr/local/bin
+export PATH=/opt/rh/qt48/root/usr/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/opt/rh/qt48/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}

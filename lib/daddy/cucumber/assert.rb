@@ -5,13 +5,7 @@ module Daddy
     module Assert
       def assert_url(path, params = {})
         # スクリーンショットの保存
-        url_without_domain = remove_domain(current_url)
-      
-        begin
-          capture url_without_domain
-        rescue
-          puts "URL： #{url_without_domain}"
-        end
+        capture
       
         # パスのチェック
         re = path.gsub(/\//, '\/')
@@ -28,7 +22,7 @@ module Daddy
       def assert_visit(path, params = {})
         query_string = ''
         params.each do |key, value|
-          if query_string.blank?
+          if query_string.empty?
             query_string += '?'
           else
             query_string += '&'
@@ -42,11 +36,6 @@ module Daddy
       
       def assert_fill_in(field_name, value)
         fill_in field_name, :with => value
-        capture
-      end
-      
-      def assert_fill_in_rich(field_name, value)
-        fill_in_rich field_name, value
         capture
       end
       
@@ -89,7 +78,7 @@ module Daddy
       end
       
       def assert_content_type(content_type)
-        assert_equal page.response_headers['Content-Type'], content_type
+        assert_equal content_type, page.response_headers['Content-Type']
       end
       
       def assert_iterate(array)
@@ -112,10 +101,7 @@ module Daddy
         end
         ret
       end
-      
-      def remove_domain(url)
-        url.sub(/http:\/\/([^\/:]+)(:[0-9]+)?\/(.+)/) { "/#{$3}" }
-      end
+
     end
   end
 end

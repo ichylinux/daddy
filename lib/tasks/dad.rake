@@ -3,5 +3,15 @@
 require 'rake'
 
 task :dad do
-  system('rake -T | grep dad:')
+  `rake -aT`.force_encoding('UTF-8').split("\n").each do |line|
+    if /rake dad(:.*)?/ =~ line
+      puts line
+    end
+  end
+end
+
+namespace :dad do
+  task :install do
+    system('rake dad:cucumber:install')
+  end
 end

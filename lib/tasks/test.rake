@@ -8,8 +8,18 @@ namespace :dad do
   task :test => :environment do
     system("mkdir -p features/reports")
     system("rm -Rf features/reports/*")
-    
-    ret = system("bundle exec rake dad:cucumber #{ARGV[1..-1].join(' ')}")
+
+    args = []    
+    ARGV[1..-1].each do |arg|
+      unless arg.index('=')
+        task arg.to_sym do ; end
+      end
+      args << arg
+    end
+
+    command = "bundle exec rake dad:cucumber #{args.join(' ')}"
+    #puts command
+    ret = system(command)
     fail unless ret
   end  
 end

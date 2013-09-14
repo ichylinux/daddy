@@ -3,31 +3,44 @@
 module Daddy
   module Cucumber
     module Capture
-      SCREENSHOT_DIR = 'features/reports/screenshots'
-      FileUtils.mkdir_p(SCREENSHOT_DIR)
+      REPORT_DIR = 'features/reports'
+      IMAGE_DIR = 'images'
+      FileUtils.mkdir_p("#{REPORT_DIR}/#{IMAGE_DIR}")
     
       @@_screen_count = 0
+      @@_browser_resized = false
     
-      def capture(url = nil)
+      def capture
         pause
-    
-        url ||= remove_domain(current_url)
+
+        url = Rack::Utils.unescape(current_url)
     
         @@_screen_count += 1
-    
-        image = "#{@@_screen_count}.png"
-    
-        if Capybara.current_driver == :selenium
-          page.driver.browser.save_screenshot("#{SCREENSHOT_DIR}/#{image}")
-        else
-          page.driver.render("#{SCREENSHOT_DIR}/#{image}")
-        end
+
+        image = "#{IMAGE_DIR}/#{@@_screen_count}.png"
+        page.driver.save_screenshot("#{REPORT_DIR}/#{image}")
 
         puts %{
           <div>#{url}</div>
-          <img style="margin: 5px 0; background: #ffffff;" src="screenshots/#{image}"/>
+          <img class="screenshot" src="#{image}"/>
         }
       end
+
+      def resize_window(width, height)
+        unless @@_browser_resized
+          case Capybara.current_driver
+          when :poltergeist
+            Capybara.current_session.driver.resize(width, height)
+          when :selenium
+            Capybara.current_session.driver.browser.manage.window.resize_to(width, height)
+          when :webkit
+            # TODO
+          end
+
+          @@_browser_resized = true
+        end
+      end
+
     end
   end
 end

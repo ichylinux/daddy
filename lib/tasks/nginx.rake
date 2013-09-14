@@ -1,6 +1,7 @@
 # coding: UTF-8
 
 require 'rake'
+require 'yaml'
 
 namespace :dad do
   namespace :nginx do
@@ -8,8 +9,7 @@ namespace :dad do
     desc 'Nginxをインストールします。'
     task :install => :environment do
       repo = File.dirname(__FILE__) + '/nginx.repo'
-      ret = system("sudo cp -f #{repo} /etc/yum.repos.d/")
-      fail unless ret
+      fail unless system("sudo cp -f #{repo} /etc/yum.repos.d/")
 
       ret = system("sudo yum install nginx")
       fail unless ret
@@ -25,15 +25,36 @@ namespace :dad do
       jenkins = ENV['JENKINS'] || false
       publish = ENV['PUBLISH'] || false
 
-      ret = system("RAILS_ROOT=#{rails_root} RAILS_ENV=#{Rails.env} erb -T - #{File.dirname(__FILE__)}/nginx.conf.erb > tmp/nginx.conf")
-      fail unless ret
+      fail unless system("RAILS_ROOT=#{rails_root} RAILS_ENV=#{Rails.env} erb -T - #{File.dirname(__FILE__)}/nginx.conf.erb > tmp/nginx.conf")
+
       system("sudo cp -f tmp/nginx.conf /etc/nginx/conf.d/nginx.conf")
       
+
       if publish
         system("sudo mkdir -p /var/lib/daddy")
         system("sudo chown -R #{ENV['USER']}:#{ENV['USER']} /var/lib/daddy")
       end
-    end  
+    end
+
+    namespace :app do
+      desc 'Nginxにアプリケーションの設定ファイルをインストールします。'
+      task :config => :environment do
+        rails_root = ENV['RAILS_ROOT'] || Rails.root
+        app_name = YAML.load_file("#{rails_root}/config/database.yml")[Rails.env]['database']
+        fail unless system("RAILS_ROOT=#{rails_root} RAILS_ENV=#{Rails.env} APP_NAME=#{app_name} erb -T - #{File.dirname(__FILE__)}/nginx.app.conf.erb > tmp/nginx.#{app_name}.conf")
+        system("sudo mkdir -p /etc/nginx/conf.d/servers") 
+        system("sudo cp -f tmp/nginx.#{app_name}.conf /etc/nginx/conf.d/servers/#{app_name}.conf")
+      end
+    end
+
+    namespace :jenkins do
+      desc 'NginxにJenkinsの設定ファイルをインストールします。'
+      task :config => :environment do
+        fail unless system("erb -T - #{File.dirname(__FILE__)}/nginx.jenkins.conf.erb > tmp/nginx.jenkins.conf")
+        system("sudo mkdir -p /etc/nginx/conf.d/servers") 
+        system("sudo cp -f tmp/nginx.jenkins.conf /etc/nginx/conf.d/servers/jenkins.conf")
+      end
+    end
 
   end
 end
