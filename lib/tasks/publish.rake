@@ -47,7 +47,7 @@ namespace :dad do
       features = []
       features += dad_publish_extract_features(base_dir + '/master')
 
-      Dir[base_dir + '/p*'].sort{|a, b| b[1..-1].to_i <=> a[1..-1].to_i}.each do |dir|
+      Dir[base_dir + '/p*'].sort{|a, b| a[1..-1].to_i <=> b[1..-1].to_i}.each do |dir|
         features += dad_publish_extract_features(dir)
       end
 
