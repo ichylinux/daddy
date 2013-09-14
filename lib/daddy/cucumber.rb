@@ -8,6 +8,7 @@ end
 
 require 'daddy/git'
 require 'differ'
+require_relative 'differ/html_patch.rb'
 
 Differ.format = :html
 
