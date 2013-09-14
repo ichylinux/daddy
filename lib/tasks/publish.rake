@@ -8,8 +8,7 @@ namespace :dad do
     fail('環境編集 TITLE を指定してください。') unless ENV['TITLE'] and not ENV['TITLE'].empty?
 
     if File.exist?("db/schema.rb")
-      ENV['RAILS_ENV'] = 'test'
-      Rake::Task['db:schema:load'].invoke
+      fail unless system('rake db:schema:load RAILS_ENV=test')
     end
 
     system("mkdir -p features/reports")
@@ -46,16 +45,15 @@ namespace :dad do
     # 開発日記を統合
     if branch == 'master'
       features = []
-      Dir[base_dir + '/*'].each do |dir|
-        next unless File.directory?(dir)
+      features += dad_publish_extract_features(base_dir + '/master')
 
-        html = dir + '/diary/index.html'
-        doc = Nokogiri::HTML(File.read(html))
-        doc.css('div.feature').each do |div|
-          features << div
-        end
+      Dir[base_dir + '/p*'].sort{|a, b| b[1..-1].to_i <=> a[1..-1].to_i}.each do |dir|
+        features += dad_publish_extract_features(dir)
       end
-      system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false COVERAGE=false features/support") # 空HTMLを生成
+
+      # 空HTMLを生成
+      system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false COVERAGE=false features/support")
+
       doc = Nokogiri::HTML(File.read('features/reports/index.html'))
       contents_div = doc.css('div.contents').first
       features.each do |div|
@@ -65,6 +63,21 @@ namespace :dad do
     end
   end
   
+end
+
+def self.dad_publish_extract_features(dir)
+  ret = []
+  return [] unless File.exist?(dir) and File.directory?(dir)
+
+  html = dir + '/diary/index.html'
+  return [] unless File.exist?(html)
+
+  doc = Nokogiri::HTML(File.read(html))
+  doc.css('div.feature').each do |div|
+    ret << div
+  end
+  
+  ret
 end
 
 def self.dad_publish_base_dir(title)
