@@ -100,7 +100,7 @@ module Daddy
 
         @feature = feature
         @exceptions = []
-        @builder << '<div class="feature">'
+        @builder << "<div id=\"#{feature_id}\" class=\"feature\">"
       end
 
       def after_feature(feature)
