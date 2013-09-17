@@ -79,6 +79,8 @@ def self.dad_publish_extract_features(dir)
     ret << div
   end
   
+  ret = ret.sort{|a, b| b['id'] <=> a['id']}
+
   ret
 end
 
