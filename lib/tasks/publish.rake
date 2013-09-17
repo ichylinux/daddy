@@ -26,12 +26,8 @@ namespace :dad do
       system("mv features/reports/images features/reports/spec")
     end
 
-    if ENV['BRANCH']
-      branch = ENV['BRANCH']
-    else
-      git = Daddy::Git.new
-      branch = git.current_branch
-    end
+    git = Daddy::Git.new
+    branch = git.current_branch
 
     # 公開
     base_dir = dad_publish_base_dir(ENV['TITLE']) 
