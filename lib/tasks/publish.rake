@@ -76,6 +76,9 @@ def self.dad_publish_extract_features(dir)
 
   doc = Nokogiri::HTML(File.read(html))
   doc.css('div.feature').each do |div|
+    div.css('img.screenshot').each do |img|
+      img['src'] = File.basename(dir) + '/diary/' + img['src']
+    end
     ret << div
   end
   
