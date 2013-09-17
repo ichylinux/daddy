@@ -515,7 +515,7 @@ module Daddy
           end
         end
 
-        step_file = step_match.file_colon_line
+        step_file = step_match.file_colon_line.force_encoding('UTF-8')
         step_file.gsub(/^([^:]*\.rb):(\d*)/) do
           if index = $1.index('lib/daddy/cucumber/step_definitions/')
             step_file = "daddy: " + $1[index..-1]
@@ -526,7 +526,7 @@ module Daddy
 
         @builder.div(:class => 'step_file') do |div|
           @builder.span do
-            @builder << step_file.force_encoding('UTF-8')
+            @builder << step_file
             @builder.script do |script|
               script << "$(function() {"
               script << "  $('#step_file_#{@step_id}').css('cursor', 'pointer').click(function(event) {"
