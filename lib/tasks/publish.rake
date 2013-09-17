@@ -19,10 +19,12 @@ namespace :dad do
     system("mv features/reports/index.html features/reports/diary")
     system("mv features/reports/images features/reports/diary")
 
-    fail unless system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false features/仕様書")
-    system("mkdir -p features/reports/spec")
-    system("mv features/reports/index.html features/reports/spec")
-    system("mv features/reports/images features/reports/spec")
+    unless ENV['SKIP_SPEC']
+      fail unless system("bundle exec rake dad:cucumber PUBLISH=true EXPAND=false features/仕様書")
+      system("mkdir -p features/reports/spec")
+      system("mv features/reports/index.html features/reports/spec")
+      system("mv features/reports/images features/reports/spec")
+    end
 
     if ENV['BRANCH']
       branch = ENV['BRANCH']
@@ -77,6 +79,8 @@ def self.dad_publish_extract_features(dir)
     ret << div
   end
   
+  ret = ret.sort{|a, b| b['id'] <=> a['id']}
+
   ret
 end
 
