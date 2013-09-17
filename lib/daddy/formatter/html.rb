@@ -413,14 +413,14 @@ module Daddy
 
         #@builder.ol do
           @delayed_messages.each_with_index do |ann, i|
-            @builder.li(:id => "#{@step_number}_#{i}", :class => 'step message', :style => 'display: none;') do
+            @builder.li(:id => "#{@step_id}_#{i}", :class => 'step message', :style => 'display: none;') do
               @builder << ann
             end
           end
           @builder.script do |script|
             script << "$(function() {"
             script << "  $('##{@step_id}').css('cursor', 'pointer').click(function() {"
-            script << "    $(this).nextAll('li[id^=\"#{@step_number}_\"]').toggle(250);"
+            script << "    $(this).nextAll('li[id^=\"#{@step_id}_\"]').toggle(250);"
             script << "  });"
             script << "});"
           end
@@ -521,7 +521,7 @@ module Daddy
             step_file = "daddy: " + $1[index..-1]
           end
 
-          step_file = "<span id=\"step_file_#{@step_number}\">#{step_file}:#{$2}</span>"
+          step_file = "<span id=\"step_file_#{@step_id}\">#{step_file}:#{$2}</span>"
         end
 
         @builder.div(:class => 'step_file') do |div|
@@ -529,7 +529,7 @@ module Daddy
             @builder << step_file.force_encoding('UTF-8')
             @builder.script do |script|
               script << "$(function() {"
-              script << "  $('#step_file_#{@step_number}').css('cursor', 'pointer').click(function(event) {"
+              script << "  $('#step_file_#{@step_id}').css('cursor', 'pointer').click(function(event) {"
               script << "    $(this).closest('li').next('.step_contents').toggle(250);"
               script << "    event.stopImmediatePropagation();"
               script << "  });"
