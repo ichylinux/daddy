@@ -9,7 +9,7 @@ namespace :dad do
     task :create do
       config = YAML.load_file("#{Rails.root}/config/database.yml")
       
-      system("mkdir -p tmp")
+      FileUtils.mkdir_p("tmp")
       system("echo '# mysql ddl' > tmp/create_databases.sql")
   
       config.each do |env, props|

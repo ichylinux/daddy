@@ -2,6 +2,10 @@
 
 require 'rake'
 
+unless defined?(Rails)
+  task :environment do; end
+end
+
 namespace :dad do
 
   task :cucumber => :environment do |t, args|
@@ -25,7 +29,7 @@ namespace :dad do
     output = "features/reports/index.html"
     output = "features/reports" if format == 'junit'
 
-    command = "bundle exec cucumber --guess --quiet --no-multiline -r features --format #{format} --out #{output} #{features.join(' ')} #{options}"
+    command = "bundle exec cucumber --guess --quiet --no-multiline -r features --format pretty --format #{format} --out #{output} #{features.join(' ')} #{options}"
     #puts command
     ret = system(command)
     fail unless ret
