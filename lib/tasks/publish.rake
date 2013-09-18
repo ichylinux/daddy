@@ -54,7 +54,7 @@ namespace :dad do
 
       doc = Nokogiri::HTML(File.read('features/reports/index.html'))
       contents_div = doc.css('div.contents').first
-      features.each do |div|
+      features.sort{|a, b| a['id'] <=> b['id']}.each do |div|
         contents_div.add_child(div)
       end
       File.write("#{base_dir}/index.html", doc)
@@ -78,8 +78,6 @@ def self.dad_publish_extract_features(dir)
     ret << div
   end
   
-  ret = ret.sort{|a, b| a['id'] <=> b['id']}
-
   ret
 end
 
