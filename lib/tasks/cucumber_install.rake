@@ -27,6 +27,8 @@ namespace :dad do
       else
         File.write "features/support/env.rb", <<-EOF
 # coding: UTF-8
+
+require 'cucumber/rails'
 require 'daddy/cucumber'
         EOF
       end      
