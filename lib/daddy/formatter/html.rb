@@ -551,6 +551,9 @@ module Daddy
         @builder.style do
           @builder << File.read(File.dirname(__FILE__) + '/cucumber.css')
           @builder << File.read(File.dirname(__FILE__) + '/daddy.css')
+          if File.exist?('features/support/daddy.css')
+            @builder << File.read('features/support/daddy.css')
+          end
         end
       end
 

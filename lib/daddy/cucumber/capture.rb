@@ -8,7 +8,6 @@ module Daddy
       FileUtils.mkdir_p("#{REPORT_DIR}/#{IMAGE_DIR}")
     
       @@_screen_count = 0
-      @@_browser_resized = false
     
       def capture
         pause
@@ -27,17 +26,13 @@ module Daddy
       end
 
       def resize_window(width, height)
-        unless @@_browser_resized
-          case Capybara.current_driver
-          when :poltergeist
-            Capybara.current_session.driver.resize(width, height)
-          when :selenium
-            Capybara.current_session.driver.browser.manage.window.resize_to(width, height)
-          when :webkit
-            # TODO
-          end
-
-          @@_browser_resized = true
+        case Capybara.current_driver
+        when :poltergeist
+          Capybara.current_session.driver.resize(width, height)
+        when :selenium
+          Capybara.current_session.driver.browser.manage.window.resize_to(width, height)
+        when :webkit
+          # TODO
         end
       end
 
