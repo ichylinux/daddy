@@ -8,7 +8,7 @@ end
 
 namespace :dad do
 
-  task :cucumber => :environment do |t, args|
+  task :cucumber => ['environment', 'db:test:prepare'] do |t, args|
     format = ENV['FORMAT'] || 'Daddy::Formatter::Html'
 
     options = [
