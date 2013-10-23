@@ -15,8 +15,9 @@ if ENV["COVERAGE"].to_s.downcase == 'true'
   SimpleCov.start 'rails'
 end
 
-require 'daddy/model'
 require 'daddy/helpers/html_helper'
+require 'daddy/model'
+require 'daddy/ocr'
 
 module Daddy
   class Railtie < Rails::Railtie
