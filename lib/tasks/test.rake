@@ -18,8 +18,7 @@ namespace :dad do
     end
 
     command = "bundle exec rake dad:cucumber #{args.join(' ')}"
-    #puts command
-    ret = system(command)
-    fail unless ret
+    puts command
+    fail unless system(command)
   end  
 end
