@@ -601,7 +601,6 @@ module Daddy
     $("#expander").css('cursor', 'pointer');
     $("#expander").click(function() {
       $(SCENARIOS).siblings().show();
-      $('li.message').show();
     });
   })
 

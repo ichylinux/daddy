@@ -64,9 +64,7 @@ module Daddy
       end
 
       def should_expand
-        return false unless ENV['EXPAND']
-        return false if ['f', 'false'].include?(ENV['EXPAND'].downcase)
-        true
+        ['t', 'true'].include?(ENV['EXPAND'].to_s.downcase)
       end
 
     end
