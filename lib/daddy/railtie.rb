@@ -16,6 +16,7 @@ if ENV["COVERAGE"].to_s.downcase == 'true'
 end
 
 require 'daddy/helpers/html_helper'
+require 'daddy/http_client'
 require 'daddy/model'
 require 'daddy/ocr'
 
