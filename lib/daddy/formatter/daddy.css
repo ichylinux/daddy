@@ -74,6 +74,10 @@
   margin: 10px 10px 0px 10px;
 }
 
+div.feature_dir span {
+  cursor: pointer:
+}
+
 .step_contents {
   display: none;
   background: #FFFFFF;

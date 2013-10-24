@@ -529,9 +529,9 @@ module Daddy
             @builder << step_file
             @builder.script do |script|
               script << "$(function() {"
-              script << "  $('#step_file_#{@step_id}').css('cursor', 'pointer').click(function(event) {"
+              script << "  $('#step_file_#{@step_id}').css('cursor', 'pointer').click(function(e) {"
               script << "    $(this).closest('li').next('.step_contents').toggle(250);"
-              script << "    event.stopImmediatePropagation();"
+              script << "    e.stopImmediatePropagation();"
               script << "  });"
               script << "});"
             end
