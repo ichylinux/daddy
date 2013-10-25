@@ -12,6 +12,10 @@ module Daddy
     
     def get(path, params = {})
       response = connection.get(path, params) do |request|
+        if @options[:auth_user] and @options[:auth_password]
+          basic = Base64.encode64(@options[:auth_user] + ':' + @options[:auth_password])
+          request.headers['Authorization'] = 'Basic ' + basic
+        end
       end
       
       if block_given?
