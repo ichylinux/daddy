@@ -8,7 +8,7 @@ module Daddy
     def initialize(url, options = {})
       @url = url
       @options = options
-      @cookie = nil
+      @cookie = options[:cookie]
       Rails.logger.debug "[HttpClient] url: #{@url}"
     end
     
@@ -18,8 +18,10 @@ module Daddy
 
       response = connection.get(path, params) do |request|
         if @options[:auth_user] and @options[:auth_password]
-          basic = Base64.encode64(@options[:auth_user] + ':' + @options[:auth_password])
-          request.headers['Authorization'] = 'Basic ' + basic
+          basic = 'Basic ' + Base64.encode64(@options[:auth_user] + ':' + @options[:auth_password])
+          Rails.logger.debug "[HttpClient] authorization: #{basic}"
+
+          request.headers['Authorization'] = basic
         end
         
         if @cookie
@@ -45,7 +47,7 @@ module Daddy
     def post(path, params = {})
       response = connection.post(path, params)
     end
-
+    
     private
   
     def connection
