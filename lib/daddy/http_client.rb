@@ -23,6 +23,7 @@ module Daddy
         end
         
         if @cookie
+          Rails.logger.debug "[HttpClient] cookie: #{@cookie}"
           request.headers['Cookie'] = @cookie
         end
         
