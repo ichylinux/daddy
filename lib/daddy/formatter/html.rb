@@ -560,16 +560,8 @@ module Daddy
       def inline_js
         @builder.script(:type => 'text/javascript') do
           @builder << inline_jquery
-          @builder << inline_daddy
           @builder << inline_js_content
-
-          if should_expand
-            @builder << %w{
-              $(document).ready(function() {
-                $('#expander').click();
-                });
-            }.join
-          end
+          @builder << inline_daddy
         end
       end
 
@@ -579,6 +571,14 @@ module Daddy
 
       def inline_daddy
         File.read(File.dirname(__FILE__) + '/daddy.js')
+
+        if should_expand
+          @builder << %w{
+            $(document).ready(function() {
+              $('#expander').click();
+              });
+          }.join
+        end
       end
 
       def inline_js_content
