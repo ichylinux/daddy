@@ -42,11 +42,18 @@ namespace :dad do
 
     # 開発日記を統合
     if branch == 'master'
-      features = []
-      features += dad_publish_extract_features(base_dir + '/master')
-
-      Dir[base_dir + '/p*'].sort{|a, b| File.basename(b)[1..-1].to_i <=> File.basename(a)[1..-1].to_i}.each do |dir|
-        features += dad_publish_extract_features(dir)
+      features = {}
+      dad_publish_sprint_dirs.each do |dir|
+        dad_publish_extract_features(dir).each do |div|
+          feature = features[div['id']]
+          if feature
+            div.css('div.scenario').each do |scenario|
+              feature.add_child(scenario)
+            end
+          else
+            features[div['id']] = div
+          end
+        end
       end
 
       # 空HTMLを生成
@@ -54,13 +61,19 @@ namespace :dad do
 
       doc = Nokogiri::HTML(File.read('features/reports/index.html'))
       contents_div = doc.css('div.contents').first
-      features.sort{|a, b| a['id'] <=> b['id']}.each do |div|
-        contents_div.add_child(div)
+      features.keys.sort.each do |key|
+        contents_div.add_child(features[key])
       end
       File.write("#{base_dir}/index.html", doc)
     end
   end
   
+end
+
+def self.dad_publish_sprint_dirs(base_dir)
+  ret = Dir[base_dir + '/p*'].sort{|a, b| File.basename(a)[1..-1].to_i <=> File.basename(b)[1..-1].to_i}
+  ret << base_dir + '/master'
+  ret
 end
 
 def self.dad_publish_extract_features(dir)

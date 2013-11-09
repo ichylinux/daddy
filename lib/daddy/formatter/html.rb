@@ -570,15 +570,17 @@ module Daddy
       end
 
       def inline_daddy
-        File.read(File.dirname(__FILE__) + '/daddy.js')
+        ret = File.read(File.dirname(__FILE__) + '/daddy.js')
 
         if should_expand
-          @builder << %w{
+          ret << %w{
             $(document).ready(function() {
               $('#expander').click();
               });
           }.join
         end
+        
+        ret
       end
 
       def inline_js_content
@@ -602,7 +604,7 @@ module Daddy
     $("#expander").click(function() {
       $(SCENARIOS).siblings().show();
     });
-  })
+  });
 
   function moveProgressBar(percentDone) {
     $("cucumber-header").css('width', percentDone +"%");
