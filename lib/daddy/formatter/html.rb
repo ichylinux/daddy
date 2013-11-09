@@ -5,6 +5,7 @@ require 'cucumber/formatter/ordered_xml_markup'
 require 'cucumber/formatter/duration'
 require 'cucumber/formatter/io'
 require 'daddy/formatter/daddy_html'
+require 'daddy/utils/string_utils'
 
 module Daddy
   module Formatter
@@ -28,23 +29,6 @@ module Daddy
         @img_id = 0
         @inside_outline = false
       end
-
-      def embed(src, mime_type, label)
-        case(mime_type)
-        when /^image\/(png|gif|jpg|jpeg)/
-          embed_image(src, label)
-        end
-      end
-
-      def embed_image(src, label)
-        id = "img_#{@img_id}"
-        @img_id += 1
-        @builder.span(:class => 'embed') do |pre|
-          pre << %{<a href="" onclick="img=document.getElementById('#{id}'); img.style.display = (img.style.display == 'none' ? 'block' : 'none');return false">#{label}</a><br>&nbsp;
-          <img id="#{id}" style="display: none" src="#{src}"/>}
-        end
-      end
-
 
       def before_features(features)
         @step_count = features.step_count
@@ -250,7 +234,7 @@ module Daddy
       end
 
       def before_step(step)
-        @step_id = step.dom_id
+        @step_id = step.dom_id + '_' + Daddy::Utils::StringUtils.current_time
         @step_number += 1
         @step = step
       end
@@ -521,21 +505,11 @@ module Daddy
             step_file = "daddy: " + $1[index..-1]
           end
 
-          step_file = "<span id=\"step_file_#{@step_id}\">#{step_file}:#{$2}</span>"
+          step_file = "<span style=\"cursor: pointer;\" onclick=\"toggle_step_file(this);\">#{step_file}:#{$2}</span>"
         end
 
         @builder.div(:class => 'step_file') do |div|
-          @builder.span do
-            @builder << step_file
-            @builder.script do |script|
-              script << "$(function() {"
-              script << "  $('#step_file_#{@step_id}').css('cursor', 'pointer').click(function(e) {"
-              script << "    $(this).closest('li').next('.step_contents').toggle(250);"
-              script << "    e.stopImmediatePropagation();"
-              script << "  });"
-              script << "});"
-            end
-          end
+          @builder << step_file
         end
       end
 
@@ -586,7 +560,7 @@ module Daddy
       def inline_js_content
         <<-EOF
 
-  SCENARIOS = "h3[id*='_scenario_'],h3[id*='_background_']";
+  SCENARIOS = "div.scenario h3";
 
   $(document).ready(function() {
     $(SCENARIOS).css('cursor', 'pointer');
