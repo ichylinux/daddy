@@ -43,7 +43,7 @@ namespace :dad do
     # 開発日記を統合
     if branch == 'master'
       features = {}
-      dad_publish_sprint_dirs.each do |dir|
+      dad_publish_sprint_dirs(base_dir).each do |dir|
         dad_publish_extract_features(dir).each do |div|
           feature = features[div['id']]
           if feature
