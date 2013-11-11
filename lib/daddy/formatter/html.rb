@@ -539,17 +539,21 @@ module Daddy
       def inline_daddy
         ret = File.read(File.dirname(__FILE__) + '/daddy.js')
 
+        ret << %w{
+          $(document).ready(function() {
+            $(SCENARIOS).find('li.step').each(function() {
+              if ($(this).nextUntil('li.step').length > 0) {
+                $(this).css('cursor', 'pointer').click(function() {
+                  $(this).nextUntil('li.step').toggle(250);
+                });
+              }
+            });
+          });
+        }.join
+
         if should_expand
           ret << %w{
             $(document).ready(function() {
-              $(SCENARIOS).find('li.step').each(function() {
-                if ($(this).nextUntil('li.step').length > 0) {
-                  $(this).css('cursor', 'pointer').click(function() {
-                    $(this).nextUntil('li.step').toggle(250);
-                  });
-                }
-              });
-
               $('#expander').click();
             });
           }.join
