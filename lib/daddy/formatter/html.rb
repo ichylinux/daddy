@@ -397,16 +397,9 @@ module Daddy
 
         #@builder.ol do
           @delayed_messages.each_with_index do |ann, i|
-            @builder.li(:id => "#{@step_id}_#{i}", :class => 'step message', :style => 'display: none;') do
+            @builder.li(:class => 'message', :style => 'display: none;') do
               @builder << ann
             end
-          end
-          @builder.script do |script|
-            script << "$(function() {"
-            script << "  $('##{@step_id}').css('cursor', 'pointer').click(function() {"
-            script << "    $(this).nextAll('li[id^=\"#{@step_id}_\"]').toggle(250);"
-            script << "  });"
-            script << "});"
           end
         #end
         empty_messages
@@ -550,7 +543,15 @@ module Daddy
           ret << %w{
             $(document).ready(function() {
               $('#expander').click();
+              $(SCENARIOS).find('li.step').each(function() {
+                if (has_step_messages(this)) {
+                  $(this).css('cursor', 'pointer');
+                }
               });
+              $(SCENARIOS).delegate('li.step', 'click', function() {
+                $(this).nextAll('li.message').toggle(250);
+              });
+            });
           }.join
         end
         
