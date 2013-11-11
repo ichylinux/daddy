@@ -544,11 +544,10 @@ module Daddy
             $(document).ready(function() {
               $(SCENARIOS).find('li.step').each(function() {
                 if ($(this).nextUntil('li.step').length > 0) {
-                  $(this).css('cursor', 'pointer');
+                  $(this).css('cursor', 'pointer').click(function() {
+                    $(this).nextUntil('li.step').toggle(250);
+                  });
                 }
-              });
-              $(SCENARIOS).find('li.step').click(function() {
-                $(this).nextAll('li.message').toggle(250);
               });
 
               $('#expander').click();
