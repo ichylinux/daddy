@@ -544,7 +544,7 @@ module Daddy
             $(document).ready(function() {
               $('#expander').click();
               $(SCENARIOS).find('li.step').each(function() {
-                if (has_step_messages(this)) {
+                if ($(this).nextUntil('li.step').length > 0) {
                   $(this).css('cursor', 'pointer');
                 }
               });
