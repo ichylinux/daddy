@@ -542,15 +542,16 @@ module Daddy
         if should_expand
           ret << %w{
             $(document).ready(function() {
-              $('#expander').click();
               $(SCENARIOS).find('li.step').each(function() {
                 if ($(this).nextUntil('li.step').length > 0) {
                   $(this).css('cursor', 'pointer');
                 }
               });
-              $(SCENARIOS).delegate('li.step', 'click', function() {
+              $(SCENARIOS).find('li.step').click(function() {
                 $(this).nextAll('li.message').toggle(250);
               });
+
+              $('#expander').click();
             });
           }.join
         end
