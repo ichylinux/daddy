@@ -234,7 +234,6 @@ module Daddy
       end
 
       def before_step(step)
-        @step_id = step.dom_id + '_' + Daddy::Utils::StringUtils.current_time
         @step_number += 1
         @step = step
       end
@@ -262,9 +261,9 @@ module Daddy
         set_scenario_color(status)
 
         if ! @delayed_messages.empty? and status == :passed
-          @builder << "<li id='#{@step_id}' class='step #{status} expand'>"
+          @builder << "<li class='step #{status} expand'>"
         else
-          @builder << "<li id='#{@step_id}' class='step #{status}'>"
+          @builder << "<li class='step #{status}'>"
         end
       end
 
@@ -541,22 +540,23 @@ module Daddy
 
         ret << %w{
           $(document).ready(function() {
-            $(SCENARIOS).find('li.step').each(function() {
-              if ($(this).nextUntil('li.step').length > 0) {
+            $('li.step').each(function() {
+              var messages = $(this).nextUntil('li.step').filter('.message');
+              if (messages.length > 0) {
                 $(this).css('cursor', 'pointer').click(function() {
-                  $(this).nextUntil('li.step').toggle(250);
+                  messages.toggle(250);
                 });
               }
             });
           });
-        }.join
+        }.join(' ')
 
         if should_expand
           ret << %w{
             $(document).ready(function() {
               $('#expander').click();
             });
-          }.join
+          }.join(' ')
         end
         
         ret
