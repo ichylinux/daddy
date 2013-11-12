@@ -110,6 +110,18 @@ div.scenario {
   margin: 10px 10px 10px 20px;
 }
 
+div.scenario.faild h3,
+div.scenario.faild .scenario_file {
+  background: #C40D0D;
+  color: #FFFFFF;
+}
+
+div.scenario.pending h3,
+div.scenario.pending .scenario_file {
+  background: #FAF834;
+  color: #000000;
+}
+
 div.scenario ol {
   margin-left: 20px;
 }
@@ -121,6 +133,11 @@ div.scenario table {
 div.scenario td {
   border: solid 1px #999999;
   padding: 5px;
+}
+
+span.scenario_file {
+  padding: 3px;
+  line-height: 1.2em;
 }
 
 span.new {

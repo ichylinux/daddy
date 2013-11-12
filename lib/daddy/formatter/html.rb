@@ -22,11 +22,9 @@ module Daddy
         @buffer = {}
         @builder = create_builder(@io)
         @feature_number = 0
-        @scenario_number = 0
         @step_number = 0
         @header_red = nil
         @delayed_messages = []
-        @img_id = 0
         @inside_outline = false
       end
 
@@ -147,7 +145,7 @@ module Daddy
 
       def background_name(keyword, name, file_colon_line, source_indent)
         @listing_background = true
-        @builder.h3(:id => scenario_id) do |h3|
+        @builder.h3 do |h3|
           @builder.span(keyword, :class => 'keyword')
           @builder.text!(' ')
           @builder.span(name, :class => 'val')
@@ -155,7 +153,6 @@ module Daddy
       end
 
       def before_feature_element(feature_element)
-        @scenario_number+=1
         @scenario_red = false
         css_class = {
           ::Cucumber::Ast::Scenario        => 'scenario',
@@ -178,7 +175,7 @@ module Daddy
         @listing_background = false
 
         lines = name.split("\n")
-        @builder.h3(:id => scenario_id) do
+        @builder.h3 do
           @builder.span(lines[0], :class => 'val')
         end
         
@@ -453,18 +450,26 @@ module Daddy
       end
 
       def set_scenario_color_failed
+        id = Daddy::Utils::StringUtils.current_time
+        style = 'display: none; margin: 0; padding: 0;'
+        @builder << "<div id=\"#{id}\" style=\"#{style}\"></div>"
+
         @builder.script do
           @builder.text!("makeRed('cucumber-header');") unless @header_red
           @header_red = true
-          @builder.text!("makeRed('#{scenario_id}');") unless @scenario_red
+          @builder.text!("$(function() { $('##{id}').closest('.scenario').addClass('faild'); });") unless @scenario_red
           @scenario_red = true
         end
       end
 
       def set_scenario_color_pending
+        id = Daddy::Utils::StringUtils.current_time
+        style = 'display: none; margin: 0; padding: 0;'
+        @builder << "<div id=\"#{id}\" style=\"#{style}\"></div>"
+
         @builder.script do
           @builder.text!("makeYellow('cucumber-header');") unless @header_red
-          @builder.text!("makeYellow('#{scenario_id}');") unless @scenario_red
+          @builder.text!("$(function() { $('##{id}').closest('.scenario').addClass('pending'); });") unless @scenario_red
         end
       end
 
@@ -585,9 +590,6 @@ module Daddy
     });
   });
 
-  function moveProgressBar(percentDone) {
-    $("cucumber-header").css('width', percentDone +"%");
-  }
   function makeRed(element_id) {
     $('#'+element_id).css('background', '#C40D0D');
     $('#'+element_id).css('color', '#FFFFFF');
@@ -601,7 +603,6 @@ module Daddy
       end
 
       def move_progress
-        @builder << " <script type=\"text/javascript\">moveProgressBar('#{percent_done}');</script>"
       end
 
       def percent_done

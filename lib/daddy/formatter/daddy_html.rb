@@ -38,10 +38,6 @@ module Daddy
         @feature.file.gsub(/(\/|\.|\\)/, '_')
       end
 
-      def scenario_id
-        feature_id + '_scenario_' + @scenario_number.to_s
-      end
-
       def feature_dir(feature, short = false)
         ret = ''
         
