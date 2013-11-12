@@ -119,7 +119,12 @@ module Daddy
         title = feature_dir(@feature, true) + @feature.file.split('/').last.gsub(/\.feature/, '')
 
         @builder.h2 do |h2|
-          @builder.span(title, :class => 'val')
+          @builder.span(:class => 'val') do
+            @builder << title
+            unless name.strip.blank?
+              @builder.span('(' + name.strip + ')', :class => 'feature_subtitle')
+            end
+          end
         end
 
         lines = name.split(/\r?\n/)
