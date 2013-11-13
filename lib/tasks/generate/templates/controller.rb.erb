@@ -1,0 +1,62 @@
+# coding: UTF-8
+
+class <%= @resources.capitalize %>Controller < ApplicationController
+
+  def index
+    @<%= @resources %> = <%= @resources.singularize.capitalize %>.not_deleted
+  end
+
+  def show
+    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.find(params[:id])
+  end
+
+  def new
+    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.new
+  end
+
+  def create
+    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.new(params[:id])
+    
+    begin
+      @<%= @resources.singularize %>.transaction do
+        @<%= @resources.singularize %>.save!
+      end
+
+      redirect_to :action => 'show', :id => @<%= @resources.singularize %>
+
+    rescue ActiveRecord::RecordInvalid => e
+      render :new
+    end
+  end
+
+  def edit
+    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.find(params[:id])
+  end
+
+  def update
+    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.find(params[:id])
+    
+    begin
+      @<%= @resources.singularize %>.transaction do
+        @<%= @resources.singularize %>.attributes = params[:<%= @resources.singularize %>]
+        @<%= @resources.singularize %>.save!
+      end
+
+      redirect_to :action => 'show', :id => @<%= @resources.singularize %>
+
+    rescue ActiveRecord::RecordInvalid => e
+      render :edit
+    end
+  end
+
+  def destroy
+    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.find(params[:id])
+    
+    @<%= @resources.singularize %>.transaction do
+      @<%= @resources.singularize %>.destroy_logically!
+    end
+    
+    redirect_to :action => 'index'
+  end
+
+end
