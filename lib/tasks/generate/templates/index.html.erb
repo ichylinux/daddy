@@ -1,0 +1,26 @@
+<div class="actions">
+  <%= @tag_begin %>= link_to '追加', new_<%= @resource %>_path <%= @tag_end %>
+</div>
+
+<table>
+  <tr>
+<% @model_class.columns.each do |column| -%>
+    <th><%= @tag_begin %>= <%= @model_class.name %>.human_attribute_name :<%= column.name %> <%= @tag_end %></th>
+<% end -%>
+    <th colspan="2"></th>
+  </tr>
+  
+  <%= @tag_begin %> @<%= @resources %>.each do |<%= @short_name %>| <%= @tag_end %>
+    <tr>
+<% @model_class.columns.each do |column| -%>
+      <td><%= @tag_begin %>= <%= @short_name %>.<%= column.name %> <%= @tag_end %></td>
+<% end -%>
+      <td>
+        <%= @tag_begin %>= link_to '編集', edit_<%= @resource %>_path(<%= @short_name %>) <%= @tag_end %>
+      </td>
+      <td>
+        <%= @tag_begin %>= link_to '削除', <%= @resource %>_path(<%= @short_name %>), :method => 'delete', :confirm => '削除します。よろしいですか？' <%= @tag_end %>
+      </td>
+    </tr>
+  <%= @tag_begin %> end <%= @tag_end %>
+</table>

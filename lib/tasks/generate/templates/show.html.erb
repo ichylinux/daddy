@@ -1,0 +1,14 @@
+<div class="actions">
+  <%= @tag_begin %>= link_to '一覧', <%= @resources %>_path <%= @tag_end %>
+  <%= @tag_begin %>= link_to '編集', edit_<%= @resource %>_path(@<%= @resource %>) <%= @tag_end %>
+  <%= @tag_begin %>= link_to '削除', <%= @resource %>_path(@<%= @resource %>), :method => 'delete', :confirm => '削除します。よろしいですか？' <%= @tag_end %>
+</div>
+
+<table>
+<% @model_class.columns.each do |column| -%>
+  <tr>
+    <th><%= @tag_begin %>= <%= @model_class %>.human_attribute_name :<%= column.name %> <%= @tag_end %></th>
+    <td><%= @tag_begin %>= @<%= @resource %>.<%= column.name %> <%= @tag_end %></td>
+  </tr>
+<% end -%>
+</table>

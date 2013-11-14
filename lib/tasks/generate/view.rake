@@ -17,7 +17,9 @@ namespace :dad do
         end
       end
 
-      @model_class = @resources.singularize.capitalize.constantize
+      @resource = @resources.singularize
+      @short_name = @resource.split('_').map(&:first).join
+      @model_class = @resource.capitalize.constantize
       @tag_begin = '<%'
       @tag_end = '%>'
 
@@ -26,7 +28,7 @@ namespace :dad do
         FileUtils.mkdir_p(view_dir)
 
         view_file = "#{view_dir}/#{File.basename(template)}"
-        File.write(view_file, ERB.new(File.read(template)).result)
+        File.write(view_file, ERB.new(File.read(template), 0, '-').result)
       end
     end
     

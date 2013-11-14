@@ -1,0 +1,6 @@
+<div class="actions">
+  <%= @tag_begin %>= link_to '一覧', <%= @resources %>_path <%= @tag_end %>
+  <%= @tag_begin %>= link_to '参照', <%= @resource %>_path(@<%= @resource %>) <%= @tag_end %>
+</div>
+
+<%= @tag_begin %>= render 'form' <%= @tag_end %>

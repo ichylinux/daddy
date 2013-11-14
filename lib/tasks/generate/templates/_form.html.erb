@@ -1,11 +1,11 @@
 <%= @tag_begin %>= form_for @<%= @resources.singularize %> do |f| <%= @tag_end %>
   <table>
-    <% @model_class.columns.each do |column| %>
+<% @model_class.columns.each do |column| -%>
     <tr>
       <th><%= @tag_begin %>= f.label :<%= column.name %> <%= @tag_end %></th>
       <td><%= @tag_begin %>= f.text_field :<%= column.name %> <%= @tag_end %></td>
     </tr>
-    <% end %>
+<% end -%>
   </table>
   <%= @tag_begin %>= f.submit <%= @tag_end %>
 <%= @tag_begin %> end <%= @tag_end %>

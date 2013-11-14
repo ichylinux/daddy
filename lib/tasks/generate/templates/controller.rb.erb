@@ -15,7 +15,7 @@ class <%= @resources.capitalize %>Controller < ApplicationController
   end
 
   def create
-    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.new(params[:id])
+    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.new(params[:<%= @resources.singularize %>])
     
     begin
       @<%= @resources.singularize %>.transaction do

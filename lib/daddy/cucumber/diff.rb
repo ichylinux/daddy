@@ -22,8 +22,8 @@ module Daddy
       end
       
       def diff(file_a, file_b, options = {})
-        a = File.read(file_a)
-        b = File.read(file_b)
+        a = File.read(file_a).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
+        b = File.read(file_b).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
         diff = format_diff(Differ.diff(a, b))
 
         show_filename(file_a, options)
