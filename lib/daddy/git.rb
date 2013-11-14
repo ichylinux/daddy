@@ -1,17 +1,8 @@
 # coding: UTF-8
 
-Dir::glob(File.dirname(__FILE__) + '/git/*.rb').each do |file|
-  require file
-end
-
 module Daddy
   
   class Git
-    @@sub_dir = nil
-
-    def self.sub_dir=(sub_dir)
-      @@sub_dir = sub_dir
-    end
 
     def branches(remote = false)
       branches = []
@@ -63,33 +54,19 @@ module Daddy
       end
     end
     
-    def show_previous(file, remote = false)
-      if @@sub_dir
-        sub_dir = @@sub_dir
-        sub_dir += '/' unless @@sub_dir.end_with?('/')
-        `git show #{previous_branch(remote)}:#{sub_dir}#{file}`
+    def show_previous(file, options = {})
+      remote = options[:remote]
+      commit = options[:commit]
+
+      if commit
+        `git show #{commit}:#{file}`
       else
         `git show #{previous_branch(remote)}:#{file}`
       end
     end
 
     def git_diff_name(*includes)
-      diff = `git diff origin/#{previous_branch} --name-only #{includes.join(' ')}`
-      return diff unless @@sub_dir
-
-      ret = []
-      diff.split("\n").each do |line|
-        index = line.index(@@sub_dir)
-        if index
-          sub_file = line[@@sub_dir.length..-1]
-          sub_file = sub_file[1..-1] if sub_file.start_with?('/')
-          ret << sub_file
-        else
-          ret << line
-        end
-      end
-
-      ret.join("\n")
+      `git diff origin/#{previous_branch} --name-only #{includes.join(' ')}`
     end
   end
 

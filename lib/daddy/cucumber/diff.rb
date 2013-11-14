@@ -5,11 +5,25 @@ module Daddy
     module Diff
       
       def git_diff(file, options = {})
-        options[:as] ||= 'edit'
+        options[:as] = 'edit' unless options.has_key?(:as)
+        remote = options.has_key?(:remote) ? options[:remote] : true 
 
         git = Daddy::Git.new
-        a = File.read(file).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
-        b = git.show_previous(file, true).gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
+        
+        if options[:between]
+          a = git.show_previous(file, :commit => options[:between], :remote => remote)
+        else
+          a = File.read(file)
+        end
+        a = a.gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
+
+        if options[:and]
+          b = git.show_previous(file, :commit => options[:and], :remote => remote)
+        else
+          b = git.show_previous(file, :remote => remote)
+        end
+        b = b.gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
+
         diff = format_diff(Differ.diff(a, b), options)
 
         show_filename(file, options)
