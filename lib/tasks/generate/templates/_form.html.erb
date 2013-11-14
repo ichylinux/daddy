@@ -1,6 +1,7 @@
 <%= @tag_begin %>= form_for @<%= @resources.singularize %> do |f| <%= @tag_end %>
   <table>
 <% @model_class.columns.each do |column| -%>
+<% next if %w{ id deleted created_at updated_at }.include?(column.name.to_s) -%>
     <tr>
       <th><%= @tag_begin %>= f.label :<%= column.name %> <%= @tag_end %></th>
       <td><%= @tag_begin %>= f.text_field :<%= column.name %> <%= @tag_end %></td>

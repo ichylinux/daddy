@@ -3,26 +3,26 @@
 class <%= @resources.capitalize %>Controller < ApplicationController
 
   def index
-    @<%= @resources %> = <%= @resources.singularize.capitalize %>.not_deleted
+    @<%= @resources %> = <%= @model_class %>.not_deleted
   end
 
   def show
-    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.find(params[:id])
+    @<%= @resource %> = <%= @model_class.name %>.find(params[:id])
   end
 
   def new
-    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.new
+    @<%= @resource %> = <%= @model_class.name %>.new
   end
 
   def create
-    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.new(params[:<%= @resources.singularize %>])
+    @<%= @resource %> = <%= @model_class.name %>.new(params[:<%= @resource %>])
     
     begin
-      @<%= @resources.singularize %>.transaction do
-        @<%= @resources.singularize %>.save!
+      @<%= @resource %>.transaction do
+        @<%= @resource %>.save!
       end
 
-      redirect_to :action => 'show', :id => @<%= @resources.singularize %>
+      redirect_to :action => 'show', :id => @<%= @resource %>.id
 
     rescue ActiveRecord::RecordInvalid => e
       render :new
@@ -30,19 +30,19 @@ class <%= @resources.capitalize %>Controller < ApplicationController
   end
 
   def edit
-    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.find(params[:id])
+    @<%= @resource %> = <%= @model_class.name %>.find(params[:id])
   end
 
   def update
-    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.find(params[:id])
+    @<%= @resource %> = <%= @model_class.name %>.find(params[:id])
     
     begin
-      @<%= @resources.singularize %>.transaction do
-        @<%= @resources.singularize %>.attributes = params[:<%= @resources.singularize %>]
-        @<%= @resources.singularize %>.save!
+      @<%= @resource %>.transaction do
+        @<%= @resource %>.attributes = params[:<%= @resource %>]
+        @<%= @resource %>.save!
       end
 
-      redirect_to :action => 'show', :id => @<%= @resources.singularize %>
+      redirect_to :action => 'show', :id => @<%= @resource %>.id
 
     rescue ActiveRecord::RecordInvalid => e
       render :edit
@@ -50,10 +50,10 @@ class <%= @resources.capitalize %>Controller < ApplicationController
   end
 
   def destroy
-    @<%= @resources.singularize %> = <%= @resources.singularize.capitalize %>.find(params[:id])
+    @<%= @resource %> = <%= @model_class.name %>.find(params[:id])
     
-    @<%= @resources.singularize %>.transaction do
-      @<%= @resources.singularize %>.destroy_logically!
+    @<%= @resource %>.transaction do
+      @<%= @resource %>.destroy_logically!
     end
     
     redirect_to :action => 'index'

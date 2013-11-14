@@ -3,14 +3,10 @@
 require 'rake'
 require 'erb'
 
-unless defined?(Rails)
-  task :environment do; end
-end
-
 namespace :dad do
   namespace :generate do
 
-    task :controller do
+    task :controller => :environment do
       ARGV[1..-1].each do |arg|
         unless arg.index('=')
           task arg.to_sym do ; end
@@ -20,6 +16,9 @@ namespace :dad do
           end
         end
       end
+
+      @resource = @resources.singularize
+      @model_class = @resource.capitalize.constantize
 
       template = File.join(File.dirname(__FILE__), 'templates', 'controller.rb.erb')
       controller_file = "#{Rails.root}/app/controllers/#{@resources}_controller.rb"

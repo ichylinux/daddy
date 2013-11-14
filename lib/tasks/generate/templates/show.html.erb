@@ -6,6 +6,7 @@
 
 <table>
 <% @model_class.columns.each do |column| -%>
+<% next if %w{ id deleted }.include?(column.name.to_s) -%>
   <tr>
     <th><%= @tag_begin %>= <%= @model_class %>.human_attribute_name :<%= column.name %> <%= @tag_end %></th>
     <td><%= @tag_begin %>= @<%= @resource %>.<%= column.name %> <%= @tag_end %></td>
