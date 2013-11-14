@@ -2,8 +2,8 @@
 
 Gem::Specification.new do |s|
   s.name        = 'daddy'
-  s.version     = '0.1.19'
-  s.date        = '2013-11-12'
+  s.version     = '0.1.20'
+  s.date        = '2013-11-14'
   s.summary     = "My rails dad"
   s.description = "Daddy helps me build rails applications since daddy knows some good practices."
   s.license     = 'MIT'
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'differ'
   s.add_runtime_dependency 'execjs' if s.platform.to_s == 'ruby'
   s.add_runtime_dependency 'faraday'
+  s.add_runtime_dependency 'holiday_jp'
   s.add_runtime_dependency 'poltergeist'
   s.add_runtime_dependency 'rails', ['~> 3.2.0']
   s.add_runtime_dependency 'rails-i18n'

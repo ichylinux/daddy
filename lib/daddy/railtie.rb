@@ -1,6 +1,7 @@
 # coding: UTF-8
 
 require 'rails_i18n'
+require 'holiday_jp'
 
 if ENV["COVERAGE"].to_s.downcase == 'true'
   require 'simplecov'
