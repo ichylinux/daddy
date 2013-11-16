@@ -117,17 +117,19 @@ module Daddy
 
       def feature_name(keyword, name)
         title = feature_dir(@feature, true) + @feature.file.split('/').last.gsub(/\.feature/, '')
+        lines = name.split(/\r?\n/)
 
         @builder.h2 do |h2|
           @builder.span(:class => 'val') do
             @builder << title
-            unless name.strip.blank?
-              @builder.span('(' + name.strip + ')', :class => 'feature_subtitle')
+
+            subtitle = lines.first.to_s.strip 
+            unless subtitle.blank?
+              @builder.span('(' + subtitle + ')', :class => 'feature_subtitle')
             end
           end
         end
 
-        lines = name.split(/\r?\n/)
         if lines.size > 1
           @builder.p(:class => 'narrative') do
             lines[1..-1].each do |line|
