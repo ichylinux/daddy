@@ -99,6 +99,12 @@ div.contents {
 }
 
 div.feature .narrative {
+  margin: 10px;
+  line-height: 1.3em;
+  font-size: 1.2em;
+}
+
+div.feature .narrative > div {
   margin-left: 10px;
 }
 

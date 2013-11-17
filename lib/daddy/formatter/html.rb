@@ -131,11 +131,8 @@ module Daddy
         end
 
         if lines.size > 1
-          @builder.p(:class => 'narrative') do
-            lines[1..-1].each do |line|
-              @builder.text!(line.strip)
-              @builder.br
-            end
+          @builder.div do
+            @builder << lines[1..-1].join("\n")
           end
         end
       end
