@@ -131,7 +131,7 @@ module Daddy
         end
 
         if lines.size > 1
-          @builder.div do
+          @builder.div(:class => 'narrative') do
             @builder << lines[1..-1].join("\n")
           end
         end
