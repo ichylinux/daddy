@@ -9,7 +9,7 @@ module Daddy
     
       @@_screen_count = 0
     
-      def capture
+      def capture(options = {})
         pause
 
         url = Rack::Utils.unescape(current_url)
@@ -19,10 +19,8 @@ module Daddy
         image = "#{IMAGE_DIR}/#{@@_screen_count}.png"
         page.driver.save_screenshot("#{REPORT_DIR}/#{image}")
 
-        puts %{
-          <div>#{url}</div>
-          <img class="screenshot" src="#{image}"/>
-        }
+        puts "<div>#{url}</div>" unless options[:suppress_url]
+        puts "<img class=\"screenshot\" src=\"#{image}\"/>"
       end
 
       def resize_window(width, height)

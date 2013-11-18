@@ -100,7 +100,7 @@ div.contents {
 
 div.feature .narrative {
   margin: 10px;
-  line-height: 1.3em;
+  line-height: 1.5em;
   font-size: 1.2em;
 }
 
@@ -186,4 +186,10 @@ del.differ {
   background: #ffffff;
   max-width: 98%;
   max-height: 98%;
+}
+
+blockquote {
+  border: solid 1px #999999;
+  border-radius: 5px 5px;
+  padding: 5px;
 }
