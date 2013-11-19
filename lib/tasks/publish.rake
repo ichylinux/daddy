@@ -47,6 +47,9 @@ namespace :dad do
         dad_publish_extract_features(dir).each do |div|
           feature = features[div['id']]
           if feature
+            div.css('div.narrative').each do |narrative|
+              feature.add_child(narrative)
+            end
             div.css('div.scenario').each do |scenario|
               feature.add_child(scenario)
             end

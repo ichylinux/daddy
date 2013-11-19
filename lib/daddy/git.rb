@@ -7,9 +7,7 @@ module Daddy
     def branches(remote = false)
       branches = []
       `git branch -a`.split("\n").each do |b|
-        next if b.index('HEAD')
-        next if b.index('gh-pages')
-        next unless b.index('remotes/origin/')
+        next unless b.index('remotes/origin/master') or b.index(/remotes\/origin\/p[0-9]+(\.[0-9]+)?/)
         
         if remote
           branches << b.strip
@@ -25,9 +23,9 @@ module Daddy
           1
         else
           if remote
-            b.sub('remotes/origin/p', '').to_i <=> a.sub('remotes/origin/p', '').to_i
+            b.sub('remotes/origin/p', '').to_f <=> a.sub('remotes/origin/p', '').to_f
           else
-            b.sub('p', '').to_i <=> a.sub('p', '').to_i
+            b.sub('p', '').to_f <=> a.sub('p', '').to_f
           end
         end
       end
