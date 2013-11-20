@@ -2,15 +2,16 @@
 
 Gem::Specification.new do |s|
   s.name        = 'daddy'
-  s.version     = '0.1.21'
-  s.date        = '2013-11-18'
+  s.version     = '0.1.22'
+  s.date        = '2013-11-20'
   s.summary     = "My rails dad"
   s.description = "Daddy helps me build rails applications since daddy knows some good practices."
   s.license     = 'MIT'
   s.authors     = ["ichy"]
   s.email       = 'ichylinux@gmail.com'
-  s.files       = Dir['lib/**/*']
   s.homepage    = 'https://github.com/ichylinux/daddy'
+  s.files       = Dir['lib/**/*']
+  s.executables << 'dad'
 
   s.add_runtime_dependency 'capybara'
   s.add_runtime_dependency 'cucumber'
