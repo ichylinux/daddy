@@ -55,7 +55,7 @@ AfterConfiguration do |configuration|
   }
 end
 
-require_relative 'rails/hooks' if defined?(Rails)
+require_relative 'cucumber/hooks/database' if defined?(Rails)
 
 Before do
   resize_window(1280, 720)

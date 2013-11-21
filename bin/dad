@@ -62,6 +62,7 @@ if action == 'new'
     "echo \"#{GEMFILE}\" > #{app_name}/Gemfile",
     "echo \"#{ROUTES}\" > #{app_name}/config/routes.rb",
     "cd #{app_name} && sudo bundle install",
+    "cd #{app_name} && bundle exec rake dad:install",
     "cd #{app_name} && bundle exec rake dad:db:config",
   ].each do |command|
     exit 1 unless system(command)
