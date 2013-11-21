@@ -25,6 +25,10 @@ end
 
 gem 'jquery-rails'
 
+group :development, :test do
+  gem 'thin'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -51,6 +55,7 @@ if action == 'new'
     "rails _#{rails_version}_ new #{app_name} -d mysql --skip-bundle",
     "echo \"#{GEMFILE}\" > #{app_name}/Gemfile",
     "cd #{app_name} && sudo bundle install",
+    "cd #{app_name} && bundle exec rake dad:db:config",
   ].each do |command|
     exit 1 unless system(command)
   end
