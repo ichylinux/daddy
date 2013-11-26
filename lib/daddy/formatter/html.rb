@@ -90,19 +90,22 @@ module Daddy
       end
 
       def before_comment(comment)
-        return if comment == '# language: ja'
-        @builder << '<pre class="comment">'
+        unless magic_comment?(comment)
+          @builder << '<pre class="comment">'
+        end
       end
 
       def after_comment(comment)
-        return if comment == '# language: ja'
-        @builder << '</pre>'
+        unless magic_comment?(comment)
+          @builder << '</pre>'
+        end
       end
 
       def comment_line(comment_line)
-        return if comment_line == '# language: ja'
-        @builder.text!(comment_line)
-        @builder.br
+        unless magic_comment?(comment_line)
+          @builder.text!(comment_line)
+          @builder.br
+        end
       end
 
       def after_tags(tags)

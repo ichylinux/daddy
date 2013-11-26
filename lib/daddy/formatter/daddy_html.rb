@@ -63,6 +63,16 @@ module Daddy
         ['t', 'true'].include?(ENV['EXPAND'].to_s.downcase)
       end
 
+      def magic_comment?(comment_line)
+        comment = comment_line.to_s
+
+        ['language', 'format'].each do |magic|
+          return true if /#\s*#{magic}\s*:.*/ =~ comment
+        end
+        
+        false
+      end
+
     end
   end
 end
