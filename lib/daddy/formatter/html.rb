@@ -188,15 +188,7 @@ module Daddy
         
         if lines.size > 1
           @builder.div(:class => 'narrative', :style => 'display: none;') do
-            @builder.pre do
-              text = ''
-              lines[1..-1].each_with_index do |line, i|
-                next if i == 0 and line.strip.empty?
-                text << '<br/>' unless text.empty?
-                text << line
-              end
-              @builder << text
-            end
+            @builder << lines[1..-1].join("\n")
           end
         end
       end
