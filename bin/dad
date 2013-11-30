@@ -45,12 +45,6 @@ gem 'unicorn'
 # gem 'debugger'
 EOF
 
-ROUTES = <<-EOF
-Banbanlive::Application.routes.draw do
-  # root :to => 'welcome#index'
-end
-EOF
-
 action = ARGV[0]
 
 if action == 'new'
@@ -60,11 +54,13 @@ if action == 'new'
   [
     "rails _#{rails_version}_ new #{app_name} -d mysql --skip-bundle",
     "echo \"#{GEMFILE}\" > #{app_name}/Gemfile",
-    "echo \"#{ROUTES}\" > #{app_name}/config/routes.rb",
     "cd #{app_name} && sudo bundle install",
     "cd #{app_name} && bundle exec rake dad:install",
+    "cd #{app_name} && bundle exec rake dad:generate:routes #{app_name}",
     "cd #{app_name} && bundle exec rake dad:db:config",
+    "cd #{app_name} && bundle exec rake dad:db:create",
   ].each do |command|
+    puts command
     exit 1 unless system(command)
   end
 end

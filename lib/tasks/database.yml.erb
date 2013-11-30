@@ -1,5 +1,5 @@
 <%
-  app_name = ENV['APP_NAME']
+  app_name_short = ENV['APP_NAME'][0..15]
 -%>
 # MySQL.  Versions 4.1 and 5.0 are recommended.
 # 
@@ -15,10 +15,10 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: <%= app_name %>_dev
+  database: <%= app_name_short %>_dev
   pool: 5
-  username: <%= app_name %>
-  password: <%= app_name %>
+  username: <%= app_name_short %>
+  password: <%= app_name_short %>
   socket: /var/lib/mysql/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -28,18 +28,18 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: <%= app_name %>_test
+  database: <%= app_name_short %>_test
   pool: 5
-  username: <%= app_name %>
-  password: <%= app_name %>
+  username: <%= app_name_short %>
+  password: <%= app_name_short %>
   socket: /var/lib/mysql/mysql.sock
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: <%= app_name %>_pro
+  database: <%= app_name_short %>_pro
   pool: 5
-  username: <%= app_name %>
-  password: <%= app_name %>
+  username: <%= app_name_short %>
+  password: <%= app_name_short %>
   socket: /var/lib/mysql/mysql.sock
