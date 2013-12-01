@@ -59,6 +59,7 @@ if action == 'new'
     "cd #{app_name} && bundle exec rake dad:generate:routes #{app_name}",
     "cd #{app_name} && bundle exec rake dad:db:config",
     "cd #{app_name} && bundle exec rake dad:db:create",
+    "cd #{app_name} && bundle exec rake db:migrate",
   ].each do |command|
     puts command
     exit 1 unless system(command)
