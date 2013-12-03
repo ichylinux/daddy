@@ -74,7 +74,7 @@ namespace :dad do
 end
 
 def self.dad_publish_sprint_dirs(base_dir)
-  ret = Dir[base_dir + '/p*'].sort{|a, b| File.basename(a)[1..-1].to_i <=> File.basename(b)[1..-1].to_i}
+  ret = Dir[base_dir + '/p*'].sort{|a, b| File.basename(a)[1..-1].to_f <=> File.basename(b)[1..-1].to_f}
   ret << base_dir + '/master'
   ret
 end
