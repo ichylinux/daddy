@@ -1,5 +1,5 @@
 upstream <%= ENV['APP_NAME'] %> {
-  server unix:/tmp/<%= ENV['APP_NAME'] %>.sock;
+  server unix:/tmp/<%= ENV['APP_NAME'] %>_<%= ENV['RAILS_ENV'][0..2] %>.sock;
 }
 
 server {
