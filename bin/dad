@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 
+RAILS_VERSION = '3.2.16'
+
 GEMFILE = <<-EOF
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.15'
+gem 'rails', '#{RAILS_VERSION}'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -49,10 +51,9 @@ action = ARGV[0]
 
 if action == 'new'
   app_name = ARGV[1]
-  rails_version = "3.2.15"
   
   [
-    "rails _#{rails_version}_ new #{app_name} -d mysql --skip-bundle",
+    "rails _#{RAILS_VERSION}_ new #{app_name} -d mysql --skip-bundle",
     "echo \"#{GEMFILE}\" > #{app_name}/Gemfile",
     "cd #{app_name} && sudo bundle install",
     "cd #{app_name} && bundle exec rake dad:install",
