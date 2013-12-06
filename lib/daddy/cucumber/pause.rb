@@ -10,10 +10,10 @@ module Daddy
       end
       
       def wait_until
-        pause_count = 5
+        pause_count = 10
         while pause_count > 0 do
           break if yield
-          pause
+          pause 1
           pause_count -= 1
         end
       end
