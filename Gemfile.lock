@@ -36,9 +36,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-webkit (1.0.0)
-      capybara (~> 2.0, >= 2.0.2)
-      json
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     ci_reporter (1.9.0)
@@ -121,11 +118,11 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    rubyzip (1.0.0)
-    selenium-webdriver (2.37.0)
+    rubyzip (1.1.0)
+    selenium-webdriver (2.38.0)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
-      rubyzip (~> 1.0.0)
+      rubyzip (~> 1.0)
       websocket (~> 1.0.4)
     simplecov (0.8.2)
       docile (~> 1.1.0)
@@ -159,7 +156,6 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
-  capybara-webkit
   ci_reporter
   cucumber
   cucumber-rails
