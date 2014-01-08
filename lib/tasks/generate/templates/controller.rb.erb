@@ -1,6 +1,6 @@
 # coding: UTF-8
 
-class <%= @resources.capitalize %>Controller < ApplicationController
+class <%= @controller_name %>Controller < ApplicationController
 
   def index
     @<%= @resources %> = <%= @model_class %>.not_deleted

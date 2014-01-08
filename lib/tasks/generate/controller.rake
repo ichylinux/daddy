@@ -18,7 +18,8 @@ namespace :dad do
       end
 
       @resource = @resources.singularize
-      @model_class = @resource.capitalize.constantize
+      @model_class = @resource.classify.constantize
+      @controller_name = @resources.split('_').map{|a| a.capitalize}.join
 
       template = File.join(File.dirname(__FILE__), 'templates', 'controller.rb.erb')
       controller_file = "#{Rails.root}/app/controllers/#{@resources}_controller.rb"
