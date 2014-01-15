@@ -498,10 +498,10 @@ module Daddy
         step_file = step_match.file_colon_line.force_encoding('UTF-8')
         step_file.gsub(/^([^:]*\.rb):(\d*)/) do
           if index = $1.index('lib/daddy/cucumber/step_definitions/')
-            step_file = "daddy: " + $1[index..-1]
+            step_file = "daddy: #{$1[index..-1]}:#{$2}"
           end
 
-          step_file = "<span style=\"cursor: pointer;\" onclick=\"toggle_step_file(this);\">#{step_file}:#{$2}</span>"
+          step_file = "<span style=\"cursor: pointer;\" onclick=\"toggle_step_file(this); return false;\">#{step_file}</span>"
         end
 
         @builder.div(:class => 'step_file') do |div|
