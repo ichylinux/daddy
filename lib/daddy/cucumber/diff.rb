@@ -47,7 +47,13 @@ module Daddy
       def show(file, options = {})
         show_filename(file, options)
 
-        lines = File.readlines(file)
+        if options[:commit].present?
+          git = Daddy::Git.new
+          content = git.show_previous(file, :commit => options[:commit], :remote => options[:remote])
+          lines = content.split(/\r\n|\r|\n/).map{|line| line + "\n"}
+        else
+          lines = File.readlines(file)
+        end
 
         if options[:from] and options[:to]
           from = options[:from] - 1
