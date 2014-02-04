@@ -2,12 +2,10 @@ if (typeof tax === "undefined") {
   var tax = {};
 }
 
-// 非課税
-tax.TAX_TYPE_NONTAXABLE = 1;
-// 内税
-tax.TAX_TYPE_INCLUSIVE = 2;
-// 外税
-tax.TAX_TYPE_EXCLUSIVE = 3;
+
+tax.TAX_TYPE_NONTAXABLE = 1; // 非課税
+tax.TAX_TYPE_INCLUSIVE = 2; // 内税
+tax.TAX_TYPE_EXCLUSIVE = 3; // 外税
 
 tax.RATE_3 = Date.parse('1989-04-01');
 tax.RATE_5 = Date.parse('1997-04-01');
