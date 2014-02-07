@@ -3,7 +3,8 @@
 require 'rails_i18n'
 require 'holiday_jp'
 
-if ENV["COVERAGE"].to_s.downcase == 'true'
+true_values = %w{ true t 1 }
+if true_values.include?(ENV["COVERAGE"].to_s.downcase) and true_values.include?(ENV['ACCEPTANCE_TEST'].to_s.downcase)
   require 'simplecov'
   require 'simplecov-rcov'
   SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter

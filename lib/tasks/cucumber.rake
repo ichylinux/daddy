@@ -12,10 +12,11 @@ namespace :dad do
     format = ENV['FORMAT'] || 'Daddy::Formatter::Html'
 
     options = [
-      "DRIVER=" + (ENV['DRIVER'] || 'poltergeist'),
-      "PAUSE=" + (ENV['PAUSE'] || '0'),
-      "COVERAGE=" + (ENV['COVERAGE'] || 'true'),
-      "EXPAND=" + (ENV['EXPAND'] || 'true')
+      'DRIVER=' + (ENV['DRIVER'] || 'poltergeist'),
+      'PAUSE=' + (ENV['PAUSE'] || '0'),
+      'COVERAGE=' + (ENV['COVERAGE'] || 'true'),
+      'ACCEPTANCE_TEST=true',
+      'EXPAND=' + (ENV['EXPAND'] || 'true')
     ].join(' ')
     
     features = []
@@ -30,7 +31,7 @@ namespace :dad do
     output = "features/reports" if format == 'junit'
 
     command = "bundle exec cucumber --guess --quiet --no-multiline -r features --format pretty --format #{format} --out #{output} #{features.join(' ')} #{options}"
-    #puts command
+    puts command
     ret = system(command)
     fail unless ret
   end
