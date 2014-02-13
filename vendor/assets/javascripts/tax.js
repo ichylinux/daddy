@@ -27,12 +27,10 @@ tax.getRateOn = function(date) {
   return 0;
 };
 
-tax.calcTaxAmount = function(taxType, date, amount) {
+tax.calcTaxAmount = function(taxType, rate, amount) {
   if ( isNaN( amount ) ) {
     return '';
   }
-
-  var rate = this.getRateOn(date);
 
   if ( taxType == tax.TAX_TYPE_INCLUSIVE ) {
     return parseInt(amount * rate / (1 + rate));
