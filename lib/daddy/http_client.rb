@@ -3,29 +3,23 @@
 require 'faraday'
 
 module Daddy
+  
   class HttpClient
   
     def initialize(url, options = {})
       @url = url
       @options = options
       @cookie = options[:cookie]
-      Rails.logger.debug "[HttpClient] url: #{@url}"
     end
     
     def get(path, params = {})
-      Rails.logger.debug "[HttpClient] path: #{path}"
-      Rails.logger.debug "[HttpClient] params: #{params}"
-
       response = connection.get(path, params) do |request|
         if @options[:auth_user] and @options[:auth_password]
           basic = 'Basic ' + Base64.encode64(@options[:auth_user] + ':' + @options[:auth_password])
-          Rails.logger.debug "[HttpClient] authorization: #{basic}"
-
           request.headers['Authorization'] = basic
         end
         
         if @cookie
-          Rails.logger.debug "[HttpClient] cookie: #{@cookie}"
           request.headers['Cookie'] = @cookie
         end
         
@@ -39,7 +33,6 @@ module Daddy
       if block_given?
         yield response
       else
-        Rails.logger.debug "[HttpClient] stutus: #{response.status}"
         response.body.force_encoding('UTF-8')
       end
     end
