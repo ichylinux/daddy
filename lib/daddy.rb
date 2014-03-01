@@ -11,6 +11,7 @@ end
 
 require 'sql_builder'
 require 'tax'
+require 'daddy/utils/string_utils'
 
 module Daddy
   require 'daddy/config'
