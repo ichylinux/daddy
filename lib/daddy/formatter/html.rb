@@ -126,9 +126,11 @@ module Daddy
           @builder.span(:class => 'val') do
             @builder << title
 
-            subtitle = lines.first.to_s.strip 
-            unless subtitle.blank?
-              @builder.span('(' + subtitle + ')', :class => 'feature_subtitle')
+            if Daddy.config.use_feature_name?
+              subtitle = lines.first.to_s.strip 
+              unless subtitle.blank?
+                @builder.span('(' + subtitle + ')', :class => 'feature_subtitle')
+              end
             end
           end
         end

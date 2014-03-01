@@ -13,4 +13,10 @@ require 'sql_builder'
 require 'tax'
 
 module Daddy
+  require 'daddy/config'
+
+  def self.config
+    @_config ||= Daddy::Config.new(config_file = File.join('config', 'daddy.yml'))
+  end
+
 end
