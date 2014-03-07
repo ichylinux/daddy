@@ -7,10 +7,10 @@ namespace :dad do
 
     desc "PhantomJSをインストールします。"
     task :install do
-      name = 'phantomjs-1.9.1-linux-x86_64'
+      name = 'phantomjs-1.9.7-linux-x86_64'
       file = "#{name}.tar.bz2"
       unless File.exist?("tmp/#{file}")
-        system("wget https://phantomjs.googlecode.com/files/#{file} -O tmp/#{file}")
+        system("wget https://bitbucket.org/ariya/phantomjs/downloads/#{file} -O tmp/#{file}")
       end
       system("rm -Rf tmp/#{name}")
       system("cd tmp && tar jxf #{file}")
