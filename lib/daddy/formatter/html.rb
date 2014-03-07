@@ -284,7 +284,7 @@ module Daddy
 
             file = $1.force_encoding('UTF-8')
             if file.start_with?('daddy-') or file.start_with?('/daddy-')
-              file = '/usr/local/lib/ruby/gems/1.9.1/gems/' + file
+              file = '/usr/local/lib/ruby/gems/2.0.0/gems/' + file
             end
 
             File.readlines(File.expand_path(file))[line_index..-1].each do |line|
