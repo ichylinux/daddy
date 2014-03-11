@@ -10,6 +10,23 @@ module Daddy
       end
 
       module InstanceMethods
+
+        def readable_by?(user)
+          true
+        end
+
+        def creatable_by?(user)
+          readable_by?(user)
+        end
+
+        def updatable_by?(user)
+          readable_by?(user)
+        end
+
+        def deletable_by?(user)
+          readable_by?(user)
+        end
+
         def destroy_logically!
           self.deleted = true
           save!
