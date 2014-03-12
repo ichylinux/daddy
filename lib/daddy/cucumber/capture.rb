@@ -11,6 +11,7 @@ module Daddy
     
       def capture(options = {})
         pause
+        return if ENV['FORMAT'] == 'junit'
 
         url = Rack::Utils.unescape(current_url)
     
