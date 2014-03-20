@@ -29,7 +29,6 @@ namespace :dad do
 
       system("sudo cp -f tmp/nginx.conf /etc/nginx/conf.d/nginx.conf")
       
-
       if publish
         system("sudo mkdir -p /var/lib/daddy")
         system("sudo chown -R #{ENV['USER']}:#{ENV['USER']} /var/lib/daddy")

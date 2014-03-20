@@ -2,8 +2,8 @@
 
 Gem::Specification.new do |s|
   s.name        = 'daddy'
-  s.version     = '0.2.2'
-  s.date        = '2014-03-17'
+  s.version     = '0.2.3'
+  s.date        = '2014-03-20'
   s.summary     = "My rails dad"
   s.description = "Daddy helps me build rails applications since daddy knows some good practices."
   s.license     = 'MIT'
@@ -25,6 +25,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'poltergeist', '~> 1.5'
   s.add_runtime_dependency 'rails', '~> 3.2', '>= 3.2.0'
   s.add_runtime_dependency 'rails-i18n', '~> 3.0'
+  s.add_runtime_dependency 'resque', '~> 1.25'
+  s.add_runtime_dependency 'resque-scheduler', '~> 2.5'
   s.add_runtime_dependency 'selenium-webdriver', '~> 2.39'
   s.add_runtime_dependency 'simplecov', '~> 0'
   s.add_runtime_dependency 'simplecov-rcov', '~> 0'
