@@ -24,7 +24,7 @@ sudo cp -f #{File.join(File.dirname(__FILE__), 'fluentd.repo')} /etc/yum.repos.d
 sudo yum install td-agent
 sudo gem install fluent-plugin-mongo
 
-sudo cp -f #{File.join(File.dirname(__FILE__), 'fluentd.conf')} /etc/td-agent/
+sudo cp -f #{File.join(File.dirname(__FILE__), 'fluentd.conf')} /etc/td-agent/td-agent.conf
 sudo mkdir -p /etc/td-agent/conf.d
 
 if [ -e #{nginx} ]; then
