@@ -1,0 +1,13 @@
+<source>
+  format apache
+  path /var/log/nginx/access.log
+  tag <%= app_name %>.nginx.access
+  pos_file /var/log/td-agent/nginx.pos
+</source>
+<match <%= app_name %>.nginx.access>
+  type mongo
+  database <%= app_name %>
+  collection nginx_access
+  host localhost
+  port 27017
+</match>
