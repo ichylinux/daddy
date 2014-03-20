@@ -9,7 +9,7 @@ namespace :dad do
     desc "Fluentdをインストールします。"
     task :install do
       if Daddy.config.fluentd_nginx?
-        nginx = File.join(Rails.root, 'tmp', 'fluentd', 'nginx.conf')
+        nginx = File.join(Rails.root, 'tmp', 'fluentd', "#{app_name}_nginx.conf")
         FileUtils.mkdir_p(File.dirname(nginx))
         File.write(nginx, ERB.new(File.read(File.join(File.dirname(__FILE__), 'fluentd_nginx.conf.erb'))).result)
       else
