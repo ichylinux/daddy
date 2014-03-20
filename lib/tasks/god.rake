@@ -15,6 +15,8 @@ if [ -e /var/run/god.pid ]; then
 fi
 
 sudo gem install god
+sudo mkdir -p /etc/god
+
 sudo cp -f #{File.join(File.dirname(__FILE__), 'god')} /etc/init.d/god
 sudo chown root:root /etc/init.d/god
 sudo chmod 755 /etc/init.d/god
