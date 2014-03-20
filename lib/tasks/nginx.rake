@@ -1,7 +1,7 @@
 # coding: UTF-8
 
 require 'rake'
-require 'yaml'
+require_relative 'task_helper'
 
 namespace :dad do
   namespace :nginx do
@@ -35,24 +35,18 @@ namespace :dad do
       end
     end
 
-    namespace :app do
-      desc 'Nginxにアプリケーションの設定ファイルをインストールします。'
-      task :config => :environment do
-        rails_root = ENV['RAILS_ROOT'] || Rails.root
-        app_name = YAML.load_file("#{rails_root}/config/database.yml")[Rails.env]['database']
-        fail unless system("RAILS_ROOT=#{rails_root} RAILS_ENV=#{Rails.env} APP_NAME=#{app_name} erb -T - #{File.dirname(__FILE__)}/nginx.app.conf.erb > tmp/nginx.#{app_name}.conf")
-        system("sudo mkdir -p /etc/nginx/conf.d/servers") 
-        system("sudo cp -f tmp/nginx.#{app_name}.conf /etc/nginx/conf.d/servers/#{app_name}.conf")
-      end
+    desc 'Nginxにアプリケーションの設定ファイルをインストールします。'
+    task :config => :environment do
+      fail unless system("RAILS_ROOT=#{rails_root} RAILS_ENV=#{Rails.env} APP_NAME=#{app_name} erb -T - #{File.dirname(__FILE__)}/nginx.app.conf.erb > tmp/nginx.#{app_name}.conf")
+      system("sudo mkdir -p /etc/nginx/conf.d/servers") 
+      system("sudo cp -f tmp/nginx.#{app_name}.conf /etc/nginx/conf.d/servers/#{app_name}.conf")
     end
 
-    namespace :jenkins do
-      desc 'NginxにJenkinsの設定ファイルをインストールします。'
-      task :config => :environment do
-        fail unless system("erb -T - #{File.dirname(__FILE__)}/nginx.jenkins.conf.erb > tmp/nginx.jenkins.conf")
-        system("sudo mkdir -p /etc/nginx/conf.d/servers") 
-        system("sudo cp -f tmp/nginx.jenkins.conf /etc/nginx/conf.d/servers/jenkins.conf")
-      end
+    desc 'NginxにJenkinsの設定ファイルをインストールします。'
+    task :jenkins => :environment do
+      fail unless system("erb -T - #{File.dirname(__FILE__)}/nginx.jenkins.conf.erb > tmp/nginx.jenkins.conf")
+      system("sudo mkdir -p /etc/nginx/conf.d/servers") 
+      system("sudo cp -f tmp/nginx.jenkins.conf /etc/nginx/conf.d/servers/jenkins.conf")
     end
 
   end
