@@ -18,6 +18,6 @@ if (typeof String.prototype.isPresent !== 'function') {
 
 if (typeof String.prototype.toInt !== 'function') {
   String.prototype.toInt = function() {
-    return parseInt(this) || 0;
+    return parseInt(this.replace(/,/g, '')) || 0;
   };
 };
