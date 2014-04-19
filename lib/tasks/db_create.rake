@@ -23,12 +23,15 @@ namespace :dad do
           system("echo 'grant file on *.* to #{props['username']}@localhost;' >> tmp/create_databases.sql")
         end
       end
-      
+
       system("echo >> tmp/create_databases.sql")
-  
       system("cat tmp/create_databases.sql")
-      ret = system("mysql -u root -p < tmp/create_databases.sql")
-      fail unless ret
+
+      if ENV['NO_ROOT_PASSWORD']
+        fail unless system("mysql -u root < tmp/create_databases.sql")
+      else
+        fail unless system("mysql -u root -p < tmp/create_databases.sql")
+      end
     end
   end
 end
