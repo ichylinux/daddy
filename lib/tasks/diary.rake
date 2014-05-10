@@ -1,11 +1,14 @@
 # coding: UTF-8
 
 require 'rake'
+require 'rugged'
 
 namespace :dad do
   
   desc '開発日記を実行します。'
   task :diary do
+    repo = Rugged::Repository.new(defined?(Rails) ? Rails.root.to_s : '.')
+
     features_path = File.join('features', '開発日記')
     driver = ENV['DRIVER'] || 'poltergeist'
     system("bundle exec rake dad:cucumber DRIVER=#{driver} COVERAGE=false #{features_path}")
