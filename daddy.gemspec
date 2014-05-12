@@ -13,6 +13,8 @@ Gem::Specification.new do |s|
   s.files       = Dir['lib/**/*'] + Dir['vendor/**/*']
   s.executables << 'dad'
 
+  s.required_ruby_version = '>= 1.9.3'
+
   s.add_runtime_dependency 'capybara', '~> 2.2'
   s.add_runtime_dependency 'cucumber', '~> 1.3'
   s.add_runtime_dependency 'cucumber-rails', '~> 1.4'

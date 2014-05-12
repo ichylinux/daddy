@@ -18,7 +18,7 @@ module Daddy
         @@_screen_count += 1
 
         image = "#{IMAGE_DIR}/#{@@_screen_count}.png"
-        page.driver.save_screenshot("#{REPORT_DIR}/#{image}")
+        page.driver.save_screenshot("#{REPORT_DIR}/#{image}", :full => true)
 
         puts "<div>#{url}</div>" unless options[:suppress_url]
         puts "<img class=\"screenshot\" src=\"#{image}\"/>"
