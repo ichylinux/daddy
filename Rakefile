@@ -11,14 +11,8 @@ task :build do |t|
   end
 
   Dir.glob(File.dirname(__FILE__) + '/daddy-*.gem').each do |gem|
-    command = "sudo gem install --local #{gem}"
+    command = "sudo gem install --no-ri --no-rdoc --local #{gem}"
     puts command
     system command
   end
 end
-
-task :test do |t|
-  system "cd careerlife && rake test"
-end
-
-task :default => :test

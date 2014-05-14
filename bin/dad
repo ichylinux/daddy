@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-RAILS_VERSION = '3.2.16'
+RAILS_VERSION = '3.2.18'
 
 GEMFILE = <<-EOF
 source 'https://rubygems.org'
@@ -61,6 +61,7 @@ if action == 'new'
     "cd #{app_name} && bundle exec rake dad:db:config",
     "cd #{app_name} && bundle exec rake dad:db:create",
     "cd #{app_name} && bundle exec rake db:migrate",
+    "cd #{app_name} && echo '#{app_name}' > #{File.join('public', 'index.html')}",
   ].each do |command|
     puts command
     exit 1 unless system(command)
