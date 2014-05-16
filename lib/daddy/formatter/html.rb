@@ -541,20 +541,9 @@ module Daddy
       end
 
       def inline_daddy
-        ret = File.read(File.dirname(__FILE__) + '/daddy.js')
-
-        ret << %w{
-          $(document).ready(function() {
-            $('li.step').each(function() {
-              var messages = $(this).nextUntil('li.step').filter('.message');
-              if (messages.length > 0) {
-                $(this).css('cursor', 'pointer').click(function() {
-                  messages.toggle(250);
-                });
-              }
-            });
-          });
-        }.join(' ')
+        ret = ''
+        ret << File.read(File.join(File.dirname(__FILE__), 'daddy.js'))
+        ret << File.read(File.join(File.dirname(__FILE__), 'screenshot.js'))
 
         if should_expand
           ret << %w{
@@ -587,6 +576,7 @@ module Daddy
     $("#expander").css('cursor', 'pointer');
     $("#expander").click(function() {
       $(SCENARIOS).siblings().show();
+      $('li.message').show();
     });
   });
 

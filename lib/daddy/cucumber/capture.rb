@@ -20,8 +20,7 @@ module Daddy
         image = "#{IMAGE_DIR}/#{@@_screen_count}.png"
         page.driver.save_screenshot("#{REPORT_DIR}/#{image}", :full => true)
 
-        puts "<div>#{url}</div>" unless options[:suppress_url]
-        puts "<img class=\"screenshot\" src=\"#{image}\"/>"
+        puts "<img class=\"screenshot\" src=\"#{image}\" alt=\"#{url}\"/>"
       end
 
       def resize_window(width, height)

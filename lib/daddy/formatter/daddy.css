@@ -180,8 +180,22 @@ del.differ {
   margin: 5px 0;
   padding: 1%;
   background: #ffffff;
+  width: 32%;
+  height: 32%;
   max-width: 98%;
   max-height: 98%;
+  cursor: pointer;
+}
+
+#screenshot_viewer img {
+  display: block;
+  border: solid 1px #999999;
+  border-radius: 5px 5px;
+  margin: 5%;
+  padding: 1%;
+  background: #ffffff;
+  max-width: 90%;
+  max-height: 90%;
 }
 
 blockquote {
