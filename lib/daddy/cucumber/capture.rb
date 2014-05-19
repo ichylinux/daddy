@@ -40,8 +40,10 @@ module Daddy
       end
 
       def flash_image_tags
-        puts @@_images.join("\n")
-        @@_images.clear
+        if @@_images.size > 0
+          puts @@_images.join("\n")
+          @@_images.clear
+        end
       end
 
     end
