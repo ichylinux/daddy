@@ -9,16 +9,16 @@ else
   end
 end
 
+require 'daddy/utils/config'
 require 'daddy/utils/string_utils'
 require 'prefecture'
 require 'sql_builder'
 require 'tax'
 
 module Daddy
-  require 'daddy/config'
 
   def self.config
-    @_config ||= Daddy::Config.new(config_file = File.join('config', 'daddy.yml'))
+    @_config ||= Daddy::Utils::Config.new(File.join('config', 'daddy.yml'))
   end
 
 end

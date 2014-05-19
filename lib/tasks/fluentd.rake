@@ -8,7 +8,7 @@ namespace :dad do
 
     desc "Fluentdをインストールします。"
     task :install do
-      if Daddy.config.fluentd_nginx?
+      if Daddy.config.fluentd.nginx?
         nginx = File.join(Rails.root, 'tmp', 'fluentd', "#{app_name}_nginx.conf")
         FileUtils.mkdir_p(File.dirname(nginx))
         File.write(nginx, ERB.new(File.read(File.join(File.dirname(__FILE__), 'fluentd_nginx.conf.erb'))).result)
@@ -41,7 +41,10 @@ fi
 EOF
       tmpfile = File.join(Rails.root, 'tmp', 'dad-fluentd-install-' + Daddy::Utils::StringUtils.current_time + '.sh')
       File.write(tmpfile, ERB.new(script).result)
-      fail unless system("bash #{tmpfile}")
+      
+      unless ENV['DRY_RUN']
+        fail unless system("bash #{tmpfile}")
+      end
     end
   end
 end

@@ -174,11 +174,10 @@ del.differ {
 }
 
 .screenshot {
-  display: block;
   border: solid 1px #999999;
   border-radius: 5px 5px;
   margin: 5px 0;
-  padding: 1%;
+  padding: 5px;
   background: #ffffff;
   width: 32%;
   height: 32%;
