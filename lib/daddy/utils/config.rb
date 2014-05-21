@@ -3,17 +3,15 @@
 module Daddy
   module Utils
     
-    class Config < Hash
+    class Config
       
       def initialize(yaml_path_or_hash = nil)
         if yaml_path_or_hash.is_a?(Hash)
-          @hash = hash
+          @hash = yaml_path_or_hash
+        elsif yaml_path_or_hash and File.exist?(yaml_path_or_hash)
+          @hash = YAML.load_file(yaml_path_or_hash)
         else
-          if yaml_path_or_hash and File.exist?(yaml_path_or_hash)
-            @hash = YAML.load_file(yaml_path_or_hash)
-          else
-            @hash = {}
-          end
+          @hash = {}
         end
       end
     
