@@ -1,11 +1,12 @@
-# coding: UTF-8
-
 module Daddy
   module Formatter
     module DaddyHtml
       
       def title
-        ENV['TITLE'] || 'Daddy'
+        ret = ENV['TITLE']
+        ret ||= Daddy.config.cucumber.title if Daddy.config.cucumber.title?
+        ret ||= 'Daddy'
+        ret
       end
       
       def before_menu
