@@ -1,7 +1,6 @@
 <%
-  load File.dirname(File.dirname(__FILE__)) + '/git.rb'
   git = Daddy::Git.new
-  title = ENV['TITLE'].sub(' ', '_').downcase
+  title = Daddy.config.cucumber.title.sub(' ', '_').downcase
 -%>
 
 <script>

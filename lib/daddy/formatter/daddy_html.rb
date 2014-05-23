@@ -1,3 +1,5 @@
+require 'erb'
+
 module Daddy
   module Formatter
     module DaddyHtml
@@ -29,10 +31,8 @@ module Daddy
       end
 
       def make_menu_for_publish
-        FileUtils.mkdir_p('tmp')
-        menu = File.join('tmp', 'menu.html')
-        system("erb -T - #{File.dirname(__FILE__)}/menu.html.erb > #{menu}")
-        File.read(menu)
+        template = File.join(File.dirname(__FILE__), 'menu.html.erb')
+        ERB.new(File.read(template), 0, '-').result
       end
 
       def feature_id

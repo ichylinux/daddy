@@ -1,11 +1,9 @@
-# coding: UTF-8
-
 require 'daddy/git'
 require 'nokogiri'
 
 namespace :dad do
   task :publish do
-    fail('環境編集 TITLE を指定してください。') unless ENV['TITLE'] and not ENV['TITLE'].empty?
+    fail('設定「cucumber.title」がありません。') unless Daddy.config.cucumber.title?
 
     if File.exist?("db/schema.rb")
       fail unless system('rake db:schema:load RAILS_ENV=test')
@@ -30,7 +28,7 @@ namespace :dad do
     branch = git.current_branch
 
     # 公開
-    base_dir = dad_publish_base_dir(ENV['TITLE']) 
+    base_dir = dad_publish_base_dir
     system("sudo mkdir -p #{base_dir}")
     system("sudo chown -R #{ENV['USER']}:#{ENV['USER']} #{base_dir}") 
     system("mkdir -p #{base_dir}/#{branch}")
@@ -97,10 +95,10 @@ def self.dad_publish_extract_features(dir)
   ret
 end
 
-def self.dad_publish_base_dir(title)
-  '/var/lib/daddy/' + dad_publish_title_to_dirname(title) 
+def self.dad_publish_base_dir
+  '/var/lib/daddy/' + dad_publish_title_to_dirname 
 end
 
-def self.dad_publish_title_to_dirname(title)
-  title.sub(' ', '_').downcase
+def self.dad_publish_title_to_dirname
+  Daddy.config.cucumber.title.sub(' ', '_').downcase
 end
