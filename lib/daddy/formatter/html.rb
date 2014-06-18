@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 require 'erb'
 require 'cucumber/formatter/ordered_xml_markup'
 require 'cucumber/formatter/duration'

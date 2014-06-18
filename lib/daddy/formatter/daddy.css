@@ -67,7 +67,7 @@
 }
 
 .feature_dir {
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: bold;
   padding: 2px;
   margin: 10px 10px 0px 10px;
@@ -75,6 +75,10 @@
 
 div.feature_dir span {
   cursor: pointer;
+}
+
+div.feature h2 {
+  font-size: 1.2em;
 }
 
 .step_contents {
@@ -179,8 +183,8 @@ del.differ {
   margin: 5px 0;
   padding: 5px;
   background: #ffffff;
-  width: 32%;
-  height: 32%;
+  width: 49%;
+  height: 49%;
   max-width: 98%;
   max-height: 98%;
   cursor: pointer;
@@ -188,9 +192,10 @@ del.differ {
 
 #screenshot_viewer img {
   display: block;
-  border: solid 1px #999999;
+  border: solid 3px #555555;
   border-radius: 5px 5px;
-  margin: 5%;
+  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.3);
+  margin: 4%;
   padding: 1%;
   background: #ffffff;
   max-width: 90%;

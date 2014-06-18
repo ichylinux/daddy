@@ -1,8 +1,6 @@
-# coding: UTF-8
-
 Gem::Specification.new do |s|
   s.name        = 'daddy'
-  s.version     = '0.2.9'
+  s.version     = '0.2.14'
   s.date        = Date.today
   s.summary     = "My rails dad"
   s.description = "Daddy helps me build web applications since daddy knows some good practices."
@@ -13,7 +11,7 @@ Gem::Specification.new do |s|
   s.files       = Dir['lib/**/*'] + Dir['vendor/**/*']
   s.executables << 'dad'
 
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.0.0'
 
   s.add_runtime_dependency 'capybara', '~> 2.2'
   s.add_runtime_dependency 'cucumber', '~> 1.3'

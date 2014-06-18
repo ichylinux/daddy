@@ -2,7 +2,7 @@
 
 task :build do |t|
   [
-    "sudo bundle install",
+    "bundle install",
     "rm -f daddy-*.gem",
     "gem build daddy.gemspec",
   ].each do |command|
