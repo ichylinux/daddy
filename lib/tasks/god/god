@@ -6,33 +6,30 @@
 # description: god monitors your system
 #              
 
-CONFIG_FILES=/etc/god/*.god
 PID=/var/run/god.pid
+CONFIG=/etc/god/master.conf
 LOG=/var/log/god.log
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 RETVAL=0
 
 case "$1" in
     start)
-      god -P $PID -l $LOG --log-level info
-      for config in $CONFIG_FILES; do
-        god load $config
-      done
+      echo 'Starting god'
+      god -P $PID -c $CONFIG -l $LOG --log-level info
       RETVAL=$?
   ;;
     stop)
-      kill `cat $PID`
+      god quit
       RETVAL=$?
   ;;
     restart)
-      kill `cat $PID`
-      god -P $PID -l $LOG --log-level info
-      for config in $CONFIG_FILES; do
-        god load $config
-      done
+      god quit
+      echo 'Starting god'
+      god -P $PID -c $CONFIG -l $LOG --log-level info
       RETVAL=$?
   ;;
     status)
+      god status
       RETVAL=$?
   ;;
     *)
