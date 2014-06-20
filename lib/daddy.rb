@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 if defined?(Rails)
   require 'daddy/rails/engine'
   require 'daddy/rails/railtie'
