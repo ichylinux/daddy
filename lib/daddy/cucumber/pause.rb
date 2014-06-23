@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 module Daddy
   module Cucumber
     module Pause
@@ -12,10 +10,12 @@ module Daddy
       def wait_until
         pause_count = 10
         while pause_count > 0 do
-          break if yield
+          return true if yield
           pause 1
           pause_count -= 1
         end
+
+        false
       end
     
     end
