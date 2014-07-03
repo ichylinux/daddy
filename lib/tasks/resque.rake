@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 require 'rake'
 require 'yaml'
 
@@ -38,12 +36,12 @@ EOF
 end
 
 require 'resque/tasks'
-require 'resque_scheduler/tasks'
+require 'resque/scheduler/tasks'
 
 namespace :resque do
   task :setup do
     require 'resque'
-    require 'resque_scheduler'
+    require 'resque/scheduler'
 
     # If you want to be able to dynamically change the schedule,
     # uncomment this line.  A dynamic schedule can be updated via the
