@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'daddy'
-  s.version     = '0.2.19'
+  s.version     = '0.2.20'
   s.date        = Date.today
   s.summary     = "My rails dad"
   s.description = "Daddy helps me build web applications since daddy knows some good practices."
@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = ["ichy"]
   s.email       = 'ichylinux@gmail.com'
   s.homepage    = 'https://github.com/ichylinux/daddy'
-  s.files       = Dir['lib/**/*'] + Dir['vendor/**/*']
+  s.files       = Dir['app/**/*'] + Dir['lib/**/*'] + Dir['vendor/**/*']
   s.executables << 'dad'
 
   s.required_ruby_version = '>= 2.0.0'

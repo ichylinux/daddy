@@ -8,7 +8,7 @@ namespace :dad do
       ARGV[1..-1].each do |arg|
         unless arg.index('=')
           task arg.to_sym do ; end
-          
+
           if @resources.nil?
             @resources = arg.downcase
           end
@@ -23,6 +23,6 @@ namespace :dad do
       controller_file = "#{Rails.root}/app/controllers/#{@resources}_controller.rb"
       File.write(controller_file, ERB.new(File.read(template)).result)
     end
-    
+
   end
 end

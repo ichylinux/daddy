@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-RAILS_VERSION = '3.2.18'
+RAILS_VERSION = '3.2.19'
 
 GEMFILE = <<-EOF
 source 'https://rubygems.org'
@@ -18,10 +18,6 @@ gem 'mysql2'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -41,7 +37,7 @@ end
 gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
@@ -55,7 +51,7 @@ if action == 'new'
   [
     "rails _#{RAILS_VERSION}_ new #{app_name} -d mysql --skip-bundle",
     "echo \"#{GEMFILE}\" > #{app_name}/Gemfile",
-    "cd #{app_name} && sudo bundle install",
+    "cd #{app_name} && bundle install",
     "cd #{app_name} && bundle exec rake dad:install",
     "cd #{app_name} && bundle exec rake dad:generate:routes #{app_name}",
     "cd #{app_name} && bundle exec rake dad:db:config",
