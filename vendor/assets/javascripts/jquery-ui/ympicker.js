@@ -968,12 +968,12 @@ $.extend(Ympicker.prototype, {
       inst = this._getInst(target[0]);
 
     if (this._get(inst, "gotoCurrent") && inst.currentDay) {
-      inst.selectedDay = inst.currentDay;
+      inst.selectedDay = 1;
       inst.drawMonth = inst.selectedMonth = inst.currentMonth;
       inst.drawYear = inst.selectedYear = inst.currentYear;
     } else {
       date = new Date();
-      inst.selectedDay = date.getDate();
+      inst.selectedDay = 1;
       inst.drawMonth = inst.selectedMonth = date.getMonth();
       inst.drawYear = inst.selectedYear = date.getFullYear();
     }
@@ -1004,7 +1004,7 @@ $.extend(Ympicker.prototype, {
     }
 
     inst = this._getInst(target[0]);
-    inst.selectedDay = inst.currentDay = $("a", td).html();
+    inst.selectedDay = inst.currentDay = 1;
     inst.selectedMonth = inst.currentMonth = month;
     inst.selectedYear = inst.currentYear = year;
     this._selectDate(id, this._formatDate(inst,
@@ -1121,7 +1121,7 @@ $.extend(Ympicker.prototype, {
       monthNames = (settings ? settings.monthNames : null) || this._defaults.monthNames,
       year = -1,
       month = -1,
-      day = -1,
+      day = 1,
       doy = -1,
       literal = false,
       date,
@@ -1256,7 +1256,7 @@ $.extend(Ympicker.prototype, {
       } while (true);
     }
 
-    date = this._daylightSavingAdjust(new Date(year, month - 1, day));
+    date = this._daylightSavingAdjust(new Date(year, month - 1, 1));
     if (date.getFullYear() !== year || date.getMonth() + 1 !== month || date.getDate() !== day) {
       throw "Invalid date"; // E.g. 31/02/00
     }
@@ -1461,10 +1461,10 @@ $.extend(Ympicker.prototype, {
     } catch (event) {
       dates = (noDefault ? "" : dates);
     }
-    inst.selectedDay = date.getDate();
+    inst.selectedDay = 1;
     inst.drawMonth = inst.selectedMonth = date.getMonth();
     inst.drawYear = inst.selectedYear = date.getFullYear();
-    inst.currentDay = (dates ? date.getDate() : 0);
+    inst.currentDay = (dates ? 1 : 0);
     inst.currentMonth = (dates ? date.getMonth() : 0);
     inst.currentYear = (dates ? date.getFullYear() : 0);
     this._adjustInstDate(inst);
@@ -1472,8 +1472,12 @@ $.extend(Ympicker.prototype, {
 
   /* Retrieve the default date shown on opening. */
   _getDefaultDate: function(inst) {
+    var tempDate = new Date(),
+        date = this._daylightSavingAdjust(
+          new Date(tempDate.getFullYear(), tempDate.getMonth(), 1)); // clear time
+
     return this._restrictMinMax(inst,
-      this._determineDate(inst, this._get(inst, "defaultDate"), new Date()));
+      this._determineDate(inst, this._get(inst, "defaultDate"), date));
   },
 
   /* A date may be specified as an exact value or a relative one. */
@@ -1554,7 +1558,7 @@ $.extend(Ympicker.prototype, {
       origYear = inst.selectedYear,
       newDate = this._restrictMinMax(inst, this._determineDate(inst, date, new Date()));
 
-    inst.selectedDay = inst.currentDay = newDate.getDate();
+    inst.selectedDay = inst.currentDay = 1;
     inst.drawMonth = inst.selectedMonth = inst.currentMonth = newDate.getMonth();
     inst.drawYear = inst.selectedYear = inst.currentYear = newDate.getFullYear();
     if ((origMonth !== inst.selectedMonth || origYear !== inst.selectedYear) && !noChange) {
@@ -1583,10 +1587,10 @@ $.extend(Ympicker.prototype, {
     inst.dpDiv.find("[data-handler]").map(function () {
       var handler = {
         prev: function () {
-          $.ympicker._adjustDate(id, -stepMonths, "M");
+          $.ympicker._adjustDate(id, -1, "Y");
         },
         next: function () {
-          $.ympicker._adjustDate(id, +stepMonths, "M");
+          $.ympicker._adjustDate(id, +1, "Y");
         },
         hide: function () {
           $.ympicker._hideDatepicker();
@@ -1621,7 +1625,7 @@ $.extend(Ympicker.prototype, {
       printDate, dRow, tbody, daySettings, otherMonth, unselectable,
       tempDate = new Date(),
       today = this._daylightSavingAdjust(
-        new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate())), // clear time
+        new Date(tempDate.getFullYear(), tempDate.getMonth(), 1)), // clear time
       isRTL = this._get(inst, "isRTL"),
       showButtonPanel = this._get(inst, "showButtonPanel"),
       hideIfNoPrevNext = this._get(inst, "hideIfNoPrevNext"),
@@ -1631,7 +1635,7 @@ $.extend(Ympicker.prototype, {
       stepMonths = this._get(inst, "stepMonths"),
       isMultiMonth = (numMonths[0] !== 1 || numMonths[1] !== 1),
       currentDate = this._daylightSavingAdjust((!inst.currentDay ? new Date(9999, 9, 9) :
-        new Date(inst.currentYear, inst.currentMonth, inst.currentDay))),
+        new Date(inst.currentYear, inst.currentMonth, 1))),
       minDate = this._getMinMaxDate(inst, "min"),
       maxDate = this._getMinMaxDate(inst, "max"),
       drawMonth = inst.drawMonth - showCurrentAtPos,
@@ -1727,55 +1731,42 @@ $.extend(Ympicker.prototype, {
           (/all|right/.test(cornerClass) && row === 0 ? (isRTL ? prev : next) : "") +
           this._generateMonthYearHeader(inst, drawMonth, drawYear, minDate, maxDate,
           row > 0 || col > 0, monthNames, monthNamesShort) + // draw month headers
-          "</div><table class='ui-datepicker-calendar'><thead>" +
-          "<tr>";
-        thead = (showWeek ? "<th class='ui-datepicker-week-col'>" + this._get(inst, "weekHeader") + "</th>" : "");
-        for (dow = 0; dow < 7; dow++) { // days of the week
-          day = (dow + firstDay) % 7;
-          thead += "<th scope='col'" + ((dow + firstDay + 6) % 7 >= 5 ? " class='ui-datepicker-week-end'" : "") + ">" +
-            "<span title='" + dayNames[day] + "'>" + dayNamesMin[day] + "</span></th>";
-        }
-        calender += thead + "</tr></thead><tbody>";
+          "</div><table class='ui-datepicker-calendar'>";
+
+        calender += "<tbody>";
         daysInMonth = this._getDaysInMonth(drawYear, drawMonth);
         if (drawYear === inst.selectedYear && drawMonth === inst.selectedMonth) {
           inst.selectedDay = Math.min(inst.selectedDay, daysInMonth);
         }
-        leadDays = (this._getFirstDayOfMonth(drawYear, drawMonth) - firstDay + 7) % 7;
-        curRows = Math.ceil((leadDays + daysInMonth) / 7); // calculate the number of rows to generate
-        numRows = (isMultiMonth ? this.maxRows > curRows ? this.maxRows : curRows : curRows); //If multiple months, use the higher number of rows (see #7043)
-        this.maxRows = numRows;
-        printDate = this._daylightSavingAdjust(new Date(drawYear, drawMonth, 1 - leadDays));
+        leadDays = 0;
+        curRows = 2;
+        numRows = 2;
+        this.maxRows = 2;
+        printDate = this._daylightSavingAdjust(new Date(drawYear, 0, 1));
         for (dRow = 0; dRow < numRows; dRow++) { // create date picker rows
           calender += "<tr>";
           tbody = (!showWeek ? "" : "<td class='ui-datepicker-week-col'>" +
             this._get(inst, "calculateWeek")(printDate) + "</td>");
-          for (dow = 0; dow < 7; dow++) { // create date picker days
+          for (dow = 0; dow < 6; dow++) { // create ym picker months
             daySettings = (beforeShowDay ?
               beforeShowDay.apply((inst.input ? inst.input[0] : null), [printDate]) : [true, ""]);
-            otherMonth = (printDate.getMonth() !== drawMonth);
-            unselectable = (otherMonth && !selectOtherMonths) || !daySettings[0] ||
-              (minDate && printDate < minDate) || (maxDate && printDate > maxDate);
+            otherMonth = false;
+            unselectable = false;
             tbody += "<td class='" +
-              ((dow + firstDay + 6) % 7 >= 5 ? " ui-datepicker-week-end" : "") + // highlight weekends
-              (otherMonth ? " ui-datepicker-other-month" : "") + // highlight days from other months
               ((printDate.getTime() === selectedDate.getTime() && drawMonth === inst.selectedMonth && inst._keyEvent) || // user pressed key
               (defaultDate.getTime() === printDate.getTime() && defaultDate.getTime() === selectedDate.getTime()) ?
               // or defaultDate is current printedDate and defaultDate is selectedDate
               " " + this._dayOverClass : "") + // highlight selected day
-              (unselectable ? " " + this._unselectableClass + " ui-state-disabled": "") +  // highlight unselectable days
               (otherMonth && !showOtherMonths ? "" : " " + daySettings[1] + // highlight custom dates
               (printDate.getTime() === currentDate.getTime() ? " " + this._currentClass : "") + // highlight selected day
               (printDate.getTime() === today.getTime() ? " ui-datepicker-today" : "")) + "'" + // highlight today (if different)
               ((!otherMonth || showOtherMonths) && daySettings[2] ? " title='" + daySettings[2].replace(/'/g, "&#39;") + "'" : "") + // cell title
-              (unselectable ? "" : " data-handler='selectDay' data-event='click' data-month='" + printDate.getMonth() + "' data-year='" + printDate.getFullYear() + "'") + ">" + // actions
-              (otherMonth && !showOtherMonths ? "&#xa0;" : // display for other months
-              (unselectable ? "<span class='ui-state-default'>" + printDate.getDate() + "</span>" : "<a class='ui-state-default" +
+              " data-handler='selectDay' data-event='click' data-month='" + printDate.getMonth() + "' data-year='" + printDate.getFullYear() + "'>" + // actions
+              "<a class='ui-state-default" +
               (printDate.getTime() === today.getTime() ? " ui-state-highlight" : "") +
               (printDate.getTime() === currentDate.getTime() ? " ui-state-active" : "") + // highlight selected day
-              (otherMonth ? " ui-priority-secondary" : "") + // distinguish dates from other months
-              "' href='#'>" + printDate.getDate() + "</a>")) + "</td>"; // display selectable date
-            printDate.setDate(printDate.getDate() + 1);
-            printDate = this._daylightSavingAdjust(printDate);
+              "' href='#'>" + monthNamesShort[printDate.getMonth()] + "</a></td>"; // display selectable month
+            printDate.setMonth(printDate.getMonth() + 1);
           }
           calender += tbody + "</tr>";
         }
@@ -1805,23 +1796,6 @@ $.extend(Ympicker.prototype, {
       showMonthAfterYear = this._get(inst, "showMonthAfterYear"),
       html = "<div class='ui-datepicker-title'>",
       monthHtml = "";
-
-    // month selection
-    if (secondary || !changeMonth) {
-      monthHtml += "<span class='ui-datepicker-month'>" + monthNames[drawMonth] + "</span>";
-    } else {
-      inMinYear = (minDate && minDate.getFullYear() === drawYear);
-      inMaxYear = (maxDate && maxDate.getFullYear() === drawYear);
-      monthHtml += "<select class='ui-datepicker-month' data-handler='selectMonth' data-event='change'>";
-      for ( month = 0; month < 12; month++) {
-        if ((!inMinYear || month >= minDate.getMonth()) && (!inMaxYear || month <= maxDate.getMonth())) {
-          monthHtml += "<option value='" + month + "'" +
-            (month === drawMonth ? " selected='selected'" : "") +
-            ">" + monthNamesShort[month] + "</option>";
-        }
-      }
-      monthHtml += "</select>";
-    }
 
     if (!showMonthAfterYear) {
       html += monthHtml + (secondary || !(changeMonth && changeYear) ? "&#xa0;" : "");
@@ -1871,13 +1845,13 @@ $.extend(Ympicker.prototype, {
   _adjustInstDate: function(inst, offset, period) {
     var year = inst.drawYear + (period === "Y" ? offset : 0),
       month = inst.drawMonth + (period === "M" ? offset : 0),
-      day = Math.min(inst.selectedDay, this._getDaysInMonth(year, month)) + (period === "D" ? offset : 0),
+      day = 1 + (period === "D" ? offset : 0),
       date = this._restrictMinMax(inst, this._daylightSavingAdjust(new Date(year, month, day)));
 
-    inst.selectedDay = date.getDate();
+    inst.selectedDay = 1;
     inst.drawMonth = inst.selectedMonth = date.getMonth();
     inst.drawYear = inst.selectedYear = date.getFullYear();
-    if (period === "M" || period === "Y") {
+    if (period === "Y") {
       this._notifyChange(inst);
     }
   },
