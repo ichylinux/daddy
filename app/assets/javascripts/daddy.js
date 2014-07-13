@@ -1,2 +1,2 @@
-//= require_tree .
 //= require jquery-ui/ympicker
+//= require_tree .
