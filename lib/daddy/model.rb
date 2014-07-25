@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 module Daddy
   class Model < Hash
     extend ActiveModel::Naming
@@ -7,7 +5,7 @@ module Daddy
     include ActiveModel::Validations
 
     def initialize(params = {})
-      self.merge!(params) if params
+      self.merge!(params.stringify_keys) if params
     end
 
     def persisted?
