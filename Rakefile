@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 task :build do |t|
   [
     "bundle install",

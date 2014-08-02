@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'daddy'
-  s.version     = '0.2.22'
+  s.version     = '0.2.23'
   s.date        = Date.today
   s.summary     = "My rails dad"
   s.description = "Daddy helps me build web applications since daddy knows some good practices."
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.0.0'
 
-  s.add_runtime_dependency 'capybara', '~> 2.3'
+  s.add_runtime_dependency 'capybara', '~> 2.4'
   s.add_runtime_dependency 'cucumber', '~> 1.3'
   s.add_runtime_dependency 'cucumber-rails', '~> 1.4'
   s.add_runtime_dependency 'ci_reporter', '~> 1.9'
@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'resque', '~> 1.25'
   s.add_runtime_dependency 'resque-scheduler', '~> 3.0'
   s.add_runtime_dependency 'selenium-webdriver', '~> 2.42'
-  s.add_runtime_dependency 'simplecov', '~> 0.8'
+  s.add_runtime_dependency 'simplecov', '~> 0.9'
   s.add_runtime_dependency 'simplecov-rcov', '~> 0.2'
   s.add_runtime_dependency 'term-ansicolor', '~> 1.3'
 
