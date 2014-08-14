@@ -30,7 +30,7 @@ if action == 'new'
     "bundle exec rake dad:db:create",
     "bundle exec rake db:migrate",
     "bundle exec rails g controller welcome index --no-helper --no-assets",
-    "echo '<h1>Welcome to #{APP_NAME}</h1>' > #{File.join('app', 'views', 'welcome', 'index.html')}
+    "echo '<h1>Welcome to #{APP_NAME}</h1>' > #{File.join('app', 'views', 'welcome', 'index.html.erb')}"
   ].each do |command|
     puts command
     exit 1 unless system("cd #{APP_NAME} && #{command}")
