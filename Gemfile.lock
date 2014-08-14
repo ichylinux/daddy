@@ -38,7 +38,7 @@ GEM
       xpath (~> 2.0)
     childprocess (0.5.3)
       ffi (~> 1.0, >= 1.0.11)
-    ci_reporter (2.0.0)
+    ci_reporter (1.9.2)
       builder (>= 2.1.2)
     cliver (0.3.2)
     cucumber (1.3.16)
@@ -177,7 +177,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
-  ci_reporter
+  ci_reporter (>= 1.9.0, < 2.0.0)
   cucumber
   cucumber-rails
   database_cleaner

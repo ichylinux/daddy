@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'capybara', '>= 2.4.0'
   s.add_runtime_dependency 'cucumber', '>= 1.3.0'
   s.add_runtime_dependency 'cucumber-rails', '>= 1.4.0'
-  s.add_runtime_dependency 'ci_reporter', '>= 1.9.0'
+  s.add_runtime_dependency 'ci_reporter', '>= 1.9.0', '< 2.0.0'
   s.add_runtime_dependency 'database_cleaner', '>= 1.3.0'
   s.add_runtime_dependency 'differ', '>= 0.1.0'
   s.add_runtime_dependency 'execjs', '>= 2.2.0' if s.platform.to_s == 'ruby'
