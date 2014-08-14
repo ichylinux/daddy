@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 もし /^(.*?) を選択(する)?$/ do |name, suffix|
   click_on name
 end

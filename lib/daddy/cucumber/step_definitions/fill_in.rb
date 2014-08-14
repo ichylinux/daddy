@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 もし /^(.*?)に (.*?) と入力$/ do |name, value|
   assert_fill_in name, value
 end

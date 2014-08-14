@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 もし /^(.*?)をクリック$/ do |name|
   click_on name
 end
