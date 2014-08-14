@@ -23,11 +23,6 @@ if action == 'new'
   gemfile = File.join(APP_NAME, 'Gemfile')
   File.write(gemfile, ERB.new(File.read(template)).result)
 
-  # routes
-  template = File.join(DADDY_HOME, 'templates', 'config', 'routes.rb.erb')
-  routes = File.join(APP_NAME, 'config', 'routes.rb')
-  File.write(routes, ERB.new(File.read(template)).result)
-
   [
     "bundle install",
     "bundle exec rake dad:install",
@@ -40,4 +35,10 @@ if action == 'new'
     puts command
     exit 1 unless system("cd #{APP_NAME} && #{command}")
   end
+
+  # routes
+  template = File.join(DADDY_HOME, 'templates', 'config', 'routes.rb.erb')
+  routes = File.join(APP_NAME, 'config', 'routes.rb')
+  File.write(routes, ERB.new(File.read(template)).result)
+
 end

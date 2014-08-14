@@ -11,18 +11,18 @@ Before do
   DatabaseCleaner.start
 
   if ::ActiveRecord::VERSION::MAJOR < 4
-    FIXTURE = ActiveRecord::Fixtures
+    fixture_class = ActiveRecord::Fixtures
   else
-    FIXTURE = ActiveRecord::FixtureSet
+    fixture_class = ActiveRecord::FixtureSet
   end
 
-  FIXTURE.reset_cache
+  fixture_class.reset_cache
   fixtures_folder = File.join(Rails.root, 'test', 'fixtures')
   fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
-  FIXTURE.create_fixtures(fixtures_folder, fixtures)
+  fixture_class.create_fixtures(fixtures_folder, fixtures)
   if defined? RailsCsvFixtures
     fixtures = Dir[File.join(fixtures_folder, '*.csv')].map {|f| File.basename(f, '.csv') }
-    FIXTURE.create_fixtures(fixtures_folder, fixtures)
+    fixture_class.create_fixtures(fixtures_folder, fixtures)
   end
 end
 
