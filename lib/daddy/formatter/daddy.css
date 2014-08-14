@@ -111,6 +111,12 @@ div.feature .narrative > div {
   margin-left: 10px;
 }
 
+div.feature .narrative > pre {
+  border: solid 1px #999999;
+  border-radius: 5px;
+  padding: 1em 0;
+}
+
 div.scenario {
   margin: 10px 10px 10px 1.2em;
 }

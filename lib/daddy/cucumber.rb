@@ -1,6 +1,7 @@
 require 'daddy'
 
 if defined?(Rails)
+  require 'capybara/rails'
   ActionController::Base.allow_rescue = false
 end
 
