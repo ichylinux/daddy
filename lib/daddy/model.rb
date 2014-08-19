@@ -14,7 +14,7 @@ module Daddy
 
     def method_missing(method, *params)
       method_name = method.to_s
-      if method_name.last == "="
+      if method_name.last == '='
         self[method_name[0..-2]] = params.first
       else
         self[method_name]
