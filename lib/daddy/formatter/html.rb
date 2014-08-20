@@ -19,11 +19,30 @@ module Daddy
         @buffer = {}
         @builder = create_builder(@io)
         @feature_number = 0
+        @scenario_number = 0
         @step_number = 0
         @header_red = nil
         @delayed_messages = []
+        @img_id = 0
         @inside_outline = false
       end
+
+      def embed(src, mime_type, label)
+        case(mime_type)
+        when /^image\/(png|gif|jpg|jpeg)/
+          embed_image(src, label)
+        end
+      end
+
+      def embed_image(src, label)
+        id = "img_#{@img_id}"
+        @img_id += 1
+        @builder.span(:class => 'embed') do |pre|
+          pre << %{<a href="" onclick="img=document.getElementById('#{id}'); img.style.display = (img.style.display == 'none' ? 'block' : 'none');return false">#{label}</a><br>&nbsp;
+          <img id="#{id}" style="display: none" src="#{src}"/>}
+        end
+      end
+
 
       def before_features(features)
         @step_count = features.step_count
@@ -118,7 +137,7 @@ module Daddy
       def feature_name(keyword, name)
         title = feature_dir(@feature, true) + @feature.file.split('/').last.gsub(/\.feature/, '')
         lines = name.split(/\r?\n/)
-
+        return if lines.empty?
         @builder.h2 do |h2|
           @builder.span(:class => 'val') do
             @builder << title
@@ -159,6 +178,7 @@ module Daddy
       end
 
       def before_feature_element(feature_element)
+        @scenario_number+=1
         @scenario_red = false
         css_class = {
           ::Cucumber::Ast::Scenario        => 'scenario',
@@ -229,6 +249,7 @@ module Daddy
       end
 
       def before_step(step)
+        @step_id = step.dom_id
         @step_number += 1
         @step = step
       end
@@ -333,7 +354,7 @@ module Daddy
       def doc_string(string)
         return if @hide_this_step
         @builder.pre(:class => 'val') do |pre|
-          @builder << string
+          @builder << h(string).gsub("\n", '&#x000A;')
         end
       end
 
@@ -390,7 +411,7 @@ module Daddy
         return if @delayed_messages.empty?
 
         #@builder.ol do
-          @delayed_messages.each_with_index do |ann, i|
+          @delayed_messages.each do |ann|
             @builder.li(:class => 'message', :style => 'display: none;') do
               @builder << ann
             end
@@ -439,7 +460,7 @@ module Daddy
       end
 
       def set_scenario_color(status)
-        if status == :undefined or status == :pending
+        if status.nil? or status == :undefined or status == :pending
           set_scenario_color_pending
         end
         if status == :failed
@@ -504,7 +525,9 @@ module Daddy
         end
 
         @builder.div(:class => 'step_file') do |div|
-          @builder << step_file
+          @builder.span do
+            @builder << step_file
+          end
         end
       end
 
@@ -517,7 +540,7 @@ module Daddy
       end
 
       def inline_css
-        @builder.style do
+        @builder.style(:type => 'text/css') do
           @builder << File.read(File.dirname(__FILE__) + '/cucumber.css')
           @builder << File.read(File.dirname(__FILE__) + '/daddy.css')
           if File.exist?('features/support/daddy.css')
@@ -576,8 +599,11 @@ module Daddy
       $(SCENARIOS).siblings().show();
       $('li.message').show();
     });
-  });
+  })
 
+  function moveProgressBar(percentDone) {
+    $("cucumber-header").css('width', percentDone +"%");
+  }
   function makeRed(element_id) {
     $('#'+element_id).css('background', '#C40D0D');
     $('#'+element_id).css('color', '#FFFFFF');
@@ -591,6 +617,7 @@ module Daddy
       end
 
       def move_progress
+        @builder << " <script type=\"text/javascript\">moveProgressBar('#{percent_done}');</script>"
       end
 
       def percent_done
@@ -616,8 +643,8 @@ module Daddy
       end
 
       def print_stats(features)
-        @builder <<  "<script>document.getElementById('duration').innerHTML = \"Finished in <strong>#{format_duration(features.duration)} seconds</strong>\";</script>"
-        @builder <<  "<script>document.getElementById('totals').innerHTML = \"#{print_stat_string(features)}\";</script>"
+        @builder <<  "<script type=\"text/javascript\">document.getElementById('duration').innerHTML = \"Finished in <strong>#{format_duration(features.duration)} seconds</strong>\";</script>"
+        @builder <<  "<script type=\"text/javascript\">document.getElementById('totals').innerHTML = \"#{print_stat_string(features)}\";</script>"
       end
 
       def print_stat_string(features)
