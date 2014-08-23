@@ -1,17 +1,19 @@
 #!/usr/bin/env ruby
 
 require 'erb'
-require 'rails'
 
 DADDY_HOME = File.dirname(File.dirname(__FILE__))
-RAILS_VERSION = '4.0.6'
 
 action = ARGV[0]
 
 if action == 'new'
+  RAILS_VERSION = '4.0.9'
+  puts "using rails #{RAILS_VERSION}"
+
   APP_NAME = ARGV[1]
 
   [
+    "sudo gem install rails -v=#{RAILS_VERSION} --no-ri --no-rdoc",
     "rails _#{RAILS_VERSION}_ new #{APP_NAME} -d mysql --skip-bundle",
   ].each do |command|
     puts command

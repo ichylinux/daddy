@@ -2,7 +2,7 @@
   app_name_short = ENV['APP_NAME'][0..15]
 -%>
 # MySQL.  Versions 4.1 and 5.0 are recommended.
-# 
+#
 # Install the MYSQL driver
 #   gem install mysql2
 #
@@ -14,7 +14,6 @@
 development:
   adapter: mysql2
   encoding: utf8
-  reconnect: false
   database: <%= app_name_short %>_dev
   pool: 5
   username: <%= app_name_short %>
@@ -27,7 +26,6 @@ development:
 test:
   adapter: mysql2
   encoding: utf8
-  reconnect: false
   database: <%= app_name_short %>_test
   pool: 5
   username: <%= app_name_short %>
@@ -37,7 +35,6 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  reconnect: false
   database: <%= app_name_short %>_pro
   pool: 5
   username: <%= app_name_short %>
