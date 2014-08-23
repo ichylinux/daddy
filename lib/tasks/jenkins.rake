@@ -1,8 +1,4 @@
-# coding: UTF-8
-
 require 'rake'
-require 'term/ansicolor'
-include Term::ANSIColor
 
 namespace :dad do
   namespace :jenkins do
@@ -22,7 +18,7 @@ namespace :dad do
         "sudo chown jenkins:jenkins /var/lib/jenkins/plugins",
       ]
       commands.each do |command|
-        print blue, bold, command, reset, "\n"
+        puts command
         system(command)
       end
 
@@ -38,12 +34,12 @@ namespace :dad do
 
         unless File.exist?(download_path)
           command = "sudo wget http://updates.jenkins-ci.org/download/plugins/#{p[:name]}/#{p[:version]}/#{p[:name]}.hpi -O #{download_path}"
-          print blue, bold, command, reset, "\n"
+          puts command
           system(command)
         end
         
         command = "sudo cp -f #{download_path} /var/lib/jenkins/plugins/#{p[:name]}.hpi"
-        print blue, bold, command, reset, "\n"
+        puts command
         system(command)
       end
     end

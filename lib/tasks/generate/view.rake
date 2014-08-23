@@ -1,7 +1,4 @@
-# coding: UTF-8
-
 require 'rake'
-require 'erb'
 
 namespace :dad do
   namespace :generate do
@@ -23,7 +20,7 @@ namespace :dad do
       @tag_begin = '<%'
       @tag_end = '%>'
 
-      Dir[File.join(File.dirname(__FILE__), 'templates/*.html.erb')].each do |template|
+      Dir[File.join(template_dir, 'app', 'views', '*.html.erb')].each do |template|
         view_dir = "#{Rails.root}/app/views/#{@resources}"
         FileUtils.mkdir_p(view_dir)
 

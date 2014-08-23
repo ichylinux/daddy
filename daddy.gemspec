@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'holiday_jp', '~> 0.3'
   s.add_runtime_dependency 'poltergeist', '~> 1.5'
   s.add_runtime_dependency 'rails', '>= 3.2.0', '< 5.0.0'
-  s.add_runtime_dependency 'rails-i18n', '~> 3.0'
+  s.add_runtime_dependency 'rails-i18n', '>= 3.2.0', '< 5.0.0'
   s.add_runtime_dependency 'resque', '~> 1.25'
   s.add_runtime_dependency 'resque-scheduler', '~> 3.0'
   s.add_runtime_dependency 'selenium-webdriver', '~> 2.42'

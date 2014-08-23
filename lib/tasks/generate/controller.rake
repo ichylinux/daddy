@@ -1,5 +1,5 @@
 require 'rake'
-require 'erb'
+require_relative '../task_helper'
 
 namespace :dad do
   namespace :generate do
@@ -19,7 +19,7 @@ namespace :dad do
       @model_class = @resource.classify.constantize
       @controller_name = @resources.split('_').map{|a| a.capitalize}.join
 
-      template = File.join(File.dirname(__FILE__), 'templates', 'controller.rb.erb')
+      template = File.join(template_dir, 'app', 'controllers', 'controller.rb.erb')
       controller_file = "#{Rails.root}/app/controllers/#{@resources}_controller.rb"
       File.write(controller_file, ERB.new(File.read(template)).result)
     end

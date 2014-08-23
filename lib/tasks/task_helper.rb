@@ -12,3 +12,7 @@ end
 def self.app_name
   YAML.load_file("#{rails_root}/config/database.yml")[Rails.env]['database']
 end
+
+def self.template_dir
+  File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'templates')
+end
