@@ -2,13 +2,7 @@ module Daddy
   module Models
     
     module QueryExtension
-      def self.included(base)
-        base.extend(ClassMethods)
-        base.__send__(:include, InstanceMethods)
-      end
-
-      module InstanceMethods
-      end
+      extend ActiveSupport::Concern
 
       module ClassMethods
         require 'daddy/utils/sql_utils'

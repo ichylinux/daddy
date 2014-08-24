@@ -1,40 +1,32 @@
 module Daddy
   module Models
-    
     module CrudExtension
-      def self.included(base)
-        base.extend(ClassMethods)
-        base.__send__(:include, InstanceMethods)
+      extend ActiveSupport::Concern
+
+      def readable_by?(user)
+        true
       end
 
-      module InstanceMethods
+      def creatable_by?(user)
+        readable_by?(user)
+      end
 
-        def readable_by?(user)
-          true
-        end
+      def updatable_by?(user)
+        readable_by?(user)
+      end
 
-        def creatable_by?(user)
-          readable_by?(user)
-        end
+      def deletable_by?(user)
+        readable_by?(user)
+      end
 
-        def updatable_by?(user)
-          readable_by?(user)
-        end
-
-        def deletable_by?(user)
-          readable_by?(user)
-        end
-
-        def destroy_logically!
-          self.deleted = true
-          save!
-        end
+      def destroy_logically!
+        self.deleted = true
+        save!
       end
 
       module ClassMethods
       end
 
     end
-
   end
 end

@@ -16,3 +16,7 @@ end
 def self.template_dir
   File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'templates')
 end
+
+def self.render(template, options = {})
+  File.write(options[:to], ERB.new(File.read(template), 0, '-').result)
+end

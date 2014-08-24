@@ -6,30 +6,14 @@ namespace :dad do
 
     desc "Resqueをインストールします。"
     task :install => :environment do
-      rails_root = ENV['RAILS_ROOT'] || Rails.root
-      app_name = YAML.load_file("#{rails_root}/config/database.yml")[Rails.env]['database']
+      template = File.join(File.dirname(__FILE__), 'resque', 'app.god.erb')
+      config = File.join('tmp', "#{app_name}.god")
+      render(template, :to => config)
 
-      script = <<-EOF
-#!/bin/bash
-
-export APP_NAME=#{app_name}
-export RAILS_ROOT=#{rails_root}
-export RAILS_ENV=#{Rails.env}
-export NUM_WORKERS=1
-erb -T - #{File.join(File.dirname(__FILE__), 'resque.erb')} > tmp/#{app_name}.god 
-
-sudo mkdir -p /etc/god
-sudo cp -f tmp/#{app_name}.god /etc/god/#{app_name}.god
-sudo chown -R root:root /etc/god
-sudo chmod 755 /etc/god
-sudo chmod -R 644 /etc/god/*
-
-sudo /etc/init.d/god restart
-EOF
-
-      tmpfile = File.join(Rails.root, 'tmp', 'dad-resque-install-' + Daddy::Utils::StringUtils.current_time + '.sh')
-      File.write(tmpfile, ERB.new(script).result)
-      fail unless system("bash #{tmpfile}")
+      template = File.join(File.dirname(__FILE__), 'resque', 'install.sh.erb')
+      script = File.join('tmp', 'resque-install.sh')
+      render(template, :to => script)
+      fail unless system("bash -ex #{script}")
     end
 
   end

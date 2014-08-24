@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 module Tax
 
   # 消費税区分
