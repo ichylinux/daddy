@@ -1,0 +1,13 @@
+#!/bin/bash
+
+sudo mkdir -p /etc/god
+sudo cp -f tmp/<%= app_name %>.god /etc/god/<%= app_name %>.god
+sudo chown -R root:root /etc/god
+sudo chmod 755 /etc/god
+sudo chmod -R 644 /etc/god/*
+
+if [ -e /var/run/god.pid ]; then
+  sudo /etc/init.d/god restart
+else
+  sudo /etc/init.d/god start
+fi
