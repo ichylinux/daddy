@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 require 'nkf'
 
 module Daddy
