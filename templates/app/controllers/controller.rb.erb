@@ -33,7 +33,7 @@ class <%= @controller_name %>Controller < ApplicationController
 
   def update
     @<%= @resource %> = <%= @model_class.name %>.find(params[:id])
-    @<%= @resource %>.attributes = params[:<%= @resource %>_params]
+    @<%= @resource %>.attributes = <%= @resource %>_params
 
     begin
       @<%= @resource %>.transaction do
