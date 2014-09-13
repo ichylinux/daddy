@@ -3,7 +3,14 @@ require 'erb'
 module Daddy
   module Formatter
     module DaddyHtml
-      
+
+      def ruby_version_dir
+        unless @_ruby_version_dir
+          @_ruby_version_dir = RUBY_VERSION.split('.')[0..1].join('.') + '.0'
+        end
+        @_ruby_version_dir
+      end
+
       def title
         ret = ENV['TITLE']
         ret ||= Daddy.config.cucumber.title if Daddy.config.cucumber.title?

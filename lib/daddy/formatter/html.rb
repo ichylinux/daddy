@@ -72,7 +72,7 @@ module Daddy
             end
           end
         end
-        
+
         before_menu
       end
 
@@ -106,15 +106,11 @@ module Daddy
       end
 
       def before_comment(comment)
-        unless magic_comment?(comment)
-          @builder << '<pre class="comment">'
-        end
+        @builder << '<pre class="comment">' unless magic_comment?(comment)
       end
 
       def after_comment(comment)
-        unless magic_comment?(comment)
-          @builder << '</pre>'
-        end
+        @builder << '</pre>' unless magic_comment?(comment)
       end
 
       def comment_line(comment_line)
@@ -303,7 +299,7 @@ module Daddy
 
             file = $1.force_encoding('UTF-8')
             if file.start_with?('daddy-') or file.start_with?('/daddy-')
-              file = '/usr/local/lib/ruby/gems/2.0.0/gems/' + file
+              file = File.join('/usr/local/lib/ruby/gems', ruby_version_dir, 'gems', file)
             end
 
             File.readlines(File.expand_path(file))[line_index..-1].each do |line|
@@ -312,7 +308,7 @@ module Daddy
             end
           end
           step_contents << "</pre></div>"
-          @builder << step_contents.force_encoding('UTF-8')
+          @builder << step_contents
         end
 
         print_messages
