@@ -5,29 +5,17 @@ namespace :dad do
 
     desc 'Jenkinsをインストールします。'
     task :install do
-      commands = [
-        "sudo yum install httpd-devel libxslt-devel libxml2-devel java-1.7.0-openjdk qt-webkit-devel Xvfb firefox",
-        "sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo",
-        "sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key",
-        "sudo yum install jenkins",
-        "sudo cp -f #{File.dirname(__FILE__)}/jenkins.conf /etc/httpd/conf.d",
-        "sudo cp -f #{File.dirname(__FILE__)}/jenkins /etc/sysconfig",
-        "sudo chown root:root /etc/sysconfig/jenkins",
-        "sudo chmod 600 /etc/sysconfig/jenkins",
-        "sudo mkdir -p /var/lib/jenkins/plugins",
-        "sudo chown jenkins:jenkins /var/lib/jenkins/plugins",
-      ]
-      commands.each do |command|
-        puts command
-        system(command)
-      end
+      script = File.join(File.dirname(__FILE__), 'jenkins', 'install.sh')
+      fail unless system "bash -ex #{script}"
 
       plugins = [
-        {:name => 'build-pipeline-plugin', :version => '1.3.5'},
-        {:name => 'git', :version => '1.4.0'},
-        {:name => 'rake', :version => '1.7.7'},
-        {:name => 'rubyMetrics', :version => '1.5.0'},
-        {:name => 'htmlpublisher', :version => '1.2'},
+        {:name => 'build-pipeline-plugin', :version => '1.4.3'},
+        {:name => 'git', :version => '2.2.5'},
+        {:name => 'git-client', :version => '1.10.2'},
+        {:name => 'rake', :version => '1.8.0'},
+        {:name => 'rubyMetrics', :version => '1.6.2'},
+        {:name => 'htmlpublisher', :version => '1.3'},
+        {:name => 'reverse-proxy-auth-plugin', :version => '1.4.0'}
       ]
       plugins.each do |p|
         download_path = "tmp/#{p[:name]}.hpi"
