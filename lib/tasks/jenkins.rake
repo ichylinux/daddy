@@ -1,10 +1,12 @@
-require 'rake'
+require_relative 'task_helper'
 
 namespace :dad do
   namespace :jenkins do
 
     desc 'Jenkinsをインストールします。'
     task :install do
+      FileUtils.mkdir_p 'tmp'
+
       script = File.join(File.dirname(__FILE__), 'jenkins', 'install.sh')
       fail unless system "bash -ex #{script}"
 
@@ -18,20 +20,19 @@ namespace :dad do
         {:name => 'reverse-proxy-auth-plugin', :version => '1.4.0'}
       ]
       plugins.each do |p|
-        download_path = "tmp/#{p[:name]}.hpi"
+        download_path = "tmp/#{p[:name]}-#{p[:version]}.hpi"
 
         unless File.exist?(download_path)
           command = "sudo wget http://updates.jenkins-ci.org/download/plugins/#{p[:name]}/#{p[:version]}/#{p[:name]}.hpi -O #{download_path}"
           puts command
-          system(command)
+          fail unless system(command)
         end
         
         command = "sudo cp -f #{download_path} /var/lib/jenkins/plugins/#{p[:name]}.hpi"
         puts command
-        system(command)
+        fail unless system(command)
       end
     end
 
   end
-
 end
