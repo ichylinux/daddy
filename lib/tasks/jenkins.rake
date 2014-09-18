@@ -17,7 +17,8 @@ namespace :dad do
         {:name => 'rake', :version => '1.8.0'},
         {:name => 'rubyMetrics', :version => '1.6.2'},
         {:name => 'htmlpublisher', :version => '1.3'},
-        {:name => 'reverse-proxy-auth-plugin', :version => '1.4.0'}
+        {:name => 'reverse-proxy-auth-plugin', :version => '1.4.0'},
+        {:name => 'thinBackup', :version => '1.7.4'}
       ]
       plugins.each do |p|
         download_path = "tmp/#{p[:name]}-#{p[:version]}.hpi"
