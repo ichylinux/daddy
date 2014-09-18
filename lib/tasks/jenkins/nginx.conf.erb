@@ -5,7 +5,7 @@ upstream jenkins {
 server {
   listen 80;
   listen 443 ssl;
-  server_name localhost;
+  server_name <%= @server_name %>;
   #access_log /var/log/nginx/jenkins_access.log ltsv;
   ssl_certificate conf.d/server.crt;
   ssl_certificate_key conf.d/server.key;

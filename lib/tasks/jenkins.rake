@@ -34,5 +34,16 @@ namespace :dad do
       end
     end
 
+    namespace :nginx do
+      desc 'Nginxの設定を行います。'
+      task :config do
+        @server_name = ask('server_name', :required => true)
+
+        FileUtils.mkdir_p 'tmp'
+        template = File.join(File.dirname(__FILE__), 'jenkins', 'nginx.conf.erb')
+        render template, :to => 'tmp/jenkins_nginx.conf'
+      end
+    end
+
   end
 end

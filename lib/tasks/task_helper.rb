@@ -21,3 +21,28 @@ end
 def self.render(template, options = {})
   File.write(options[:to], ERB.new(File.read(template), 0, '-').result)
 end
+
+def self.ask(prompt, options = {})
+  print prompt + "[#{options[:default]}]: "
+
+  if options[:password]
+    system("stty -echo")
+    at_exit do
+      system("stty echo")
+    end
+  end
+
+  answer = STDIN.gets.strip
+  answer = options[:default] if answer.blank?
+
+  if options[:password]
+    system("stty echo")
+    puts
+  end
+
+  if options[:required] and answer.blank?
+    raise "必須です。処理を中止します。"
+  end
+
+  answer
+end
