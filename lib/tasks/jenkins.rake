@@ -44,7 +44,8 @@ namespace :dad do
         FileUtils.mkdir_p 'tmp'
         template = File.join(File.dirname(__FILE__), 'jenkins', 'nginx.conf.erb')
         render template, :to => 'tmp/jenkins_nginx.conf'
-        fail unless system("sudo cp -f tmp/jenkins_nginx.conf /etc/nginx/conf.d/servers/jenkins.conf")
+
+        run "sudo cp -f tmp/jenkins_nginx.conf /etc/nginx/conf.d/servers/jenkins.conf"
       end
     end
 

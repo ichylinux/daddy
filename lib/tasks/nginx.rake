@@ -14,12 +14,13 @@ namespace :dad do
         '/etc/nginx/conf.d/example_ssl.conf'
       ]
       default_config_files.each do |conf|
-        fail unless system("sudo mv #{conf} #{conf}.org") if File.exist?(conf)
+        run "sudo mv #{conf} #{conf}.org" if File.exist?(conf)
       end
 
       template = File.join(File.dirname(__FILE__), 'nginx', 'nginx.conf.erb')
       render template, :to => 'tmp/nginx.conf'
-      fail unless system("sudo cp -f tmp/nginx.conf /etc/nginx/conf.d/nginx.conf")
+      run "sudo cp -f tmp/nginx.conf /etc/nginx/conf.d/nginx.conf"
+      run "sudo mkdir -p /etc/nginx/conf.d/servers"
 
       publish = ENV['PUBLISH'] || false
       if publish

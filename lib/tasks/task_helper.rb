@@ -50,3 +50,10 @@ def self.ask(prompt, options = {})
 
   answer.blank? ? nil : answer
 end
+
+def self.run(*commands)
+  commands.each do |c|
+    puts c
+    fail unless system(c)
+  end
+end
