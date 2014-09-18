@@ -8,7 +8,7 @@ server {
   server_name <%= @server_name %>;
   #access_log /var/log/nginx/jenkins_access.log ltsv;
 <% if @ssl_certificate and @ssl_certificate_key -%>
-  ssl_certificate <%= ssl_certificate %>;
+  ssl_certificate <%= @ssl_certificate %>;
   ssl_certificate_key <%= @ssl_certificate_key %>;
 <% end -%>
   root /var/cache/jenkins/war;
