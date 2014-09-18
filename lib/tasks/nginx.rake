@@ -35,12 +35,5 @@ namespace :dad do
       system("sudo cp -f tmp/nginx.#{app_name}.conf /etc/nginx/conf.d/servers/#{app_name}.conf")
     end
 
-    desc 'NginxにJenkinsの設定ファイルをインストールします。'
-    task :jenkins => :environment do
-      fail unless system("erb -T - #{File.dirname(__FILE__)}/nginx.jenkins.conf.erb > tmp/nginx.jenkins.conf")
-      system("sudo mkdir -p /etc/nginx/conf.d/servers") 
-      system("sudo cp -f tmp/nginx.jenkins.conf /etc/nginx/conf.d/servers/jenkins.conf")
-    end
-
   end
 end
