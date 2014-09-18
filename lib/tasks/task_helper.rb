@@ -23,7 +23,7 @@ def self.render(template, options = {})
 end
 
 def self.ask(prompt, options = {})
-  if optoins[:default]
+  if options[:default]
     print prompt + "[#{options[:default]}]: "
   else
     print prompt + ": "
