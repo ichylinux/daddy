@@ -11,7 +11,3 @@ sudo chown root:root /etc/sysconfig/jenkins
 sudo chmod 600 /etc/sysconfig/jenkins
 sudo mkdir -p /var/lib/jenkins/plugins
 sudo chown jenkins:jenkins /var/lib/jenkins/plugins
-
-if [ -d /etc/nginx/conf.d ]; then
-  sudo cp -f ${SCRIPT_BASE}/nginx.conf /etc/nginx/conf.d/
-fi

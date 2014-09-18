@@ -8,7 +8,7 @@ namespace :dad do
       FileUtils.mkdir_p 'tmp'
 
       script = File.join(File.dirname(__FILE__), 'jenkins', 'install.sh')
-      fail unless system "bash -ex #{script}"
+      run "bash -ex #{script}"
 
       plugins = [
         {:name => 'build-pipeline-plugin', :version => '1.4.3'},
@@ -22,16 +22,11 @@ namespace :dad do
       ]
       plugins.each do |p|
         download_path = "tmp/#{p[:name]}-#{p[:version]}.hpi"
-
         unless File.exist?(download_path)
-          command = "sudo wget http://updates.jenkins-ci.org/download/plugins/#{p[:name]}/#{p[:version]}/#{p[:name]}.hpi -O #{download_path}"
-          puts command
-          fail unless system(command)
+          run "sudo wget http://updates.jenkins-ci.org/download/plugins/#{p[:name]}/#{p[:version]}/#{p[:name]}.hpi -O #{download_path}"
         end
         
-        command = "sudo cp -f #{download_path} /var/lib/jenkins/plugins/#{p[:name]}.hpi"
-        puts command
-        fail unless system(command)
+        run "sudo cp -f #{download_path} /var/lib/jenkins/plugins/#{p[:name]}.hpi"
       end
     end
 
