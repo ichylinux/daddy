@@ -38,6 +38,8 @@ namespace :dad do
       desc 'Nginxの設定を行います。'
       task :config do
         @server_name = ask('server_name', :required => true)
+        @ssl_certificate = ask('ssl_certificate')
+        @ssl_certificate_key = ask('ssl_certificate_key')
 
         FileUtils.mkdir_p 'tmp'
         template = File.join(File.dirname(__FILE__), 'jenkins', 'nginx.conf.erb')

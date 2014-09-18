@@ -23,7 +23,11 @@ def self.render(template, options = {})
 end
 
 def self.ask(prompt, options = {})
-  print prompt + "[#{options[:default]}]: "
+  if optoins[:default]
+    print prompt + "[#{options[:default]}]: "
+  else
+    print prompt + ": "
+  end
 
   if options[:password]
     system("stty -echo")
@@ -44,5 +48,5 @@ def self.ask(prompt, options = {})
     raise "必須です。処理を中止します。"
   end
 
-  answer
+  answer.blank? ? nil : answer
 end

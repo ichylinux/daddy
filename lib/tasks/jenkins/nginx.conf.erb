@@ -7,8 +7,10 @@ server {
   listen 443 ssl;
   server_name <%= @server_name %>;
   #access_log /var/log/nginx/jenkins_access.log ltsv;
-  ssl_certificate conf.d/server.crt;
-  ssl_certificate_key conf.d/server.key;
+<% if @ssl_certificate and @ssl_certificate_key -%>
+  ssl_certificate <%= ssl_certificate %>;
+  ssl_certificate_key <%= @ssl_certificate_key %>;
+<% end -%>
   root /var/cache/jenkins/war;
 
   location / {
