@@ -1,6 +1,4 @@
-# coding: UTF-8
-
-require 'rake'
+require_relative 'task_helper'
 
 namespace :dad do
   
@@ -17,8 +15,6 @@ namespace :dad do
       args << arg
     end
 
-    command = "bundle exec rake dad:cucumber #{args.join(' ')}"
-    puts command
-    fail unless system(command)
+    run "bundle exec rake dad:cucumber #{args.join(' ')}"
   end  
 end
