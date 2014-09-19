@@ -1,12 +1,15 @@
 require 'rake'
 
+dependencies = ['environment', 'db:test:prepare']
 unless defined?(Rails)
-  task :environment do; end
+  dependencies.each do |t|
+    task t do; end
+  end
 end
 
 namespace :dad do
 
-  task :cucumber => ['environment', 'db:test:prepare'] do |t, args|
+  task :cucumber => dependencies do |t, args|
     format = ENV['FORMAT'] || 'Daddy::Formatter::Html'
 
     options = [
@@ -28,9 +31,6 @@ namespace :dad do
     output = "features/reports/index.html"
     output = "test/reports" if format == 'junit'
 
-    command = "bundle exec cucumber --guess --quiet --no-multiline -r features --format pretty --format #{format} --out #{output} #{features.join(' ')} #{options}"
-    puts command
-    ret = system(command)
-    fail unless ret
+    run "bundle exec cucumber --guess --quiet --no-multiline -r features --format pretty --format #{format} --out #{output} #{features.join(' ')} #{options}"
   end
 end
