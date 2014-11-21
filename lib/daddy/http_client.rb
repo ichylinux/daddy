@@ -49,8 +49,8 @@ module Daddy
     end
     
     def ssl_options
-      lib_dir = File.expand_path('../..', __FILE__)
-      ca_path = File.join(lib_dir, 'ssl')
+      daddy_dir = File.expand_path('../../..', __FILE__)
+      ca_path = File.join(daddy_dir, 'ssl')
   
       ret = {
         :ca_path => ca_path,

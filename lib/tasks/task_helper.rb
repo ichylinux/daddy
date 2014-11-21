@@ -19,12 +19,13 @@ def self.template_dir
 end
 
 def self.render(template, options = {})
+  FileUtils.mkdir_p(File.dirname(options[:to]))
   File.write(options[:to], ERB.new(File.read(template), 0, '-').result)
 end
 
 def self.ask(prompt, options = {})
   if options[:default]
-    print prompt + "[#{options[:default]}]: "
+    print prompt + " [#{options[:default]}]: "
   else
     print prompt + ": "
   end

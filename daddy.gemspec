@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors     = ["ichy"]
   s.email       = 'ichylinux@gmail.com'
   s.homepage    = 'https://github.com/ichylinux/daddy'
-  s.files       = Dir['app/**/*'] + Dir['lib/**/*'] + Dir['templates/**/*'] + Dir['vendor/**/*']
+  s.files       = Dir['app/**/*'] + Dir['lib/**/*'] + Dir['ssl/**/*'] + Dir['templates/**/*'] + Dir['vendor/**/*']
   s.executables << 'dad'
 
   s.required_ruby_version = '~> 2.0'

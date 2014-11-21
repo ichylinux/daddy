@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    daddy (0.3.13)
+    daddy (0.3.14)
       capybara (~> 2.4)
       ci_reporter (>= 1.9.0, < 2.0.0)
       cucumber (~> 1.3)

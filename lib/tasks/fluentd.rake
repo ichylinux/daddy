@@ -1,6 +1,3 @@
-# coding: UTF-8
-
-require 'rake'
 require_relative 'task_helper'
 
 namespace :dad do

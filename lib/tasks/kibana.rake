@@ -1,4 +1,3 @@
-require 'rake'
 require_relative 'task_helper'
 
 namespace :dad do
@@ -9,7 +8,7 @@ namespace :dad do
       FileUtils.mkdir_p(File.join(rails_root, 'tmp'))
 
       script = File.join(File.dirname(__FILE__), 'kibana', 'install.sh')
-      fail unless system("bash -x #{script}")
+      run "bash -x #{script}"
     end
 
   end
