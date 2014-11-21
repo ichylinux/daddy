@@ -29,6 +29,7 @@ pushd tmp
   rm -Rf elasticsearch-elasticsearch-servicewrapper*
   tar zxf elasticsearch-servicewrapper.tar.gz
   sudo mv elasticsearch-elasticsearch-servicewrapper*/service /opt/elasticsearch/bin/
+  sudo /opt/elasticsearch/bin/service/elasticsearch remove
   sudo /opt/elasticsearch/bin/service/elasticsearch install
   sudo chkconfig elasticsearch on
 popd
