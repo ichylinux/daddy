@@ -15,8 +15,8 @@ server {
   server_name           <%= @options[:server] %>;
   access_log            /var/log/nginx/kibana.access.log ltsv;
 
-  ssl_certificate conf.d/server.crt;
-  ssl_certificate_key conf.d/server.key;
+  ssl_certificate /etc/pki/tls/certs/nginx.pem;
+  ssl_certificate_key /etc/pki/tls/certs/nginx.pem;
 
   auth_basic "<%= @options[:server] %>";
   auth_basic_user_file conf.d/.htpasswd;
