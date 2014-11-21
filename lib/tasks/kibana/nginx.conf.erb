@@ -13,8 +13,7 @@
 server {
   listen 443;
   server_name           <%= @options[:server] %>;
-  access_log            /var/log/nginx/kibana.access.log ltsv;
-
+  #access_log            /var/log/nginx/kibana.access.log ltsv;
   ssl_certificate /etc/pki/tls/certs/nginx.pem;
   ssl_certificate_key /etc/pki/tls/certs/nginx.pem;
 
