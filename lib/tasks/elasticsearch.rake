@@ -12,6 +12,9 @@ namespace :dad do
       template = File.join(File.dirname(__FILE__), 'elasticsearch', 'elasticsearch.yml.erb')
       render(template, :to => File.join('tmp', 'elasticsearch.yml'))
 
+      template = File.join(File.dirname(__FILE__), 'elasticsearch', 'elasticsearch.conf.erb')
+      render(template, :to => File.join('tmp', 'elasticsearch.conf'))
+
       script = File.join(File.dirname(__FILE__), 'elasticsearch', 'install.sh')
       run "bash -ex #{script}"
     end
