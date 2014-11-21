@@ -5,10 +5,14 @@ namespace :dad do
 
     desc "Kibanaをインストールします。"
     task :install do
-      FileUtils.mkdir_p(File.join(rails_root, 'tmp'))
+      @options = {
+        :version => ask('version', :default => '3.1.2'),
+        :elasticsearch => ask('elasticsearch', :default => '"https://" + window.location.hostname')
+      }
+      render(task_file('kibana', 'config.js.erb'), :to => 'tmp/config.js')
 
-      script = File.join(File.dirname(__FILE__), 'kibana', 'install.sh')
-      run "bash -x #{script}"
+      run "bash -ex #{task_file('kibana', 'configure.sh')} #{@options[:version]}"
+      run "bash -ex #{task_file('kibana', 'install.sh')} #{@options[:version]}" unless ENV['DRY_RUN']
     end
 
   end

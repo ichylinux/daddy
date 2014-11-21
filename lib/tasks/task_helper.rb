@@ -18,6 +18,10 @@ def self.template_dir
   File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'templates')
 end
 
+def self.task_file(*path)
+  File.join(File.dirname(__FILE__), *path)
+end
+
 def self.render(template, options = {})
   FileUtils.mkdir_p(File.dirname(options[:to]))
   File.write(options[:to], ERB.new(File.read(template), 0, '-').result)
