@@ -15,6 +15,7 @@ namespace :dad do
       args << arg
     end
 
-    run "bundle exec rake dad:cucumber #{args.join(' ')}"
+    format = ENV['FORMAT'] || 'Daddy::Formatter::Html'
+    run "bundle exec rake close FORMAT=#{format} #{args.join(' ')}"
   end  
 end
