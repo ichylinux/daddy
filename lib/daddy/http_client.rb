@@ -16,31 +16,31 @@ module Daddy
           basic = 'Basic ' + Base64.encode64(@options[:auth_user] + ':' + @options[:auth_password])
           request.headers['Authorization'] = basic
         end
-        
+
         if @cookie
           request.headers['Cookie'] = @cookie
         end
-        
+
         params.each do |key, value|
           request.params[key] = value
         end
       end
-      
+
       @cookie = response.headers['set-cookie']
-      
+
       if block_given?
         yield response
       else
         response.body.force_encoding('UTF-8')
       end
     end
-  
+
     def post(path, params = {})
       response = connection.post(path, params)
     end
-    
+
     private
-  
+
     def connection
       Faraday.new(:url => @url, :ssl => ssl_options) do |faraday|
         faraday.request :url_encoded
@@ -51,12 +51,13 @@ module Daddy
     def ssl_options
       daddy_dir = File.expand_path('../../..', __FILE__)
       ca_path = File.join(daddy_dir, 'ssl')
-  
+
       ret = {
         :ca_path => ca_path,
         :ca_file => File.join(ca_path, 'cert.pem'),
         :verify => @options[:verify_ssl] || false,
       }
     end
+
   end
 end
