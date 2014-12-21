@@ -4,8 +4,8 @@ namespace :dad do
   
   desc 'Cucumberを使用してテストを実行します。'
   task :test => :environment do
-    system("mkdir -p features/reports")
-    system("rm -Rf features/reports/*")
+    run 'mkdir -p features/reports',
+        'rm -Rf features/reports/*'
 
     args = []    
     ARGV[1..-1].each do |arg|
@@ -16,6 +16,7 @@ namespace :dad do
     end
 
     format = ENV['FORMAT'] || 'Daddy::Formatter::Html'
-    run "bundle exec rake close FORMAT=#{format} #{args.join(' ')}"
+    coverage = ENV['COVERAGE'] || true
+    run "bundle exec rake close FORMAT=#{format} COVERAGE=#{coverage} #{args.join(' ')}"
   end  
 end
