@@ -6,8 +6,8 @@ namespace :dad do
     desc 'Nginxをインストールします。'
     task :install => :environment do
       repo = File.join(File.dirname(__FILE__), 'nginx', 'nginx.repo')
-      fail unless system("sudo cp -f #{repo} /etc/yum.repos.d/")
-      fail unless system("sudo yum install nginx")
+      run "sudo cp -f #{repo} /etc/yum.repos.d/",
+          "sudo yum install nginx"
       
       default_config_files = [
         '/etc/nginx/conf.d/default.conf',
@@ -31,9 +31,13 @@ namespace :dad do
 
     desc 'Nginxにアプリケーションの設定ファイルをインストールします。'
     task :config => :environment do
-      fail unless system("RAILS_ROOT=#{rails_root} RAILS_ENV=#{Rails.env} APP_NAME=#{app_name} erb -T - #{File.dirname(__FILE__)}/nginx.app.conf.erb > tmp/nginx.#{app_name}.conf")
-      system("sudo mkdir -p /etc/nginx/conf.d/servers") 
-      system("sudo cp -f tmp/nginx.#{app_name}.conf /etc/nginx/conf.d/servers/#{app_name}.conf")
+      conf = File.join('tmp', 'nginx', "#{app_name}.conf")
+      render File.join(File.dirname(__FILE__), 'nginx', 'app.conf.erb'), :to => conf
+
+      unless dry_run?
+        run "sudo mkdir -p /etc/nginx/conf.d/servers",
+            "sudo cp -f #{conf} /etc/nginx/conf.d/servers/"
+      end
     end
 
   end

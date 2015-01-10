@@ -18,13 +18,27 @@ def self.template_dir
   File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'templates')
 end
 
+def self.dry_run?
+  %w{ DRY_RUN DR }.each do |key|
+    return true if %w{ true t yes y 1 }.include?(ENV[key].to_s.downcase)
+  end
+  
+  false
+end
+
 def self.task_file(*path)
   File.join(File.dirname(__FILE__), *path)
 end
 
 def self.render(template, options = {})
-  FileUtils.mkdir_p(File.dirname(options[:to]))
-  File.write(options[:to], ERB.new(File.read(template), 0, '-').result)
+  text = ERB.new(File.read(template), 0, '-').result
+
+  if options[:to]
+    FileUtils.mkdir_p(File.dirname(options[:to]))
+    File.write(options[:to], text)
+  end
+
+  text
 end
 
 def self.ask(prompt, options = {})

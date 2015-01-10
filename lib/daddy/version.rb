@@ -1,3 +1,3 @@
 module Daddy
-  VERSION = '0.3.19'.freeze
+  VERSION = '0.3.20'.freeze
 end
