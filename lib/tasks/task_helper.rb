@@ -71,6 +71,8 @@ def self.ask(prompt, options = {})
 end
 
 def self.run(*commands)
+  return if dry_run?
+
   commands.each do |c|
     puts c
     fail unless system(c)

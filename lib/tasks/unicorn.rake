@@ -1,28 +1,21 @@
-require 'rake'
+require_relative 'task_helper'
 
 namespace :dad do
   namespace :unicorn do
 
-    desc 'Unicornをインストールします。'
-    task :install => :environment do
-      rails_env = ENV['RAILS_ENV'] || Rails.env
-      rails_root = ENV['RAILS_ROOT'] || Rails.root
-      init_script = 'unicorn_' + YAML.load_file("config/database.yml")[Rails.env]['database']
+    desc 'Unicornの設定を行います。'
+    task :config => :environment do
+      config = File.join('tmp', 'unicorn', 'unicorn.rb')
+      render File.join(File.dirname(__FILE__), 'unicorn', 'unicorn.rb.erb'), :to => config
+      run "cp -f #{config} config/"
 
-      commands = [
-        "RAILS_ENV=#{rails_env} RAILS_ROOT=#{rails_root} erb -T - #{File.dirname(__FILE__)}/unicorn.erb > tmp/#{init_script}",
-        "RAILS_ENV=#{rails_env} RAILS_ROOT=#{rails_root} erb -T - #{File.dirname(__FILE__)}/unicorn.rb.erb > config/unicorn.rb",
+      init_script = File.join('tmp', 'unicorn', "unicorn_#{app_name}")
+      render File.join(File.dirname(__FILE__), 'unicorn', 'unicorn.erb'), :to => init_script
 
-        "sudo cp -f tmp/#{init_script} /etc/init.d/#{init_script}",
-        "sudo chown root:root /etc/init.d/#{init_script}",
-        "sudo chmod 755 /etc/init.d/#{init_script}",
-        "sudo /sbin/chkconfig #{init_script} on",
-      ]
-
-      commands.each do |c|
-        puts c
-        fail unless system(c)
-      end
+      run "sudo cp -f #{init_script} /etc/init.d/",
+          "sudo chown root:root /etc/init.d/#{File.basename(init_script)}",
+          "sudo chmod 755 /etc/init.d/#{File.basename(init_script)}",
+          "sudo /sbin/chkconfig #{File.basename(init_script)} on"
     end  
 
   end
