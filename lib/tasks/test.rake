@@ -8,7 +8,7 @@ namespace :dad do
         'rm -Rf features/reports/*'
 
     ENV['FORMAT'] ||= 'Daddy::Formatter::Html'
-    ENV['COVERAGE'] ||= 'true'
     Rake::Task['close'].invoke
-  end  
+  end
+
 end
