@@ -18,14 +18,6 @@ require 'capybara/poltergeist' if ENV['DRIVER'] == 'poltergeist'
 Capybara.default_driver = (ENV['DRIVER'] || :selenium).to_sym
 Capybara.default_selector = :css
 
-Dir::glob(File.dirname(__FILE__) + '/cucumber/*.rb').each do |file|
-  require file
-end
-
-Dir::glob(File.dirname(__FILE__) + '/cucumber/step_definitions/*.rb').each do |file|
-  load file
-end
-
 def override_method(obj, method_name, &block)
   klass = class <<obj; self; end
   klass.send(:undef_method, method_name)
@@ -54,6 +46,7 @@ AfterConfiguration do |configuration|
   }
 end
 
+require_relative 'cucumber/helpers'
 require_relative 'cucumber/hooks/database' if defined?(Rails)
 
 Before do

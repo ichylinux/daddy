@@ -1,7 +1,14 @@
 module Daddy
   module Cucumber
     module Capture
-      REPORT_DIR = File.join('features', 'reports')
+      feature_dir = 'feature'
+      ARGV.each_with_index do |arg, i|
+        if arg == '-r'
+          feature_dir = ARGV[i + 1]
+          break
+        end
+      end
+      REPORT_DIR = File.join(feature_dir, 'reports')
       IMAGE_DIR = 'images'
       FileUtils.mkdir_p("#{REPORT_DIR}/#{IMAGE_DIR}")
     
