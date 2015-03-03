@@ -1,20 +1,5 @@
 require 'rails_i18n'
 require 'holiday_jp'
-
-true_values = %w{ true t 1 }
-if true_values.include?(ENV["COVERAGE"].to_s.downcase) and true_values.include?(ENV['ACCEPTANCE_TEST'].to_s.downcase)
-  require 'simplecov'
-  require 'simplecov-rcov'
-  SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
-
-  if ENV['COMMAND_NAME']
-    SimpleCov.command_name(ENV['COMMAND_NAME'])
-  end
-
-  SimpleCov.merge_timeout(7200)
-  SimpleCov.start 'rails'
-end
-
 require 'daddy/helpers/html_helper'
 require 'daddy/http_client'
 require 'daddy/model'
