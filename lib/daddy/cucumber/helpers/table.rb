@@ -8,7 +8,7 @@ module Daddy
           row = []
       
           ast_row.each do |ast_col|
-            value = ast_col.gsub(/　/, '')
+            value = ast_col.gsub(/^[　\s]*(.*?)[　\s]*$/, '\1')
             row << value
           end
       
