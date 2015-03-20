@@ -1,7 +1,7 @@
 module Daddy
   module Cucumber
     module Capture
-      feature_dir = 'feature'
+      feature_dir = 'features'
       ARGV.each_with_index do |arg, i|
         if arg == '-r'
           feature_dir = ARGV[i + 1]
@@ -16,6 +16,9 @@ module Daddy
       @@_images = []
     
       def capture(options = {})
+        options ||= {}
+        options = {:title => options} if options.is_a?(String)
+
         pause
         return if ENV['FORMAT'] == 'junit'
 
@@ -26,10 +29,12 @@ module Daddy
         image = "#{IMAGE_DIR}/#{@@_screen_count}.png"
         page.driver.save_screenshot("#{REPORT_DIR}/#{image}", :full => true)
 
+        image_tag = "<img class=\"screenshot\" src=\"#{image}\" title=\"#{options[:title]}\" alt=\"#{url}\"/>"
+
         if options[:flash]
-          puts "<img class=\"screenshot\" src=\"#{image}\" alt=\"#{url}\"/>"
+          puts image_tag
         else
-          @@_images << "<img class=\"screenshot\" src=\"#{image}\" alt=\"#{url}\"/>"
+          @@_images << image_tag
         end
       end
 
