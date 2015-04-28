@@ -15,7 +15,7 @@ CONFIG=${RAILS_ROOT}/config/unicorn.rb
 export PATH="${PATH}":/usr/local/bin
 
 start() {
-  daemon --user=${RAILS_USER} --pidfile=$PID bundle exec unicorn_rails -c ${CONFIG} -E ${RAILS_ENV} -D
+  daemon --user=${RAILS_USER} --pidfile=$PID bundle exec unicorn -c ${CONFIG} -E ${RAILS_ENV} -D
 }
 
 stop() {
