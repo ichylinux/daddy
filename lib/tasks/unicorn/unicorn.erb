@@ -6,8 +6,8 @@
 . /etc/rc.d/init.d/functions
 
 RAILS_USER=<%= ENV['USER'] %>
-RAILS_ENV=<%= ENV['RAILS_ENV'] %>
-RAILS_ROOT=<%= ENV['RAILS_ROOT'] %>
+RAILS_ENV=<%= ENV['RAILS_ENV'] || 'development' %>
+RAILS_ROOT=<%= ENV['RAILS_ROOT'] || Rails.root %>
 
 PID=${RAILS_ROOT}/tmp/pids/unicorn.pid
 CONFIG=${RAILS_ROOT}/config/unicorn.rb
