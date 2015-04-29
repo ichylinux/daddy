@@ -1,6 +1,7 @@
 require 'yaml'
 
 rails_root = "#{File.dirname(File.expand_path(__FILE__))}/.."
+rails_env = ENV['RAILS_ENV'] || 'development'
 
 worker_processes 2
 working_directory rails_root
