@@ -6,8 +6,8 @@
 . /etc/rc.d/init.d/functions
 
 RAILS_USER=<%= ENV['USER'] %>
-RAILS_ENV=<%= ENV['RAILS_ENV'] || 'development' %>
-RAILS_ROOT=<%= ENV['RAILS_ROOT'] || Rails.root %>
+RAILS_ENV=<%= rails_env %>
+RAILS_ROOT=<%= rails_root %>
 
 PID=${RAILS_ROOT}/tmp/pids/unicorn.pid
 CONFIG=${RAILS_ROOT}/config/unicorn.rb
@@ -15,7 +15,7 @@ CONFIG=${RAILS_ROOT}/config/unicorn.rb
 export PATH="${PATH}":/usr/local/bin
 
 start() {
-  daemon --user=${RAILS_USER} --pidfile=$PID bundle exec unicorn -c ${CONFIG} -E ${RAILS_ENV} -D
+  daemon --user=${RAILS_USER} --pidfile=$PID bundle exec unicorn_rails -c ${CONFIG} -E ${RAILS_ENV} -D
 }
 
 stop() {

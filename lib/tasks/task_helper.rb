@@ -3,11 +3,11 @@ require 'erb'
 require 'yaml'
 
 def self.rails_root
-  ENV['RAILS_ROOT'] || Rails.root
+  ENV['RAILS_ROOT'] || @_rails_root ||= ask('RAILS_ROOT', :default => Rails.root)
 end
 
 def self.rails_env
-  ENV['RAILS_ENV'] || 'development'
+  ENV['RAILS_ENV'] || @_rails_env ||= ask('RAILS_ENV', :default => 'development')
 end
 
 def self.app_name
