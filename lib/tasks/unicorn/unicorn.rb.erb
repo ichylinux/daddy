@@ -1,13 +1,12 @@
 require 'yaml'
 
 rails_root = "#{File.dirname(File.expand_path(__FILE__))}/.."
-rails_env = ENV['RAILS_ENV'] || 'development'
 
 worker_processes 2
 working_directory rails_root
 
-database = YAML.load_file("#{File.dirname(__FILE__)}/database.yml")[rails_env]['database']
-listen "/tmp/#{database}.sock"
+app_name = YAML.load_file("#{File.dirname(__FILE__)}/database.yml")[Rails.env]['database']
+listen "/tmp/#{app_name}.sock"
 timeout 300
 
 stdout_path rails_root + '/log/unicorn.log'

@@ -11,7 +11,7 @@ def self.rails_env
 end
 
 def self.app_name
-  YAML.load_file("#{rails_root}/config/database.yml")[Rails.env]['database']
+  YAML.load_file("#{rails_root}/config/database.yml")[rails_env]['database']
 end
 
 def self.template_dir
