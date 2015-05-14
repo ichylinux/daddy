@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 if defined?(RailsCsvFixtures)
   namespace :db do
     namespace :fixtures do

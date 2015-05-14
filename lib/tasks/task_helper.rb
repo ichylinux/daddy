@@ -71,10 +71,14 @@ def self.ask(prompt, options = {})
 end
 
 def self.run(*commands)
-  return if dry_run?
+  options = commands.pop if commands.last.is_a?(Hash)
 
   commands.each do |c|
-    puts c
-    fail unless system(c)
+    if dry_run?
+      puts "command to be run: #{options[:gsub] ? c.gsub(*options[:gsub]) : c}"
+    else
+      puts options[:gsub] ? c.gsub(*options[:gsub]) : c
+      fail unless system(c)
+    end
   end
 end
