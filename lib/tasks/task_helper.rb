@@ -72,6 +72,7 @@ end
 
 def self.run(*commands)
   options = commands.pop if commands.last.is_a?(Hash)
+  options ||= {}
 
   commands.each do |c|
     if dry_run?
