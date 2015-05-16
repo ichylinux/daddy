@@ -1,12 +1,3 @@
-if defined?(Rails)
-  require 'daddy/rails/engine'
-  require 'daddy/rails/railtie'
-else
-  Dir[File.join(File.dirname(__FILE__), 'tasks', '*.rake')].each do |f|
-    load f
-  end
-end
-
 require 'daddy/utils/config'
 require 'daddy/utils/string_utils'
 require 'sql_builder'
@@ -17,4 +8,13 @@ module Daddy
     @_config ||= Daddy::Utils::Config.new(File.join('config', 'daddy.yml'))
   end
 
+end
+
+if defined?(Rails)
+  require 'daddy/rails/engine'
+  require 'daddy/rails/railtie'
+else
+  Dir[File.join(File.dirname(__FILE__), 'tasks', '*.rake')].each do |f|
+    load f
+  end
 end

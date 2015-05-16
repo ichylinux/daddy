@@ -1,4 +1,5 @@
 require 'erb'
+require 'daddy'
 
 module Daddy
   module Formatter
