@@ -70,15 +70,21 @@ def self.ask(prompt, options = {})
   answer.blank? ? nil : answer
 end
 
+def self.quiet?
+  ARGV.include?('--quiet') or ARGV.include?('-q')
+end
+
 def self.run(*commands)
   options = commands.pop if commands.last.is_a?(Hash)
   options ||= {}
 
   commands.each do |c|
+    masked_command = options[:mask] ? c.gsub(*options[:mask]) : c
+
     if dry_run?
-      puts "command to be run: #{options[:gsub] ? c.gsub(*options[:gsub]) : c}"
+      puts "command to be run: #{masked_command}" unless quiet?
     else
-      puts options[:gsub] ? c.gsub(*options[:gsub]) : c
+      puts masked_command unless quiet?
       fail unless system(c)
     end
   end

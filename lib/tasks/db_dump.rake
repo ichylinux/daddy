@@ -17,7 +17,7 @@ namespace :dad do
 
       run "mkdir -p #{File.dirname(filepath)}",
           "mysqldump -u #{user} -p#{password} -h #{host} #{database} | gzip > #{filepath}",
-          :gsub => [/-p[^ ]+/, '-pFILTERED']
+          :mask => [/-p[^ ]+/, '-pFILTERED']
     end
   end
 
