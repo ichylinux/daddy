@@ -14,7 +14,7 @@ if defined?(Rails)
   require 'daddy/rails/engine'
   require 'daddy/rails/railtie'
 else
-  Dir[File.join(File.dirname(__FILE__), 'tasks', '*.rake')].each do |f|
+  Dir[File.join(File.dirname(__FILE__), 'tasks/**/*.rake')].each do |f|
     load f
   end
 end

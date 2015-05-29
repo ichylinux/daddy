@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    daddy (0.3.34)
+    daddy (0.3.35)
       capybara (~> 2.4)
       ci_reporter (>= 1.9.0, < 2.0.0)
       closer (~> 0.1)
@@ -105,9 +105,9 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mime-types (2.5)
+    mime-types (2.6.1)
     mini_portile (0.6.2)
-    minitest (5.6.1)
+    minitest (5.7.0)
     mono_logger (1.1.0)
     multi_json (1.11.0)
     multi_test (0.1.2)
