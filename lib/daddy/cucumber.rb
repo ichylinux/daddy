@@ -1,10 +1,3 @@
-require 'daddy'
-
-if defined?(Rails)
-  require 'capybara/rails'
-  ActionController::Base.allow_rescue = false
-end
-
 require 'daddy/git'
 require 'differ'
 require_relative 'differ/html_patch.rb'
