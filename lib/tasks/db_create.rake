@@ -11,6 +11,8 @@ namespace :dad do
       system("echo '# mysql ddl' > tmp/create_databases.sql")
   
       config.each do |env, props|
+        next if env == 'default'
+
         puts "database for environment #{env}"
         system("echo 'drop database if exists #{props['database']};' >> tmp/create_databases.sql")
         system("echo 'create database #{props['database']};' >> tmp/create_databases.sql")
@@ -23,7 +25,9 @@ namespace :dad do
       end
 
       system("echo >> tmp/create_databases.sql")
-      system("cat tmp/create_databases.sql")
+
+      puts
+      puts File.read('tmp/create_databases.sql')
 
       if ENV['NO_ROOT_PASSWORD']
         fail unless system("mysql -u root < tmp/create_databases.sql")

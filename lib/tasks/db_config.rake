@@ -5,9 +5,10 @@ namespace :dad do
     
     desc 'database.yml を生成します。'
     task :config do
-      command = "APP_NAME=#{File.basename(Rails.root)} erb -T - #{File.dirname(__FILE__)}/database.yml.erb > config/database.yml"
-      puts command
-      system("#{command}")
+      @app_name = File.basename(Rails.root)[0..15]
+
+      template File.join(File.dirname(__FILE__), 'db/database.yml.erb')
+      render template, :to => 'config/database.yml'
     end
   end
 end
