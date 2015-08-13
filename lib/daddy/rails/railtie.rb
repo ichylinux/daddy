@@ -28,7 +28,7 @@ module Daddy
       end
   
       rake_tasks do
-        require 'daddy/tasks'
+        require 'closer/tasks'
       end
     end
   end

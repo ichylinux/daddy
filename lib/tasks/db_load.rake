@@ -21,6 +21,6 @@ namespace :dad do
           :mask => [/-p[^ ]+/, '-pFILTERED']
       end
     end
-  end
 
+  end
 end
