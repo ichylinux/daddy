@@ -37,7 +37,6 @@ module Daddy
       end
 
       def confirm(ok = true)
-        puts("確認ダイアログで #{ok ? 'OK' : 'キャンセル'} をクリック")
         return unless Capybara.current_driver == :selenium
 
         if ok
