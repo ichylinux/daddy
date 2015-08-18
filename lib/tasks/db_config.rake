@@ -1,4 +1,4 @@
-require 'rake'
+require_relative 'task_helper'
 
 namespace :dad do
   namespace :db do
@@ -7,7 +7,7 @@ namespace :dad do
     task :config do
       @app_name = File.basename(Rails.root)[0..15]
 
-      template File.join(File.dirname(__FILE__), 'db/database.yml.erb')
+      template = File.join(File.dirname(__FILE__), 'db/database.yml.erb')
       render template, :to => 'config/database.yml'
     end
   end
