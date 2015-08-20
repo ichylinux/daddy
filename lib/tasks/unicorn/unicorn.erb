@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # chkconfig: - 85 15
-# description: unicorn
+# description: <%= app_name %>
 
 . /etc/rc.d/init.d/functions
 
@@ -15,11 +15,15 @@ CONFIG=${RAILS_ROOT}/config/unicorn.rb
 export PATH="${PATH}":/usr/local/bin
 
 start() {
+  echo -n 'Starting <%= app_name %>: '
   daemon --user=${RAILS_USER} --pidfile=$PID bundle exec unicorn_rails -c ${CONFIG} -E ${RAILS_ENV} -D
+  echo
 }
 
 stop() {
+  echo -n 'Stopping <%= app_name %>: '
   killproc -p ${PID} -QUIT
+  echo
 }
 
 cd ${RAILS_ROOT} || exit 1

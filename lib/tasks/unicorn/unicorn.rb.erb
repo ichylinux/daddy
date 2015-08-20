@@ -6,7 +6,7 @@ rails_env = ENV['RAILS_ENV'] || 'development'
 worker_processes 2
 working_directory rails_root
 
-app_name = YAML.load_file("#{File.dirname(__FILE__)}/database.yml")[Rails.env]['database']
+app_name = YAML.load_file("#{File.dirname(__FILE__)}/database.yml")[rails_env]['database']
 listen "/tmp/#{app_name}.sock"
 timeout 300
 
