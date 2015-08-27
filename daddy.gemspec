@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '~> 2.0'
 
-  s.add_runtime_dependency 'capybara', '~> 2.4'
+  s.add_runtime_dependency 'capybara', '~> 2.5'
   s.add_runtime_dependency 'closer', '~> 0.2'
   s.add_runtime_dependency 'ci_reporter', '>= 1.9.0', '< 2.0.0'
   s.add_runtime_dependency 'database_cleaner', '~> 1.3'
