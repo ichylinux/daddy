@@ -1,13 +1,18 @@
 require 'rake'
 require 'erb'
 require 'yaml'
+require File.join(File.dirname(File.dirname(__FILE__)), 'daddy', 'version.rb')
+
+def self.daddy_version
+  Daddy::VERSION
+end
 
 def self.rails_root
   ENV['RAILS_ROOT'] || @_rails_root ||= ask('RAILS_ROOT', :default => Rails.root)
 end
 
-def self.rails_env
-  ENV['RAILS_ENV'] || @_rails_env ||= ask('RAILS_ENV', :default => 'development')
+def self.rails_env(options = {})
+  ENV['RAILS_ENV'] || @_rails_env ||= ask('RAILS_ENV', :default => options.fetch(:default, 'development'))
 end
 
 def self.app_name
@@ -36,9 +41,12 @@ def self.render(template, options = {})
   if options[:to]
     FileUtils.mkdir_p(File.dirname(options[:to]))
     File.write(options[:to], text)
+    ret = File.new(options[:to])
+  else
+    ret = text
   end
 
-  text
+  ret
 end
 
 def self.ask(prompt, options = {})
