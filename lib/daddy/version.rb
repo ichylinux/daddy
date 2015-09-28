@@ -1,3 +1,3 @@
 module Daddy
-  VERSION = '0.4.5'
+  VERSION = '0.4.6'
 end
