@@ -7,7 +7,6 @@ end
 
 case ENV['FORMAT'].to_s.downcase
 when 'junit'
-  require 'minitest/reporters'
   MiniTest::Reporters.use! [
     MiniTest::Reporters::DefaultReporter.new,
     MiniTest::Reporters::JUnitReporter.new
