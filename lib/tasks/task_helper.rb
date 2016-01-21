@@ -23,6 +23,10 @@ def self.template_dir
   File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'templates')
 end
 
+def self.cookbook_dir
+  File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'cookbooks')
+end
+
 def self.dry_run?
   %w{ DRY_RUN DR }.each do |key|
     return true if %w{ true t yes y 1 }.include?(ENV[key].to_s.downcase)
@@ -96,4 +100,12 @@ def self.run(*commands)
       fail unless system(c)
     end
   end
+end
+
+def self.itamae(recipe)
+  options = []
+  options << '--ohai'
+  options << '--log-level=debug' if ENV['DEBUG']
+
+  run "bundle exec itamae local #{options.join(' ')} #{File.join(cookbook_dir, recipe)}"
 end
