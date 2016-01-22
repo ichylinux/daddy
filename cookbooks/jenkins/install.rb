@@ -1,7 +1,16 @@
 ENV['DAD_JENKINS_URL'] ||= 'http://localhost:8080'
 
-package 'java-1.8.0-openjdk' do
-  user 'root'
+case "#{node[:platform_family]}-#{node[:platform_version]}"
+when /rhel-6\.(.*?)/
+  package 'java-1.7.0-openjdk' do
+    user 'root'
+  end
+when /rhel-7\.(.*?)/
+  package 'java-1.8.0-openjdk' do
+    user 'root'
+  end
+else
+  raise "サポートしていないOSバージョンです。#{node[:platform_family]}-#{node[:platform_version]}"
 end
 
 execute '/etc/yum.repos.d/jenkins.repo' do
