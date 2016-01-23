@@ -1,7 +1,7 @@
 require 'rake'
 require 'erb'
 require 'yaml'
-require File.join(File.dirname(File.dirname(__FILE__)), 'daddy', 'version.rb')
+require File.expand_path('../../daddy/version', __FILE__)
 
 def self.daddy_version
   Daddy::VERSION
