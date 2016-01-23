@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.email       = 'ichylinux@gmail.com'
   s.homepage    = 'https://github.com/ichylinux/daddy'
   s.files       = Dir['app/**/*'] +
-                  Dir['cookbooks/**/*'] +
+                  Dir['itamae/**/*'] +
                   Dir['lib/**/*'] +
                   Dir['ssl/**/*'] +
                   Dir['templates/**/*'] +

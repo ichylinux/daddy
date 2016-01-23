@@ -1,6 +1,9 @@
+require 'daddy/itamae'
+
 ENV['DAD_JENKINS_URL'] ||= 'http://localhost:8080'
 
-case "#{node[:platform_family]}-#{node[:platform_version]}"
+@os_version = "#{node[:platform_family]}-#{node[:platform_version]}"
+case @os_version
 when /rhel-6\.(.*?)/
   package 'java-1.7.0-openjdk' do
     user 'root'
@@ -10,7 +13,7 @@ when /rhel-7\.(.*?)/
     user 'root'
   end
 else
-  raise "サポートしていないOSバージョンです。#{node[:platform_family]}-#{node[:platform_version]}"
+  raise "サポートしていないOSバージョンです。#{@os_version}"
 end
 
 execute '/etc/yum.repos.d/jenkins.repo' do
@@ -27,7 +30,6 @@ package 'jenkins' do
 end
 
 template '/etc/sysconfig/jenkins' do
-  source File.join(File.dirname(__FILE__), 'jenkins.erb')
   user 'root'
   group 'root'
   owner 'root'
@@ -54,14 +56,14 @@ execute 'jenkins-cli.jar' do
 end
 
 @plugins = [
-  {:name => 'build-pipeline-plugin', :version => '1.4.3'},
-  {:name => 'git', :version => '2.2.5'},
-  {:name => 'git-client', :version => '1.10.2'},
-  {:name => 'rake', :version => '1.8.0'},
-  {:name => 'rubyMetrics', :version => '1.6.2'},
-  {:name => 'htmlpublisher', :version => '1.3'},
-  {:name => 'reverse-proxy-auth-plugin', :version => '1.4.0'},
-  {:name => 'thinBackup', :version => '1.7.4'}
+  {:name => 'build-pipeline-plugin', :version => nil},
+  {:name => 'git', :version => nil},
+  {:name => 'git-client', :version => nil},
+  {:name => 'rake', :version => nil},
+  {:name => 'rubyMetrics', :version => nil},
+  {:name => 'htmlpublisher', :version => nil},
+  {:name => 'reverse-proxy-auth-plugin', :version => nil},
+  {:name => 'thinBackup', :version => nil}
 ]
 @plugins.each do |plugin|
   execute "/var/lib/jenkins/plugins/#{plugin[:name]}" do
