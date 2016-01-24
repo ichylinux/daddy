@@ -5,7 +5,7 @@ namespace :dad do
 
     desc 'Jenkinsをインストールします。'
     task :install do
-      itamae 'jenkins/install.rb'
+      run_itamae 'jenkins/install'
     end
 
     namespace :nginx do
