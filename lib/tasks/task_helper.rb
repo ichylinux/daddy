@@ -24,7 +24,7 @@ def self.template_dir
 end
 
 def self.cookbook_dir
-  File.expand_path('../../itamae/cookbooks', __FILE__)
+  File.expand_path('../../../itamae/cookbooks', __FILE__)
 end
 
 def self.dry_run?
