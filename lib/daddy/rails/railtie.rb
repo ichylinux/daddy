@@ -23,10 +23,6 @@ module Daddy
         end
       end
 
-      initializer 'quiet_assets' do
-        load File.join(File.dirname(__FILE__), 'quiet_assets.rb')
-      end
-  
       rake_tasks do
         require 'closer/tasks'
       end
