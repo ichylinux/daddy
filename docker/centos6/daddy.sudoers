@@ -1,0 +1,2 @@
+daddy ALL=(ALL) NOPASSWD: ALL
+Defaults:daddy !requiretty
