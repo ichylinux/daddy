@@ -1,3 +1,5 @@
+require 'daddy/itamae'
+
 case os_version
 when /rhel-6\.(.*?)/
   package 'mysql' do
@@ -9,6 +11,7 @@ when /rhel-6\.(.*?)/
   end
 
   service 'mysqld' do
+    user 'root'
     action [:enable, :start]
   end
 
@@ -22,6 +25,7 @@ when /rhel-7\.(.*?)/
   end
 
   service 'mariadb' do
+    user 'root'
     action [:enable, :start]
   end
 

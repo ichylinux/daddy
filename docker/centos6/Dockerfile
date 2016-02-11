@@ -5,9 +5,11 @@ MAINTAINER ichylinux@gmail.com
 RUN ["yum", "-y", "groupinstall", "Development Tools"]
 RUN ["yum", "-y", "groupinstall", "Japanese Support"]
 RUN ["yum", "-y", "install", "epel-release"]
-RUN ["yum", "-y", "install", "nodejs", "sudo", "tar", "wget"]
+RUN ["yum", "-y", "install", "expect", "nodejs", "sudo", "tar", "wget", "which"]
 RUN ["yum", "-y", "install", "zlib-devel", "openssl-devel", "curl-devel", "readline-devel", "sqlite-devel", "mysql-devel", "libffi-devel", "libxslt-devel", "libxml2-devel", "libyaml-devel", "ImageMagick-devel"]
 RUN ["yum", "-y", "update"]
+
+ENV LANG=ja_JP.UTF-8
 
 # add /usr/local/bin to secure_path
 COPY ["docker/centos6/sudoers", "/etc/sudoers"]
