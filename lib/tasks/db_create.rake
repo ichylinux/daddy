@@ -29,7 +29,7 @@ namespace :dad do
       puts
       puts File.read('tmp/create_databases.sql')
 
-      if ENV['NO_ROOT_PASSWORD']
+      if ENV['DAD_MYSQL_NO_ROOT_PASSWORD']
         fail unless system("mysql -u root < tmp/create_databases.sql")
       else
         fail unless system("mysql -u root -p < tmp/create_databases.sql")

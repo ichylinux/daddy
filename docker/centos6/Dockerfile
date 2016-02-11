@@ -39,7 +39,8 @@ WORKDIR /home/daddy/setup/daddy
 RUN ["bundle", "install"]
 RUN ["sudo", "rake", "install"]
 
-# new rails app for test
+# run new rails app
+ENV DAD_MYSQL_NO_ROOT_PASSWORD=true
 RUN ["mkdir", "-p", "/home/daddy/setup"]
 WORKDIR /home/daddy/setup
 RUN ["dad", "new", "hello_daddy"]
