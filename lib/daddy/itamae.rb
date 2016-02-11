@@ -33,3 +33,7 @@ module Itamae
     end
   end
 end
+
+Dir[File.join(File.dirname(__FILE__), 'itamae', '*.rb')].each do |f|
+  require f
+end
