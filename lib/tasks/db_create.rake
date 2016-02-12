@@ -24,6 +24,7 @@ namespace :dad do
         end
       end
 
+      system("echo 'flush privileges;' >> tmp/create_databases.sql")
       system("echo >> tmp/create_databases.sql")
 
       puts

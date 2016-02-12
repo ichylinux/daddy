@@ -33,3 +33,8 @@ else
   raise "サポートしていないOSバージョンです。#{os_version}"
 end
 
+execute 'mysql_secure_installation' do
+  user 'root'
+  command "bash #{File.join(File.dirname(__FILE__), 'mysql_secure_installation.sh')}"
+  only_if "mysql -u root -e 'select 1;' && test $? -eq 0"
+end
