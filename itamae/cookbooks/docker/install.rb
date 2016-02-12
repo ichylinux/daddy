@@ -10,17 +10,6 @@ when /rhel-6\.(.*?)/
     user 'root'
   end
 
-  execute 'add group docker' do
-    command "groupadd docker"
-    user 'root'
-    not_if 'grep -E "docker:.*" /etc/group'
-  end
-
-  execute 'add user to docker group' do
-    command "usermod -aG docker #{ENV['USER']}"
-    user 'root'
-    not_if 'grep -E "docker:.*:ichy" /etc/group'
-  end
 when /rhel-7\.(.*?)/
   template '/etc/yum.repos.d/docker.repo' do
     user 'root'
@@ -33,13 +22,16 @@ when /rhel-7\.(.*?)/
     user 'root'
   end
 
-  execute 'add user to docker group' do
-    command "usermod -aG docker #{ENV['USER']}"
-    user 'root'
-    not_if 'grep -E "docker:.*:ichy" /etc/group'
-  end
 else
   raise "サポートしていないOSバージョンです。#{os_version}"
+end
+
+group 'docker'
+
+execute 'add user to docker group' do
+  command "usermod -aG docker #{ENV['USER']}"
+  user 'root'
+  not_if "grep -E \"docker:.*:#{ENV['USER']}\" /etc/group"
 end
 
 service 'docker' do
