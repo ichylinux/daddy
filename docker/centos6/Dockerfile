@@ -36,6 +36,7 @@ RUN ["sudo", "gem", "install", "bundler", "--no-document"]
 RUN ["mkdir", "-p", "/home/daddy/setup/daddy"]
 COPY [".", "/home/daddy/setup/daddy/"]
 WORKDIR /home/daddy/setup/daddy
+RUN ["sudo", "rm", "-Rf", "pkg"]
 RUN ["bundle", "install"]
 RUN ["sudo", "rake", "install"]
 
