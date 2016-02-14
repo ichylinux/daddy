@@ -23,15 +23,14 @@ when /rhel-7\.(.*?)/
   end
 
 else
-  raise "サポートしていないOSバージョンです。#{os_version}"
+  raise "unsupported operating system: #{os_version}"
 end
 
 group 'docker'
 
-execute 'add user to docker group' do
-  command "usermod -aG docker #{ENV['USER']}"
+execute "usermod -aG docker #{ENV['USER']} && grpconv" do
   user 'root'
-  not_if "grep -E \"docker:.*:#{ENV['USER']}\" /etc/group"
+  not_if 'groups | grep -E "\sdocker"'
 end
 
 service 'docker' do
