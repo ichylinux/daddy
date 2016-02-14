@@ -26,7 +26,9 @@ else
   raise "unsupported operating system: #{os_version}"
 end
 
-group 'docker'
+group 'docker' do
+  user 'root'
+end
 
 execute "usermod -aG docker #{ENV['USER']} && grpconv" do
   user 'root'
