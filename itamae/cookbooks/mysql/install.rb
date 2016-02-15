@@ -10,6 +10,10 @@ when /rhel-6\.(.*?)/
     user 'root'
   end
 
+  template '/etc/my.cnf' do
+    user 'root'
+  end
+
   service 'mysqld' do
     user 'root'
     action [:enable, :start]
@@ -21,6 +25,10 @@ when /rhel-7\.(.*?)/
   end
 
   package 'mariadb-server' do
+    user 'root'
+  end
+
+  template '/etc/my.cnf.d/daddy.cnf' do
     user 'root'
   end
 
