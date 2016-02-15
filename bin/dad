@@ -25,7 +25,7 @@ when 'new'
   File.write(gemfile, ERB.new(File.read(template)).result)
 
   [
-    "bundle install",
+    "bundle install --quiet",
     "bundle exec rake dad:mysql:install",
     "bundle exec rake dad:install",
     "bundle exec rake dad:db:config",

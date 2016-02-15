@@ -36,8 +36,7 @@ RUN ["sudo", "gem", "install", "bundler", "--no-document"]
 RUN ["mkdir", "-p", "/home/daddy/setup/daddy"]
 COPY [".", "/home/daddy/setup/daddy/"]
 WORKDIR /home/daddy/setup/daddy
-RUN ["sudo", "rm", "-Rf", "pkg"]
-RUN ["bundle", "install"]
+RUN ["bundle", "install", "--quiet"]
 RUN ["sudo", "rake", "install"]
 
 # run new rails app
