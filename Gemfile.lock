@@ -11,7 +11,7 @@ PATH
       itamae (~> 1.9)
       ohai (~> 8.10)
       poltergeist (~> 1.9)
-      rails (~> 4.2)
+      rails (~> 4.1)
       resque (~> 1.25)
       resque-scheduler (~> 4.0)
       selenium-webdriver (~> 2.51)
