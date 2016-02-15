@@ -1,4 +1,4 @@
-FROM centos:6.7
+FROM centos:6
 MAINTAINER ichylinux@gmail.com
 
 # update package
@@ -36,7 +36,7 @@ RUN ["sudo", "gem", "install", "bundler", "--no-document"]
 RUN ["mkdir", "-p", "/home/daddy/setup/daddy"]
 COPY [".", "/home/daddy/setup/daddy/"]
 WORKDIR /home/daddy/setup/daddy
-RUN ["bundle", "install", "--quiet"]
+RUN ["bundle", "install"]
 RUN ["sudo", "rake", "install"]
 
 # run new rails app
