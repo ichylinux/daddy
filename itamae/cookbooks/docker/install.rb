@@ -30,9 +30,9 @@ group 'docker' do
   user 'root'
 end
 
-execute "usermod -aG docker #{ENV['USER']} && grpconv" do
+execute "usermod -aG docker #{ENV['USER']}" do
   user 'root'
-  not_if 'groups | grep -E "\sdocker"'
+  not_if "groups #{ENV['USER']} | grep -E \"\sdocker\""
 end
 
 service 'docker' do

@@ -12,7 +12,7 @@ namespace :dad do
 
       desc 'install Docker Registry'
       task :install do
-        run_itamae 'docker/registry/install'
+        run_itamae 'docker/install', 'docker/registry/install'
       end
     end
 

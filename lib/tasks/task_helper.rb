@@ -102,12 +102,16 @@ def self.run(*commands)
   end
 end
 
-def self.run_itamae(recipe)
+def self.run_itamae(*recipes)
   options = []
   options << '--ohai'
   options << '--log-level=debug' if ENV['DEBUG']
 
-  recipe = "#{recipe}.rb" unless recipe.end_with?('.rb')
+  recipe_files = []
+  recipes.each do |recipe|
+    recipe = "#{recipe}.rb" unless recipe.end_with?('.rb')
+    recipe_files << File.join(cookbook_dir, recipe)
+  end
 
-  run "bundle exec itamae local #{options.join(' ')} #{File.join(cookbook_dir, recipe)}"
+  run "bundle exec itamae local #{options.join(' ')} #{recipe_files.join(' ')}"
 end
