@@ -16,13 +16,16 @@ else
   raise "サポートしていないOSバージョンです。#{@os_version}"
 end
 
-execute '/etc/yum.repos.d/jenkins.repo' do
+http_request '/etc/yum.repos.d/jenkins.repo' do
   user 'root'
-  command <<-EOF
-    wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
-    rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
-  EOF
-  not_if 'test -e /etc/yum.repos.d/jenkins.repo'
+  owner 'root'
+  group 'root'
+  mode '644'
+  url 'http://pkg.jenkins-ci.org/redhat/jenkins.repo'
+end
+
+execute 'rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key' do
+  user 'root'
 end
 
 package 'jenkins' do
@@ -41,18 +44,27 @@ service 'jenkins' do
   action [:enable, :start]
 end
 
+directory 'tmp'
+
+execute "wait until jenkins starts" do
+  cwd 'tmp'
+  command <<-EOF
+    wget --retry-connrefused -t 10 #{ENV['DAD_JENKINS_URL']} ||
+    wget -t 10 #{ENV['DAD_JENKINS_URL']} ||
+    echo $?    
+  EOF
+end
+
+execute 'wget jenkins-cli.jar' do
+  cwd 'tmp'
+  command "wget #{ENV['DAD_JENKINS_URL']}/jnlpJars/jenkins-cli.jar"
+  not_if 'test -e jenkins-cli.jar'
+end
+
 directory '/var/lib/jenkins/plugins' do
   user 'root'
   group 'jenkins'
   owner 'jenkins'
-end
-
-directory 'tmp'
-
-execute 'jenkins-cli.jar' do
-  cwd 'tmp'
-  command "wget #{ENV['DAD_JENKINS_URL']}/jnlpJars/jenkins-cli.jar"
-  not_if 'test -e jenkins-cli.jar'
 end
 
 @plugins = [

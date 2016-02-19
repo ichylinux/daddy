@@ -2,6 +2,7 @@ FROM centos:7
 MAINTAINER ichylinux@gmail.com
 
 # package
+RUN yum groups
 RUN yum -y groupinstall "Development Tools"
 RUN yum -y install epel-release
 RUN yum -y install \
@@ -54,6 +55,8 @@ RUN ./configure --disable-install-rdoc
 RUN make
 RUN sudo make install
 RUN sudo gem update --system --no-document
+RUN sudo gem update rake -f --no-document
+RUN sudo gem update rdoc -f --no-document
 RUN sudo gem install bundler --no-document
 
 # install daddy
