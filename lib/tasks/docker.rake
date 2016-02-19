@@ -11,8 +11,6 @@ namespace :dad do
       unless `docker images -q --filter "dangling=true"`.empty?
         run 'docker rmi `docker images -q --filter "dangling=true"`'
       end
-      
-          
     end
 
     desc 'install Docker'
