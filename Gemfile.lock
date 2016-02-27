@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    daddy (0.5.3)
+    daddy (0.5.4)
       capybara (~> 2.6)
       ci_reporter (~> 2.0)
       closer (~> 0.3)
