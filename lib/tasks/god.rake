@@ -5,8 +5,7 @@ namespace :dad do
 
     desc "Godをインストールします。"
     task :install do
-      script = File.join(File.dirname(__FILE__), 'god', 'install.sh')
-      system("bash -x #{script} #{rails_env} #{rails_root}")
+      run_itamae 'god/install'
     end
 
   end
