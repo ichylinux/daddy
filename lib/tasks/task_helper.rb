@@ -4,7 +4,7 @@ require 'yaml'
 require File.expand_path('../../daddy/version', __FILE__)
 
 require 'i18n'
-I18n.load_path << Dir.glob(File.expand_path('../locale/*.yml', __FILE__))
+I18n.load_path += Dir.glob(File.expand_path('../locale/*.yml', __FILE__))
 
 def self.daddy_version
   Daddy::VERSION

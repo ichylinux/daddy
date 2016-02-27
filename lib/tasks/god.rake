@@ -1,4 +1,4 @@
-require 'rake'
+require_relative 'task_helper'
 
 namespace :dad do
   namespace :god do
