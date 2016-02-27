@@ -1,0 +1,4 @@
+en:
+  itamae:
+    errors:
+      unsupported_os_version: unsupported os version. %{os_version}

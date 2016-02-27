@@ -1,0 +1,4 @@
+ja:
+  itamae:
+    errors:
+      unsupported_os_version: サポートしていないOSバージョンです。%{os_version}

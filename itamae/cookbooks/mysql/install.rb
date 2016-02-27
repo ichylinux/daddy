@@ -38,7 +38,7 @@ when /rhel-7\.(.*?)/
   end
 
 else
-  raise "サポートしていないOSバージョンです。#{os_version}"
+  raise I18n.t('itamae.errors.unsupported_os_version', :os_version => os_version)
 end
 
 execute 'mysql_secure_installation' do

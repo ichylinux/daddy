@@ -2,12 +2,31 @@ FROM centos:6
 MAINTAINER ichylinux@gmail.com
 
 # update package
-RUN ["yum", "-y", "groupinstall", "Development Tools"]
-RUN ["yum", "-y", "groupinstall", "Japanese Support"]
-RUN ["yum", "-y", "install", "epel-release"]
-RUN ["yum", "-y", "install", "expect", "nodejs", "sudo", "tar", "wget", "which"]
-RUN ["yum", "-y", "install", "zlib-devel", "openssl-devel", "curl-devel", "readline-devel", "sqlite-devel", "mysql-devel", "libffi-devel", "libxslt-devel", "libxml2-devel", "libyaml-devel", "ImageMagick-devel"]
-RUN ["yum", "-y", "update"]
+RUN yum -y groupinstall "Japanese Support"
+RUN yum -y install epel-release
+RUN yum -y install \
+      ImageMagick-devel \
+      curl-devel \
+      expect \
+      gcc \
+      gcc-c++ \
+      git \
+      libffi-devel \
+      libxml2-devel \
+      libxslt-devel \
+      libyaml-devel \
+      mysql-devel \
+      nodejs \
+      openssl-devel \
+      readline-devel \
+      sqlite-devel \
+      sudo \
+      tar \
+      wget \
+      which \
+      zlib-devel
+RUN yum -y update && \
+    yum clean all
 
 ENV LANG=ja_JP.UTF-8
 
