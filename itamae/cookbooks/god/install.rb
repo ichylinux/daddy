@@ -5,7 +5,9 @@ execute '/etc/init.d/god stop' do
   only_if '-e /var/run/god.pid'
 end
 
-gem_package 'god'
+gem_package 'god' do
+  user 'root'
+end
 
 template '/etc/init.d/god' do
   user 'root'
@@ -21,14 +23,14 @@ directory '/etc/god' do
   mode '755'
 end
 
-tempate '/etc/god/master.conf' do
+template '/etc/god/master.conf' do
   user 'root'
   owner 'root'
   group 'root'
   mode '644'
 end
 
-tempate '/etc/logrotate.d/god' do
+template '/etc/logrotate.d/god' do
   user 'root'
   owner 'root'
   group 'root'
