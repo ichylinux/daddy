@@ -16,16 +16,17 @@ else
   raise "サポートしていないOSバージョンです。#{@os_version}"
 end
 
+execute 'rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key' do
+  user 'root'
+  not_if 'test -e /etc/yum.repos.d/jenkins.repo'
+end
+
 http_request '/etc/yum.repos.d/jenkins.repo' do
   user 'root'
   owner 'root'
   group 'root'
   mode '644'
   url 'http://pkg.jenkins-ci.org/redhat/jenkins.repo'
-end
-
-execute 'rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key' do
-  user 'root'
 end
 
 package 'jenkins' do
@@ -68,6 +69,7 @@ directory '/var/lib/jenkins/plugins' do
 end
 
 @plugins = [
+  {:name => 'ansicolor', :version => nil},
   {:name => 'build-pipeline-plugin', :version => nil},
   {:name => 'git', :version => nil},
   {:name => 'git-client', :version => nil},
