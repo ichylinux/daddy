@@ -1,7 +1,11 @@
 FROM centos:6
 MAINTAINER ichylinux@gmail.com
 
+RUN localedef -f UTF-8 -i ja_JP ja_JP.utf8
+ENV LANG=ja_JP.UTF-8
+
 # update package
+RUN yum -y groupinstall "Development Tools"
 RUN yum -y groupinstall "Japanese Support"
 RUN yum -y install epel-release
 RUN yum -y install \
@@ -28,35 +32,35 @@ RUN yum -y install \
 RUN yum -y update && \
     yum clean all
 
-ENV LANG=ja_JP.UTF-8
+# install ruby
+RUN mkdir -p /tmp/src
+WORKDIR /tmp/src
+RUN wget https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.4.tar.gz && \
+    tar zxf ruby-2.2.4.tar.gz
+WORKDIR /tmp/src/ruby-2.2.4
+RUN ./configure --disable-install-rdoc && \
+    make && \
+    make install && \
+    gem update --system --no-document && \
+    gem install bundler --no-document
+WORKDIR /tmp
+RUN rm -Rf src
 
 # add /usr/local/bin to secure_path
-COPY ["docker/centos6/sudoers", "/etc/sudoers"]
-RUN ["chmod", "440", "/etc/sudoers"]
+COPY docker/centos6/etc/sudoers /etc/
+RUN chmod 440 /etc/sudoers
 
 # add user daddy
-RUN ["useradd", "daddy"]
-COPY ["docker/centos6/daddy.sudoers", "/etc/sudoers.d/daddy"]
+RUN useradd daddy
+COPY docker/centos6/etc/sudoers.d/daddy /etc/sudoers.d/
 USER daddy
 
-# install ruby
-RUN ["mkdir", "-p", "/home/daddy/src"]
-WORKDIR /home/daddy/src
-RUN ["wget", "https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.4.tar.gz"]
-RUN ["tar", "zxf", "ruby-2.2.4.tar.gz"]
-WORKDIR /home/daddy/src/ruby-2.2.4
-RUN ["./configure", "--disable-install-rdoc"]
-RUN ["make"]
-RUN ["sudo", "make", "install"]
-RUN ["sudo", "gem", "update", "--system"]
-RUN ["sudo", "gem", "install", "bundler", "--no-document"]
-
 # install daddy
-RUN ["mkdir", "-p", "/home/daddy/setup/daddy"]
-COPY [".", "/home/daddy/setup/daddy/"]
+RUN mkdir -p /home/daddy/setup/daddy
+COPY . /home/daddy/setup/daddy/
 WORKDIR /home/daddy/setup/daddy
-RUN ["bundle", "install"]
-RUN ["sudo", "rake", "install"]
+RUN bundle install && \
+    sudo rake install
 
 # run new rails app
 ENV DAD_MYSQL_NO_ROOT_PASSWORD=true
