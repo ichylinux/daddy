@@ -64,6 +64,6 @@ RUN bundle install && \
 
 # run new rails app
 ENV DAD_MYSQL_NO_ROOT_PASSWORD=true
-RUN ["mkdir", "-p", "/home/daddy/setup"]
+RUN mkdir -p /home/daddy/setup
 WORKDIR /home/daddy/setup
 RUN ["dad", "new", "hello_daddy"]
