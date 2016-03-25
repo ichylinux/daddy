@@ -1,12 +1,3 @@
-begin
-  require 'database_cleaner'
-  require 'database_cleaner/cucumber'
-
-  DatabaseCleaner.strategy = :truncation
-rescue NameError
-  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
-end
-
 if ::ActiveRecord::VERSION::MAJOR < 4
   fixture_class = ActiveRecord::Fixtures
 else
@@ -20,11 +11,9 @@ if defined? RailsCsvFixtures
 end
 
 Before do
-  DatabaseCleaner.start
   fixture_class.create_fixtures(fixtures_folder, fixtures)
 end
 
 After do |scenario|
   fixture_class.reset_cache
-  DatabaseCleaner.clean
 end

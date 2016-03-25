@@ -1,4 +1,4 @@
-FROM centos:6
+FROM centos:6.7
 MAINTAINER ichylinux@gmail.com
 
 RUN localedef -f UTF-8 -i ja_JP ja_JP.utf8
@@ -32,20 +32,6 @@ RUN yum -y install \
 RUN yum -y update && \
     yum clean all
 
-# install ruby
-RUN mkdir -p /tmp/src
-WORKDIR /tmp/src
-RUN wget https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.4.tar.gz && \
-    tar zxf ruby-2.2.4.tar.gz
-WORKDIR /tmp/src/ruby-2.2.4
-RUN ./configure --disable-install-rdoc && \
-    make && \
-    make install && \
-    gem update --system --no-document && \
-    gem install bundler --no-document
-WORKDIR /tmp
-RUN rm -Rf src
-
 # add /usr/local/bin to secure_path
 COPY docker/centos6/etc/sudoers /etc/
 RUN chmod 440 /etc/sudoers
@@ -55,15 +41,32 @@ RUN useradd daddy
 COPY docker/centos6/etc/sudoers.d/daddy /etc/sudoers.d/
 USER daddy
 
+# install ruby
+RUN mkdir -p /home/daddy/src
+WORKDIR /home/daddy/src
+RUN wget https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.4.tar.gz && \
+    tar zxf ruby-2.2.4.tar.gz
+WORKDIR /home/daddy/src/ruby-2.2.4
+RUN ./configure --disable-install-rdoc && \
+    make && \
+    sudo make install
+WORKDIR /home/daddy/src
+RUN rm -Rf ruby-2.2.4*
+RUN sudo gem update --system --no-document && \
+    sudo gem install bundler --no-document
+
 # install daddy
 RUN mkdir -p /home/daddy/setup/daddy
-COPY . /home/daddy/setup/daddy/
 WORKDIR /home/daddy/setup/daddy
-RUN bundle install && \
-    sudo rake install
+COPY daddy.gemspec Gemfile Gemfile.lock ./
+RUN mkdir -p lib/daddy
+COPY lib/daddy/version.rb lib/daddy/
+RUN bundle install
+COPY . ./
+RUN sudo rake install
 
 # run new rails app
-ENV DAD_MYSQL_NO_ROOT_PASSWORD=true
 RUN mkdir -p /home/daddy/setup
 WORKDIR /home/daddy/setup
-RUN ["dad", "new", "hello_daddy"]
+ENV DAD_MYSQL_NO_ROOT_PASSWORD=true
+CMD ["dad", "new", "hello_daddy"]
