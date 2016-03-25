@@ -1,5 +1,4 @@
 require 'closer'
-require 'rails'
 
 begin
   require 'cucumber/rails'
