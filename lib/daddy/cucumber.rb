@@ -2,7 +2,7 @@ require 'capybara/cucumber'
 
 case ENV['DRIVER']
 when 'poltergeist'
-  require 'capybara/poltergeist' 
+  require 'capybara/poltergeist'
 when 'webkit'
   require 'capybara/webkit'
 end
@@ -15,10 +15,10 @@ def override_method(obj, method_name, &block)
   klass.send(:undef_method, method_name)
   klass.send(:define_method, method_name, block)
 end
-  
+
 AfterConfiguration do |configuration|
   feature_files =  configuration.feature_files
- 
+
   override_method(configuration, :feature_files) {
     sorted_files = feature_files.sort do |x, y|
       x <=> y
@@ -27,7 +27,6 @@ AfterConfiguration do |configuration|
 end
 
 require_relative 'cucumber/helpers'
-require_relative 'cucumber/hooks/database' if defined?(Rails)
 
 Before do
   resize_window(1280, 720)

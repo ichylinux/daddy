@@ -4,7 +4,7 @@ else
   fixture_class = ActiveRecord::FixtureSet
 end
 
-fixtures_folder = File.join(Rails.root, 'test', 'fixtures')
+fixtures_folder = File.join('test', 'fixtures')
 fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
 if defined? RailsCsvFixtures
   fixtures += Dir[File.join(fixtures_folder, '*.csv')].map {|f| File.basename(f, '.csv') }
