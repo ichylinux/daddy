@@ -69,4 +69,6 @@ RUN sudo rake install
 RUN mkdir -p /home/daddy/setup
 WORKDIR /home/daddy/setup
 ENV DAD_MYSQL_NO_ROOT_PASSWORD=true
-CMD ["dad", "new", "hello_daddy"]
+RUN dad new hello_daddy
+CMD /bin/bash
+
