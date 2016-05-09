@@ -13,7 +13,7 @@ when /rhel-7\.(.*?)/
     user 'root'
   end
 else
-  raise "サポートしていないOSバージョンです。#{@os_version}"
+  raise I18n.t('itamae.errors.unsupported_os_version', :os_version => @os_version)
 end
 
 execute 'rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key' do
@@ -45,10 +45,7 @@ service 'jenkins' do
   action [:enable, :start]
 end
 
-directory 'tmp'
-
 execute "wait until jenkins starts" do
-  cwd 'tmp'
   command <<-EOF
     wget --retry-connrefused -t 10 #{ENV['DAD_JENKINS_URL']} ||
     wget -t 10 #{ENV['DAD_JENKINS_URL']} ||
@@ -56,37 +53,51 @@ execute "wait until jenkins starts" do
   EOF
 end
 
-execute 'wget jenkins-cli.jar' do
-  cwd 'tmp'
-  command "wget #{ENV['DAD_JENKINS_URL']}/jnlpJars/jenkins-cli.jar"
-  not_if 'test -e jenkins-cli.jar'
-end
-
-directory '/var/lib/jenkins/plugins' do
+directory '/var/lib/jenkins/.ssh' do
   user 'root'
-  group 'jenkins'
   owner 'jenkins'
+  group 'jenkins'
+  mode '700'
+end
+  
+execute "ssh-keygen -f id_rsa -q -N ''" do
+  user 'jenkins'
+  cwd '/var/lib/jenkins/.ssh'
+  not_if 'test -e id_rsa'
 end
 
-@plugins = [
-  {:name => 'ansicolor', :version => nil},
-  {:name => 'build-pipeline-plugin', :version => nil},
-  {:name => 'git', :version => nil},
-  {:name => 'git-client', :version => nil},
-  {:name => 'rake', :version => nil},
-  {:name => 'rubyMetrics', :version => nil},
-  {:name => 'htmlpublisher', :version => nil},
-  {:name => 'reverse-proxy-auth-plugin', :version => nil},
-  {:name => 'thinBackup', :version => nil}
-]
-@plugins.each do |plugin|
-  execute "/var/lib/jenkins/plugins/#{plugin[:name]}" do
-    cwd 'tmp'
-    command "java -jar jenkins-cli.jar -s #{ENV['DAD_JENKINS_URL']} install-plugin #{plugin[:name]}"
+file '/var/lib/jenkins/.ssh/authorized_keys' do
+  user 'root'
+end
+
+%w{ authorized_keys id_rsa id_rsa.pub }.each do |name|
+  file name do
+    cwd '/var/lib/jenkins/.ssh'
+    user 'root'
+    owner 'jenkins'
+    group 'jenkins'
+    mode '600'
   end
 end
 
-execute 'restart jenkins' do
-  cwd 'tmp'
-  command "java -jar jenkins-cli.jar -s #{ENV['DAD_JENKINS_URL']} safe-restart"
+execute 'add public key' do
+  user 'root'
+  cwd '/var/lib/jenkins/.ssh'
+  command 'cat id_rsa.pub >> authorized_keys'
+  not_if "cat authorized_keys | grep \"`cat id_rsa.pub`\""
+end
+
+execute '/etc/init.d/jenkins restart' do
+  user 'root'
+end
+
+local_ruby_block 'post install message' do
+  block do
+    message = I18n.t('itamae.messages.jenkins.after_install',
+        :jenkins_url => ENV['DAD_JENKINS_URL'],
+        :public_key => `sudo cat /var/lib/jenkins/.ssh/id_rsa.pub`)
+    message.split("\n").each do |line|
+      Itamae.logger.info line
+    end
+  end
 end

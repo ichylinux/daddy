@@ -2,3 +2,12 @@ ja:
   itamae:
     errors:
       unsupported_os_version: サポートしていないOSバージョンです。%{os_version}
+    messages:
+      jenkins:
+        after_install: |
+          インストールが完了しました。
+          %{jenkins_url} にアクセスし、最初のユーザを登録します。
+          下記公開鍵を設定します。
+          
+          %{public_key}
+          

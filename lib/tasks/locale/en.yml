@@ -1,3 +1,7 @@
 en:
   god:
     install: install God
+  jenkins:
+    install: install Jenkins
+    plugins:
+      install: install Jenkins plugins

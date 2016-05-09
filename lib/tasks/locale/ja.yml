@@ -1,3 +1,7 @@
-en:
+ja:
   god:
     install: God をインストールします
+  jenkins:
+    install: Jenkinsをインストールします
+    plugins:
+      install: Jenkinsプラグインをインストールします

@@ -44,8 +44,9 @@ JENKINS_USER="jenkins"
 #
 # Options to pass to java when running Jenkins.
 #
-JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true ${JENKINS_JAVA_OPTIONS}"
+JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true"
 JENKINS_JAVA_OPTIONS="-Dhudson.model.DirectoryBrowserSupport.CSP=\"sandbox allow-same-origin allow-scripts; default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';\" ${JENKINS_JAVA_OPTIONS}"
+JENKINS_JAVA_OPTIONS="-Dhudson.diyChunking=false ${JENKINS_JAVA_OPTIONS}"
 
 ## Type:        integer(0:65535)
 ## Default:     8080
@@ -100,24 +101,6 @@ JENKINS_HTTPS_KEYSTORE_PASSWORD=""
 # Default is disabled.
 #
 JENKINS_HTTPS_LISTEN_ADDRESS=""
-
-## Type:        integer(0:65535)
-## Default:     8009
-## ServiceRestart: jenkins
-#
-# Ajp13 Port Jenkins is listening on.
-# Set to -1 to disable
-#
-JENKINS_AJP_PORT="-1"
-
-## Type:        string
-## Default:     ""
-## ServiceRestart: jenkins
-#
-# IP address Jenkins listens on for Ajp13 requests.
-# Default is all interfaces (0.0.0.0).
-#
-JENKINS_AJP_LISTEN_ADDRESS=""
 
 ## Type:        integer(1:9)
 ## Default:     5

@@ -2,3 +2,12 @@ en:
   itamae:
     errors:
       unsupported_os_version: unsupported os version. %{os_version}
+    messages:
+      jenkins:
+        after_install: |
+          installation completed.
+          access %{jenkins_url} and add first user.
+          use public key below.
+          
+          %{public_key}
+          
