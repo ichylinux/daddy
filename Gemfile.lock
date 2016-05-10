@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     daddy (0.5.10)
-      capybara (~> 2.6)
+      capybara (~> 2.7)
       ci_reporter (~> 2.0)
       closer (~> 0.3)
       database_cleaner (~> 1.5)
