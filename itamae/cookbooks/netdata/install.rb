@@ -17,12 +17,6 @@ git 'netdata' do
   repository 'https://github.com/firehol/netdata.git'
 end
 
-execute 'mysql_secure_installation' do
-  user 'root'
-  command "bash #{File.join(File.dirname(__FILE__), 'mysql_secure_installation.sh')}"
-  only_if "mysql -u root -e 'select 1;' && test $? -eq 0"
-end
-
 execute 'netdata-installer.sh' do
   user 'root'
   cwd '/tmp/netdata'
