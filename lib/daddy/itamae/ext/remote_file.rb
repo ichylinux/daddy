@@ -1,4 +1,4 @@
-require 'itamae/resource/remote_file'
+require 'itamae/resource/template'
 
 module Itamae
   module Resource
@@ -19,7 +19,7 @@ module Itamae
       end
 
       def find_source_file_in_templates
-        itamae_dir = ::File.expand_path('../../../itamae', __FILE__)
+        itamae_dir = ::File.expand_path('../../../../../itamae', __FILE__)
         path = ::File.join(itamae_dir, source_file_dir, "#{attributes.path}.erb")
         if ::File.exist?(path)
           path
