@@ -1,4 +1,4 @@
-FROM centos:6.7
+FROM centos:6.8
 MAINTAINER ichylinux@gmail.com
 
 RUN localedef -f UTF-8 -i ja_JP ja_JP.utf8
@@ -53,7 +53,9 @@ RUN ./configure --disable-install-rdoc && \
 WORKDIR /home/daddy/src
 RUN rm -Rf ruby-2.2.4*
 RUN sudo gem update --system --no-document && \
-    sudo gem install bundler --no-document
+    sudo gem install bundler --no-document && \
+    sudo mkdir -p /usr/local/lib/ruby/gems/2.2.0/extensions/x86_64-linux && \
+    sudo chmod 777 /usr/local/lib/ruby/gems/2.2.0/extensions/x86_64-linux
 
 # install daddy
 RUN mkdir -p /home/daddy/setup/daddy
