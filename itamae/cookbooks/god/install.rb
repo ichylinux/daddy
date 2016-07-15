@@ -1,8 +1,8 @@
 require 'daddy/itamae'
 
-execute '/etc/init.d/god stop' do
+service 'god' do
   user 'root'
-  only_if '-e /var/run/god.pid'
+  action :stop
 end
 
 gem_package 'god' do

@@ -19,7 +19,9 @@ case "$1" in
       RETVAL=$?
   ;;
     stop)
-      god quit
+      if test -e $PID ; then
+        god quit
+      fi
       RETVAL=$?
   ;;
     restart)
