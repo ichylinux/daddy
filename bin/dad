@@ -6,7 +6,7 @@ DADDY_HOME = File.dirname(File.dirname(__FILE__))
 
 case action = ARGV[0]
 when 'new'
-  RAILS_VERSION = '4.2.6'
+  RAILS_VERSION = '4.2.7'
   puts "using rails #{RAILS_VERSION}"
 
   APP_NAME = ARGV[1]
