@@ -12,6 +12,9 @@ when /rhel-6\.(.*?)/
 
   template '/etc/my.cnf' do
     user 'root'
+    owner 'root'
+    group 'root'
+    mode '644'
   end
 
   service 'mysqld' do
@@ -30,6 +33,9 @@ when /rhel-7\.(.*?)/
 
   template '/etc/my.cnf.d/daddy.cnf' do
     user 'root'
+    owner 'root'
+    group 'root'
+    mode '644'
   end
 
   service 'mariadb' do

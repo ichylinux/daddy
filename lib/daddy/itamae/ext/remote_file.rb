@@ -1,8 +1,8 @@
-require 'itamae/resource/template'
+require 'itamae/resource/remote_file'
 
 module Itamae
   module Resource
-    class Template
+    class RemoteFile
 
       def find_source_file_with_daddy_convention
         begin

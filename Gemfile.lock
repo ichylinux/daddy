@@ -8,7 +8,7 @@ PATH
       faraday (~> 0.9)
       holiday_jp (~> 0.4)
       i18n (~> 0.7)
-      itamae (= 1.9.4)
+      itamae (~> 1.9)
       ohai (~> 8.10)
       poltergeist (~> 1.9)
       rails (~> 4.1)
@@ -108,7 +108,7 @@ GEM
     holiday_jp (0.5.0)
     i18n (0.7.0)
     ipaddress (0.8.3)
-    itamae (1.9.4)
+    itamae (1.9.9)
       ansi
       hashie
       schash (~> 0.1.0)
