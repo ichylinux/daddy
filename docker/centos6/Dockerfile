@@ -10,11 +10,11 @@ RUN yum -y groupinstall "Japanese Support"
 RUN yum -y install epel-release
 RUN yum -y install \
       ImageMagick-devel \
-      curl-devel \
       expect \
       gcc \
       gcc-c++ \
       git \
+      libcurl-devel \
       libffi-devel \
       libxml2-devel \
       libxslt-devel \

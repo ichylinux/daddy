@@ -7,10 +7,10 @@ RUN yum -y groupinstall "Development Tools"
 RUN yum -y install epel-release
 RUN yum -y install \
       ImageMagick-devel \
-      curl-devel \
       ibus-kkc \
       vlgothic-* \
       expect \
+      libcurl-devel \
       libffi-devel \
       libxml2-devel \
       libxslt-devel \
