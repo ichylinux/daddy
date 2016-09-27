@@ -5,3 +5,5 @@ en:
     install: install Jenkins
     plugins:
       install: install Jenkins plugins
+  nginx:
+    install: install Nginx
