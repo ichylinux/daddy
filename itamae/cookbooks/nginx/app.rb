@@ -16,7 +16,5 @@ template "/etc/nginx/conf.d/servers/#{ENV['APP_NAME']}.conf" do
   variables :app_name => ENV['APP_NAME'],
       :server_name => ENV['SERVER_NAME'],
       :rails_env => ENV['RAILS_ENV'],
-      :rails_root => ENV['RAILS_ROOT'],
-      :ssl => File.exist?("/etc/letsencrypt/live/#{ENV['SERVER_NAME']}/fullchain.pem") &&
-              File.exist?("/etc/letsencrypt/live/#{ENV['SERVER_NAME']}/privkey.pem")
+      :rails_root => ENV['RAILS_ROOT']
 end
