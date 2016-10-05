@@ -12,7 +12,7 @@ def self.daddy_version
 end
 
 def self.rails_root
-  ENV['RAILS_ROOT'] || @_rails_root ||= ask('RAILS_ROOT', :default => Rails.root)
+  ENV['RAILS_ROOT'] || @_rails_root ||= ask('RAILS_ROOT', :default => Dir.pwd)
 end
 
 def self.rails_env(options = {})
@@ -20,7 +20,7 @@ def self.rails_env(options = {})
 end
 
 def self.app_name
-  YAML.load_file("#{rails_root}/config/database.yml")[rails_env]['database']
+  ENV['APP_NAME'] || @_app_name ||= ask('APP_NAME', :default => File.basename(Dir.pwd))
 end
 
 def self.template_dir
@@ -72,18 +72,18 @@ def self.ask(prompt, options = {})
   end
 
   answer = STDIN.gets.strip
-  answer = options[:default] if answer.blank?
+  answer = options[:default] if answer.empty?
 
   if options[:password]
     system("stty echo")
     puts
   end
 
-  if options[:required] and answer.blank?
+  if options[:required] and answer.empty?
     raise "必須です。処理を中止します。"
   end
 
-  answer.blank? ? nil : answer
+  answer.empty? ? nil : answer
 end
 
 def self.quiet?
