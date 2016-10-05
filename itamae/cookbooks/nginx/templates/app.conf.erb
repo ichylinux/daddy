@@ -1,7 +1,7 @@
-<%
-  @ssl = ::File.exist?("/etc/letsencrypt/live/#{@server_name}/fullchain.pem") &&
-         ::File.exist?("/etc/letsencrypt/live/#{@server_name}/privkey.pem")
-%>
+<%-
+  @ssl = system("sudo test -e /etc/letsencrypt/live/#{@server_name}/fullchain.pem") &&
+         system("sudo test -e /etc/letsencrypt/live/#{@server_name}/privkey.pem")
+-%>
 upstream <%= @app_name %> {
   server unix:/tmp/<%= @app_name %>.sock;
 }
