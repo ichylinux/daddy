@@ -1,4 +1,6 @@
 ja:
+  docker:
+    install: Docker をインストールします
   god:
     install: God をインストールします
   jenkins:

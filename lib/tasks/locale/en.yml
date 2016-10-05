@@ -1,4 +1,6 @@
 en:
+  docker:
+    install: install Docker
   god:
     install: install God
   jenkins:
