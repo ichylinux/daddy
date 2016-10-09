@@ -1,0 +1,15 @@
+[Unit]
+Description = unicorn server for <%= @app_name %>
+Wants = mariadb.service
+After = mariadb.service
+
+[Service]
+User = <%= @user %>
+WorkingDirectory = <%= @rails_root %>
+SyslogIdentifier = <%= @app_name %>
+PIDFile = <%= @rails_root %>/tmp/pids/unicorn.pid
+ExecStart = /usr/local/bin/bundle exec unicorn_rails -c <%= @rails_root %>/config/unicorn.rb -E <%= @rails_env %> -D
+ExecStop = <%= `which kill`.strip %> -s QUIT $MAINPID
+
+[Install]
+WantedBy = multi-user.target

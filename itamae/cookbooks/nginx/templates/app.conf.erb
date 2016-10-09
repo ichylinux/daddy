@@ -3,7 +3,7 @@
          system("sudo test -e /etc/letsencrypt/live/#{@server_name}/privkey.pem")
 -%>
 upstream <%= @app_name %> {
-  server unix:/tmp/<%= @app_name %>.sock;
+  server unix:<%= @rails_root %>/tmp/sockets/unicorn.sock;
 }
 
 server {

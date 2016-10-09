@@ -8,4 +8,6 @@ ja:
     plugins:
       install: Jenkinsプラグインをインストールします
   nginx:
-    install: Nginxをインストールします。
+    install: Nginxをインストールします
+  unicorn:
+    install: アプリをUnicornサービスとしてインストールします

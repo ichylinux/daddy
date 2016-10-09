@@ -14,7 +14,7 @@ namespace :dad do
       ENV['SERVER_NAME'] ||= ask('SERVER_NAME', :default => 'localhost', :required => true)
       ENV['RAILS_ENV'] ||= rails_env(:default => 'development')
       ENV['RAILS_ROOT'] ||= rails_root
-      run_itamae 'nginx/app'
+      run_itamae 'nginx/config'
     end
 
   end

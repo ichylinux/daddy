@@ -9,3 +9,5 @@ en:
       install: install Jenkins plugins
   nginx:
     install: install Nginx
+  unicorn:
+    install: install application as unicorn service
