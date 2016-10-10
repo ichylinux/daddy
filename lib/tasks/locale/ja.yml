@@ -11,3 +11,6 @@ ja:
     install: Nginxをインストールします
   unicorn:
     install: アプリをUnicornサービスとしてインストールします
+  vsftpd:
+    install: vsftpd をインストールします
+

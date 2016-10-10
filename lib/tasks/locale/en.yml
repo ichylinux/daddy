@@ -11,3 +11,5 @@ en:
     install: install Nginx
   unicorn:
     install: install application as unicorn service
+  vsftpd:
+    install: install vsftpd
