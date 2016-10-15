@@ -7,6 +7,8 @@ en:
     install: install Jenkins
     plugins:
       install: install Jenkins plugins
+  letsencrypt:
+    install: install Let's Eencrypt certbot
   nginx:
     install: install Nginx
   unicorn:
