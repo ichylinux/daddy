@@ -1,7 +1,9 @@
-worker_processes <%= @worker_processes %>
-working_directory '<%= @rails_root %>'
+rails_root = "#{File.expand_path(File.dirname(File.dirname(__FILE__)))}"
 
-listen '<%= @rails_root %>/tmp/sockets/unicorn.sock'
+worker_processes <%= @worker_processes %>
+working_directory rails_root
+
+listen "#{rails_root}/tmp/sockets/unicorn.sock"
 timeout <%= @timeout %>
 
 stdout_path 'log/unicorn.log'

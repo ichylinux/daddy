@@ -11,9 +11,11 @@ package 'nginx' do
   user 'root'
 end
 
-execute 'mv -f /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.org' do
+template '/etc/nginx/nginx.conf' do
   user 'root'
-  not_if 'test -e /etc/nginx/conf.d/default.conf.org'
+  owner 'root'
+  group 'root'
+  mode '644'
 end
 
 template '/etc/nginx/conf.d/default.conf' do
