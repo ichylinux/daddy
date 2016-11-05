@@ -3,7 +3,7 @@
          system("sudo test -e /etc/letsencrypt/live/#{@server_name}/privkey.pem")
 -%>
 upstream <%= @app_name %> {
-  server unix:<%= @rails_root %>/tmp/sockets/unicorn.sock;
+  server unix:<%= @rails_root %>/tmp/sockets/unicorn.sock fail_timeout=0;
 }
 
 server {
@@ -21,6 +21,16 @@ server {
   root <%= @rails_root %>/public;
   try_files $uri/index.html $uri @app;
 
+  gzip on;
+  gzip_http_version 1.0;
+  gzip_proxied any;
+  gzip_min_length 500;
+  gzip_disable "MSIE [1-6]\.";
+  gzip_types text/plain text/html text/xml text/css
+             text/comma-separated-values
+             text/javascript application/x-javascript
+             application/atom+xml;
+
   location @app {
     proxy_pass http://<%= @app_name %>;
     proxy_set_header Host $http_host;
@@ -32,7 +42,8 @@ server {
 <%- if @rails_env == 'production' -%>
   location ~ ^/(assets)/ {
     gzip_vary on;
-    gzip_static on;
+    gzip_static always;
+    gunzip on;
     expires 1y;
     add_header Cache-Control public;
     add_header ETag "";
