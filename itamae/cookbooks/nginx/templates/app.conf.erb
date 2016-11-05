@@ -12,6 +12,7 @@ server {
   listen 443 ssl;
 <%- end -%>
   server_name <%= @server_name %>;
+  access_log /var/log/nginx/<%= @server_name %>_access.log ltsv;
 
 <%- if @ssl -%>
   ssl_certificate /etc/letsencrypt/live/<%= @server_name %>/fullchain.pem;
