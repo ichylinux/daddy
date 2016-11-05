@@ -48,9 +48,9 @@ USER daddy
 # install ruby
 RUN mkdir -p /home/daddy/src
 WORKDIR /home/daddy/src
-RUN wget https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.4.tar.gz
-RUN tar zxf ruby-2.2.4.tar.gz
-WORKDIR /home/daddy/src/ruby-2.2.4
+RUN wget https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.1.tar.gz
+RUN tar zxf ruby-2.3.1.tar.gz
+WORKDIR /home/daddy/src/ruby-2.3.1
 RUN ./configure --disable-install-rdoc
 RUN make
 RUN sudo make install
@@ -74,4 +74,4 @@ VOLUME /sys/fs/cgroup
 # run new rails app
 RUN mkdir -p /home/daddy/setup
 WORKDIR /home/daddy/setup
-CMD ["/bin/bash"]
+CMD /bin/bash
