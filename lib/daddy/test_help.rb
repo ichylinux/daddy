@@ -1,6 +1,15 @@
 if ENV["COVERAGE"]
-  require 'simplecov'
-  require 'simplecov-rcov'
+  begin
+    require 'simplecov'
+  rescue LoadError => e
+    raise 'simplecov not found.'
+  end
+  begin
+    require 'simplecov-rcov'
+  rescue LoadError => e
+    raise 'simplecov-rcov not found.'
+  end
+
   SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
   SimpleCov.start 'rails' 
 end

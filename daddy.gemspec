@@ -35,8 +35,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'resque', '~> 1.25'
   s.add_runtime_dependency 'resque-scheduler', '~> 4.0'
   s.add_runtime_dependency 'selenium-webdriver', '~> 2.51'
-  s.add_runtime_dependency 'simplecov', '~> 0.11'
-  s.add_runtime_dependency 'simplecov-rcov', '~> 0.2'
 
   s.add_development_dependency 'database_cleaner', '~> 1.5'
+  s.add_development_dependency 'simplecov', '~> 0.11'
+  s.add_development_dependency 'simplecov-rcov', '~> 0.2'
 end
