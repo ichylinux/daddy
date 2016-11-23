@@ -11,7 +11,12 @@ if ENV["COVERAGE"]
   end
 
   SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
-  SimpleCov.start 'rails' 
+  SimpleCov.start do
+    add_filter '/features/'
+    add_filter '/test/'
+    add_filter '/user_stories/'
+    add_filter '/vendor/'
+  end
 end
 
 case ENV['FORMAT'].to_s.downcase
