@@ -1,9 +1,7 @@
 require 'daddy/itamae'
 
 template 'config/unicorn.rb' do
-  variables :rails_root => ENV['RAILS_ROOT'],
-      :worker_processes => ENV['RAILS_ROOT'] == 'production' ? 2 : 1,
-      :timeout => 300
+  variables :timeout => 300
 end
 
 case os_version
@@ -16,7 +14,8 @@ when /rhel-6\.(.*?)/
     mode '755'
     variables :app_name => ENV['APP_NAME'],
         :rails_env => ENV['RAILS_ENV'],
-        :rails_root => ENV['RAILS_ROOT']
+        :rails_root => ENV['RAILS_ROOT'],
+        :worker_processes => ENV['RAILS_ROOT'] == 'production' ? 2 : 1
   end
 when /rhel-7\.(.*?)/
   template "/etc/systemd/system/#{ENV['APP_NAME']}.service" do
@@ -29,7 +28,7 @@ when /rhel-7\.(.*?)/
         :rails_env => ENV['RAILS_ENV'],
         :rails_root => ENV['RAILS_ROOT'],
         :user => ENV['USER'],
-        :timeout => 305
+        :worker_processes => ENV['RAILS_ROOT'] == 'production' ? 2 : 1
   end
 
   execute 'systemctl daemon-reload' do
