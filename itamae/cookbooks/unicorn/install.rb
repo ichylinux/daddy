@@ -15,7 +15,7 @@ when /rhel-6\.(.*?)/
     variables :app_name => ENV['APP_NAME'],
         :rails_env => ENV['RAILS_ENV'],
         :rails_root => ENV['RAILS_ROOT'],
-        :worker_processes => ENV['RAILS_ROOT'] == 'production' ? 2 : 1
+        :worker_processes => ENV['RAILS_ENV'] == 'production' ? 2 : 1
   end
 when /rhel-7\.(.*?)/
   template "/etc/systemd/system/#{ENV['APP_NAME']}.service" do
@@ -28,7 +28,7 @@ when /rhel-7\.(.*?)/
         :rails_env => ENV['RAILS_ENV'],
         :rails_root => ENV['RAILS_ROOT'],
         :user => ENV['USER'],
-        :worker_processes => ENV['RAILS_ROOT'] == 'production' ? 2 : 1
+        :worker_processes => ENV['RAILS_ENV'] == 'production' ? 2 : 1
   end
 
   execute 'systemctl daemon-reload' do
