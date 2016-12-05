@@ -1,6 +1,6 @@
 rails_root = "#{File.expand_path(File.dirname(File.dirname(__FILE__)))}"
 
-worker_processes <%= ENV['WORKER_PROCESSES'] || 1 %>
+worker_processes ENV['WORKER_PROCESSES'] || 1
 working_directory rails_root
 
 listen "#{rails_root}/tmp/sockets/unicorn.sock"
