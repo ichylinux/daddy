@@ -17,6 +17,10 @@ systemctl disable NetworkManager
 #systemctl stop firewalld
 #systemctl disable firewalld
 
+# postfis
+systemctl stop postfix
+systemctl disable postfix
+
 # selinux
 sudo sed -i "s/\(^SELINUX=\).*/\1disabled/" /etc/selinux/config
 
