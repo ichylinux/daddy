@@ -14,8 +14,8 @@ cat /proc/sys/net/ipv6/conf/all/disable_ipv6
 # network
 systemctl stop NetworkManager
 systemctl disable NetworkManager
-systemctl stop firewalld
-systemctl disable firewalld
+#systemctl stop firewalld
+#systemctl disable firewalld
 
 # selinux
 sudo sed -i "s/\(^SELINUX=\).*/\1disabled/" /etc/selinux/config
