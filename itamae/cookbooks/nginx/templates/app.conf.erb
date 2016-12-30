@@ -36,8 +36,12 @@ server {
     proxy_pass http://<%= @app_name %>;
     proxy_set_header Host $http_host;
     proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    <%- if @behind_load_balancer %>
+    proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+    <%- else -%>
+    proxy_set_header X-Forwarded-Proto $scheme;
+    <%- end %>
   }
 
 <%- if @rails_env == 'production' -%>
