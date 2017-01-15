@@ -31,12 +31,12 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'itamae', '~> 1.9'
   s.add_runtime_dependency 'ohai', '~> 8.10'
   s.add_runtime_dependency 'poltergeist', '~> 1.9'
-  s.add_runtime_dependency 'rails', '~> 4.1'
-  s.add_runtime_dependency 'resque', '~> 1.25'
-  s.add_runtime_dependency 'resque-scheduler', '~> 4.0'
-  s.add_runtime_dependency 'selenium-webdriver', '~> 2.51'
+  s.add_runtime_dependency 'rails', '>= 4.2.0', '< 5.1.0'
 
   s.add_development_dependency 'database_cleaner', '~> 1.5'
+  s.add_development_dependency 'resque', '~> 1.26'
+  s.add_development_dependency 'resque-scheduler', '~> 4.0'
+  s.add_development_dependency 'selenium-webdriver', '~> 2.51'
   s.add_development_dependency 'simplecov', '~> 0.11'
   s.add_development_dependency 'simplecov-rcov', '~> 0.2'
 end
