@@ -1,4 +1,4 @@
-if ENV["COVERAGE"]
+if ENV['COVERAGE']
   begin
     require 'simplecov'
   rescue LoadError => e
