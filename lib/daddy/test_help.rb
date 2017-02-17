@@ -19,14 +19,22 @@ if ENV['COVERAGE']
   end
 end
 
-case ENV['FORMAT'].to_s.downcase
-when 'junit'
-  MiniTest::Reporters.use! [
-    MiniTest::Reporters::DefaultReporter.new,
-    MiniTest::Reporters::JUnitReporter.new
-  ]
-else
-  MiniTest::Reporters.use! [
-    MiniTest::Reporters::DefaultReporter.new(:color => true),
-  ]
+if ENV['FORMAT']
+  begin
+    require 'minitest/reporters'
+  
+    case ENV['FORMAT'].to_s.downcase
+    when 'junit'
+      MiniTest::Reporters.use! [
+        MiniTest::Reporters::DefaultReporter.new,
+        MiniTest::Reporters::JUnitReporter.new
+      ]
+    else
+      MiniTest::Reporters.use! [
+        MiniTest::Reporters::DefaultReporter.new(:color => true),
+      ]
+    end
+  rescue LoadError => e
+    raise 'minitest-reporters not found.'
+  end
 end
