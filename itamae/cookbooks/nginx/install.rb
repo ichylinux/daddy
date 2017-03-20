@@ -45,6 +45,13 @@ execute 'build nginx' do
   not_if "test -e /opt/nginx"
 end
 
+directory '/etc/nginx/conf.d' do
+  user 'root'
+  owner 'root'
+  group 'root'
+  mode '755'
+end
+
 template '/etc/nginx/nginx.conf' do
   user 'root'
 end
