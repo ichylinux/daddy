@@ -45,6 +45,10 @@ execute 'build nginx' do
   not_if "test -e /opt/nginx"
 end
 
+template '/etc/nginx/nginx.conf' do
+  user 'root'
+end
+
 template '/lib/systemd/system/nginx.service' do
   user 'root'
 end
