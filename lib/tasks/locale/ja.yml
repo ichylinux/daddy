@@ -11,6 +11,8 @@ ja:
     install: Let's Eencrypt の certbot をインストールします
   nginx:
     install: Nginxをインストールします
+  obs_studio:
+    install: OBS-Studioをインストールします
   unicorn:
     install: アプリをUnicornサービスとしてインストールします
   vsftpd:
