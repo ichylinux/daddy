@@ -9,10 +9,14 @@ en:
       install: install Jenkins plugins
   letsencrypt:
     install: install Let's Eencrypt certbot
+  memcached:
+    install: install mecached
   nginx:
     install: install Nginx
   obs_studio:
     install: install OBS-Studio
+  redis:
+    install: install Redis
   unicorn:
     install: install application as unicorn service
   vsftpd:

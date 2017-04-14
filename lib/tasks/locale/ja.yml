@@ -9,10 +9,14 @@ ja:
       install: Jenkinsプラグインをインストールします
   letsencrypt:
     install: Let's Eencrypt の certbot をインストールします
+  memcached:
+    install: memcachedをインストールします
   nginx:
     install: Nginxをインストールします
   obs_studio:
     install: OBS-Studioをインストールします
+  redis:
+    install: Redisをインストールします
   unicorn:
     install: アプリをUnicornサービスとしてインストールします
   vsftpd:
