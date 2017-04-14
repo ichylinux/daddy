@@ -47,6 +47,10 @@ else
   raise I18n.t('itamae.errors.unsupported_os_version', :os_version => os_version)
 end
 
+package 'expect' do
+  user 'root'
+end
+
 execute 'mysql_secure_installation' do
   user 'root'
   command "bash #{File.join(File.dirname(__FILE__), 'mysql_secure_installation.sh')}"
