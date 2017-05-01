@@ -1,6 +1,7 @@
 require 'daddy/itamae'
 
 dad_nginx_checksum = File.join(File.dirname(__FILE__), 'sha256sum.txt')
+dad_nginx_version = '1.12.0'
 
 directory 'tmp'
 
@@ -8,7 +9,7 @@ directory 'tmp'
 execute 'download nginx' do
   cwd 'tmp'
   command <<-EOF
-    wget https://nginx.org/download/nginx-1.11.10.tar.gz
+    wget https://nginx.org/download/nginx-#{dad_nginx_version}.tar.gz
   EOF
   not_if "sha256sum -c #{dad_nginx_checksum}"
 end
@@ -29,20 +30,24 @@ end
 execute 'build nginx' do
   cwd 'tmp'
   command <<-EOF
-    rm -Rf nginx-1.11.10
-    tar zxf nginx-1.11.10.tar.gz
-    cd nginx-1.11.10
+    rm -Rf nginx-#{dad_nginx_version}
+    tar zxf nginx-#{dad_nginx_version}.tar.gz
+    cd nginx-#{dad_nginx_version}
     ./configure \
-      --prefix=/opt/nginx-1.11.10 \
+      --prefix=/opt/nginx-#{dad_nginx_version} \
       --conf-path=/etc/nginx/nginx.conf \
       --pid-path=/run/nginx.pid \
       --with-http_ssl_module \
       --add-module=/opt/nginx-rtmp-module/v1.1.11
     make
     sudo make install
-    sudo ln -snf /opt/nginx-1.11.10 /opt/nginx
+    sudo ln -snf /opt/nginx-#{dad_nginx_version} /opt/nginx
   EOF
-  not_if "test -e /opt/nginx"
+  not_if "test -e /opt/nginx-#{dad_nginx_version}"
+end
+
+template '/etc/nginx/nginx.conf' do
+  user 'root'
 end
 
 directory '/etc/nginx/conf.d' do
@@ -52,7 +57,7 @@ directory '/etc/nginx/conf.d' do
   mode '755'
 end
 
-template '/etc/nginx/nginx.conf' do
+template '/etc/nginx/conf.d/default.conf' do
   user 'root'
 end
 
