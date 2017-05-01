@@ -13,13 +13,6 @@ directory '/opt/letsencrypt' do
   mode '755'
 end
 
-directory '/opt/letsencrypt/certbot' do
-  user 'root'
-  owner ENV['USER']
-  group ENV['USER']
-  mode '755'
-end
-
 git '/opt/letsencrypt/certbot' do
   repository 'https://github.com/certbot/certbot'
 end
