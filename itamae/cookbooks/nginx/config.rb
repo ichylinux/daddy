@@ -7,8 +7,8 @@ directory '/etc/nginx/conf.d/servers' do
   mode '755'
 end
 
-template "/etc/nginx/conf.d/servers/#{ENV['APP_NAME']}.conf" do
-  source 'templates/app.conf.erb'
+template "/etc/nginx/conf.d/servers/#{ENV['SERVER_NAME']}.conf" do
+  source 'templates/passenger.conf.erb'
   user 'root'
   owner 'root'
   group 'root'
@@ -18,4 +18,13 @@ template "/etc/nginx/conf.d/servers/#{ENV['APP_NAME']}.conf" do
       :rails_env => ENV['RAILS_ENV'],
       :rails_root => ENV['RAILS_ROOT'],
       :behind_load_balancer => false
+end
+
+if ENV['RAILS_ROOT'].start_with?("/home/#{ENV['USER']}/")
+  directory "/home/#{ENV['USER']}" do
+    user 'root'
+    owner ENV['USER']
+    group ENV['USER']
+    mode '755'
+  end
 end

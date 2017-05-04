@@ -65,6 +65,7 @@ template '/etc/nginx/conf.d/default.conf' do
   owner 'root'
   group 'root'
   mode '644'
+  variables :passenger_root => `sudo passenger-config about root`
 end
 
 directory '/etc/nginx/conf.d/servers' do

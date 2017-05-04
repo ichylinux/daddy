@@ -1,0 +1,31 @@
+<%-
+  @ssl = system("sudo test -e /etc/letsencrypt/live/#{@server_name}/fullchain.pem") &&
+         system("sudo test -e /etc/letsencrypt/live/#{@server_name}/privkey.pem")
+-%>
+server {
+  listen 80;
+<%- if @ssl -%>
+  listen 443 ssl;
+<%- end -%>
+  server_name <%= @server_name %>;
+  access_log /opt/nginx/logs/<%= @server_name %>_access.log ltsv;
+
+<%- if @ssl -%>
+  ssl_certificate /etc/letsencrypt/live/<%= @server_name %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= @server_name %>/privkey.pem;
+<%- end -%>
+
+  root <%= ::File.join(@rails_root, 'public') %>;
+  passenger_enabled on;
+  passenger_app_env <%= @rails_env %>;
+
+  gzip on;
+  gzip_http_version 1.0;
+  gzip_proxied any;
+  gzip_min_length 500;
+  gzip_disable "MSIE [1-6]\.";
+  gzip_types text/plain text/xml text/css
+             text/comma-separated-values
+             text/javascript application/x-javascript
+             application/atom+xml;
+}
