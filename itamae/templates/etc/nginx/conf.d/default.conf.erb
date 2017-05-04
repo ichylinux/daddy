@@ -34,4 +34,6 @@ http {
     server_name _;
     deny all;
   }
+
+  include /etc/nginx/conf.d/servers/*.conf;
 }

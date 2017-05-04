@@ -8,7 +8,7 @@ namespace :dad do
       run_itamae 'nginx/install'
     end
 
-    desc 'Nginxにアプリの設定ファイルをインストールします。'
+    desc I18n.t('nginx.config')
     task :config do
       ENV['APP_NAME'] ||= app_name
       ENV['SERVER_NAME'] ||= ask('SERVER_NAME', :default => 'localhost', :required => true)

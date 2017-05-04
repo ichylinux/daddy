@@ -12,6 +12,7 @@ ja:
   memcached:
     install: memcachedをインストールします
   nginx:
+    config: Nginxにアプリの設定ファイルをインストールします
     install: Nginxをインストールします
   obs_studio:
     install: OBS-Studioをインストールします

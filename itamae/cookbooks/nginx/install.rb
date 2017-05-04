@@ -14,17 +14,9 @@ execute 'download nginx' do
   not_if "sha256sum -c #{dad_nginx_checksum}"
 end
 
-# nginx-rtmp-module source
-directory '/opt/nginx-rtmp-module' do
-  user 'root'
-  owner ENV['USER']
-  group ENV['USER']
-  mode '755'
-end
-git '/opt/nginx-rtmp-module/v1.1.11' do
-  repository 'https://github.com/arut/nginx-rtmp-module.git'
-  revision 'v1.1.11'
-end
+# module sources
+include_recipe 'modules/nginx-rtmp-module'
+include_recipe 'modules/passenger'
 
 # build
 execute 'build nginx' do
@@ -33,21 +25,32 @@ execute 'build nginx' do
     rm -Rf nginx-#{dad_nginx_version}
     tar zxf nginx-#{dad_nginx_version}.tar.gz
     cd nginx-#{dad_nginx_version}
-    ./configure \
+    sudo ./configure \
       --prefix=/opt/nginx-#{dad_nginx_version} \
       --conf-path=/etc/nginx/nginx.conf \
       --pid-path=/run/nginx.pid \
       --with-http_ssl_module \
-      --add-module=/opt/nginx-rtmp-module/v1.1.11
+      --add-dynamic-module=/opt/nginx-rtmp-module/v1.1.11 \
+      --add-dynamic-module=$(passenger-config --nginx-addon-dir)
+    sudo chown -R #{ENV['USER']}:#{ENV['USER']} ./
     make
     sudo make install
-    sudo ln -snf /opt/nginx-#{dad_nginx_version} /opt/nginx
   EOF
   not_if "test -e /opt/nginx-#{dad_nginx_version}"
 end
 
+link 'nginx' do
+  user 'root'
+  cwd '/opt'
+  to "nginx-#{dad_nginx_version}"
+  force true
+end
+
 template '/etc/nginx/nginx.conf' do
   user 'root'
+  owner 'root'
+  group 'root'
+  mode '644'
 end
 
 directory '/etc/nginx/conf.d' do
@@ -59,6 +62,16 @@ end
 
 template '/etc/nginx/conf.d/default.conf' do
   user 'root'
+  owner 'root'
+  group 'root'
+  mode '644'
+end
+
+directory '/etc/nginx/conf.d/servers' do
+  user 'root'
+  owner 'root'
+  group 'root'
+  mode '755'
 end
 
 template '/lib/systemd/system/nginx.service' do

@@ -12,6 +12,7 @@ en:
   memcached:
     install: install mecached
   nginx:
+    config: setting Passenger for app to Nginx
     install: install Nginx
   obs_studio:
     install: install OBS-Studio
