@@ -29,7 +29,7 @@ http {
 
   #gzip  on;
 
-  passenger_root <%= @passenger_root %>;
+  passenger_root <%= `sudo passenger-config about root` %>;
 
   server {
     listen 80 default_server;
