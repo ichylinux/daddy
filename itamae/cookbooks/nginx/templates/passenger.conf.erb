@@ -1,6 +1,7 @@
 <%-
-  @ssl = system("sudo test -e /etc/letsencrypt/live/#{@server_name}/fullchain.pem") &&
-         system("sudo test -e /etc/letsencrypt/live/#{@server_name}/privkey.pem")
+  @letsencrypt = system("sudo test -e /etc/letsencrypt/live/#{@server_name}/fullchain.pem")
+  @selfsigned = system('sudo test -e /etc/pki/tls/certs/localhost.crt')
+  @ssl = @letsencrypt || @selfsigned
 -%>
 server {
   listen 80;
@@ -10,9 +11,12 @@ server {
   server_name <%= @server_name %>;
   access_log /opt/nginx/logs/<%= @server_name %>_access.log ltsv;
 
-<%- if @ssl -%>
+<%- if @letsencrypt -%>
   ssl_certificate /etc/letsencrypt/live/<%= @server_name %>/fullchain.pem;
   ssl_certificate_key /etc/letsencrypt/live/<%= @server_name %>/privkey.pem;
+<%- elsif @selfsigned -%>
+  ssl_certificate /etc/pki/tls/certs/localhost.crt;
+  ssl_certificate_key /etc/pki/tls/private/localhost.key;
 <%- end -%>
 
   root <%= ::File.join(@rails_root, 'public') %>;

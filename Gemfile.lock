@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    daddy (0.5.22)
+    daddy (0.5.23)
       capybara (~> 2.7)
       ci_reporter (~> 2.0)
       closer (~> 0.3)
@@ -160,7 +160,7 @@ GEM
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
     public_suffix (2.0.5)
-    rack (2.0.2)
+    rack (2.0.3)
     rack-protection (2.0.0)
       rack
     rack-test (0.6.3)
@@ -224,7 +224,7 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.0)
       tilt (~> 2.0)
-    specinfra (2.67.9)
+    specinfra (2.67.10)
       net-scp
       net-ssh (>= 2.7, < 5.0)
       net-telnet
