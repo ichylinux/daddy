@@ -30,6 +30,7 @@ http {
   #gzip  on;
 
   passenger_root <%= `sudo passenger-config about root` %>;
+  passenger_instance_registry_dir /var/run/passenger-instreg;
 
   server {
     listen 80 default_server;
