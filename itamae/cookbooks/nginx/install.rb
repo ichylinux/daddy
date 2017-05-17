@@ -53,11 +53,16 @@ template '/etc/nginx/nginx.conf' do
   mode '644'
 end
 
-directory '/etc/nginx/conf.d' do
-  user 'root'
-  owner 'root'
-  group 'root'
-  mode '755'
+%w{
+  /etc/nginx/conf.d
+  /var/run/passenger-instreg
+}.each do |name|
+  directory name do
+    user 'root'
+    owner 'root'
+    group 'root'
+    mode '755'
+  end
 end
 
 template '/etc/nginx/conf.d/default.conf' do
