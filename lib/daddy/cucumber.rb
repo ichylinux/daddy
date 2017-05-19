@@ -3,8 +3,6 @@ require 'capybara/cucumber'
 case ENV['DRIVER']
 when 'poltergeist'
   require 'capybara/poltergeist'
-when 'webkit'
-  require 'capybara/webkit'
 end
 
 Capybara.default_driver = (ENV['DRIVER'] || :selenium).to_sym
