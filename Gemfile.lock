@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    daddy (0.5.25)
+    daddy (0.5.26)
       capybara (~> 2.7)
       ci_reporter (~> 2.0)
       faraday (~> 0.9)
@@ -265,4 +265,4 @@ DEPENDENCIES
   simplecov-rcov (~> 0.2)
 
 BUNDLED WITH
-   1.14.6
+   1.15.0
