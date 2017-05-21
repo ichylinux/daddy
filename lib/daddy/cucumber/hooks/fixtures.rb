@@ -6,9 +6,6 @@ end
 
 fixtures_folder = File.join('test', 'fixtures')
 fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
-if defined? RailsCsvFixtures
-  fixtures += Dir[File.join(fixtures_folder, '*.csv')].map {|f| File.basename(f, '.csv') }
-end
 
 Before do
   fixture_class.create_fixtures(fixtures_folder, fixtures)
