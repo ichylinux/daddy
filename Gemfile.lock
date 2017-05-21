@@ -75,7 +75,7 @@ GEM
     ci_reporter (2.0.0)
       builder (>= 2.1.2)
     cliver (0.3.2)
-    closer (0.4.1)
+    closer (0.4.2)
       cucumber (~> 2.4)
     concurrent-ruby (1.0.5)
     cucumber (2.4.0)
