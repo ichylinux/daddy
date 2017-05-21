@@ -22,10 +22,6 @@ module Daddy
           ActiveRecord::Base.send(:include, Daddy::Models::QueryExtension)
         end
       end
-
-      rake_tasks do
-        require 'closer/tasks'
-      end
     end
   end
 end
