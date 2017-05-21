@@ -4,7 +4,6 @@ require 'daddy/version'
 Gem::Specification.new do |s|
   s.name        = 'daddy'
   s.version     = Daddy::VERSION
-  s.date        = Date.today
   s.summary     = "My rails dad"
   s.description = "Daddy helps me build web applications since daddy knows some good practices."
   s.license     = 'MIT'
