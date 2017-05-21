@@ -1,4 +1,4 @@
-FROM centos:6.8
+FROM centos:6.9
 MAINTAINER ichylinux@gmail.com
 
 RUN localedef -f UTF-8 -i ja_JP ja_JP.utf8
