@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    daddy (0.5.26)
+    daddy (0.5.27)
       capybara (~> 2.7)
       ci_reporter (~> 2.0)
       faraday (~> 0.9)
@@ -259,6 +259,8 @@ DEPENDENCIES
   closer (>= 0.5)
   daddy!
   database_cleaner (~> 1.5)
+  redis (~> 3.3)
+  redis-namespace (~> 1.5)
   resque (~> 1.26)
   resque-scheduler (~> 4.0)
   simplecov (~> 0.11)

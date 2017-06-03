@@ -22,6 +22,12 @@ module Daddy
           ActiveRecord::Base.send(:include, Daddy::Models::QueryExtension)
         end
       end
+
+      initializer 'sidekiq' do
+        if defined?(Sidekiq)
+          require 'daddy/sidekiq'
+        end
+      end
     end
   end
 end

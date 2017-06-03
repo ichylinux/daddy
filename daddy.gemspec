@@ -32,6 +32,8 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'database_cleaner', '~> 1.5'
   s.add_development_dependency 'closer', '>= 0.5'
+  s.add_development_dependency 'redis', '~> 3.3'
+  s.add_development_dependency 'redis-namespace', '~> 1.5'
   s.add_development_dependency 'resque', '~> 1.26'
   s.add_development_dependency 'resque-scheduler', '~> 4.0'
   s.add_development_dependency 'simplecov', '~> 0.11'
