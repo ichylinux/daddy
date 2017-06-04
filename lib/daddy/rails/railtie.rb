@@ -25,6 +25,7 @@ module Daddy
 
       initializer 'sidekiq' do
         if defined?(Sidekiq)
+          ::Rails.logger.info '[daddy] loading sidekiq configuration'
           require 'daddy/sidekiq'
         end
       end
