@@ -20,7 +20,7 @@ http {
                     'runtime:$upstream_http_x_runtime\t'
                     'vhost:$host';
 
-  access_log  /opt/nginx/logs/access.log  ltsv;
+  access_log  /opt/nginx/shared/logs/access.log  ltsv;
 
   sendfile        on;
   #tcp_nopush     on;

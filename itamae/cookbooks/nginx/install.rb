@@ -1,9 +1,23 @@
 require 'daddy/itamae'
 
 dad_nginx_checksum = File.join(File.dirname(__FILE__), 'sha256sum.txt')
-dad_nginx_version = '1.12.0'
+dad_nginx_version = '1.13.1'
 
 directory 'tmp'
+
+# install destination
+%w{
+  /opt/nginx
+  /opt/nginx/shared
+  /opt/nginx/shared/logs
+}.each do |name|
+  directory name do
+    user 'root'
+    owner 'root'
+    group 'root'
+    mode '755'
+  end
+end
 
 # nginx source
 execute 'download nginx' do
@@ -26,7 +40,7 @@ execute 'build nginx' do
     tar zxf nginx-#{dad_nginx_version}.tar.gz
     cd nginx-#{dad_nginx_version}
     sudo ./configure \
-      --prefix=/opt/nginx-#{dad_nginx_version} \
+      --prefix=/opt/nginx/nginx-#{dad_nginx_version} \
       --conf-path=/etc/nginx/nginx.conf \
       --pid-path=/run/nginx.pid \
       --with-http_ssl_module \
@@ -36,12 +50,12 @@ execute 'build nginx' do
     make
     sudo make install
   EOF
-  not_if "test -e /opt/nginx-#{dad_nginx_version}"
+  not_if "test -e /opt/nginx/nginx-#{dad_nginx_version}"
 end
 
-link 'nginx' do
+link 'current' do
   user 'root'
-  cwd '/opt'
+  cwd '/opt/nginx'
   to "nginx-#{dad_nginx_version}"
   force true
 end
