@@ -11,6 +11,8 @@ en:
     install: install Let's Eencrypt certbot
   memcached:
     install: install mecached
+  mysql:
+    install: install MySQL/MariaDB
   nginx:
     config: setting Passenger for app to Nginx
     install: install Nginx
@@ -18,6 +20,8 @@ en:
     install: install OBS-Studio
   redis:
     install: install Redis
+  trac:
+    install: install Trac
   unicorn:
     install: install application as unicorn service
   vsftpd:

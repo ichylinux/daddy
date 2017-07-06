@@ -11,6 +11,8 @@ ja:
     install: Let's Eencrypt の certbot をインストールします
   memcached:
     install: memcachedをインストールします
+  mysql:
+    install: MySQL/MariaDBをインストールします
   nginx:
     config: Nginxにアプリの設定ファイルをインストールします
     install: Nginxをインストールします
@@ -18,6 +20,8 @@ ja:
     install: OBS-Studioをインストールします
   redis:
     install: Redisをインストールします
+  trac:
+    install: Tracをインストールします
   unicorn:
     install: アプリをUnicornサービスとしてインストールします
   vsftpd:
