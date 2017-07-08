@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'capybara', '~> 2.7'
   s.add_runtime_dependency 'ci_reporter', '~> 2.0'
   s.add_runtime_dependency 'faraday', '~> 0.9'
+  s.add_runtime_dependency 'hashie', '~> 3.4.0'
   s.add_runtime_dependency 'holiday_jp', '~> 0.4'
   s.add_runtime_dependency 'i18n', '~> 0.7'
   s.add_runtime_dependency 'itamae', '>= 1.9'
