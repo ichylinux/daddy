@@ -9,11 +9,17 @@ gem_package 'god' do
   user 'root'
 end
 
-template '/etc/init.d/god' do
-  user 'root'
-  owner 'root'
-  group 'root'
-  mode '755'
+case os_version
+when /rhel-6\.(.*?)/
+  template '/etc/init.d/god' do
+    user 'root'
+    owner 'root'
+    group 'root'
+    mode '755'
+  end
+else
+  #raise I18n.t('itamae.errors.unsupported_os_version', :os_version => os_version)
+  raise "サポートしていないOSバージョンです。#{os_version}"
 end
 
 directory '/etc/god' do
