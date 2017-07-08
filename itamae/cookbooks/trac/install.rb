@@ -11,3 +11,17 @@ end
 execute 'pip install trac==1.2.2 mysql-python' do
   user 'root'
 end
+
+directory '/var/apps' do
+  user 'root'
+  owner 'root'
+  group 'root'
+  mode '755'
+end
+
+directory '/var/apps/trac' do
+  user 'root'
+  owner ENV['USER']
+  group ENV['USER']
+  mode '755'
+end
