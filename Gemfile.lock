@@ -96,7 +96,7 @@ GEM
     erubis (2.7.0)
     et-orbi (1.0.5)
       tzinfo
-    faraday (0.12.1)
+    faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
     ffi-yajl (2.3.1)
@@ -107,7 +107,7 @@ GEM
       activesupport (>= 4.2.0)
     hashie (3.4.6)
     holiday_jp (0.5.1)
-    i18n (0.8.5)
+    i18n (0.8.6)
     ipaddress (0.8.3)
     itamae (1.9.11)
       ansi
@@ -126,11 +126,11 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_portile2 (2.2.0)
-    minitest (5.10.2)
+    minitest (5.10.3)
     mixlib-cli (1.7.0)
     mixlib-config (2.2.4)
     mixlib-log (1.7.1)
-    mixlib-shellout (2.2.7)
+    mixlib-shellout (2.3.2)
     mono_logger (1.1.0)
     multi_json (1.12.1)
     multi_test (0.1.2)
@@ -225,7 +225,7 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.0)
       tilt (~> 2.0)
-    specinfra (2.68.1)
+    specinfra (2.69.0)
       net-scp
       net-ssh (>= 2.7, < 5.0)
       net-telnet
