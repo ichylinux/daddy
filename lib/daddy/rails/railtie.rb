@@ -24,7 +24,7 @@ module Daddy
       end
 
       initializer 'carrierwave' do
-        if defined?(Carrierwave)
+        if defined?(CarrierWave)
           ::Rails.logger.info '[daddy] loading carrierwave uploader'
           require 'daddy/uploader'
         end
