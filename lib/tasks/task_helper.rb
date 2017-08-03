@@ -79,7 +79,7 @@ def self.ask(prompt, options = {})
     puts
   end
 
-  if options[:required] and answer.empty?
+  if options[:required] and answer.to_s.empty?
     raise "必須です。処理を中止します。"
   end
 
