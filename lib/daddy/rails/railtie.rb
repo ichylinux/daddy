@@ -23,6 +23,13 @@ module Daddy
         end
       end
 
+      initializer 'carrierwave' do
+        if defined?(Carrierwave)
+          ::Rails.logger.info '[daddy] loading carrierwave uploader'
+          require 'daddy/uploader'
+        end
+      end
+
       initializer 'sidekiq' do
         if defined?(Sidekiq)
           ::Rails.logger.info '[daddy] loading sidekiq configuration'
