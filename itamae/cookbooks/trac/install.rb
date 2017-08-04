@@ -8,8 +8,16 @@ package 'python-devel' do
   user 'root'
 end
 
-execute 'pip install trac==1.2.2 mysql-python' do
-  user 'root'
+{
+  'Trac': '1.2.2',
+  'MySQL-python': nil,
+  'trac-github': nil,
+  'requests-oauthlib': nil
+}.each do |name, version|
+  execute "pip install #{name}" do
+    user 'root'
+    not_if "pip list --format=freeze | egrep '#{name}==#{version ? version : '.*'}'"
+  end
 end
 
 directory '/var/apps' do
