@@ -1,0 +1,14 @@
+[Unit]
+Description=tracd
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/tracd -p <%= @port %> -e /var/apps/trac/
+
+User=<%= @user %>
+Group=<%= @group %>
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target

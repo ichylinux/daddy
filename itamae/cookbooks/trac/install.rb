@@ -33,3 +33,11 @@ directory '/var/apps/trac' do
   group ENV['USER']
   mode '755'
 end
+
+template '/etc/systemd/system/tracd.service' do
+  user 'root'
+  owner 'root'
+  group 'root'
+  mode '644'
+  variables :user => ENV['USER'], :group => ENV['USER'], :port => 8082
+end
