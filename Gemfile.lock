@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    daddy (0.5.31)
+    daddy (0.5.32)
       capybara (~> 2.7)
       ci_reporter (~> 2.0)
       faraday (~> 0.9)
@@ -214,11 +214,11 @@ GEM
       rubyzip (~> 1.0)
       websocket (~> 1.0)
     sfl (2.3)
-    simplecov (0.14.1)
+    simplecov (0.15.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.1)
+    simplecov-html (0.10.2)
     simplecov-rcov (0.2.3)
       simplecov (>= 0.4.1)
     sinatra (2.0.0)
