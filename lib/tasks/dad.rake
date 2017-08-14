@@ -7,9 +7,3 @@ task :dad do
     end
   end
 end
-
-namespace :dad do
-  task :install do
-    system('rake dad:cucumber:install')
-  end
-end
