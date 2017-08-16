@@ -96,7 +96,7 @@ GEM
     erubis (2.7.0)
     et-orbi (1.0.5)
       tzinfo
-    faraday (0.12.2)
+    faraday (0.13.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
     ffi-yajl (2.3.1)
