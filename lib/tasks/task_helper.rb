@@ -1,6 +1,7 @@
 require 'rake'
 require 'erb'
 require 'yaml'
+require 'highline'
 require File.expand_path('../../daddy/version', __FILE__)
 
 require 'i18n'
@@ -11,12 +12,26 @@ def self.daddy_version
   Daddy::VERSION
 end
 
+def self.cli
+  @_cli ||= HighLine.new
+end
+
 def self.rails_root
   ENV['RAILS_ROOT'] || @_rails_root ||= ask('RAILS_ROOT', :default => Dir.pwd)
 end
 
 def self.rails_env(options = {})
-  ENV['RAILS_ENV'] || @_rails_env ||= ask('RAILS_ENV', :default => options.fetch(:default, 'development'))
+  ret = ENV['RAILS_ENV']
+  unless ret
+    cli.say('RAILS_ENV')
+    @_rails_env ||= cli.choose do |menu|
+      menu.choice 'production'
+      menu.choice 'development'
+      menu.choice 'test'
+      menu.prompt = 'select number above [2]'
+      menu.default = 'development'
+    end
+  end
 end
 
 def self.app_name
