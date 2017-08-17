@@ -36,7 +36,7 @@ include_recipe 'modules/passenger'
 execute 'build nginx' do
   cwd 'tmp'
   command <<-EOF
-    rm -Rf nginx-#{dad_nginx_version}
+    rm -Rf nginx-#{dad_nginx_version}/
     tar zxf nginx-#{dad_nginx_version}.tar.gz
     cd nginx-#{dad_nginx_version}
     sudo ./configure \
