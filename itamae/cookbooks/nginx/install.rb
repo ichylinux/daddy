@@ -1,7 +1,7 @@
 require 'daddy/itamae'
 
 dad_nginx_checksum = File.join(File.dirname(__FILE__), 'sha256sum.txt')
-dad_nginx_version = '1.13.1'
+dad_nginx_version = '1.13.4'
 
 directory 'tmp'
 
@@ -50,7 +50,7 @@ execute 'build nginx' do
     make
     sudo make install
   EOF
-  not_if "test -e /opt/nginx/nginx-#{dad_nginx_version}"
+  only_if "test #{ENV['FORCE']} -o ! -e /opt/nginx/nginx-#{dad_nginx_version}"
 end
 
 link 'current' do
