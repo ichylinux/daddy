@@ -6,7 +6,7 @@ en:
       jenkins:
         after_install: |
           installation completed.
-          access %{jenkins_url} and add first user.
-          use public key below.
+          please access %{jenkins_url} and add first user.
+          use public key below for your git repository.
           
           %{public_key}
