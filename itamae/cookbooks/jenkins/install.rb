@@ -86,8 +86,9 @@ execute 'add public key' do
   not_if "cat authorized_keys | grep \"`cat id_rsa.pub`\""
 end
 
-execute '/etc/init.d/jenkins restart' do
+service 'jenkins' do
   user 'root'
+  action :restart
 end
 
 local_ruby_block 'post install message' do
