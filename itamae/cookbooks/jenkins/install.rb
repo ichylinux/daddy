@@ -88,7 +88,8 @@ end
 
 service 'jenkins' do
   user 'root'
-  action :restart
+  action :nothing
+  subscribes :restart, 'template[/etc/sysconfig/jenkins]'
 end
 
 local_ruby_block 'post install message' do
