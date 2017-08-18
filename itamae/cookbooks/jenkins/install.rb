@@ -36,7 +36,7 @@ template '/etc/sysconfig/jenkins' do
   user 'root'
   group 'root'
   owner 'root'
-  mode '644'
+  mode '600'
 end
 
 service 'jenkins' do
