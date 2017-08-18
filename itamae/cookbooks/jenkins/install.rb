@@ -97,8 +97,6 @@ local_ruby_block 'post install message' do
     message = I18n.t('itamae.messages.jenkins.after_install',
         :jenkins_url => ENV['DAD_JENKINS_URL'],
         :public_key => `sudo cat /var/lib/jenkins/.ssh/id_rsa.pub`)
-    message.split("\n").each do |line|
-      Itamae.logger.info line
-    end
+    message.split("\n").map {|line| Itamae.logger.info line }
   end
 end
