@@ -1,0 +1,37 @@
+<%-
+  @letsencrypt = system("sudo test -e /etc/letsencrypt/live/#{@server_name}/fullchain.pem")
+  @selfsigned = system('sudo test -e /etc/pki/tls/certs/localhost.crt')
+  @ssl = @letsencrypt || @selfsigned
+-%>
+upstream jenkins {
+  server localhost:8080;
+}
+
+server {
+  listen 80;
+<%- if @ssl -%>
+  listen 443 ssl;
+<%- end -%>
+  server_name <%= @server_name %>;
+  access_log /opt/nginx/shared/logs/<%= @server_name %>_access.log ltsv;
+
+<%- if @letsencrypt -%>
+  ssl_certificate /etc/letsencrypt/live/<%= @server_name %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= @server_name %>/privkey.pem;
+<%- elsif @selfsigned -%>
+  ssl_certificate /etc/pki/tls/certs/localhost.crt;
+  ssl_certificate_key /etc/pki/tls/private/localhost.key;
+<%- end -%>
+
+  root /var/cache/jenkins/war;
+
+  location / {
+    proxy_pass http://jenkins;
+    proxy_redirect http:// https://;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Forwarded-Proto https;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-User $remote_user;
+  }
+}

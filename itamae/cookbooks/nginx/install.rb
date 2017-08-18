@@ -50,7 +50,7 @@ execute 'build nginx' do
     make
     sudo make install
   EOF
-  only_if "test #{ENV['FORCE'] == 'true'} -o ! -e /opt/nginx/nginx-#{dad_nginx_version}"
+  not_if "test -e /opt/nginx/nginx-#{dad_nginx_version}"
 end
 
 link 'current' do

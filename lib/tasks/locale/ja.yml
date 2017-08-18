@@ -14,7 +14,9 @@ ja:
   mysql:
     install: MySQL/MariaDBをインストールします
   nginx:
-    config: Nginxにアプリの設定ファイルをインストールします
+    config:
+      default: Nginxにアプリの設定ファイルをインストールします
+      jenkins: NginxにJenkinsのリバースプロキシを設定します
     install: Nginxをインストールします
   obs_studio:
     install: OBS-Studioをインストールします

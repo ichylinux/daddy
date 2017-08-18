@@ -14,7 +14,9 @@ en:
   mysql:
     install: install MySQL/MariaDB
   nginx:
-    config: setting Passenger for app to Nginx
+    config:
+      default: setting Passenger for app to Nginx
+      nginx: setting Jenkins as reverse proxy
     install: install Nginx
   obs_studio:
     install: install OBS-Studio

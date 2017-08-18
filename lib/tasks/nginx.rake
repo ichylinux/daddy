@@ -8,7 +8,7 @@ namespace :dad do
       run_itamae 'nginx/install'
     end
 
-    desc I18n.t('nginx.config')
+    desc I18n.t('nginx.config.default')
     task :config do
       ENV['APP_NAME'] ||= app_name
       ENV['SERVER_NAME'] ||= ask('SERVER_NAME', :default => 'localhost', :required => true)
@@ -17,5 +17,13 @@ namespace :dad do
       run_itamae 'nginx/config'
     end
 
+    namespace :config do
+      
+      desc I18n.t('nginx.config.jenkins')
+      task :jenkins do
+        ENV['SERVER_NAME'] ||= ask('SERVER_NAME', :default => 'localhost', :required => true)
+        run_itamae 'nginx/config/jenkins'
+      end
+    end
   end
 end
