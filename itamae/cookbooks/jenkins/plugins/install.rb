@@ -17,12 +17,9 @@ end
 @plugins = [
   {:name => 'ansicolor', :version => nil},
   {:name => 'build-pipeline-plugin', :version => nil},
-  {:name => 'git', :version => nil},
-  {:name => 'git-client', :version => nil},
   {:name => 'rake', :version => nil},
   {:name => 'rubyMetrics', :version => nil},
   {:name => 'htmlpublisher', :version => nil},
-  {:name => 'reverse-proxy-auth-plugin', :version => nil},
   {:name => 'thinBackup', :version => nil}
 ]
 @plugins.each do |plugin|
