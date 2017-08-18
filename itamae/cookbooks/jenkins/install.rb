@@ -21,12 +21,11 @@ execute 'rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key' do
   not_if 'test -e /etc/yum.repos.d/jenkins.repo'
 end
 
-http_request '/etc/yum.repos.d/jenkins.repo' do
+template '/etc/yum.repos.d/jenkins.repo' do
   user 'root'
-  owner 'root'
   group 'root'
+  owner 'root'
   mode '644'
-  url 'http://pkg.jenkins-ci.org/redhat/jenkins.repo'
 end
 
 package 'jenkins' do
