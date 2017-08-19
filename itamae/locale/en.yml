@@ -3,6 +3,10 @@ en:
     errors:
       unsupported_os_version: unsupported os version. %{os_version}
     messages:
+      docker:
+        after_install: |
+          user %{user} is added to group docker.
+          please restart os to reflect the change.
       jenkins:
         after_install: |
           installation completed.

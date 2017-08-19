@@ -33,12 +33,22 @@ group 'docker' do
   user 'root'
 end
 
-execute "usermod -aG docker #{ENV['USER']}" do
+execute "add user to docker group" do
   user 'root'
+  command "usermod -aG docker #{ENV['USER']}"
   not_if "groups #{ENV['USER']} | grep -E \"\sdocker\""
 end
 
 service 'docker' do
   action [:enable, :start]
   user 'root'
+end
+
+local_ruby_block 'post install message' do
+  block do
+    message = I18n.t('itamae.messages.docker.after_install', :user => ENV['USER'])
+    message.split("\n").map {|line| Itamae.logger.info line }
+  end
+  action :nothing
+  subscribes :run, 'execute[add user to docker group]'
 end

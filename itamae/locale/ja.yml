@@ -3,6 +3,10 @@ ja:
     errors:
       unsupported_os_version: サポートしていないOSバージョンです。%{os_version}
     messages:
+      docker:
+        after_install: |
+          ユーザ %{user} をグループ docker に追加しました。
+          OSを再起動して変更を反映してください。
       jenkins:
         after_install: |
           インストールが完了しました。
