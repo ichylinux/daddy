@@ -23,14 +23,6 @@ server {
   ssl_certificate_key /etc/pki/tls/private/localhost.key;
 <%- end -%>
 
-  location /assets/ {
-    proxy_pass              http://localhost:<%= @port %>/assets/;
-    proxy_cache             cache;
-    proxy_cache_key         $host$uri$is_args$args;
-    proxy_cache_valid       200 301 302 1d;
-    expires                 1d;
-  }
-
   location / {
     proxy_pass              http://localhost:<%= @port %>;
     proxy_redirect http:// https://;
@@ -45,4 +37,13 @@ server {
     client_max_body_size    500m; # Big number is we can post big commits.
     client_body_buffer_size 128k;
   }
+
+  location /assets/ {
+    proxy_pass              http://localhost:<%= @port %>/assets/;
+    proxy_cache             cache;
+    proxy_cache_key         $host$uri$is_args$args;
+    proxy_cache_valid       200 301 302 1d;
+    expires                 1d;
+  }
+
 }

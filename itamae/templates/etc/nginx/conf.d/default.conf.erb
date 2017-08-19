@@ -29,6 +29,8 @@ http {
 
   #gzip  on;
 
+  proxy_cache_path /opt/nginx/cache levels=1:2 keys_zone=cache:512m inactive=1d  max_size=60g;
+
   passenger_root <%= `sudo passenger-config about root` %>;
   passenger_instance_registry_dir /var/run/passenger-instreg;
 

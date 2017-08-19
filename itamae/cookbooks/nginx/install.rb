@@ -8,6 +8,7 @@ directory 'tmp'
 # install destination
 %w{
   /opt/nginx
+  /opt/nginx/cache
   /opt/nginx/shared
   /opt/nginx/shared/logs
 }.each do |name|
