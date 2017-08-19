@@ -18,12 +18,20 @@ namespace :dad do
     end
 
     namespace :config do
-      
+
+      desc I18n.t('nginx.config.gitbucket')
+      task :jenkins do
+        ENV['SERVER_NAME'] ||= ask('SERVER_NAME', :default => 'localhost', :required => true)
+        ENV['PORT'] = ask('PORT', :default => '8081', :required => true)
+        run_itamae 'nginx/config/gitbucket'
+      end
+
       desc I18n.t('nginx.config.jenkins')
       task :jenkins do
         ENV['SERVER_NAME'] ||= ask('SERVER_NAME', :default => 'localhost', :required => true)
         run_itamae 'nginx/config/jenkins'
       end
+
     end
   end
 end

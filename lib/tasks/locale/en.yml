@@ -16,6 +16,7 @@ en:
   nginx:
     config:
       default: setting Passenger for app to Nginx
+      gitbucket: setting GitBucket as reverse proxy
       nginx: setting Jenkins as reverse proxy
     install: install Nginx
   obs_studio:

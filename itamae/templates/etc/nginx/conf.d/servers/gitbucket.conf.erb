@@ -1,0 +1,48 @@
+<%-
+  @letsencrypt = system("sudo test -e /etc/letsencrypt/live/#{@server_name}/fullchain.pem")
+  @selfsigned = system('sudo test -e /etc/pki/tls/certs/localhost.crt')
+  @ssl = @letsencrypt || @selfsigned
+-%>
+upstream gitbucket {
+  server localhost:<%= @port %>;
+}
+
+server {
+  listen 80;
+<%- if @ssl -%>
+  listen 443 ssl;
+<%- end -%>
+  server_name <%= @server_name %>;
+  access_log /opt/nginx/shared/logs/<%= @server_name %>_access.log ltsv;
+
+<%- if @letsencrypt -%>
+  ssl_certificate /etc/letsencrypt/live/<%= @server_name %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= @server_name %>/privkey.pem;
+<%- elsif @selfsigned -%>
+  ssl_certificate /etc/pki/tls/certs/localhost.crt;
+  ssl_certificate_key /etc/pki/tls/private/localhost.key;
+<%- end -%>
+
+  location /assets/ {
+    proxy_pass              http://localhost:<%= @port %>/assets/;
+    proxy_cache             cache;
+    proxy_cache_key         $host$uri$is_args$args;
+    proxy_cache_valid       200 301 302 1d;
+    expires                 1d;
+  }
+
+  location / {
+    proxy_pass              http://localhost:<%= @port %>;
+    proxy_redirect http:// https://;
+    proxy_set_header        Host $host;
+    proxy_set_header        X-Real-IP $remote_addr;
+    proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-User $remote_user;
+    proxy_connect_timeout   150;
+    proxy_send_timeout      100;
+    proxy_read_timeout      100;
+    proxy_buffers           4 32k;
+    client_max_body_size    500m; # Big number is we can post big commits.
+    client_body_buffer_size 128k;
+  }
+}

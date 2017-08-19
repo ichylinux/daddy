@@ -16,6 +16,7 @@ ja:
   nginx:
     config:
       default: Nginxにアプリの設定ファイルをインストールします
+      gitbucket: NginxにGitBucketのリバースプロキシを設定します
       jenkins: NginxにJenkinsのリバースプロキシを設定します
     install: Nginxをインストールします
   obs_studio:
