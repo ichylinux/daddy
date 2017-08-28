@@ -53,8 +53,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.5.1)
-      public_suffix (~> 2.0, >= 2.0.2)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
     arel (7.1.4)
     builder (3.2.3)
@@ -97,7 +97,7 @@ GEM
     erubis (2.7.0)
     et-orbi (1.0.5)
       tzinfo
-    faraday (0.13.0)
+    faraday (0.13.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
     ffi-yajl (2.3.1)
@@ -138,7 +138,7 @@ GEM
     multi_json (1.12.1)
     multi_test (0.1.2)
     multipart-post (2.0.0)
-    mustermann (1.0.0)
+    mustermann (1.0.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
@@ -163,7 +163,7 @@ GEM
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
-    public_suffix (2.0.5)
+    public_suffix (3.0.0)
     rack (2.0.3)
     rack-protection (2.0.0)
       rack
@@ -228,7 +228,7 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.0)
       tilt (~> 2.0)
-    specinfra (2.70.1)
+    specinfra (2.71.0)
       net-scp
       net-ssh (>= 2.7, < 5.0)
       net-telnet
@@ -271,4 +271,4 @@ DEPENDENCIES
   simplecov-rcov (~> 0.2)
 
 BUNDLED WITH
-   1.15.3
+   1.15.4
