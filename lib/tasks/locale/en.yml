@@ -25,6 +25,8 @@ en:
     install: install OBS-Studio
   redis:
     install: install Redis
+  sbt:
+    install: install sbt
   trac:
     install: install Trac
   unicorn:

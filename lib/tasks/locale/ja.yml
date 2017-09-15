@@ -25,6 +25,8 @@ ja:
     install: OBS-Studioをインストールします
   redis:
     install: Redisをインストールします
+  sbt:
+    install: sbt をインストールします
   trac:
     install: Tracをインストールします
   unicorn:
