@@ -1,6 +1,8 @@
 en:
   docker:
     install: install Docker
+  git:
+    install: install Git with git-lfs extention
   god:
     install: install God
   jenkins:
