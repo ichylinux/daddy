@@ -1,3 +1,7 @@
 module Daddy
-  VERSION = '0.5.32'
+  VERSION = [
+    VERSION_MAJOR = '0',
+    VERSION_MINOR = '5',
+    VERSION_REVISION = '33'
+  ].join('.')
 end
