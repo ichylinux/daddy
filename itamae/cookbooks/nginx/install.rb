@@ -1,7 +1,7 @@
 require 'daddy/itamae'
 
 dad_nginx_checksum = File.join(File.dirname(__FILE__), 'sha256sum.txt')
-dad_nginx_version = '1.13.4'
+dad_nginx_version = '1.13.5'
 
 directory 'tmp'
 
