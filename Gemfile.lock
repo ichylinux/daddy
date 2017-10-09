@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    daddy (0.5.34)
+    daddy (0.6.0)
       capybara
       ci_reporter
       faraday
