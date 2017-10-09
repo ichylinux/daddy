@@ -1,8 +1,5 @@
 require 'daddy/itamae'
 
-dad_nginx_checksum = File.join(File.dirname(__FILE__), 'sha256sum.txt')
-dad_nginx_version = '1.13.5'
-
 directory 'tmp'
 
 # install destination
@@ -24,9 +21,9 @@ end
 execute 'download nginx' do
   cwd 'tmp'
   command <<-EOF
-    wget https://nginx.org/download/nginx-#{dad_nginx_version}.tar.gz
+    wget https://nginx.org/download/nginx-#{Daddy::NGINX_VERSION}.tar.gz
   EOF
-  not_if "sha256sum -c #{dad_nginx_checksum}"
+  not_if "sha256sum -c nginx-#{Daddy::NGINX_VERSION}_sha256sum.txt"
 end
 
 # module sources
@@ -37,27 +34,28 @@ include_recipe 'modules/passenger'
 execute 'build nginx' do
   cwd 'tmp'
   command <<-EOF
-    rm -Rf nginx-#{dad_nginx_version}/
-    tar zxf nginx-#{dad_nginx_version}.tar.gz
-    cd nginx-#{dad_nginx_version}
-    sudo ./configure \
-      --prefix=/opt/nginx/nginx-#{dad_nginx_version} \
-      --conf-path=/etc/nginx/nginx.conf \
-      --pid-path=/run/nginx.pid \
-      --with-http_ssl_module \
-      --add-dynamic-module=/opt/nginx-rtmp-module/v1.1.11 \
-      --add-dynamic-module=$(passenger-config --nginx-addon-dir)
-    sudo chown -R #{ENV['USER']}:#{ENV['USER']} ./
-    make
-    sudo make install
+    rm -Rf nginx-#{Daddy::NGINX_VERSION}/
+    tar zxf nginx-#{Daddy::NGINX_VERSION}.tar.gz
+    pushd nginx-#{Daddy::NGINX_VERSION}
+      sudo ./configure \
+        --prefix=/opt/nginx/nginx-#{Daddy::NGINX_VERSION} \
+        --conf-path=/etc/nginx/nginx.conf \
+        --pid-path=/run/nginx.pid \
+        --with-http_ssl_module \
+        --add-dynamic-module=/opt/nginx-rtmp-module/v1.1.11 \
+        --add-dynamic-module=$(passenger-config --nginx-addon-dir)
+      sudo chown -R #{ENV['USER']}:#{ENV['USER']} ./
+      make
+      sudo make install
+    popd
   EOF
-  not_if "test -e /opt/nginx/nginx-#{dad_nginx_version}"
+  not_if "test -e /opt/nginx/nginx-#{Daddy::NGINX_VERSION}"
 end
 
 link 'current' do
   user 'root'
   cwd '/opt/nginx'
-  to "nginx-#{dad_nginx_version}"
+  to "nginx-#{Daddy::NGINX_VERSION}"
   force true
 end
 
