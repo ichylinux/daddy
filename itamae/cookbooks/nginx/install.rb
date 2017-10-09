@@ -23,7 +23,7 @@ execute 'download nginx' do
   command <<-EOF
     wget https://nginx.org/download/nginx-#{Daddy::NGINX_VERSION}.tar.gz
   EOF
-  not_if "sha256sum -c nginx-#{Daddy::NGINX_VERSION}_sha256sum.txt"
+  not_if "sha256sum -c #{::File.join(::File.dirname(__FILE__), "nginx-#{Daddy::NGINX_VERSION}_sha256sum.txt")}"
 end
 
 # module sources

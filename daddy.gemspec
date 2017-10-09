@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'capybara'
   s.add_runtime_dependency 'ci_reporter'
   s.add_runtime_dependency 'faraday'
-  s.add_runtime_dependency 'hashie'
+  s.add_runtime_dependency 'hashie', '~> 3.4.0'
   s.add_runtime_dependency 'highline'
   s.add_runtime_dependency 'holiday_jp'
   s.add_runtime_dependency 'i18n'
