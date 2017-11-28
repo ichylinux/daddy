@@ -1,4 +1,10 @@
 gem_package 'passenger' do
   user 'root'
-  version '5.1.8'
+  version Daddy::PASSENGER_VERSION
+end
+
+execute "rm -Rf /opt/nginx/nginx-#{Daddy::NGINX_VERSION}" do
+  user 'root'
+  subscribes :run, 'gem_package[passenger]'
+  action :nothing
 end

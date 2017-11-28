@@ -10,4 +10,10 @@ module Daddy
     NGINX_VERSION_MINOR = '13',
     NGINX_VERSION_REVISION = '5'
   ].join('.')
+
+  PASSENGER_VERSION = [
+    PASSENGER_VERSION_MAJOR = '5',
+    PASSENGER_VERSION_MINOR = '1',
+    PASSENGER_VERSION_REVISION = '12'
+  ].join('.')
 end
