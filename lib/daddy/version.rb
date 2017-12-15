@@ -16,4 +16,10 @@ module Daddy
     PASSENGER_VERSION_MINOR = '1',
     PASSENGER_VERSION_REVISION = '12'
   ].join('.')
+
+  PYTHON_VERSION = [
+    PYTHON_VERSION_MAJOR = '3',
+    PYTHON_VERSION_MINOR = '6',
+    PYTHON_VERSION_REVISION = '3'
+  ].join('.')
 end
