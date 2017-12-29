@@ -5,6 +5,12 @@ module Daddy
     VERSION_REVISION = '0'
   ].join('.')
 
+  BAZEL_VERSION = [
+    BAZEL_VERSION_MAJOR = '0',
+    BAZEL_VERSION_MINOR = '8',
+    BAZEL_VERSION_REVISION = '1'
+  ].join('.')
+
   NGINX_VERSION = [
     NGINX_VERSION_MAJOR = '1',
     NGINX_VERSION_MINOR = '13',
