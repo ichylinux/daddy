@@ -10,6 +10,7 @@ PATH
       holiday_jp
       i18n
       itamae
+      itamae-plugin-resource-pip
       ohai
       rails
 
@@ -57,7 +58,7 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
     arel (8.0.0)
-    backports (3.10.3)
+    backports (3.11.0)
     builder (3.2.3)
     capybara (2.16.1)
       addressable
@@ -125,6 +126,8 @@ GEM
       schash (~> 0.1.0)
       specinfra (>= 2.64.0, < 3.0.0)
       thor
+    itamae-plugin-resource-pip (1.0.0)
+      itamae (~> 1.2)
     json (2.1.0)
     libyajl2 (1.2.0)
     loofah (2.1.1)
@@ -149,7 +152,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
     net-telnet (0.1.1)
-    nio4r (2.1.0)
+    nio4r (2.2.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     ohai (13.7.0)
@@ -233,7 +236,7 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.0)
       tilt (~> 2.0)
-    specinfra (2.72.1)
+    specinfra (2.73.0)
       net-scp
       net-ssh (>= 2.7, < 5.0)
       net-telnet

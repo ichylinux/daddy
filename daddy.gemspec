@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'holiday_jp'
   s.add_runtime_dependency 'i18n'
   s.add_runtime_dependency 'itamae'
+  s.add_runtime_dependency 'itamae-plugin-resource-pip'
   s.add_runtime_dependency 'ohai'
   s.add_runtime_dependency 'rails'
 
