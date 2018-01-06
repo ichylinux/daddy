@@ -5,11 +5,6 @@ directory '/opt/tensorflow' do
   mode '755'
 end
 
-git '/opt/tensorflow/r1.4' do
-  repository 'https://github.com/tensorflow/tensorflow'
-  revision 'r1.4'
-end
-
 include_recipe '../python/install'
 include_recipe '../bazel/install'
 
@@ -26,13 +21,21 @@ include_recipe '../bazel/install'
   end
 end
 
-execute 'install tensorflow' do
+git '/opt/tensorflow/r1.4' do
+  repository 'https://github.com/tensorflow/tensorflow'
+  revision 'r1.4'
+end
+
+local_ruby_block 'install tensorflow' do
   cwd '/opt/tensorflow/r1.4'
-  command <<-EOF
-    PYTHON_BIN_PATH=/usr/local/bin/python3 ./configure # TODO more options
-    bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
-    bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
-    sudo pip3 install /tmp/tensorflow_pkg/tensorflow-1.4.1-cp36-cp36m-linux_x86_64.whl
-  EOF
-  action :nothing
+  block do
+    Itamae.logger.info ''
+    Itamae.logger.info 'Run following commands to proceed.'
+    Itamae.logger.info "\n\n" + <<-EOF
+PYTHON_BIN_PATH=/usr/local/bin/python3 ./configure
+bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
+bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+sudo pip3 install /tmp/tensorflow_pkg/tensorflow-1.4.1-cp36-cp36m-linux_x86_64.whl
+    EOF
+  end
 end

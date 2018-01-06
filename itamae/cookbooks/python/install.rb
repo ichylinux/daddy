@@ -19,5 +19,5 @@ execute "install python-#{Daddy::PYTHON_VERSION}" do
       sudo make install
     popd
   EOF
-  not_if "which python#{Daddy::PYTHON_VERSION_MAJOR} && python3 -V | grep 'Python #{Daddy::PYTHON_VERSION}'" 
+  not_if "which python3 && python3 -V | grep 'Python #{Daddy::PYTHON_VERSION}'" 
 end
