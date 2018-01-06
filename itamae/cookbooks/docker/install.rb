@@ -28,6 +28,15 @@ when /rhel-6\.(.*?)/
     action :nothing
     subscribes :run, 'execute[add user to docker group]'
   end
+
+  local_ruby_block 'post install message' do
+    block do
+      message = I18n.t('itamae.messages.docker.after_install', :user => ENV['USER'])
+      ['', message.split("\n"), ''].flatten.map {|line| Itamae.logger.info line }
+    end
+    action :nothing
+    subscribes :run, 'execute[add user to docker group]'
+  end
 when /rhel-7\.(.*?)/
   %w{ yum-utils device-mapper-persistent-data lvm2 }.each do |name|
     package name do
@@ -49,8 +58,7 @@ when /rhel-7\.(.*?)/
   end
   
   execute "add user to docker group" do
-    user 'root'
-    command "sudo gpasswd -a #{ENV['USER']} docker"
+    command "sudo usermod -a -G docker #{ENV['USER']} && newgrp docker"
     not_if "groups #{ENV['USER']} | grep -E \"\sdocker\""
   end
 else
@@ -60,13 +68,4 @@ end
 service 'docker' do
   action [:enable, :start]
   user 'root'
-end
-
-local_ruby_block 'post install message' do
-  block do
-    message = I18n.t('itamae.messages.docker.after_install', :user => ENV['USER'])
-    ['', message.split("\n"), ''].flatten.map {|line| Itamae.logger.info line }
-  end
-  action :nothing
-  subscribes :run, 'execute[add user to docker group]'
 end
