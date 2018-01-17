@@ -78,6 +78,19 @@ end
   end
 end
 
+case os_version
+when /rhel-6\.(.*?)/
+when /rhel-7\.(.*?)/
+  template '/etc/tmpfiles.d/passenger.conf' do
+    user 'root'
+    owner 'root'
+    group 'root'
+    mode '644'
+    variables :path => '/var/run/passenger-instreg',
+        :owner => 'root', :group => 'root', :mode => '0755'
+    end
+end
+
 template '/etc/nginx/conf.d/default.conf' do
   user 'root'
   owner 'root'
