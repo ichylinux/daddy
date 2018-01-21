@@ -1,7 +1,6 @@
 require 'rails_i18n'
 require 'holiday_jp'
 require 'daddy/helpers/html_helper'
-require 'daddy/http_client'
 require 'daddy/model'
 require 'daddy/ocr'
 
