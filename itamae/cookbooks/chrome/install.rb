@@ -1,6 +1,6 @@
 require 'daddy/itamae'
 
-template '/etc/yum.repos.d/google.chrome.repo' do
+template '/etc/yum.repos.d/google-chrome.repo' do
   user 'root'
 end
 
