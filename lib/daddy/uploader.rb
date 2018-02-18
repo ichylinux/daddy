@@ -24,6 +24,7 @@ CarrierWave.configure do |config|
         region: aws['s3']['region']
       }
       config.fog_directory = aws['s3']['bucket']
+      config.fog_public = aws['s3'].fetch('public', false)
     end
   end
 end
