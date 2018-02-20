@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    daddy (0.6.3)
+    daddy (0.6.4)
       capybara
       ci_reporter
       hashie (~> 3.4.0)
