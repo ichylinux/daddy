@@ -2,7 +2,7 @@ module Daddy
   VERSION = [
     VERSION_MAJOR = '0',
     VERSION_MINOR = '6',
-    VERSION_REVISION = '4'
+    VERSION_REVISION = '5'
   ].join('.')
 
   BAZEL_VERSION = [

@@ -39,6 +39,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'redis-namespace'
   s.add_development_dependency 'resque'
   s.add_development_dependency 'resque-scheduler'
-  s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'simplecov', '~> 0.16'
   s.add_development_dependency 'simplecov-rcov'
 end

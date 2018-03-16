@@ -6,12 +6,10 @@ if ENV['COVERAGE']
   end
   begin
     require 'simplecov-rcov'
-    require 'daddy/coverage/rcov_formatter'
   rescue LoadError => e
     raise 'simplecov-rcov not found.'
   end
 
-  SimpleCov.formatter = Daddy::Coverage::RcovFormatter
   SimpleCov.start do
     add_filter '/features/'
     add_filter '/test/'
