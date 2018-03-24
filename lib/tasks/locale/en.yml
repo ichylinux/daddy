@@ -17,9 +17,9 @@ en:
     install: install MySQL/MariaDB
   nginx:
     config:
-      default: setting Passenger for app to Nginx
       gitbucket: setting GitBucket as reverse proxy
-      nginx: setting Jenkins as reverse proxy
+      jenkins: setting Jenkins as reverse proxy
+      rails: setting Passenger for rails app
     install: install Nginx
   obs_studio:
     install: install OBS-Studio

@@ -8,15 +8,6 @@ namespace :dad do
       run_itamae 'nginx/install'
     end
 
-    desc I18n.t('nginx.config.default')
-    task :config do
-      ENV['APP_NAME'] ||= app_name
-      ENV['SERVER_NAME'] ||= ask('SERVER_NAME', :default => 'localhost', :required => true)
-      ENV['RAILS_ENV'] ||= rails_env(:default => 'development')
-      ENV['RAILS_ROOT'] ||= rails_root
-      run_itamae 'nginx/config'
-    end
-
     namespace :config do
 
       desc I18n.t('nginx.config.gitbucket')
@@ -30,6 +21,15 @@ namespace :dad do
       task :jenkins do
         ENV['SERVER_NAME'] ||= ask('SERVER_NAME', :default => 'localhost', :required => true)
         run_itamae 'nginx/config/jenkins'
+      end
+
+      desc I18n.t('nginx.config.rails')
+      task :rails do
+        ENV['APP_NAME'] ||= app_name
+        ENV['SERVER_NAME'] ||= ask('SERVER_NAME', :default => 'localhost', :required => true)
+        ENV['RAILS_ENV'] ||= rails_env(:default => 'development')
+        ENV['RAILS_ROOT'] ||= rails_root
+        run_itamae 'nginx/config/rails'
       end
 
     end
