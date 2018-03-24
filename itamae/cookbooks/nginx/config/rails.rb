@@ -8,7 +8,7 @@ directory '/etc/nginx/conf.d/servers' do
 end
 
 template "/etc/nginx/conf.d/servers/#{ENV['SERVER_NAME']}.conf" do
-  source ::File.join(File.dirname(__FILE__), 'templates/etc/nginx/conf.d/servers/passenger.conf.erb')
+  source '_passenger.conf.erb'
   user 'root'
   owner 'root'
   group 'root'
