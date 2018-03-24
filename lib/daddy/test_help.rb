@@ -10,6 +10,11 @@ if ENV['COVERAGE']
     raise 'simplecov-rcov not found.'
   end
 
+  SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
+    SimpleCov::Formatter::HTMLFormatter,
+    SimpleCov::Formatter::RcovFormatter
+  ])
+
   SimpleCov.start do
     add_filter '/features/'
     add_filter '/test/'
