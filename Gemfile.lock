@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    daddy (0.6.5)
+    daddy (0.6.6)
       capybara
       ci_reporter
       hashie (~> 3.4.0)
@@ -131,7 +131,7 @@ GEM
       itamae (~> 1.2)
     json (2.1.0)
     libyajl2 (1.2.0)
-    loofah (2.2.0)
+    loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.0)
@@ -141,8 +141,9 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     mixlib-cli (1.7.0)
-    mixlib-config (2.2.5)
-    mixlib-log (1.7.1)
+    mixlib-config (2.2.6)
+      tomlrb
+    mixlib-log (2.0.3)
     mixlib-shellout (2.3.2)
     mono_logger (1.1.0)
     multi_json (1.13.1)
@@ -156,14 +157,14 @@ GEM
     nio4r (2.3.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
-    ohai (13.8.0)
-      chef-config (>= 12.5.0.alpha.1, < 14)
+    ohai (14.0.28)
+      chef-config (>= 12.8, < 15)
       ffi (~> 1.9)
       ffi-yajl (~> 2.2)
       ipaddress
       mixlib-cli
       mixlib-config (~> 2.0)
-      mixlib-log (>= 1.7.1, < 2.0)
+      mixlib-log (~> 2.0, >= 2.0.1)
       mixlib-shellout (~> 2.0)
       plist (~> 3.1)
       systemu (~> 2.6.4)
@@ -194,15 +195,15 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.0.3)
-      loofah (~> 2.0)
+    rails-html-sanitizer (1.0.4)
+      loofah (~> 2.2, >= 2.2.2)
     railties (5.1.5)
       actionpack (= 5.1.5)
       activesupport (= 5.1.5)
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (12.3.0)
+    rake (12.3.1)
     redis (4.0.1)
     redis-namespace (1.6.0)
       redis (>= 3.0.4)
