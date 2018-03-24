@@ -6,6 +6,7 @@ if ENV['COVERAGE']
   end
   begin
     require 'simplecov-rcov'
+    require 'daddy/coverage/rcov_formatter'
   rescue LoadError => e
     raise 'simplecov-rcov not found.'
   end
