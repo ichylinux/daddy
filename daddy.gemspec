@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.executables << 'dad'
 
-  s.required_ruby_version = '~> 2.3'
+  s.required_ruby_version = '~> 2.4'
 
   s.add_runtime_dependency 'capybara'
   s.add_runtime_dependency 'ci_reporter'
