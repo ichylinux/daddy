@@ -8,7 +8,7 @@ directory '/etc/nginx/conf.d/servers' do
 end
 
 template "/etc/nginx/conf.d/servers/#{ENV['SERVER_NAME']}.conf" do
-  source '/etc/nginx/conf.d/servers/_passenger.conf.erb'
+  source '_passenger.conf.erb'
   user 'root'
   owner 'root'
   group 'root'
