@@ -21,8 +21,6 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '~> 2.4'
 
-  s.add_runtime_dependency 'capybara'
-  s.add_runtime_dependency 'ci_reporter'
   s.add_runtime_dependency 'hashie', '~> 3.4.0'
   s.add_runtime_dependency 'highline'
   s.add_runtime_dependency 'holiday_jp'
@@ -32,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'ohai'
   s.add_runtime_dependency 'rails'
 
+  s.add_development_dependency 'ci_reporter'
   s.add_development_dependency 'closer'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'faraday'

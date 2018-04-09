@@ -2,8 +2,8 @@ require 'closer'
 
 begin
   require 'cucumber/rails'
+  puts 'cucumber-rails loaded.'
 rescue LoadError => e
-  puts 'cucumber-rails not found.'
 end
 
 DatabaseCleaner.strategy = :truncation
