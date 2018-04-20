@@ -1,22 +1,26 @@
+require 'daddy'
+
+version = ENV['BAZEL_VERSION'] || Daddy::BAZEL_VERSION
+
 directory 'tmp'
 
-execute "download bazel-#{Daddy::BAZEL_VERSION}" do
+execute "download bazel-#{version}" do
   cwd 'tmp'
   command <<-EOF
-    wget https://github.com/bazelbuild/bazel/releases/download/#{Daddy::BAZEL_VERSION}/bazel-#{Daddy::BAZEL_VERSION}-dist.zip -O bazel-#{Daddy::BAZEL_VERSION}-dist.zip 
+    wget https://github.com/bazelbuild/bazel/releases/download/#{version}/bazel-#{version}-dist.zip -O bazel-#{version}-dist.zip 
   EOF
-  not_if "sha256sum -c #{::File.join(::File.dirname(__FILE__), "bazel-#{Daddy::BAZEL_VERSION}_sha256sum.txt")}"
+  not_if "sha256sum -c #{::File.join(::File.dirname(__FILE__), "bazel-#{version}_sha256sum.txt")}"
 end
 
-execute "install bazel-#{Daddy::BAZEL_VERSION}" do
+execute "install bazel-#{version}" do
   cwd 'tmp'
   command <<-EOF
-    rm -Rf bazel-#{Daddy::BAZEL_VERSION}/
-    unzip bazel-#{Daddy::BAZEL_VERSION}-dist.zip -d bazel-#{Daddy::BAZEL_VERSION}
-    pushd bazel-#{Daddy::BAZEL_VERSION}
+    rm -Rf bazel-#{version}/
+    unzip bazel-#{version}-dist.zip -d bazel-#{version}
+    pushd bazel-#{version}
       bash ./compile.sh
       sudo cp -f output/bazel /usr/local/bin/
     popd
   EOF
-  not_if "which bazel && bazel version | grep 'Build label: #{Daddy::BAZEL_VERSION}-'"
+  not_if "which bazel && bazel version | grep 'Build label: #{version}-'"
 end
