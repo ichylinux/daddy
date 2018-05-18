@@ -1,3 +1,5 @@
+require 'daddy/itamae'
+
 template '/etc/yum.repos.d/vbatts-bazel.repo' do
   user 'root'
 end
