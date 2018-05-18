@@ -21,21 +21,21 @@ include_recipe '../bazel/install'
   end
 end
 
-git '/opt/tensorflow/r1.4' do
+git '/opt/tensorflow/v1.7.1' do
   repository 'https://github.com/tensorflow/tensorflow'
-  revision 'r1.4'
+  revision 'v1.7.1'
 end
 
 local_ruby_block 'install tensorflow' do
-  cwd '/opt/tensorflow/r1.4'
+  cwd '/opt/tensorflow/v1.7.1'
   block do
     Itamae.logger.info ''
     Itamae.logger.info 'Run following commands to proceed.'
     Itamae.logger.info "\n\n" + <<-EOF
 PYTHON_BIN_PATH=/usr/local/bin/python3 ./configure
-bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
+bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package
 bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
-sudo pip3 install /tmp/tensorflow_pkg/tensorflow-1.4.1-cp36-cp36m-linux_x86_64.whl
+sudo pip3 install /tmp/tensorflow_pkg/tensorflow-1.7.1-cp36-cp36m-linux_x86_64.whl
     EOF
   end
 end
