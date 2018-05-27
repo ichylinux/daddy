@@ -5,6 +5,7 @@ namespace :dad do
 
     desc I18n.t('nginx.install')
     task :install do
+      ask_env('NGINX_VERSION', default: Daddy::NGINX_VERSION)
       run_itamae 'nginx/install'
     end
 

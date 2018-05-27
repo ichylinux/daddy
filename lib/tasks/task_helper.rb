@@ -98,7 +98,13 @@ def self.ask(prompt, options = {})
     raise "必須です。処理を中止します。"
   end
 
-  answer.empty? ? nil : answer
+  answer.to_s.empty? ? nil : answer
+end
+
+def self.ask_env(key, options = {})
+  answer = ask(key, options)
+  ENV[key] ||= answer if answer
+  answer
 end
 
 def self.quiet?

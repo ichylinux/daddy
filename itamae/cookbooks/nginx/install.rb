@@ -1,5 +1,7 @@
 require 'daddy/itamae'
 
+version = ENV['NGINX_VERSION']
+
 directory 'tmp'
 
 # install destination
@@ -21,9 +23,9 @@ end
 execute 'download nginx' do
   cwd 'tmp'
   command <<-EOF
-    wget https://nginx.org/download/nginx-#{Daddy::NGINX_VERSION}.tar.gz
+    wget https://nginx.org/download/nginx-#{version}.tar.gz
   EOF
-  not_if "sha256sum -c #{::File.join(::File.dirname(__FILE__), "nginx-#{Daddy::NGINX_VERSION}_sha256sum.txt")}"
+  not_if "sha256sum -c #{::File.join(::File.dirname(__FILE__), "nginx-#{version}_sha256sum.txt")}"
 end
 
 # module sources
@@ -34,11 +36,11 @@ include_recipe 'modules/passenger'
 execute 'build nginx' do
   cwd 'tmp'
   command <<-EOF
-    rm -Rf nginx-#{Daddy::NGINX_VERSION}/
-    tar zxf nginx-#{Daddy::NGINX_VERSION}.tar.gz
-    pushd nginx-#{Daddy::NGINX_VERSION}
+    rm -Rf nginx-#{version}/
+    tar zxf nginx-#{version}.tar.gz
+    pushd nginx-#{version}
       sudo ./configure \
-        --prefix=/opt/nginx/nginx-#{Daddy::NGINX_VERSION} \
+        --prefix=/opt/nginx/nginx-#{version} \
         --conf-path=/etc/nginx/nginx.conf \
         --pid-path=/run/nginx.pid \
         --with-http_ssl_module \
@@ -49,13 +51,13 @@ execute 'build nginx' do
       sudo make install
     popd
   EOF
-  not_if "test -e /opt/nginx/nginx-#{Daddy::NGINX_VERSION}"
+  not_if "test -e /opt/nginx/nginx-#{version}"
 end
 
 link 'current' do
   user 'root'
   cwd '/opt/nginx'
-  to "nginx-#{Daddy::NGINX_VERSION}"
+  to "nginx-#{version}"
   force true
 end
 
