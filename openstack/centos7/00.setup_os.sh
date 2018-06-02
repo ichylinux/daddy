@@ -4,7 +4,7 @@
 #
 
 # sudo
-sed -i "s/\(^Defaults.*secure_path.*=\).*/\1 \/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
+sed -i "s/\(^Defaults\s+secure_path\s+=\s+\).*/\1\/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
 
 # disable ipv6
 echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf

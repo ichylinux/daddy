@@ -21,7 +21,18 @@ execute 'install ruby' do
        make
        sudo make install
      popd
-     sudo gem update -N --system
    EOF
    not_if "ruby -v | egrep \"ruby #{version}(p[0-9]+) \""
+end
+
+gem_package 'rubygems-update' do
+  user 'root'
+end
+
+gem_package 'bundler' do
+  user 'root'
+end
+
+gem_package 'itamae' do
+  user 'root'
 end
