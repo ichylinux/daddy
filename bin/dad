@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 function setup_dad() {
-  sudo sed -i "s/\(^Defaults\s+secure_path\s+=\s+\).*/\1\/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
+  sudo sed -i "s/\(^Defaults    secure_path = \).*/\1\/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
   sudo yum install -y wget
 
   if [ `which mitamae` ]; then

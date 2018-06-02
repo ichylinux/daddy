@@ -4,6 +4,7 @@ end
 
 %w{
   ImageMagick-devel
+  graphviz
   libcurl-devel
   libffi-devel
   libxml2-devel
