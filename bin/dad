@@ -1,45 +1,31 @@
-#!/usr/bin/env ruby
+#!/usr/bin/bash
 
-require 'erb'
+function setup_dad() {
+  sudo yum install -y git wget
 
-DADDY_HOME = File.dirname(File.dirname(__FILE__))
+  if [ `which mitamae` ]; then
+    echo -e "`mitamae version` found.\ndaddy is ready."
+  else
+    echo "install mitamae"
+    mkdir -p ./tmp
+    pushd tmp
+      rm -f mitamae-x86_64-linux.tar.gz
+      wget https://github.com/itamae-kitchen/mitamae/releases/download/v1.5.6/mitamae-x86_64-linux.tar.gz
+      tar zxf mitamae-x86_64-linux.tar.gz
+      sudo mv mitamae-x86_64-linux /usr/local/bin/mitamae
+    popd
+  fi
+}
 
-case action = ARGV[0]
-when 'new'
-  RAILS_VERSION = '4.2.8'
-  puts "using rails #{RAILS_VERSION}"
+function setup_environment() {
+  mitamae local "itamae/environments/$1.rb"
+}
 
-  APP_NAME = ARGV[1]
-
-  [
-    "sudo gem install rails -v #{RAILS_VERSION} --no-document",
-    "rails _#{RAILS_VERSION}_ new #{APP_NAME} -d mysql --skip-bundle",
-  ].each do |command|
-    puts command
-    exit 1 unless system(command)
-  end
-
-  # Gemfile
-  template = File.join(DADDY_HOME, 'templates', 'Gemfile.erb')
-  gemfile = File.join(APP_NAME, 'Gemfile')
-  File.write(gemfile, ERB.new(File.read(template)).result)
-
-  [
-    "bundle install --quiet",
-    "bundle exec rake dad:mysql:install",
-    "bundle exec rake dad:install",
-    "bundle exec rake dad:db:config",
-    "bundle exec rake dad:db:create",
-    "bundle exec rake db:migrate",
-    "bundle exec rails g controller welcome index --no-helper --no-assets",
-    "echo '<h1>Welcome to #{APP_NAME}</h1>' > #{File.join('app', 'views', 'welcome', 'index.html.erb')}"
-  ].each do |command|
-    puts command
-    exit 1 unless system("cd #{APP_NAME} && #{command}")
-  end
-
-  # routes
-  template = File.join(DADDY_HOME, 'templates', 'config', 'routes.rb.erb')
-  routes = File.join(APP_NAME, 'config', 'routes.rb')
-  File.write(routes, ERB.new(File.read(template)).result)
-end
+case $1 in
+  'env')
+    setup_environment $2
+    ;;
+  'install')
+    setup_dad
+    ;;
+esac
