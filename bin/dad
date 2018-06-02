@@ -27,4 +27,7 @@ case $1 in
   'env')
     setup_environment $2
     ;;
+  *)
+    bundle exec itamae local itamae/cookbooks/`echo $1 | sed 's/:/\//g'`.rb
+    ;;
 esac

@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
                   Dir['templates/**/*'] +
                   Dir['vendor/**/*']
   s.require_paths = ['lib']
-  s.executables << 'dad'
 
   s.required_ruby_version = '~> 2.4'
 

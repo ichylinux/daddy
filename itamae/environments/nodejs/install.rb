@@ -1,5 +1,3 @@
-require 'daddy/itamae'
-
 template '/etc/yum.repos.d/nodesource.repo' do
   user 'root'
 end
