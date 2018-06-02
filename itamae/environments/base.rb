@@ -4,6 +4,7 @@ end
 
 %w{
   ImageMagick-devel
+  epel-release
   graphviz
   libcurl-devel
   libffi-devel
