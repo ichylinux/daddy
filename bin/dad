@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 function setup_dad() {
-  sudo yum install -y git wget
+  sudo yum install -y wget
 
   if [ `which mitamae` ]; then
     echo -e "`mitamae version` found.\ndaddy is ready."
@@ -18,14 +18,12 @@ function setup_dad() {
 }
 
 function setup_environment() {
+  setup_dad
   mitamae local "itamae/environments/$1.rb"
 }
 
 case $1 in
   'env')
     setup_environment $2
-    ;;
-  'install')
-    setup_dad
     ;;
 esac
