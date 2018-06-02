@@ -1,5 +1,7 @@
 require 'daddy/itamae'
 
+include_recipe '../epel/install'
+
 package 'redis' do
   user 'root'
 end
