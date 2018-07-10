@@ -1,26 +1,32 @@
 #!/usr/bin/bash
 
-function setup_dad() {
+MITAMAE_VERSION=v1.6.2
+
+function install_mitamae() {
   sudo sed -i "s/\(^Defaults    secure_path = \).*/\1\/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
   sudo yum install -y wget
 
-  if [ `which mitamae` ]; then
-    echo -e "`mitamae version` found.\ndaddy is ready."
+  mkdir -p ./tmp
+  pushd tmp
+    rm -f mitamae-x86_64-linux.tar.gz
+    wget https://github.com/itamae-kitchen/mitamae/releases/download/${MITAMAE_VERSION}/mitamae-x86_64-linux.tar.gz
+    tar zxf mitamae-x86_64-linux.tar.gz
+    sudo mv mitamae-x86_64-linux /usr/local/bin/mitamae
+  popd
+}
+
+function setup_dad() {
+  if [ -e /usr/local/bin/mitamae ] && [ `/usr/local/bin/mitamae version | sed -e "s/MItamae \(v.*\)/\1/"` = $MITAMAE_VERSION ]; then
+    echo -e "\nmitamae $MITAMAE_VERSION found.\ndaddy is ready.\n"
   else
     echo "install mitamae"
-    mkdir -p ./tmp
-    pushd tmp
-      rm -f mitamae-x86_64-linux.tar.gz
-      wget https://github.com/itamae-kitchen/mitamae/releases/download/v1.5.6/mitamae-x86_64-linux.tar.gz
-      tar zxf mitamae-x86_64-linux.tar.gz
-      sudo mv mitamae-x86_64-linux /usr/local/bin/mitamae
-    popd
+    install_mitamae
   fi
 }
 
 function setup_environment() {
   setup_dad
-  mitamae local "itamae/environments/$1.rb"
+  /usr/local/bin/mitamae local "itamae/environments/$1.rb"
 }
 
 case $1 in
