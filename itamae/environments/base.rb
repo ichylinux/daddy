@@ -1,13 +1,14 @@
-execute 'yum -y groupinstall "Development Tools"' do
-  user 'root'
-end
-
 %w{
   ImageMagick-devel
+  autoconf
+  automake
   epel-release
+  gcc
+  gcc-c++
   graphviz
   libcurl-devel
   libffi-devel
+  libtool
   libxml2-devel
   libxslt-devel
   libyaml-devel
