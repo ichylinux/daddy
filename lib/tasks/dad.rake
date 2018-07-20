@@ -9,12 +9,19 @@ task :dad do
   end
 end
 
-namespace :dad do
-  Dir.glob('config/itamae/roles/*.rb').map{|path| File.basename(path, '.rb') }.each do |role|
+rails_dependencies = %w[ environment ]
+unless defined?(Rails)
+  rails_dependencies.each do |t|
+    task t.to_sym do; end
+  end
+end
 
-    namespace role do
+namespace :dad do
+  namespace :setup do
+
+    Dir.glob('config/itamae/roles/*.rb').map{|path| File.basename(path, '.rb') }.each do |role|
       desc "ロール #{role} のセットアップを行います。"
-      task :setup do
+      task role => :environment do
         role_file = "config/itamae/roles/#{role}.rb"
         fail unless system("bundle exec itamae local --ohai #{role_file}")
       end

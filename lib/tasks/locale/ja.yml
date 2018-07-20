@@ -11,8 +11,6 @@ ja:
       install: Jenkinsプラグインをインストールします
   letsencrypt:
     install: Let's Eencrypt の certbot をインストールします
-  memcached:
-    install: memcachedをインストールします
   nginx:
     config:
       gitbucket: NginxにGitBucketのリバースプロキシを設定します
@@ -21,8 +19,6 @@ ja:
     install: Nginxをインストールします
   obs_studio:
     install: OBS-Studioをインストールします
-  redis:
-    install: Redisをインストールします
   sbt:
     install: sbt をインストールします
   trac:

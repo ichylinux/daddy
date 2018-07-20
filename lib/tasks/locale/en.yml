@@ -11,8 +11,6 @@ en:
       install: install Jenkins plugins
   letsencrypt:
     install: install Let's Eencrypt certbot
-  memcached:
-    install: install mecached
   nginx:
     config:
       gitbucket: setting GitBucket as reverse proxy
@@ -21,8 +19,6 @@ en:
     install: install Nginx
   obs_studio:
     install: install OBS-Studio
-  redis:
-    install: install Redis
   sbt:
     install: install sbt
   trac:
