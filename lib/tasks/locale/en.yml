@@ -13,8 +13,6 @@ en:
     install: install Let's Eencrypt certbot
   memcached:
     install: install mecached
-  mysql:
-    install: install MySQL/MariaDB
   nginx:
     config:
       gitbucket: setting GitBucket as reverse proxy

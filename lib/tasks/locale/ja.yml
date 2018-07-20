@@ -13,8 +13,6 @@ ja:
     install: Let's Eencrypt の certbot をインストールします
   memcached:
     install: memcachedをインストールします
-  mysql:
-    install: MySQL/MariaDBをインストールします
   nginx:
     config:
       gitbucket: NginxにGitBucketのリバースプロキシを設定します

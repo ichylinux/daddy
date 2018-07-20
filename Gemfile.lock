@@ -1,12 +1,13 @@
 PATH
   remote: .
   specs:
-    daddy (0.7.0)
+    daddy (0.7.1)
       hashie (~> 3.4.0)
       highline
       holiday_jp
       i18n
       itamae
+      itamae-plugin-recipe-daddy
       itamae-plugin-resource-pip
       ohai
       rails
@@ -99,6 +100,7 @@ GEM
       schash (~> 0.1.0)
       specinfra (>= 2.64.0, < 3.0.0)
       thor
+    itamae-plugin-recipe-daddy (0.1.0)
     itamae-plugin-resource-pip (1.0.0)
       itamae (~> 1.2)
     json (2.1.0)
