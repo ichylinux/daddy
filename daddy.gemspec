@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '~> 2.4'
 
+  s.add_runtime_dependency 'hashie', '~> 3.4.0'
   s.add_runtime_dependency 'highline'
   s.add_runtime_dependency 'holiday_jp'
   s.add_runtime_dependency 'i18n'

@@ -54,5 +54,5 @@ end
 execute 'mysql_secure_installation' do
   user 'root'
   command "bash #{File.join(File.dirname(__FILE__), 'mysql_secure_installation.sh')}"
-  only_if "mysql -u root -e 'select 1;' && test $? -eq 0"
+  not_if "mysql -u root -e 'select 1;'"
 end

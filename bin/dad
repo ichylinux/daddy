@@ -34,6 +34,6 @@ case $1 in
     setup_environment $2
     ;;
   *)
-    bundle exec itamae local itamae/cookbooks/`echo $1 | sed 's/:/\//g'`.rb
+    bundle exec itamae local --ohai itamae/cookbooks/`echo $@ | sed -e "s/\s/\//g"`.rb
     ;;
 esac
