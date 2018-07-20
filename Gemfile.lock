@@ -244,7 +244,7 @@ DEPENDENCIES
   redis-namespace
   resque
   resque-scheduler
-  simplecov (~> 0.16)
+  simplecov
   simplecov-rcov
 
 BUNDLED WITH
