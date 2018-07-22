@@ -1,4 +1,5 @@
 require 'itamae'
+require 'itamae-plugin-recipe-daddy'
 require_relative 'itamae/config'
 require_relative 'itamae/i18n'
 

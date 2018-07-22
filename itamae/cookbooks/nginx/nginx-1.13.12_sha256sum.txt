@@ -1,1 +1,0 @@
-fb92f5602cdb8d3ab1ad47dbeca151b185d62eedb67d347bbe9d79c1438c85de  nginx-1.13.12.tar.gz
