@@ -8,7 +8,6 @@ directory '/opt/tensorflow' do
 end
 
 include_recipe '../python/install'
-include_recipe '../bazel/install'
 
 {
   dev: '0.4.0',
