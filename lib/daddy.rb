@@ -13,7 +13,4 @@ end
 if defined?(Rails)
   require 'daddy/rails/engine'
   require 'daddy/rails/railtie'
-else
-  require 'closer/tasks'
-  require 'daddy/tasks'
 end
