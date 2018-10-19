@@ -1,2 +1,4 @@
 web:
   server_name: localhost
+app:
+  type: passenger

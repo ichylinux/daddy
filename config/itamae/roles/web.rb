@@ -1,3 +1,1 @@
-require 'daddy/itamae'
-
-include_recipe 'daddy::nginx::install'
+include_recipe 'daddy::nginx'
