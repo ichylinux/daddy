@@ -28,4 +28,9 @@ namespace :dad do
     end
 
   end
+
+  task setup: :environment do
+     Rake::Task['dad:setup:default'].invoke
+  end
+  
 end
