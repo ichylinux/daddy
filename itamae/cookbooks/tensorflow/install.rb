@@ -7,8 +7,6 @@ directory '/opt/tensorflow' do
   mode '755'
 end
 
-include_recipe '../python/install'
-
 {
   dev: '0.4.0',
   numpy: '1.13.3',
