@@ -23,7 +23,7 @@ namespace :dad do
       desc "ロール #{role} のセットアップを行います。"
       task role => :environment do
         role_file = "config/itamae/roles/#{role}.rb"
-        fail unless system("bundle exec itamae local --ohai #{role_file}")
+        fail unless system("bundle exec itamae local --ohai --log-level=#{ENV['DEBUG'] ? 'debug' : 'info'} #{role_file}")
       end
     end
 
