@@ -11,7 +11,7 @@ execute 'download ruby' do
 end
 
 execute 'install ruby' do
-  cwd 'tmp'
+  cwd '/var/daddy/tmp'
   command <<-EOF
      tar zxf ruby-#{version}.tar.gz
      pushd ruby-#{version}
