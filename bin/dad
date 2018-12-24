@@ -3,7 +3,9 @@
 MITAMAE_VERSION=v1.7.0
 
 function install_mitamae() {
-  sudo sed -i "s/\(^Defaults    secure_path = \).*/\1\/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
+  # you need to have root previlege
+  #sudo sed -i "s/\(^Defaults    secure_path = \).*/\1\/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
+
   sudo yum install -y wget
 
   sudo mkdir -p /var/daddy/tmp
