@@ -1,10 +1,8 @@
-version = ENV['RUBY_VERSION'] || '2.5.1'
+version = ENV['RUBY_VERSION'] || '2.5.3'
 short_version = version.split('.')[0..1].join('.')
 
-directory 'tmp'
-
 execute 'download ruby' do
-  cwd 'tmp'
+  cwd '/var/daddy/tmp'
   command <<-EOF
     rm -f ruby-#{version}.tar.gz
     wget https://cache.ruby-lang.org/pub/ruby/#{short_version}/ruby-#{version}.tar.gz

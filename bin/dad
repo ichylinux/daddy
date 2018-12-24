@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-MITAMAE_VERSION=v1.6.3
+MITAMAE_VERSION=v1.7.0
 
 function install_mitamae() {
   sudo sed -i "s/\(^Defaults    secure_path = \).*/\1\/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
