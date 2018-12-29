@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    daddy (0.7.6)
+    daddy (0.7.7)
       highline
       holiday_jp
       i18n
