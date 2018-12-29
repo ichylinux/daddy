@@ -1,14 +1,14 @@
 require_relative 'task_helper'
 
 namespace :dad do
+
+  desc I18n.t('nginx.install')
+  task :nginx do
+    ask_env('NGINX_VERSION', default: ItamaePluginRecipeDaddy::NGINX_VERSION)
+    run_itamae 'nginx'
+  end
+
   namespace :nginx do
-
-    desc I18n.t('nginx.install')
-    task :install do
-      ask_env('NGINX_VERSION', default: Daddy::NGINX_VERSION)
-      run_itamae 'nginx/install'
-    end
-
     namespace :config do
 
       desc I18n.t('nginx.config.gitbucket')
