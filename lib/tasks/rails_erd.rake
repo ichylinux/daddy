@@ -8,7 +8,14 @@ if defined?(RailsERD)
     case Rails::VERSION::MAJOR
     when 5
       excludes << 'ActiveRecord::InternalMetadata'
+      excludes << 'ActiveStorage::Blob'
+      excludes << 'ActiveStorage::Attachment'
     end
+
+    if defined?(Nostalgic)
+      excludes << 'Nostalgic::Attr'
+    end
+
     ENV['exclude'] = excludes.join(',')
 
     Rake::Task['erd'].invoke
