@@ -13,11 +13,6 @@ namespace :dad do
       end
     end
 
-    desc I18n.t('docker.install')
-    task :install do
-      run_itamae 'docker/install'
-    end
-
     namespace :registry do
 
       desc 'install Docker Registry'

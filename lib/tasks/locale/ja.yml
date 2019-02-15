@@ -1,6 +1,4 @@
 ja:
-  docker:
-    install: Docker をインストールします
   git:
     install: Git をインストールします
   god:
