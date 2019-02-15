@@ -8,10 +8,12 @@ RUN useradd daddy && \
     sudo sed -i "s/\(^Defaults    secure_path = \).*/\1\/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
 
 USER daddy
-ENV USER daddy
 
 RUN sudo localedef -f UTF-8 -i ja_JP ja_JP && \
     sudo sed -i "s/\(^LANG=\).*/\1ja_JP.UTF-8/" /etc/locale.conf && \
     . /etc/locale.conf && \
     sudo rm -f /etc/localtime && \
     sudo ln -snf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
+RUN sudo mkdir -p /var/daddy/tmp && \
+    sudo chown daddy:daddy /var/daddy/tmp

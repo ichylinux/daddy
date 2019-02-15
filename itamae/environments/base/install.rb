@@ -5,6 +5,7 @@
   epel-release
   gcc
   gcc-c++
+  git
   graphviz
   libcurl-devel
   libffi-devel
@@ -16,6 +17,8 @@
   openssl-devel
   readline-devel
   sqlite-devel
+  sudo
+  wget
   zlib-devel
 }.each do |name|
   package name do

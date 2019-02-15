@@ -28,18 +28,14 @@ function setup_dad() {
 }
 
 case $1 in
-  'env')
-    case $2 in
-    'local')
-      setup_dad
-      /usr/local/bin/mitamae local "itamae/environments/local.rb"
-      ;;
-    'docker')
-      bundle exec itamae docker --image=daddy-base:latest itamae/environments/base/install.rb
-      ;;
-    esac
-    ;;
-  *)
-    bundle exec itamae local --ohai itamae/cookbooks/`echo $@ | sed -e "s/\s/\//g"`.rb
-    ;;
+'local')
+  setup_dad
+  /usr/local/bin/mitamae local "itamae/environments/local.rb"
+  ;;
+'docker')
+  /usr/local/bin/mitamae local "itamae/environments/docker/image.rb"
+  USER=daddy bundle exec itamae docker --image=daddy-base:latest --tag=daddy-base:latest "itamae/environments/base/install.rb"
+  USER=daddy bundle exec itamae docker --image=daddy-base:latest --tag=daddy-base:latest "itamae/environments/nodejs/install.rb"
+  USER=daddy bundle exec itamae docker --image=daddy-base:latest --tag=daddy-base:latest "itamae/environments/ruby/install.rb"
+  ;;
 esac

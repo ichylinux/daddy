@@ -26,9 +26,8 @@ namespace :dad do
         log_level = ENV['DEBUG'] ? 'debug' : 'info'
         
         if ENV['DOCKER']
-          image = 'centos:7.6.1810'
           tag = "#{Daddy.config.application}-#{role}"
-          fail unless system("bundle exec itamae docker --ohai --image #{image} --tag #{tag} --log-level=#{log_level} #{role_file}")
+          fail unless system("bundle exec itamae docker --ohai --image daddy-base --tag #{tag} --log-level=#{log_level} #{role_file}")
         else
           fail unless system("bundle exec itamae local --ohai --log-level=#{log_level} #{role_file}")
         end
