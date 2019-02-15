@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '~> 2.5'
 
+  s.add_runtime_dependency 'docker-api'
   s.add_runtime_dependency 'highline'
   s.add_runtime_dependency 'holiday_jp'
   s.add_runtime_dependency 'i18n'

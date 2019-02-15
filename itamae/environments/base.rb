@@ -22,5 +22,3 @@
     user 'root'
   end
 end
-
-include_recipe 'docker/install'

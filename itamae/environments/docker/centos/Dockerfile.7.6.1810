@@ -1,0 +1,18 @@
+FROM centos:7.6.1810
+MAINTAINER ichylinux@gmail.com
+
+RUN yum install -y sudo git
+
+RUN useradd daddy && \
+    echo "daddy ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/daddy && \
+    sudo sed -i "s/\(^Defaults    secure_path = \).*/\1\/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
+
+USER daddy
+ENV USER daddy
+RUN mkdir -p /home/daddy/src
+WORKDIR /home/daddy/src
+
+RUN git clone https://github.com/ichylinux/daddy.git
+RUN pushd daddy && \
+      bin/dad env local && \
+    popd

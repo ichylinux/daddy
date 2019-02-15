@@ -23,7 +23,15 @@ namespace :dad do
       desc "ロール #{role} のセットアップを行います。"
       task role => :environment do
         role_file = "config/itamae/roles/#{role}.rb"
-        fail unless system("bundle exec itamae local --ohai --log-level=#{ENV['DEBUG'] ? 'debug' : 'info'} #{role_file}")
+        log_level = ENV['DEBUG'] ? 'debug' : 'info'
+        
+        if ENV['DOCKER']
+          image = 'centos:7.6.1810'
+          tag = "#{Daddy.config.application}-#{role}"
+          fail unless system("bundle exec itamae docker --ohai --image #{image} --tag #{tag} --log-level=#{log_level} #{role_file}")
+        else
+          fail unless system("bundle exec itamae local --ohai --log-level=#{log_level} #{role_file}")
+        end
       end
     end
 
