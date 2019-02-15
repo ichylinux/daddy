@@ -1,8 +1,6 @@
-version = ENV['CENTOS_VERSION'] || '7.6.1810'
-dockerfile = File.join(File.dirname(__FILE__), 'centos', "Dockerfile.#{version}")
+dockerfile = File.join(File.dirname(__FILE__), 'Dockerfile.base')
+image = 'daddy-base'
 
-execute "install daddy on docker image" do
-  command <<-EOF
-    docker build -t centos-daddy:#{version} -f #{dockerfile} #{File.dirname(dockerfile)}
-  EOF
-end
+execute "docker build -t #{image}:latest -f #{dockerfile} #{File.dirname(dockerfile)}"
+
+execute "bundle exec itamae docker --image=#{image}:latest --tag=#{image}:latest itamae/environments/base/install.rb"

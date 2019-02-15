@@ -27,14 +27,17 @@ function setup_dad() {
   fi
 }
 
-function setup_environment() {
-  setup_dad
-  /usr/local/bin/mitamae local "itamae/environments/$1.rb"
-}
-
 case $1 in
   'env')
-    setup_environment $2
+    case $2 in
+    'local')
+      setup_dad
+      /usr/local/bin/mitamae local "itamae/environments/local.rb"
+      ;;
+    'docker')
+      bundle exec itamae docker --image=daddy-base:latest itamae/environments/base/install.rb
+      ;;
+    esac
     ;;
   *)
     bundle exec itamae local --ohai itamae/cookbooks/`echo $@ | sed -e "s/\s/\//g"`.rb
