@@ -20,6 +20,7 @@
   sqlite-devel
   sudo
   wget
+  which
   zlib-devel
 }.each do |name|
   package name do
