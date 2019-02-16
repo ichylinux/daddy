@@ -7,6 +7,7 @@
   gcc-c++
   git
   graphviz
+  make
   libcurl-devel
   libffi-devel
   libtool

@@ -1,4 +1,3 @@
-include_recipe 'base/install'
-include_recipe 'nodejs/install'
-include_recipe 'ruby/install'
-include_recipe 'docker/install'
+include_recipe 'base'
+include_recipe 'nodejs'
+include_recipe 'ruby'
