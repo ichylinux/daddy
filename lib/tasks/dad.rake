@@ -27,7 +27,7 @@ namespace :dad do
         
         if ENV['DOCKER']
           tag = "#{Daddy.config.application}-#{role}"
-          fail unless system("bundle exec itamae docker --ohai --image daddy-base --tag #{tag} --log-level=#{log_level} #{role_file}")
+          fail unless system("USER=daddy bundle exec itamae docker --ohai --image daddy-base --tag #{tag} --log-level=#{log_level} #{role_file}")
         else
           fail unless system("bundle exec itamae local --ohai --log-level=#{log_level} #{role_file}")
         end
