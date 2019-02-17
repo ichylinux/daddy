@@ -24,17 +24,17 @@ namespace :dad do
       task role => :environment do
         role_file = "config/itamae/roles/#{role}.rb"
         log_level = ENV['DEBUG'] ? 'debug' : 'info'
-        
-        if ENV['DOCKER']
+        env = "ROLE=#{role}"
+
+         if ENV['DOCKER']
           tag = "#{Daddy.config.application}-#{role}"
-          env = "USER=daddy ROLE=#{role}"
           if system("docker images | grep #{tag}")
             fail unless system("#{env} bundle exec itamae docker --ohai --image #{tag} --tag #{tag} --log-level=#{log_level} #{role_file}")
           else
             fail unless system("#{env} bundle exec itamae docker --ohai --image daddy-base --tag #{tag} --log-level=#{log_level} #{role_file}")
           end
         else
-          fail unless system("ROLE=#{role} bundle exec itamae local --ohai --log-level=#{log_level} #{role_file}")
+          fail unless system("#{env} bundle exec itamae local --ohai --log-level=#{log_level} #{role_file}")
         end
       end
     end

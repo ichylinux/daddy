@@ -3,12 +3,14 @@ MAINTAINER ichylinux@gmail.com
 
 RUN yum -y install sudo
 
-RUN useradd daddy && \
-    echo "daddy ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/daddy && \
+ARG user
+
+RUN useradd $user && \
+    echo "$user ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$user && \
     sudo sed -i "s/\(^Defaults    secure_path = \).*/\1\/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
 
-USER daddy
-WORKDIR /home/daddy
+USER $user
+WORKDIR /home/$user
 
 RUN sudo yum -y reinstall glibc && \
     sudo yum -y update && \
@@ -24,4 +26,4 @@ ENV LANG="ja_JP.UTF-8" \
     LC_ALL="ja_JP.UTF-8"
 
 RUN sudo mkdir -p /var/daddy/tmp && \
-    sudo chown daddy:daddy /var/daddy/tmp
+    sudo chown $user:$user /var/daddy/tmp

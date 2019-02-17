@@ -31,7 +31,7 @@ case $1 in
   'docker')
     /usr/local/bin/mitamae local "itamae/environments/docker.rb"
     for recipe in base nodejs ruby; do
-      USER=daddy bundle exec itamae docker --image daddy-base:latest --tag daddy-base:latest "itamae/environments/$recipe/default.rb"
+      bundle exec itamae docker --image daddy-base:latest --tag daddy-base:latest "itamae/environments/$recipe/default.rb"
     done
     ;;
   *)
