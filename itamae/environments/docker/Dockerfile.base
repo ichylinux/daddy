@@ -1,7 +1,7 @@
 FROM centos:7.6.1810
 MAINTAINER ichylinux@gmail.com
 
-RUN yum install -y sudo
+RUN yum -y install sudo
 
 RUN useradd daddy && \
     echo "daddy ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/daddy && \
@@ -10,11 +10,18 @@ RUN useradd daddy && \
 USER daddy
 WORKDIR /home/daddy
 
+RUN sudo yum -y reinstall glibc && \
+    sudo yum -y update && \
+    sudo yum clean all
+
 RUN sudo localedef -f UTF-8 -i ja_JP ja_JP && \
     sudo sed -i "s/\(^LANG=\).*/\1ja_JP.UTF-8/" /etc/locale.conf && \
-    . /etc/locale.conf && \
     sudo rm -f /etc/localtime && \
     sudo ln -snf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
+ENV LANG="ja_JP.UTF-8" \
+    LANGUAGE="ja_JP:ja" \
+    LC_ALL="ja_JP.UTF-8"
 
 RUN sudo mkdir -p /var/daddy/tmp && \
     sudo chown daddy:daddy /var/daddy/tmp

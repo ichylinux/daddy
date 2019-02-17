@@ -25,13 +25,14 @@ execute 'install ruby' do
   not_if "ruby -v | egrep \"ruby #{version}(p[0-9]+) \""
 end
 
-%w[
-  rubygems-update
-  bundler
-  itamae
-  daddy
-].each do |name|
+{
+  'rubygems-update' => nil,
+  'bundler' => '1.7.3',
+  'itamae' => '1.10.3',
+  'daddy' => nil
+}.each do |name, version|
   gem_package name do
     user 'root'
+    version version if version
   end
 end
