@@ -27,7 +27,7 @@ end
 
 {
   'rubygems-update' => nil,
-  'bundler' => '1.7.3',
+  'bundler' => '1.17.3',
   'itamae' => '1.10.3',
   'daddy' => nil
 }.each do |name, version|
