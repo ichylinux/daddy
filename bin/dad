@@ -34,8 +34,11 @@ case $1 in
       bundle exec itamae docker --image daddy-base:latest --tag daddy-base:latest "itamae/environments/$recipe/default.rb"
     done
     ;;
-  *)
+  'local')
     setup_dad
     /usr/local/bin/mitamae local "itamae/environments/local.rb"
+    ;;
+  *)
+    setup_dad
     ;;
 esac

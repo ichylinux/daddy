@@ -1,7 +1,7 @@
-version = ENV['RUBY_VERSION'] || '2.5.3'
+version = ENV['RUBY_VERSION'] || '2.5.5'
 short_version = version.split('.')[0..1].join('.')
 
-execute 'download ruby' do
+execute "download ruby-#{version}" do
   cwd '/var/daddy/tmp'
   command <<-EOF
     set -eu
@@ -11,7 +11,7 @@ execute 'download ruby' do
   not_if "echo #{::File.read(::File.join(::File.dirname(__FILE__), "ruby-#{version}.tar.gz_sha256sum.txt")).strip} | sha256sum -c"
 end
 
-execute 'install ruby' do
+execute "install ruby-#{version}" do
   cwd '/var/daddy/tmp'
   command <<-EOF
     set -eu
