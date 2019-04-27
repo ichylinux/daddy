@@ -10,6 +10,7 @@ function install_mitamae() {
 
   sudo mkdir -p /var/daddy/tmp
   sudo chown $USER:$USER /var/daddy/tmp
+  sudo chmod 777 /var/daddy/tmp
   pushd /var/daddy/tmp
     rm -f mitamae-x86_64-linux.tar.gz
     wget https://github.com/itamae-kitchen/mitamae/releases/download/${MITAMAE_VERSION}/mitamae-x86_64-linux.tar.gz
