@@ -17,6 +17,8 @@ ja:
     install: Nginxをインストールします
   obs_studio:
     install: OBS-Studioをインストールします
+  redmine:
+    install Redmineをインストールします
   sbt:
     install: sbt をインストールします
   trac:
