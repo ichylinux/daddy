@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    daddy (0.7.9)
+    daddy (0.8.0)
       docker-api
       highline
       i18n
