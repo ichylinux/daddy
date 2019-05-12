@@ -1,0 +1,10 @@
+application:
+  name: 'daddy'
+  env: 'development'
+  root: <%= File.expand_path(File.join(File.dirname(__FILE__), '..')) %>
+
+web:
+  server_name: localhost
+
+app:
+  type: passenger
