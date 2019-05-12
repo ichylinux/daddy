@@ -14,11 +14,8 @@ en:
       gitbucket: setting GitBucket as reverse proxy
       jenkins: setting Jenkins as reverse proxy
       rails: setting Passenger for rails app
-    install: install Nginx
   obs_studio:
     install: install OBS-Studio
-  redmine:
-    install install Redmine
   sbt:
     install: install sbt
   trac:

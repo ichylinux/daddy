@@ -14,11 +14,8 @@ ja:
       gitbucket: NginxにGitBucketのリバースプロキシを設定します
       jenkins: NginxにJenkinsのリバースプロキシを設定します
       rails: NginxにRailsアプリを設定します
-    install: Nginxをインストールします
   obs_studio:
     install: OBS-Studioをインストールします
-  redmine:
-    install Redmineをインストールします
   sbt:
     install: sbt をインストールします
   trac:
