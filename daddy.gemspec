@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'i18n'
   s.add_runtime_dependency 'itamae'
   s.add_runtime_dependency 'itamae-plugin-recipe-daddy'
+  s.add_runtime_dependency 'itamae-plugin-recipe-redmine'
   s.add_runtime_dependency 'itamae-plugin-resource-pip'
   s.add_runtime_dependency 'ohai'
 

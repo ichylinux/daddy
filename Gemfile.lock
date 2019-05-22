@@ -7,6 +7,7 @@ PATH
       i18n
       itamae
       itamae-plugin-recipe-daddy
+      itamae-plugin-recipe-redmine
       itamae-plugin-resource-pip
       ohai
 
@@ -133,8 +134,13 @@ GEM
       schash (~> 0.1.0)
       specinfra (>= 2.64.0, < 3.0.0)
       thor
-    itamae-plugin-recipe-daddy (0.1.13)
+    itamae-plugin-recipe-daddy (0.1.14)
       itamae (~> 1.10, >= 1.10.2)
+    itamae-plugin-recipe-postgresql (0.0.1)
+      itamae (~> 1.10, >= 1.10.2)
+    itamae-plugin-recipe-redmine (0.0.1)
+      itamae (~> 1.10, >= 1.10.2)
+      itamae-plugin-recipe-postgresql (~> 0, >= 0.0.1)
     itamae-plugin-resource-pip (1.1.0)
       itamae (~> 1.2)
     json (2.2.0)
