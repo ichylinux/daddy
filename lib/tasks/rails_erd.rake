@@ -1,7 +1,7 @@
 if defined?(RailsERD)
   Rake::Task['db:migrate'].enhance do
     ENV['filename'] = 'tmp/db_layout'
-    ENV['attributes'] = 'foreign_keys, content, primary_keys, timestamp'
+    ENV['attributes'] = 'foreign_keys, content, primary_keys, timestamp, inheritance'
 
     excludes = ['ActiveRecord::SchemaMigration']
     excludes << 'ActiveRecord::SessionStore::Session' if defined?(ActiveRecord::SessionStore)
