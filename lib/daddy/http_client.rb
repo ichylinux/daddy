@@ -31,7 +31,7 @@ module Daddy
       if block_given?
         yield response
       else
-        response.body.force_encoding('UTF-8')
+        response.body
       end
     end
 
@@ -42,8 +42,9 @@ module Daddy
     private
 
     def connection
-      Faraday.new(:url => @url, :ssl => ssl_options) do |faraday|
+      Faraday.new(url: @url, ssl: ssl_options) do |faraday|
         faraday.request :url_encoded
+        faraday.use FaradayMiddleware::FollowRedirects if @options[:follow_redirects]
         faraday.adapter Faraday.default_adapter
       end
     end
@@ -52,10 +53,10 @@ module Daddy
       daddy_dir = File.expand_path('../../..', __FILE__)
       ca_path = File.join(daddy_dir, 'ssl')
 
-      ret = {
-        :ca_path => ca_path,
-        :ca_file => File.join(ca_path, 'cert.pem'),
-        :verify => @options[:verify_ssl] || false,
+      {
+        ca_path: ca_path,
+        ca_file: File.join(ca_path, 'cert.pem'),
+        verify: @options.fetch(:verify_ssl, true)
       }
     end
 
