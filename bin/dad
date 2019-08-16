@@ -1,6 +1,6 @@
 #!/usr/bin/bash -eu
 
-MITAMAE_VERSION=v1.7.2
+MITAMAE_VERSION=v1.8.0
 
 function install_mitamae() {
   # you need to have root previlege
@@ -37,7 +37,7 @@ case $1 in
     ;;
   'local')
     setup_dad
-    /usr/local/bin/mitamae local "itamae/environments/local.rb"
+    sudo /usr/local/bin/mitamae local "itamae/environments/local.rb"
     ;;
   *)
     setup_dad
