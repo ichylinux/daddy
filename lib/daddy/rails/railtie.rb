@@ -1,8 +1,3 @@
-require 'rails_i18n'
-require 'daddy/helpers/html_helper'
-require 'daddy/model'
-require 'daddy/ocr'
-
 module Daddy
   module Rails
     class Railtie < ::Rails::Railtie
