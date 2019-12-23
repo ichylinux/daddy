@@ -121,7 +121,7 @@ GEM
     erubi (1.9.0)
     et-orbi (1.2.2)
       tzinfo
-    excon (0.68.0)
+    excon (0.71.0)
     faraday (0.17.0)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.13.1)
