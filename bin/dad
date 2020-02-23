@@ -1,6 +1,6 @@
 #!/usr/bin/bash -eu
 
-MITAMAE_VERSION=v1.8.0
+MITAMAE_VERSION=v1.11.0
 
 function install_mitamae() {
   # you need to have root previlege
@@ -20,7 +20,7 @@ function install_mitamae() {
 }
 
 function setup_dad() {
-  if [ -e /usr/local/bin/mitamae ] && [ `/usr/local/bin/mitamae version | sed -e "s/MItamae \(v.*\)/\1/"` = $MITAMAE_VERSION ]; then
+  if [ -e /usr/local/bin/mitamae ] && [ `/usr/local/bin/mitamae version | sed -e "s/mitamae \(v.*\)/\1/"` = $MITAMAE_VERSION ]; then
     echo -e "\nmitamae $MITAMAE_VERSION found.\ndaddy is ready.\n"
   else
     echo "installing mitamae"
