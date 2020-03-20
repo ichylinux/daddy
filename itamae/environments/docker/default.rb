@@ -18,8 +18,8 @@ group 'docker' do
 end
 
 execute "add user to docker group" do
-  command "sudo usermod -a -G docker #{ENV['USER']} && newgrp docker"
-  not_if "groups #{ENV['USER']} | grep -E \"\sdocker\""
+  command "sudo usermod -a -G docker ${USER} && newgrp docker"
+  not_if "groups ${USER} | grep -E \"\sdocker\""
 end
 
 service 'docker' do
