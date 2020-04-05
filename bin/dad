@@ -20,7 +20,8 @@ function install_mitamae() {
 }
 
 function setup_dad() {
-  if [ -e /usr/local/bin/mitamae ] && [ `/usr/local/bin/mitamae version | sed -e "s/mitamae \(v.*\)/\1/"` = $MITAMAE_VERSION ]; then
+  test -e /usr/local/bin/mitamae && /usr/local/bin/mitamae version | sed -e "s/mitamae \(v.*\)/\1/i" | grep $MITAMAE_VERSION
+  if [ $? -eq 0 ]; then
     echo -e "\nmitamae $MITAMAE_VERSION found.\ndaddy is ready.\n"
   else
     echo "installing mitamae"
