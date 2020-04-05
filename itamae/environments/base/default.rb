@@ -2,11 +2,9 @@
   ImageMagick-devel
   autoconf
   automake
-  epel-release
   gcc
   gcc-c++
   git
-  graphviz
   make
   libcurl-devel
   libffi-devel
