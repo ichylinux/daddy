@@ -33,7 +33,7 @@ namespace :dad do
       if ENV['MYSQL_NO_ROOT_PASSWORD']
         fail unless system("mysql -u root < tmp/create_databases.sql")
       else
-        fail unless system("mysql -u root -p < tmp/create_databases.sql")
+        fail unless system("mysql -u #{ENV['MYSQL_ROOT'] || 'root'} -p < tmp/create_databases.sql")
       end
     end
   end
