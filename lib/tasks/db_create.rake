@@ -5,7 +5,7 @@ namespace :dad do
     
     desc 'database.yml に従ってDBを作成します。'
     task :create do
-      config = YAML.load_file("#{Rails.root}/config/database.yml")
+      config = YAML.load(ERB.new(File.read('config/database.yml'), 0, '-').result)
       
       FileUtils.mkdir_p("tmp")
       system("echo '# mysql ddl' > tmp/create_databases.sql")
@@ -30,7 +30,7 @@ namespace :dad do
       puts
       puts File.read('tmp/create_databases.sql')
 
-      if ENV['DAD_MYSQL_NO_ROOT_PASSWORD']
+      if ENV['MYSQL_NO_ROOT_PASSWORD']
         fail unless system("mysql -u root < tmp/create_databases.sql")
       else
         fail unless system("mysql -u root -p < tmp/create_databases.sql")
