@@ -24,7 +24,7 @@ namespace :dad do
       task role => :environment do
         role_file = "config/itamae/roles/#{role}.rb"
         log_level = ENV['DEBUG'] ? 'debug' : 'info'
-        env = "ROLE=#{role}"
+        env = "SETUP=true ROLE=#{role}"
 
          if ENV['DOCKER']
           tag = "#{Daddy.config.application}-#{role}"
