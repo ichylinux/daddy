@@ -1,4 +1,4 @@
-version = ENV['RUBY_VERSION'] || '2.6.6'
+version = ENV['RUBY_VERSION'] || '2.7.2'
 short_version = version.split('.')[0..1].join('.')
 
 execute "download ruby-#{version}" do
@@ -28,7 +28,7 @@ end
 {
   'rubygems-update' => nil,
   'bundler' => '2.1.4',
-  'itamae' => '1.10.9',
+  'itamae' => '1.11.1',
   'daddy' => nil
 }.each do |name, version|
   gem_package name do
