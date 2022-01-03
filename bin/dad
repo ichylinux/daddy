@@ -37,9 +37,7 @@ case $1 in
     done
     ;;
   'local')
-    sudo /usr/local/bin/mitamae local "itamae/environments/local.rb"
-    ;;
-  *)
     setup_dad
+    sudo /usr/local/bin/mitamae local "itamae/environments/local.rb"
     ;;
 esac
