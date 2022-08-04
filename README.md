@@ -19,7 +19,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO
+When you just finish setting up CentOS-7, run these commands to make sudo available.
+```
+$ su
+# sed -i -e 's/\(\/sbin:\/bin:\/usr\/sbin:\/usr\/bin\)$/&:\/usr\/local\/bin/' /etc/sudoers
+# echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER
+# exit
+```
+
+after that, running this commnd
+```
+$ bin/dad local
+```
+will get you
+* Node.js
+* Ruby
+installed.
 
 ## Contributing
 
