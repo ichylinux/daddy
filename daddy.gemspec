@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
                   Dir['vendor/**/*']
   s.require_paths = ['lib']
 
-  s.required_ruby_version = '~> 2.5'
+  s.required_ruby_version = '~> 2.7'
 
   s.add_runtime_dependency 'docker-api'
   s.add_runtime_dependency 'highline'
