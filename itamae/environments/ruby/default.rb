@@ -1,4 +1,4 @@
-version = ENV['RUBY_VERSION'] || '2.7.6'
+version = ENV['RUBY_VERSION'] || '2.7.8'
 short_version = version.split('.')[0..1].join('.')
 
 execute "download ruby-#{version}" do
