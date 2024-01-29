@@ -37,7 +37,7 @@ if ENV['FORMAT']
         ]
       else
         Minitest::Reporters.use! [
-          Minitest::Reporters::DefaultReporter.new(:color => true),
+          Minitest::Reporters::DefaultReporter.new(color: true),
         ]
       end
     else
@@ -49,7 +49,7 @@ if ENV['FORMAT']
         ]
       else
         MiniTest::Reporters.use! [
-          MiniTest::Reporters::DefaultReporter.new(:color => true),
+          MiniTest::Reporters::DefaultReporter.new(color: true),
         ]
       end
     end
