@@ -7,7 +7,7 @@ if defined?(RailsERD)
     excludes = ['ActiveRecord::SchemaMigration']
     excludes << 'ActiveRecord::SessionStore::Session' if defined?(ActiveRecord::SessionStore)
     case Rails::VERSION::MAJOR
-    when 5
+    when 5, 6
       excludes << 'ActiveRecord::InternalMetadata'
       excludes << 'ActiveStorage::Blob'
       excludes << 'ActiveStorage::Attachment'
@@ -17,7 +17,7 @@ if defined?(RailsERD)
       excludes << 'Nostalgic::Attr'
     end
 
-    ENV['exclude'] = excludes.join(',')
+    ENV['exclude'] = (ENV['rails_erd.exclude'].to_s.split(',') + excludes).join(',')
 
     Rake::Task['erd'].invoke
   end if Rails.env.development?
