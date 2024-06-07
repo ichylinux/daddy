@@ -40,4 +40,8 @@ case $1 in
     setup_dad
     sudo /usr/local/bin/mitamae local "itamae/environments/local.rb"
     ;;
+  'mysql')
+    setup_dad
+    bundle exec itamae local --ohai "itamae/environments/mysql.rb"
+    ;;
 esac
