@@ -1,5 +1,4 @@
 %w{
-  ImageMagick-devel
   autoconf
   automake
   gcc
@@ -12,10 +11,8 @@
   libxml2-devel
   libxslt-devel
   libyaml-devel
-  mariadb-devel
   openssl-devel
   readline-devel
-  sqlite-devel
   sudo
   wget
   which

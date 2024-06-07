@@ -20,7 +20,7 @@ end
 
 package 'nodejs' do
   user 'root'
-  version "16.16.0-1nodesource"
+  version "16.20.2-1nodesource"
   options '--enablerepo=nodesource'
 end
 
