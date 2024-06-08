@@ -50,12 +50,7 @@ module Daddy
     end
     
     def ssl_options
-      daddy_dir = File.expand_path('../../..', __FILE__)
-      ca_path = File.join(daddy_dir, 'ssl')
-
       {
-        ca_path: ca_path,
-        ca_file: File.join(ca_path, 'cert.pem'),
         verify: @options.fetch(:verify_ssl, true)
       }
     end
