@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'faraday'
   s.add_development_dependency 'faraday_middleware'
-  s.add_development_dependency 'rails'
+  s.add_development_dependency 'rails', '>= 6.1'
   s.add_development_dependency 'redis'
   s.add_development_dependency 'redis-namespace'
   s.add_development_dependency 'resque'

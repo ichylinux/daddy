@@ -3,9 +3,9 @@ CarrierWave::SanitizedFile.sanitize_regexp = /[^[:print:]]/
 CarrierWave.configure do |config|
   config.root = 
     if ::Rails.env.test?
-      "/tmp/#{::Rails.application.class.parent_name.underscore}/#{::Rails.env}"
+      "/tmp/#{::Rails.application.class.module_parent_name.underscore}/#{::Rails.env}"
     else
-      "/data/#{::Rails.application.class.parent_name.underscore}/#{::Rails.env}"
+      "/data/#{::Rails.application.class.module_parent_name.underscore}/#{::Rails.env}"
     end
 
   unless ::Rails.env.test?
