@@ -6,14 +6,13 @@ if ENV['COVERAGE']
   end
   begin
     require 'simplecov-rcov'
-    require 'daddy/coverage/rcov_formatter'
   rescue LoadError => e
     raise 'simplecov-rcov not found.'
   end
 
   SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::HTMLFormatter,
-    Daddy::Coverage::RcovFormatter
+    SimpleCov::Formatter::RcovFormatter
   ])
 
   SimpleCov.start do
