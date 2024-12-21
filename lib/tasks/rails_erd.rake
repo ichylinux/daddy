@@ -7,10 +7,15 @@ if defined?(RailsERD)
     excludes = ['ActiveRecord::SchemaMigration']
     excludes << 'ActiveRecord::SessionStore::Session' if defined?(ActiveRecord::SessionStore)
     case Rails::VERSION::MAJOR
-    when 5, 6
+    when 5
       excludes << 'ActiveRecord::InternalMetadata'
       excludes << 'ActiveStorage::Blob'
       excludes << 'ActiveStorage::Attachment'
+    when 6
+      excludes << 'ActiveRecord::InternalMetadata'
+      excludes << 'ActiveStorage::Blob'
+      excludes << 'ActiveStorage::Attachment'
+      excludes << 'ActiveStorage::VariantRecord'
     end
 
     if defined?(Nostalgic)
