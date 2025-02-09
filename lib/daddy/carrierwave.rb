@@ -8,15 +8,15 @@ CarrierWave.configure do |config|
       "/data/#{::Rails.application.class.module_parent_name.underscore}/#{::Rails.env}"
     end
 
-  unless ::Rails.env.test?
-    if File.exists?('config/aws.yml')
+  if File.exists?('config/aws.yml')
+    aws = YAML.safe_load(ERB.new(File.read('config/aws.yml'), 0, '-').result)
+
+    if aws.dig('s3', 'enabled')
       require 'carrierwave/storage/fog'
       config.storage :fog
       config.cache_storage :fog
-  
       config.fog_provider = 'fog/aws'
-      aws = YAML.load_file('config/aws.yml')
-  
+
       config.fog_credentials = {
         provider: 'AWS',
         aws_access_key_id: aws['s3']['access_key_id'],
