@@ -10,19 +10,27 @@ namespace :dad do
       FileUtils.mkdir_p("tmp")
       system("echo '# mysql ddl' > tmp/create_databases.sql")
   
+      user = nil
+      config.each do |env, props|
+        next if env == 'default'
+        next if props['username'] == user
+
+        user = props['username']
+        system("echo 'drop user if exists \"#{user}\"@\"%\";' >> tmp/create_databases.sql")
+        system("echo 'create user \"#{user}\"@\"%\" IDENTIFIED BY \"#{props['password']}\";' >> tmp/create_databases.sql")
+      end
+
       config.each do |env, props|
         next if env == 'default'
         next if ENV['RAILS_ENV'] and ENV['RAILS_ENV'] != env
 
         system("echo 'drop database if exists #{props['database']};' >> tmp/create_databases.sql")
         system("echo 'create database #{props['database']};' >> tmp/create_databases.sql")
-        system("echo 'drop user if exists \"#{props['username']}\"@\"%\";' >> tmp/create_databases.sql")
-        system("echo 'create user \"#{props['username']}\"@\"%\" IDENTIFIED BY \"#{props['password']}\";' >> tmp/create_databases.sql")
-        system("echo 'grant all on #{props['database']}.* to #{props['username']} identified by \"#{props['password']}\";' >> tmp/create_databases.sql")
+        system("echo 'grant all on #{props['database']}.* to #{user};' >> tmp/create_databases.sql")
 
         if ENV['FILE']
-          system("echo 'grant all on #{props['database']}.* to #{props['username']}@localhost identified by \"#{props['password']}\";' >> tmp/create_databases.sql")
-          system("echo 'grant file on *.* to #{props['username']}@localhost;' >> tmp/create_databases.sql")
+          system("echo 'grant all on #{props['database']}.* to #{user}@localhost;' >> tmp/create_databases.sql")
+          system("echo 'grant file on *.* to #{user}@localhost;' >> tmp/create_databases.sql")
         end
         puts "database for environment #{env} written to tmp/create_databases.sql"
       end
