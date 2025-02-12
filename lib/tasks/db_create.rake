@@ -10,12 +10,14 @@ namespace :dad do
       FileUtils.mkdir_p("tmp")
       system("echo '# mysql ddl' > tmp/create_databases.sql")
   
-      user = nil
+      user = host = port = nil
       config.each do |env, props|
         next if env == 'default'
         next if props['username'] == user
 
         user = props['username']
+        host = props['host']
+        port = props['port']
         system("echo 'drop user if exists \"#{user}\"@\"%\";' >> tmp/create_databases.sql")
         system("echo 'create user \"#{user}\"@\"%\" IDENTIFIED BY \"#{props['password']}\";' >> tmp/create_databases.sql")
       end
@@ -38,11 +40,22 @@ namespace :dad do
       system("echo 'flush privileges;' >> tmp/create_databases.sql")
       system("echo >> tmp/create_databases.sql")
 
-      if ENV['MYSQL_NO_ROOT_PASSWORD']
-        fail unless system("mysql -u root < tmp/create_databases.sql")
-      else
-        fail unless system("mysql -u #{ENV['MYSQL_ROOT'] || 'root'} -p < tmp/create_databases.sql")
+      options = []
+      if host
+        port ||= 3306 if host != 'localhost'
+        options << "-h #{host}"
+        options << "-P #{port}" if port
       end
+      if ENV['MYSQL_NO_ROOT_PASSWORD']
+        options << '-u root'
+      else
+        options << "-u #{ENV['MYSQL_ROOT'] || 'root'}"
+        options << '-p'
+      end
+
+      command = "mysql #{options.join(' ')} < tmp/create_databases.sql"
+      puts command
+      fail unless system(command)
     end
   end
 end
