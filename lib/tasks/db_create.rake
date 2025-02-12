@@ -46,10 +46,8 @@ namespace :dad do
         options << "-h #{host}"
         options << "-P #{port}" if port
       end
-      if ENV['MYSQL_NO_ROOT_PASSWORD']
-        options << '-u root'
-      else
-        options << "-u #{ENV['MYSQL_ROOT'] || 'root'}"
+      options << "-u #{ENV['MYSQL_ROOT'] || 'root'}"
+      unless ENV['MYSQL_ALLOW_EMPTY_PASSWORD']
         options << '-p'
       end
 
