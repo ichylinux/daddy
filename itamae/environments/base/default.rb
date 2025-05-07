@@ -1,6 +1,7 @@
 %w{
   autoconf
   automake
+  curl
   gcc
   gcc-c++
   git
@@ -10,7 +11,6 @@
   libtool
   libxml2-devel
   libxslt-devel
-  libyaml-devel
   openssl-devel
   readline-devel
   sudo
@@ -20,5 +20,14 @@
 }.each do |name|
   package name do
     user 'root'
+  end
+end
+
+%w{
+  libyaml-devel
+}.each do |name|
+  package name do
+    user 'root'
+    options '--enablerepo=powertools'
   end
 end

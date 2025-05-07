@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-MITAMAE_VERSION=v1.11.7
+MITAMAE_VERSION=v1.14.4
 
 function install_mitamae() {
   # you need to have root previlege
@@ -39,9 +39,5 @@ case $1 in
   'local')
     setup_dad
     sudo /usr/local/bin/mitamae local "itamae/environments/local.rb"
-    ;;
-  'mysql')
-    setup_dad
-    bundle exec itamae local --ohai "itamae/environments/mysql.rb"
     ;;
 esac

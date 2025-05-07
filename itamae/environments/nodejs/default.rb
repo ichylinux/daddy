@@ -1,27 +1,20 @@
-template '/etc/yum.repos.d/nodesource-el7.repo' do
+template '/etc/yum.repos.d/nodesource-nodejs.repo' do
   user 'root'
   owner 'root'
   group 'root'
   mode '644'
 end
 
-execute 'yum clean all --enablerepo=nodesource' do
+execute 'yum clean all --enablerepo=nodesource-nodejs' do
   user 'root'
   action :nothing
-  subscribes :run, "template[/etc/yum.repos.d/nodesource-el7.repo]", :immediately
-end
-
-template '/etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL' do
-  user 'root'
-  owner 'root'
-  group 'root'
-  mode '644'
+  subscribes :run, "template[/etc/yum.repos.d/nodesource-nodejs.repo]", :immediately
 end
 
 package 'nodejs' do
   user 'root'
-  version "16.20.2-1nodesource"
-  options '--enablerepo=nodesource'
+  version '18.20.8-1nodesource'
+  options '--enablerepo=nodesource-nodejs'
 end
 
 template '/etc/yum.repos.d/yarn.repo' do
@@ -33,4 +26,5 @@ end
 
 package 'yarn' do
   user 'root'
+  options '--enablerepo=yarn'
 end

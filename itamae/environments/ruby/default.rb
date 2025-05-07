@@ -26,13 +26,23 @@ execute "install ruby-#{version}" do
 end
 
 {
-  'rubygems-update' => nil,
   'bundler' => '2.3.26',
-  'itamae' => '1.14.1',
-  'daddy' => nil
+  'itamae' => '1.14.1'
 }.each do |name, version|
   gem_package name do
     user 'root'
     version version if version
+    options '-N'
   end
+end
+
+execute 'gem update --system 3.3.26 -N' do
+  user 'root'
+  action :nothing
+  subscribes :run, "gem_package[bundler]", :immediately
+end
+
+gem_package 'daddy' do
+  user 'root'
+  options '-N'
 end
