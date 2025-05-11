@@ -30,14 +30,8 @@ function setup_dad() {
 }
 
 case $1 in
-  'docker')
-    /usr/local/bin/mitamae local "itamae/environments/docker.rb"
-    for recipe in base nodejs ruby; do
-      bundle exec itamae docker --image daddy-base:latest --tag daddy-base:latest "itamae/environments/$recipe/default.rb"
-    done
-    ;;
   'local')
     setup_dad
-    sudo /usr/local/bin/mitamae local "itamae/environments/local.rb"
+    /usr/local/bin/mitamae local "itamae/environments/local.rb"
     ;;
 esac

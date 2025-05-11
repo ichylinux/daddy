@@ -18,7 +18,7 @@ group 'docker' do
 end
 
 execute "add user to docker group" do
-  command "sudo usermod -a -G docker ${USER} && newgrp docker"
+  command "sudo usermod -a -G docker ${USER}"
   not_if "groups ${USER} | grep -E \"\sdocker\""
 end
 

@@ -1,4 +1,4 @@
-template '/etc/yum.repos.d/nodesource-nodejs.repo' do
+file '/etc/yum.repos.d/nodesource-nodejs.repo' do
   user 'root'
   owner 'root'
   group 'root'
@@ -8,7 +8,7 @@ end
 execute 'yum clean all --enablerepo=nodesource-nodejs' do
   user 'root'
   action :nothing
-  subscribes :run, "template[/etc/yum.repos.d/nodesource-nodejs.repo]", :immediately
+  subscribes :run, "file[/etc/yum.repos.d/nodesource-nodejs.repo]", :immediately
 end
 
 package 'nodejs' do
@@ -17,7 +17,7 @@ package 'nodejs' do
   options '--enablerepo=nodesource-nodejs'
 end
 
-template '/etc/yum.repos.d/yarn.repo' do
+file '/etc/yum.repos.d/yarn.repo' do
   user 'root'
   owner 'root'
   group 'root'
