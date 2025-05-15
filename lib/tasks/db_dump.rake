@@ -17,7 +17,7 @@ namespace :dad do
       filepath = File.join(dump_dir, "#{database}-#{Time.now.strftime('%Y-%m-%d_%H%M')}.dump.gz")
 
       run "mkdir -p #{File.dirname(filepath)}",
-          "mysqldump -u #{user} -p#{password} -h #{host} #{database} | gzip > #{filepath}",
+          "mysqldump -u #{user} -p#{password} -h #{host} #{database} --no-tablespaces | gzip > #{filepath}",
           :mask => [/-p[^ ]+/, '-pFILTERED']
     end
   end
