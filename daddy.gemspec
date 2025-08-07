@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
                   Dir['vendor/**/*']
   s.require_paths = ['lib']
 
-  s.required_ruby_version = '~> 2.7'
+  s.required_ruby_version = '>= 2.7', '< 3.3'
 
   s.add_runtime_dependency 'concurrent-ruby', '< 1.3.5'
   s.add_runtime_dependency 'docker-api'
@@ -30,7 +30,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'ohai'
 
   s.add_development_dependency 'ci_reporter'
-  s.add_development_dependency 'closer'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'faraday'
   s.add_development_dependency 'faraday_middleware'

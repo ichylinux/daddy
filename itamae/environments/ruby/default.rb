@@ -1,4 +1,4 @@
-version = ENV['RUBY_VERSION'] || '2.7.8'
+version = ENV['RUBY_VERSION'] || '3.2.9'
 short_version = version.split('.')[0..1].join('.')
 
 execute "download ruby-#{version}" do
@@ -17,12 +17,15 @@ execute "install ruby-#{version}" do
     set -eu
     tar zxf ruby-#{version}.tar.gz
     pushd ruby-#{version}
-      ./configure --disable-install-rdoc
-      make
-      sudo make install
+      mkdir -p build
+      pushd build
+        ../configure --disable-install-rdoc
+        make
+        yes | sudo make install
+      popd
     popd
   EOF
-  not_if "ruby -v | egrep \"ruby #{version}(p[0-9]+) \""
+  not_if "ruby -v | egrep \"ruby #{version}(p[0-9]+)? \""
 end
 
 {
@@ -36,13 +39,8 @@ end
   end
 end
 
-execute 'gem update --system 3.3.26 -N' do
+execute 'gem update --system 3.7.1 -N' do
   user 'root'
   action :nothing
   subscribes :run, "gem_package[bundler]", :immediately
-end
-
-gem_package 'daddy' do
-  user 'root'
-  options '-N'
 end
