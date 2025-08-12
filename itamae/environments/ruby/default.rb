@@ -16,12 +16,15 @@ execute "install ruby-#{version}" do
   command <<-EOF
     set -eu
     tar zxf ruby-#{version}.tar.gz
+
+    # avoid override confirmation when a different version of ruby was installed before
+    sudo rm -f /usr/local/bin/{bundle,bundler,erb,irb,gem,rdoc,ruby}
+
     pushd ruby-#{version}
       mkdir -p build
       pushd build
         ../configure --disable-install-rdoc
         make
-        sudo rm -r /usr/local/bin/erb # avoid override confirmation when a different version of ruby was installed before
         sudo make install
       popd
     popd
