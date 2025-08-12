@@ -8,7 +8,7 @@ CarrierWave.configure do |config|
       "/data/#{::Rails.application.class.module_parent_name.underscore}/#{::Rails.env}"
     end
 
-  if File.exists?('config/aws.yml')
+  if File.exist?('config/aws.yml')
     aws = YAML.safe_load(ERB.new(File.read('config/aws.yml'), 0, '-').result)
 
     if aws.dig('s3', 'enabled')
