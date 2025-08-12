@@ -21,7 +21,8 @@ execute "install ruby-#{version}" do
       pushd build
         ../configure --disable-install-rdoc
         make
-        yes | sudo make install
+        sudo rm -r /usr/local/bin/erb # avoid override confirmation when a different version of ruby was installed before
+        sudo make install
       popd
     popd
   EOF
