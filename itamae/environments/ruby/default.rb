@@ -15,6 +15,7 @@ execute "install ruby-#{version}" do
   cwd '/var/daddy/tmp'
   command <<-EOF
     set -eu
+    rm -Rf ruby-#{version}/
     tar zxf ruby-#{version}.tar.gz
 
     # avoid override confirmation when a different version of ruby was installed before
