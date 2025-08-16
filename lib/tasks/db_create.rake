@@ -5,7 +5,7 @@ namespace :dad do
     
     desc 'database.yml に従ってDBを作成します。'
     task :create do
-      config = YAML.safe_load(ERB.new(File.read('config/database.yml'), 0, '-').result, [], [], aliases: true)
+      config = YAML.safe_load(ERB.new(File.read('config/database.yml'), 0, '-').result, aliases: true)
       
       FileUtils.mkdir_p("tmp")
       system("echo '# mysql ddl' > tmp/create_databases.sql")
