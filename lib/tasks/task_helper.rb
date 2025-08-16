@@ -59,7 +59,7 @@ def self.task_file(*path)
 end
 
 def self.render(template, options = {})
-  text = ERB.new(File.read(template), 0, '-').result
+  text = ERB.new(File.read(template), trim_mode: '-').result
 
   if options[:to]
     FileUtils.mkdir_p(File.dirname(options[:to]))

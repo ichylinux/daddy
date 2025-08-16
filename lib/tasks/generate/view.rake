@@ -25,7 +25,7 @@ namespace :dad do
         FileUtils.mkdir_p(view_dir)
 
         view_file = "#{view_dir}/#{File.basename(template)}"
-        File.write(view_file, ERB.new(File.read(template), 0, '-').result)
+        File.write(view_file, ERB.new(File.read(template), trim_mode: '-').result)
       end
     end
     

@@ -9,7 +9,7 @@ CarrierWave.configure do |config|
     end
 
   if File.exist?('config/aws.yml')
-    aws = YAML.safe_load(ERB.new(File.read('config/aws.yml'), 0, '-').result, aliases: true)
+    aws = YAML.safe_load(ERB.new(File.read('config/aws.yml'), trim_mode: '-').result, aliases: true)
 
     if aws.dig('s3', 'enabled')
       require 'carrierwave/storage/fog'

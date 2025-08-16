@@ -7,7 +7,7 @@ namespace :dad do
     task :load do
       dump_file = ENV['DUMP_FILE'] || ask('ダンプファイル', :required => true)
 
-      config = YAML.load(ERB.new(File.read('config/database.yml'), 0, '-').result)[Rails.env]
+      config = YAML.load(ERB.new(File.read('config/database.yml'), trim_mode: '-').result)[Rails.env]
 
       host = config['host'] || 'localhost'
       database = config['database']
