@@ -34,7 +34,7 @@ execute "install ruby-#{version}" do
 end
 
 {
-  'bundler' => '2.3.26',
+  'bundler' => '2.7.1',
   'itamae' => '1.14.1'
 }.each do |name, version|
   gem_package name do
