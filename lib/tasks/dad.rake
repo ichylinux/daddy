@@ -34,7 +34,9 @@ namespace :dad do
             fail unless system("#{env} bundle exec itamae docker --ohai --image daddy-base --tag #{tag} --log-level=#{log_level} #{role_file}")
           end
         else
-          fail unless system("#{env} bundle exec itamae local --ohai --log-level=#{log_level} #{role_file}")
+          Bundler.with_unbundled_env do
+            fail unless system("#{env} bundle exec itamae local --ohai --log-level=#{log_level} #{role_file}")
+          end
         end
       end
     end
