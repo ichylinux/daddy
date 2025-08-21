@@ -4,16 +4,6 @@ if ENV['COVERAGE']
   rescue LoadError => e
     raise 'simplecov not found.'
   end
-  begin
-    require 'simplecov-rcov'
-  rescue LoadError => e
-    raise 'simplecov-rcov not found.'
-  end
-
-  SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
-    SimpleCov::Formatter::HTMLFormatter,
-    SimpleCov::Formatter::RcovFormatter
-  ])
 
   SimpleCov.start do
     add_filter '/features/'
