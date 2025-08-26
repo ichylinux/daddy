@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
                   Dir['vendor/**/*']
   s.require_paths = ['lib']
 
-  s.required_ruby_version = '>= 2.7', '< 3.3'
+  s.required_ruby_version = '>= 3.0', '< 3.5'
 
   s.add_runtime_dependency 'concurrent-ruby', '< 1.3.5'
   s.add_runtime_dependency 'docker-api'
