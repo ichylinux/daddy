@@ -34,7 +34,7 @@ execute "install ruby-#{version}" do
 end
 
 {
-  'bundler' => ['2.3.26', '2.7.1'],
+  'bundler' => ['2.3.26', '2.7.2'],
   'itamae' => '1.14.1'
 }.each do |name, versions|
   versions = Array(versions)
@@ -47,7 +47,7 @@ end
   end
 end
 
-execute 'gem update --system 3.7.1 -N' do
+execute 'gem update --system 3.7.2 -N' do
   user 'root'
   action :nothing
   subscribes :run, "gem_package[bundler]", :immediately
