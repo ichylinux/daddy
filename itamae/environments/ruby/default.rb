@@ -1,4 +1,4 @@
-version = ENV['RUBY_VERSION'] || '3.2.9'
+version = ENV['RUBY_VERSION'] || '3.4.3'
 short_version = version.split('.')[0..1].join('.')
 
 execute "download ruby-#{version}" do
@@ -34,7 +34,7 @@ execute "install ruby-#{version}" do
 end
 
 {
-  'bundler' => ['2.3.26', '2.7.2'],
+  'bundler' => ['2.7.2'],
   'itamae' => '1.14.1'
 }.each do |name, versions|
   versions = Array(versions)
@@ -52,3 +52,4 @@ execute 'gem update --system 3.7.2 -N' do
   action :nothing
   subscribes :run, "gem_package[bundler]", :immediately
 end
+

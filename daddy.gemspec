@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 3.0', '< 3.5'
 
-  s.add_runtime_dependency 'concurrent-ruby', '< 1.3.5'
   s.add_runtime_dependency 'docker-api'
   s.add_runtime_dependency 'highline'
   s.add_runtime_dependency 'i18n'
@@ -33,11 +32,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'faraday'
   s.add_development_dependency 'faraday_middleware'
-  s.add_development_dependency 'rails', '>= 6.1'
+  s.add_development_dependency 'rails', '>= 7.2'
   s.add_development_dependency 'redis'
   s.add_development_dependency 'redis-namespace'
   s.add_development_dependency 'resque'
   s.add_development_dependency 'resque-scheduler'
   s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'simplecov-rcov'
 end
