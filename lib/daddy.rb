@@ -1,5 +1,4 @@
 require 'daddy/utils/config'
-require 'daddy/utils/string_utils'
 require 'sql_builder'
 
 module Daddy
