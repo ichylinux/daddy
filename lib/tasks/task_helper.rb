@@ -140,3 +140,31 @@ def self.run_itamae(*recipes)
 
   run "bundle exec itamae local #{options.join(' ')} #{recipe_files.join(' ')}"
 end
+
+# Database helper methods for dad:db namespace
+module DatabaseHelpers
+  # Helper method to check if a configuration is multiple databases (Rails 8 style)
+  def multiple_databases?(props)
+    return false unless props.is_a?(Hash)
+    # Standard Rails database config keys
+    standard_keys = ['adapter', 'collation', 'database', 'encoding', 'host', 'max_connections', 'migrations_paths', 'password', 'port', 'url', 'username']
+    # If it has a 'database' key directly, it's a single database config
+    return false if props.key?('database')
+    # If it has keys that are not standard keys and those values are hashes with 'database' keys, it's multiple databases
+    props.any? do |key, value|
+      !standard_keys.include?(key.to_s) && value.is_a?(Hash) && value.key?('database')
+    end
+  end
+
+  # Helper method to write database creation SQL commands
+  def create_database_sql(database, username)
+    system("echo 'drop database if exists #{database};' >> tmp/create_databases.sql")
+    system("echo 'create database #{database};' >> tmp/create_databases.sql")
+    system("echo 'grant all on #{database}.* to \"#{username}\"@\"%\";' >> tmp/create_databases.sql")
+
+    if ENV['FILE']
+      system("echo 'grant all on #{database}.* to \"#{username}\"@localhost;' >> tmp/create_databases.sql")
+      system("echo 'grant file on *.* to \"#{username}\"@localhost;' >> tmp/create_databases.sql")
+    end
+  end
+end
