@@ -53,3 +53,8 @@ execute 'gem update --system 3.7.2 -N' do
   subscribes :run, "gem_package[bundler]", :immediately
 end
 
+execute "bundle config set --global path ~/.gem/ruby/#{short_version}.0" do
+  user ENV['USER']
+  not_if "bundle config get path | grep -qE '\\.gem/ruby/#{short_version}.0'"
+end
+
