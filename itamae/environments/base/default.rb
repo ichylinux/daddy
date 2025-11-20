@@ -33,7 +33,6 @@ end
   end
 end
 
-execute 'dnf clean all' do
+execute 'dnf clean all --enablerepo=powertools' do
   user 'root'
-  options '--enablerepo=powertools'
 end

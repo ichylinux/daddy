@@ -15,7 +15,7 @@ execute 'place /etc/yum.repos.d/nodesource-nodejs.repo' do
   not_if "diff #{::File.join(::File.dirname(__FILE__), 'files/etc/yum.repos.d/nodesource-nodejs.repo')} /etc/yum.repos.d/nodesource-nodejs.repo"
 end
 
-execute 'yum clean all --enablerepo=nodesource-nodejs' do
+execute 'dnf clean all --enablerepo=nodesource-nodejs' do
   user 'root'
   action :nothing
   subscribes :run, "execute[place /etc/yum.repos.d/nodesource-nodejs.repo]", :immediately
@@ -37,7 +37,7 @@ execute 'place /etc/yum.repos.d/yarn.repo' do
   not_if "diff #{::File.join(::File.dirname(__FILE__), 'files/etc/yum.repos.d/yarn.repo')} /etc/yum.repos.d/yarn.repo"
 end
 
-execute 'yum clean all --enablerepo=yarn' do
+execute 'dnf clean all --enablerepo=yarn' do
   user 'root'
   action :nothing
   subscribes :run, "execute[place /etc/yum.repos.d/yarn.repo]", :immediately
