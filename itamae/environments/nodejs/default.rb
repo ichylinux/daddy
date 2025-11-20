@@ -15,16 +15,16 @@ execute 'place /etc/yum.repos.d/nodesource-nodejs.repo' do
   not_if "diff #{::File.join(::File.dirname(__FILE__), 'files/etc/yum.repos.d/nodesource-nodejs.repo')} /etc/yum.repos.d/nodesource-nodejs.repo"
 end
 
-execute 'dnf clean all --enablerepo=nodesource-nodejs' do
-  user 'root'
-  action :nothing
-  subscribes :run, "execute[place /etc/yum.repos.d/nodesource-nodejs.repo]", :immediately
-end
-
 package 'nodejs' do
   user 'root'
   version '22.18.0-1nodesource'
   options '--enablerepo=nodesource-nodejs'
+end
+
+execute 'dnf clean all --enablerepo=nodesource-nodejs' do
+  user 'root'
+  action :nothing
+  subscribes :run, "package[nodejs]", :immediately
 end
 
 execute 'place /etc/yum.repos.d/yarn.repo' do
@@ -37,13 +37,13 @@ execute 'place /etc/yum.repos.d/yarn.repo' do
   not_if "diff #{::File.join(::File.dirname(__FILE__), 'files/etc/yum.repos.d/yarn.repo')} /etc/yum.repos.d/yarn.repo"
 end
 
-execute 'dnf clean all --enablerepo=yarn' do
-  user 'root'
-  action :nothing
-  subscribes :run, "execute[place /etc/yum.repos.d/yarn.repo]", :immediately
-end
-
 package 'yarn' do
   user 'root'
   options '--enablerepo=yarn'
+end
+
+execute 'dnf clean all --enablerepo=yarn' do
+  user 'root'
+  action :nothing
+  subscribes :run, "package[yarn]", :immediately
 end
