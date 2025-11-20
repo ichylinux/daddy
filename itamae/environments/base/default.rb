@@ -13,6 +13,7 @@
   libxslt-devel
   openssl-devel
   readline-devel
+  shared-mime-info
   sudo
   wget
   which
