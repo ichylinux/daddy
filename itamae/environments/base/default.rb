@@ -5,6 +5,7 @@
   gcc
   gcc-c++
   git
+  glibc-langpack-ja
   make
   libcurl-devel
   libffi-devel
@@ -12,11 +13,15 @@
   libxml2-devel
   libxslt-devel
   openssl-devel
+  patch
   readline-devel
   shared-mime-info
   sudo
+  tar
+  unzip
   wget
   which
+  zip
   zlib-devel
 }.each do |name|
   package name do
