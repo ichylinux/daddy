@@ -34,4 +34,5 @@ end
 
 execute 'dnf clean all' do
   user 'root'
+  options '--enablerepo=powertools'
 end
