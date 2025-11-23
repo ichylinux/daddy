@@ -17,7 +17,7 @@ end
 
 package 'nodejs' do
   user 'root'
-  version '22.18.0-1nodesource'
+  version '22.21.1-1nodesource'
   options '--enablerepo=nodesource-nodejs'
 end
 
