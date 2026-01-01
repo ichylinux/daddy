@@ -24,7 +24,6 @@ module Daddy
 
       initializer 'sidekiq' do
         if defined?(Sidekiq)
-          puts '[daddy] loading sidekiq configuration'
           require 'daddy/sidekiq'
         end
       end
