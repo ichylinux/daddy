@@ -18,7 +18,6 @@ module Daddy
 
       initializer 'carrierwave' do
         if defined?(CarrierWave)
-          puts '[daddy] loading carrierwave configuration'
           require 'daddy/carrierwave'
         end
       end
