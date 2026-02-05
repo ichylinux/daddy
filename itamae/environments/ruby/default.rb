@@ -15,7 +15,7 @@ execute "install ruby-#{version}" do
   cwd '/var/daddy/tmp'
   command <<-EOF
     set -eu
-    rm -Rf ruby-#{version}/
+    sudo rm -Rf ruby-#{version}/
     tar zxf ruby-#{version}.tar.gz
 
     # avoid override confirmation when a different version of ruby was installed before
@@ -33,10 +33,23 @@ execute "install ruby-#{version}" do
   not_if "ruby -v | egrep \"ruby #{version}(p[0-9]+)? \""
 end
 
+bundler_versions = case short_version
+  when '2.7'
+    ['2.3.26', '2.4.22']
+  else
+    '2.7.2'
+  end
+ohai_version = case short_version
+  when '2.7'
+    '19.0.3'
+  else
+    '19.1.16'
+  end
+
 {
-  'bundler' => ['2.7.2'],
+  'bundler' => bundler_versions,
   'itamae' => '1.14.2',
-  'ohai' => '19.1.16'
+  'ohai' => ohai_version
 }.each do |name, versions|
   versions = Array(versions)
   versions.each do |version|
@@ -46,12 +59,6 @@ end
       options '-N'
     end
   end
-end
-
-execute 'gem update --system 3.7.2 -N' do
-  user 'root'
-  action :nothing
-  subscribes :run, "gem_package[bundler]", :immediately
 end
 
 execute "bundle config set --global path ~/.gem/ruby/#{short_version}.0" do
