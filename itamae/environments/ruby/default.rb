@@ -35,8 +35,8 @@ end
 
 {
   'bundler' => ['2.7.2'],
-  'itamae' => '1.14.1',
-  'ohai' => '19.0.3'
+  'itamae' => '1.14.2',
+  'ohai' => '19.1.16'
 }.each do |name, versions|
   versions = Array(versions)
   versions.each do |version|
