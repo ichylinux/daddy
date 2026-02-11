@@ -13,12 +13,11 @@ Gem::Specification.new do |s|
   s.files       = Dir['app/**/*'] +
                   Dir['itamae/**/*'] +
                   Dir['lib/**/*'] +
-                  Dir['ssl/**/*'] +
                   Dir['templates/**/*'] +
                   Dir['vendor/**/*']
   s.require_paths = ['lib']
 
-  s.required_ruby_version = '>= 3.0', '< 3.5'
+  s.required_ruby_version = '>= 3.0', '< 3.6'
 
   s.add_runtime_dependency 'docker-api'
   s.add_runtime_dependency 'highline'
