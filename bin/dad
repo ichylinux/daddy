@@ -30,8 +30,12 @@ function setup_dad() {
 }
 
 case $1 in
-  'local')
+  'local'|'')
     setup_dad
     /usr/local/bin/mitamae local "itamae/environments/local.rb"
+    ;;
+  *)
+    echo "Usage: dad [local]" >&2
+    exit 1
     ;;
 esac
