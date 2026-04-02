@@ -43,7 +43,7 @@ ohai_version = case short_version
   when '2.7'
     '19.0.3'
   else
-    '19.1.16'
+    '19.1.24'
   end
 
 {
