@@ -26,15 +26,15 @@ when 'amazon'
     user 'root'
     command <<-EOF
       set -eu
-      sudo cp -f #{::File.join(::File.dirname(__FILE__), 'files/etc/yum.repos.d/nodesource-nodejs-v20.repo')} /etc/yum.repos.d/nodesource-nodejs.repo
+      sudo cp -f #{::File.join(::File.dirname(__FILE__), 'files/etc/yum.repos.d/nodesource-nodejs-v18.repo')} /etc/yum.repos.d/nodesource-nodejs.repo
       sudo chmod 644 /etc/yum.repos.d/nodesource-nodejs.repo
     EOF
-    not_if "diff #{::File.join(::File.dirname(__FILE__), 'files/etc/yum.repos.d/nodesource-nodejs-v20.repo')} /etc/yum.repos.d/nodesource-nodejs.repo"
+    not_if "diff #{::File.join(::File.dirname(__FILE__), 'files/etc/yum.repos.d/nodesource-nodejs-v18.repo')} /etc/yum.repos.d/nodesource-nodejs.repo"
   end
   
   package 'nodejs' do
     user 'root'
-    version '20.20.2-1nodesource'
+    version '18.20.8-1nodesource'
     options '--enablerepo=nodesource-nodejs'
   end
   

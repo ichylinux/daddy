@@ -1,0 +1,8 @@
+[nodesource-nodejs]
+name=Node.js Packages for Linux RPM based distros - x86_64
+baseurl=https://rpm.nodesource.com/pub_18.x/nodistro/nodejs/x86_64
+priority=9
+enabled=0
+gpgcheck=1
+gpgkey=https://rpm.nodesource.com/gpgkey/ns-operations-public.key
+module_hotfixes=1
