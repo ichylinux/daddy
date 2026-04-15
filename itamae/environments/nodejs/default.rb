@@ -1,10 +1,3 @@
-file '/etc/yum.repos.d/nodesource-nodejs.repo' do
-  user 'root'
-  owner 'root'
-  group 'root'
-  mode '644'
-end
-
 execute 'place /etc/yum.repos.d/nodesource-nodejs.repo' do
   user 'root'
   command <<-EOF
