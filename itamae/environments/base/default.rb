@@ -29,15 +29,30 @@
   end
 end
 
-%w{
-  libyaml-devel
-}.each do |name|
-  package name do
-    user 'root'
-    options '--enablerepo=powertools'
+case node[:platform]
+when 'almalinux'
+  %w{
+    libyaml-devel
+  }.each do |name|
+    package name do
+      user 'root'
+      options '--enablerepo=powertools'
+    end
   end
-end
 
-execute 'dnf clean all --enablerepo=powertools' do
-  user 'root'
+  execute 'dnf clean all --enablerepo=powertools' do
+    user 'root'
+  end
+when 'amazon'
+  %w{
+    libyaml-devel
+  }.each do |name|
+    package name do
+      user 'root'
+    end
+  end
+
+  execute 'yum clean all' do
+    user 'root'
+  end
 end
