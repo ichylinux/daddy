@@ -35,9 +35,16 @@ end
   package name do
     user 'root'
     options '--enablerepo=powertools'
+    only_if "uname -r | grep el8_"
   end
 end
 
-execute 'dnf clean all --enablerepo=powertools' do
-  user 'root'
+%w{
+  libyaml-devel
+}.each do |name|
+  package name do
+    user 'root'
+    options '--enablerepo=crb'
+    only_if "uname -r | grep el9_"
+  end
 end
