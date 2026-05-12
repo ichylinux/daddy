@@ -33,7 +33,7 @@ end
 }.each do |name|
   package name do
     user 'root'
-    only_if "uname -r | grep el8_"
+    only_if "grep -qE '^AlmaLinux release 8\.[0-9]+' /etc/almalinux-release"
   end
 end
 
@@ -43,7 +43,7 @@ end
   package name do
     user 'root'
     options '--enablerepo=powertools'
-    only_if "uname -r | grep el8_"
+    only_if "grep -qE '^AlmaLinux release 8\.[0-9]+' /etc/almalinux-release"
   end
 end
 
@@ -52,7 +52,7 @@ end
 }.each do |name|
   package name do
     user 'root'
-    only_if "uname -r | grep el9_"
+    only_if "grep -qE '^AlmaLinux release 9\.[0-9]+' /etc/almalinux-release"
   end
 end
 
@@ -62,6 +62,6 @@ end
   package name do
     user 'root'
     options '--enablerepo=crb'
-    only_if "uname -r | grep el9_"
+    only_if "grep -qE '^AlmaLinux release 9\.[0-9]+' /etc/almalinux-release"
   end
 end
