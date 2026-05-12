@@ -29,30 +29,12 @@
 end
 
 %w{
-  curl
-}.each do |name|
-  package name do
-    user 'root'
-    only_if "grep -qE '^AlmaLinux release 8\.[0-9]+' /etc/almalinux-release"
-  end
-end
-
-%w{
   libyaml-devel
 }.each do |name|
   package name do
     user 'root'
     options '--enablerepo=powertools'
     only_if "grep -qE '^AlmaLinux release 8\.[0-9]+' /etc/almalinux-release"
-  end
-end
-
-%w{
-  curl-minimal
-}.each do |name|
-  package name do
-    user 'root'
-    only_if "grep -qE '^AlmaLinux release 9\.[0-9]+' /etc/almalinux-release"
   end
 end
 
