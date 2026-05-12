@@ -1,7 +1,6 @@
 %w{
   autoconf
   automake
-  curl
   gcc
   gcc-c++
   git
@@ -30,12 +29,30 @@
 end
 
 %w{
+  curl
+}.each do |name|
+  package name do
+    user 'root'
+    only_if "uname -r | grep el8_"
+  end
+end
+
+%w{
   libyaml-devel
 }.each do |name|
   package name do
     user 'root'
     options '--enablerepo=powertools'
     only_if "uname -r | grep el8_"
+  end
+end
+
+%w{
+  curl-minimal
+}.each do |name|
+  package name do
+    user 'root'
+    only_if "uname -r | grep el9_"
   end
 end
 
