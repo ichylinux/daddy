@@ -34,8 +34,12 @@ case $1 in
     setup_dad
     /usr/local/bin/mitamae local "itamae/environments/local.rb"
     ;;
+  'docker')
+    setup_dad
+    /usr/local/bin/mitamae local "itamae/environments/docker.rb"
+    ;;
   *)
-    echo "Usage: dad [local]" >&2
+    echo "Usage: dad [local|docker]" >&2
     exit 1
     ;;
 esac
