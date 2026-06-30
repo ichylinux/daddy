@@ -37,7 +37,7 @@ bundler_versions = case short_version
   when '2.7'
     ['2.3.26', '2.4.22']
   else
-    '2.7.2'
+    '4.0.14'
   end
 ohai_version = case short_version
   when '2.7'
