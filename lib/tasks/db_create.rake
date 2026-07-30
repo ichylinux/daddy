@@ -64,7 +64,7 @@ namespace :dad do
             database = db_config['database']
             username = db_config['username']
             
-            create_database_sql(database, username)
+            create_database_sql(database, username, env)
             puts "database #{database} (#{env}/#{db_name}) written to tmp/create_databases.sql"
           end
         else
@@ -73,7 +73,7 @@ namespace :dad do
           database = props['database']
           username = props['username']
           
-          create_database_sql(database, username)
+          create_database_sql(database, username, env)
           puts "database #{database} (#{env}) written to tmp/create_databases.sql"
         end
       end

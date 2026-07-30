@@ -157,13 +157,22 @@ module DatabaseHelpers
   end
 
   # Helper method to write database creation SQL commands
-  def create_database_sql(database, username)
+  def create_database_sql(database, username, env = nil)
     system("echo 'drop database if exists #{database};' >> tmp/create_databases.sql")
     system("echo 'create database #{database};' >> tmp/create_databases.sql")
-    system("echo 'grant all on #{database}.* to \"#{username}\"@\"%\";' >> tmp/create_databases.sql")
+
+    # test環境はRailsの並列テストが database-0, database-1 ... を追加で作るため、
+    # それらにも権限が及ぶようワイルドカードでGRANTする(既存の"_"はリテラル一致させるためエスケープする)
+    # バッククォートで囲むと、mysqlクライアントが行中の"\_"をコマンドと誤解釈するのを防ぎつつ、
+    # GRANTのdb_nameパターンとしては(通常のバッククォート識別子と異なり)バックスラッシュエスケープと
+    # ワイルドカードが有効なまま解釈される
+    escaped_database = database.gsub('_', '\\_')
+    grant_target = env == 'test' ? "`#{escaped_database}%`" : database
+
+    system("echo 'grant all on #{grant_target}.* to \"#{username}\"@\"%\";' >> tmp/create_databases.sql")
 
     if ENV['FILE']
-      system("echo 'grant all on #{database}.* to \"#{username}\"@localhost;' >> tmp/create_databases.sql")
+      system("echo 'grant all on #{grant_target}.* to \"#{username}\"@localhost;' >> tmp/create_databases.sql")
       system("echo 'grant file on *.* to \"#{username}\"@localhost;' >> tmp/create_databases.sql")
     end
   end
