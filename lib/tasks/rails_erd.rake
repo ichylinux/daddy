@@ -11,7 +11,7 @@ if defined?(RailsERD)
       excludes << 'ActiveRecord::InternalMetadata'
       excludes << 'ActiveStorage::Blob'
       excludes << 'ActiveStorage::Attachment'
-    when 6
+    when 6, 7, 8
       excludes << 'ActiveRecord::InternalMetadata'
       excludes << 'ActiveStorage::Blob'
       excludes << 'ActiveStorage::Attachment'
