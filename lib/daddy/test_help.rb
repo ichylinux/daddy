@@ -6,10 +6,10 @@ if ENV['COVERAGE']
   end
 
   SimpleCov.start do
-    add_filter '/features/'
-    add_filter '/test/'
-    add_filter '/user_stories/'
-    add_filter '/vendor/'
+    skip '/features/'
+    skip '/test/'
+    skip '/user_stories/'
+    skip '/vendor/'
   end
 end
 
