@@ -1,4 +1,4 @@
-version = ENV['RUBY_VERSION'] || '3.4.9'
+version = ENV['RUBY_VERSION'] || '3.4.10'
 short_version = version.split('.')[0..1].join('.')
 
 execute "download ruby-#{version}" do
@@ -37,7 +37,7 @@ bundler_versions = case short_version
   when '2.7'
     ['2.3.26', '2.4.22']
   else
-    ['2.7.2', '4.0.15']
+    ['2.7.2', '4.0.18']
   end
 ohai_version = case short_version
   when '2.7'
