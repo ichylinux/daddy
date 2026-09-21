@@ -1,6 +1,8 @@
 if defined?(RailsERD)
   Rake::Task['db:migrate'].enhance do
     ENV['filename'] = 'tmp/db_layout'
+    ENV['generator'] = 'graphviz'
+    ENV['filetype'] = 'pdf'
     ENV['attributes'] = 'foreign_keys, content, primary_keys, timestamp, inheritance'
     ENV['inheritance'] = 'true'
 
