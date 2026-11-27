@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'itamae-plugin-recipe-daddy'
   s.add_runtime_dependency 'itamae-plugin-resource-pip'
   s.add_runtime_dependency 'ohai'
+  s.add_runtime_dependency 'rustic-rails'
 
   s.add_development_dependency 'ci_reporter'
   s.add_development_dependency 'database_cleaner'
