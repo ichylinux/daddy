@@ -8,7 +8,9 @@ module Daddy
       daddy_yml = File.join('config', 'daddy.yml')
       if File.exist?(daddy_yml)
         parsed = ERB.new(File.read(daddy_yml), trim_mode: '-').result
-        @_config = Daddy::Utils::Config.new(YAML.load(parsed))
+        @_config = Daddy::Utils::Config.new(
+          YAML.safe_load(parsed, aliases: true)
+        )
       else
         @_config = Daddy::Utils::Config.new
       end
