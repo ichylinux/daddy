@@ -2,11 +2,15 @@
 
 MITAMAE_VERSION=v1.14.4
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=pkg_manager.sh
+source "${SCRIPT_DIR}/pkg_manager.sh"
+
 function install_mitamae() {
   # you need to have root previlege
   #sudo sed -i "s/\(^Defaults    secure_path = \).*/\1\/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
 
-  sudo dnf install -y -q sudo wget
+  install_bootstrap_packages
 
   sudo mkdir -p /var/daddy/tmp
   sudo chown $USER:$USER /var/daddy/tmp
