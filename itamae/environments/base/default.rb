@@ -11,7 +11,6 @@
   tar
   unzip
   wget
-  xz
   zip
 }.each do |name|
   package name do
@@ -30,6 +29,7 @@ end
   openssl-devel
   readline-devel
   which
+  xz
   zlib-devel
 }.each do |name|
   package name do
