@@ -1,6 +1,7 @@
 %w{
   autoconf
   automake
+  curl
   gcc
   gcc-c++
   git
