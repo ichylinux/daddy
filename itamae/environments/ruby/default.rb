@@ -21,14 +21,9 @@ execute "install ruby-#{version}" do
     # avoid override confirmation when a different version of ruby was installed before
     sudo rm -f /usr/local/bin/{bundle,bundler,erb,irb,gem,rdoc,ruby}
 
-    pushd ruby-#{version}
-      mkdir -p build
-      pushd build
-        ../configure --disable-install-rdoc
-        make
-        sudo make install
-      popd
-    popd
+    cd ruby-#{version}
+    mkdir -p build
+    (cd build && ../configure --disable-install-rdoc && make && sudo make install)
   EOF
   not_if "ruby -v | egrep \"ruby #{version}(p[0-9]+)? \""
 end
