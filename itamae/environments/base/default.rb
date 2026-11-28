@@ -11,6 +11,7 @@
   tar
   unzip
   wget
+  xz
   zip
 }.each do |name|
   package name do
@@ -49,6 +50,7 @@ end
   libreadline-dev
   zlib1g-dev
   libyaml-dev
+  xz-utils
 }.each do |name|
   package name do
     user 'root'
