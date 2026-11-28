@@ -1,22 +1,28 @@
 version = ENV['RUBY_VERSION'] || '3.4.13'
 short_version = version.split('.')[0..1].join('.')
+work_dir = '/var/daddy/tmp'
+tarball = "ruby-#{version}.tar.gz"
+sha256 = ::File.read(::File.join(::File.dirname(__FILE__), "#{tarball}_sha256sum.txt")).strip
 
+# NOTE: mitamae silently ignores `cwd` when the directory does not exist and
+# then runs in the process cwd (the repository root). Keep the `cd` inside the
+# command so a missing work dir fails loudly instead of polluting the repo.
 execute "download ruby-#{version}" do
-  cwd '/var/daddy/tmp'
   command <<-EOF
     set -eu
-    rm -f ruby-#{version}.tar.gz
-    wget https://cache.ruby-lang.org/pub/ruby/#{short_version}/ruby-#{version}.tar.gz
+    cd #{work_dir}
+    rm -f #{tarball}
+    wget https://cache.ruby-lang.org/pub/ruby/#{short_version}/#{tarball}
   EOF
-  not_if "echo #{::File.read(::File.join(::File.dirname(__FILE__), "ruby-#{version}.tar.gz_sha256sum.txt")).strip} | sha256sum -c"
+  not_if "cd #{work_dir} && echo #{sha256} | sha256sum -c"
 end
 
 execute "install ruby-#{version}" do
-  cwd '/var/daddy/tmp'
   command <<-EOF
     set -eu
+    cd #{work_dir}
     sudo rm -Rf ruby-#{version}/
-    tar zxf ruby-#{version}.tar.gz
+    tar zxf #{tarball}
 
     # avoid override confirmation when a different version of ruby was installed before
     sudo rm -f /usr/local/bin/{bundle,bundler,erb,irb,gem,rdoc,ruby}

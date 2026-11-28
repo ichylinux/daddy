@@ -6,15 +6,21 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=pkg_manager.sh
 source "${SCRIPT_DIR}/pkg_manager.sh"
 
+function ensure_bootstrap_packages() {
+  command -v sudo >/dev/null 2>&1 && command -v wget >/dev/null 2>&1 && return 0
+  install_bootstrap_packages
+}
+
+function prepare_work_dir() {
+  sudo mkdir -p /var/daddy/tmp
+  sudo chown $USER:$USER /var/daddy/tmp
+  sudo chmod 775 /var/daddy/tmp
+}
+
 function install_mitamae() {
   # you need to have root previlege
   #sudo sed -i "s/\(^Defaults    secure_path = \).*/\1\/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
 
-  install_bootstrap_packages
-
-  sudo mkdir -p /var/daddy/tmp
-  sudo chown $USER:$USER /var/daddy/tmp
-  sudo chmod 775 /var/daddy/tmp
   pushd /var/daddy/tmp
     rm -f mitamae-x86_64-linux.tar.gz
     wget https://github.com/itamae-kitchen/mitamae/releases/download/${MITAMAE_VERSION}/mitamae-x86_64-linux.tar.gz
@@ -24,6 +30,11 @@ function install_mitamae() {
 }
 
 function setup_dad() {
+  ensure_bootstrap_packages
+  # recipes assume /var/daddy/tmp exists: mitamae silently ignores `cwd`
+  # pointing to a missing directory and would download into the current directory.
+  prepare_work_dir
+
   test -e /usr/local/bin/mitamae && /usr/local/bin/mitamae version | sed -e "s/mitamae \(v.*\)/\1/i" | grep ${MITAMAE_VERSION} > /dev/null
   if [ $? = 0 ]; then
     echo -e "mitamae $MITAMAE_VERSION found.\ndaddy is ready."
